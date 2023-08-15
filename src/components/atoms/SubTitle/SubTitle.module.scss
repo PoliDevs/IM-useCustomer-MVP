@@ -1,0 +1,15 @@
+@import "../../../scss/typography.scss";
+
+.subTitle {
+  font-family: 'Mabry Pro', sans-serif;
+  font-size: $paragraph;
+  text-align: center;
+
+  @media screen and (min-width: 430px) {
+    font-size:$line-text;
+  }
+
+  @media screen and (min-width: 750px) {
+    font-size: $title;
+  }
+}
