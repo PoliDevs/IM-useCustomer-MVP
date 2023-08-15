@@ -1,0 +1,27 @@
+@import "../../../scss/colors.scss";
+@import "../../../scss/typography.scss";
+
+.item {
+  box-sizing: border-box;
+  color: inherit;
+  font-weight: bold;
+  width: 100%;
+  padding: 10px;
+  background-color: $color-seventh;
+  border: $border;
+  border-radius: $border-secondary-radius;
+  height: 65px;
+  font-size: $paragraph;
+  margin-bottom: 10px;
+
+  @media screen and (min-width: 430px) {
+    font-size: $line-text;
+    height: 70px;
+    border-radius: $border-primary-radius;
+  }
+
+  @media screen and (min-width: 750px) {
+    height: 90px;
+    font-size: $title;
+  }
+}

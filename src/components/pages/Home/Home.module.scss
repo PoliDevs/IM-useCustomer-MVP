@@ -1,0 +1,67 @@
+@import "../../../scss/colors.scss";
+
+.home {
+  color: $text-primary;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 80px;
+  height: 100%;
+
+  .spacing {
+    margin-bottom: 30px;
+  }
+
+  .logo {
+    border-radius: 25px;
+    background-color: $color-eighth;
+    width: 180px;
+    height: 180px;
+    margin: 5px;
+  }
+
+  .span {
+    letter-spacing: 0.4rem;
+    margin-left: 10px;
+    // color: #2b2b2b;
+  }
+
+  .imenuLogo {
+    width: 50px;
+    // height: 30px;
+    margin: 0 5px;
+  }
+
+  @media screen and (min-width: 430px) {
+    .spacing {
+      margin-bottom: 40px;
+    }
+    .logo {
+      width: 220px;
+      height: 220px;
+      margin: 10px;
+    }
+
+    .imenuLogo {
+      width: 70px;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    .spacing {
+      margin-bottom: 50px;
+    }
+
+    .imenuLogo {
+      width: 90px;
+      height: 40px;
+    }
+    .logo {
+      width: 280px;
+      height: 280px;
+      margin-bottom: 5px;
+    }
+  }
+}

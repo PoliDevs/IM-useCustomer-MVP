@@ -1,0 +1,52 @@
+@import "../../../scss/colors.scss";
+@import "../../../scss/typography.scss";
+
+.button {
+   font-size: $paragraph;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1rem;
+    width: 90%;
+    margin: 4px 0 5px 0;
+    border: $border;
+    border-radius: 10px;
+    height: 40px;
+    &:hover {
+      transform: scale(1.02);
+      cursor: pointer;
+    }
+
+  @media screen and (min-width: 430px) {
+    font-size: $line-text;
+    border-radius: $border-secondary-radius;
+    height: 50px;
+    width: 375px;
+  }
+
+  @media screen and (min-width: 750px) {
+    font-size: $title;
+    width: 459px;
+    height: 55px;
+    border-radius: $border-primary-radius;
+  }
+}
+
+.primary {
+  background-color: $background-buttom-primary-active;
+  color: $text-secondary;
+  &:hover{
+    background-color: $background-buttom-primary-desable;
+  }
+}
+
+.secundary {
+  background-color: $background-buttom-secundary-active;
+  color: $text-primary;
+  &:hover{
+    background-color: $background-buttom-secundary-desable;
+  }
+}
+
+.centered {
+  margin: 0 auto
+}
