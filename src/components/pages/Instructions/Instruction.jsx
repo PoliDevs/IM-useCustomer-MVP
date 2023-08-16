@@ -14,6 +14,7 @@ export default function Instruction() {
   const [t, i18n] = useTranslation(["global"]);
 
   return (
+
     <div className={s.instrucciones}>
       <Link to="/">
         <div className={s.arrowBack}></div>

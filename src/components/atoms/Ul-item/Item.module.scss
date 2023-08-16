@@ -2,6 +2,9 @@
 @import "../../../scss/typography.scss";
 
 .item {
+  display: flex;
+  // justify-content: center;
+  align-items: center;
   box-sizing: border-box;
   color: inherit;
   font-weight: bold;
@@ -10,9 +13,16 @@
   background-color: $color-seventh;
   border: $border;
   border-radius: $border-secondary-radius;
-  height: 65px;
   font-size: $paragraph;
   margin-bottom: 10px;
+  gap: 10px;
+  
+  .childContainer {
+    display: inline-block;
+    height: auto;
+    margin: 0;
+    text-align: center;
+  }
 
   @media screen and (min-width: 430px) {
     font-size: $line-text;
