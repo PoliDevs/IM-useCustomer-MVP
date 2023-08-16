@@ -8,22 +8,22 @@ import LinkButton from "../../atoms/LinkButton/LinkButton";
 // import { useEffect, useState } from "react";
 // import { getCommerce } from "../../utils/functions";
 import s from "./Home.module.scss";
+import { useEffect, useState } from "react";
+import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
 export default function Home() {
-  // const [commerce, setCommerce] = useState();
+  const [commerce, setCommerce] = useState();
 
   const [t, i18n] = useTranslation(["global"]);
 
-  // useEffect(() => {
-  //   const req = async () => {
-  //     const res = await getCommerce(scanResult);
-  //     setCommerce(res);
-  //   };
-  //   req();
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setCommerce(true);
+    }, 5500);
+  }, []);
 
   return (
     <div className={s.home}>
-      {/* {commerce ? ( */}
+      {commerce ? (
       <>
         <HugeTitle text={t("home.title")} />
         <Paragraph text={t("home.subtitle")} />
@@ -41,10 +41,10 @@ export default function Home() {
           text={t("home.instructions")}
           type="secundary"
         />
-      </>
-      {/* ) : (
-        <h4>loading...</h4> */}
-      {/* )} */}
-    </div>
+    </>
+      ) : (
+        <LoadingPage/>
+      )}
+      </div>
   );
 }
