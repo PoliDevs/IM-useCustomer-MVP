@@ -1,33 +1,33 @@
 @import "../../../scss/colors.scss";
 @import "../../../scss/typography.scss";
-
-.instrucciones {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: auto;
-  margin: 0 auto;
-  padding: 15px;
-  margin-top: 20px;
-
-  .arrowBack {
-    background-image: url("../../../assets/ArrowBack.svg");
-    block-size: contain;
-    background-repeat: no-repeat;
-    background-position: center center;
-    height: 25px;
-    width: 25px;
-    margin-bottom: 30px;
-    cursor: pointer;
-  }
-
-  .title {
+  
+  .instrucciones {
     display: flex;
-    align-items: center;
-    margin-bottom: 8px;
-  }
-
-  .info {
+    flex-direction: column;
+    align-items: flex-start;
+    width: auto;
+    margin: 0 auto;
+    padding: 15px;
+    margin-top: 10px;
+    
+    .arrowBack {
+      background-image: url("../../../assets/ArrowBack.svg");
+      block-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+      height: 25px;
+      width: 25px;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    
+    .title {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    
+    .info {
     display: inline-block;
     background-image: url("../../../assets/info.svg");
     block-size: contain;
@@ -43,27 +43,27 @@
     height: 25px;
     vertical-align: middle;
   }
-
+  
   @media screen and (min-width: 430px) {
     width: 100%;
-    max-width: 500px;
-
+    max-width: 440px;
+    
     .title {
       margin-bottom: 12px;
     }
-
+    
     .arrowBack {
-    height: 35px;
-    width: 35px;
-    margin-bottom: 35px;
+      height: 35px;
+      width: 35px;
+      margin-bottom: 25px;
     }
-
+    
     .info {
       height: 35px;
-    width: 35px;
-    margin-right: 20px;
+      width: 35px;
+      margin-right: 20px;
     }
-
+    
     .imenuLogo {
       width: 100px;
       height: 40px;
@@ -72,22 +72,21 @@
   }
   @media screen and (min-width: 750px) {
     margin: 50px auto;
-    max-width: 660px;
-
+    
     .title {
       margin-bottom: 15px;
     }
-
+    
     .arrowBack {
-    height: 45px;
-    width: 45px;
-    margin-bottom: 40px;
+      height: 45px;
+      width: 45px;
+      margin-bottom: 30px;
     }
-
+    
     .info {
       height: 45px;
-    width: 45px;
-    margin-right: 25px;
+      width: 45px;
+      margin-right: 25px;
     }
     .imenuLogo {
       width: 150px;

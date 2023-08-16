@@ -8,10 +8,10 @@ export default function Ul() {
 
   return (
     <ul className={s.ul}>
-      <Item text={`1 ${t("instructions.instruction_1")}`} />
-      <Item text={`2 ${t("instructions.instruction_2")}`} />
-      <Item text={`3 ${t("instructions.instruction_3")}`} />
-      <Item text={`4 ${t("instructions.instruction_4")}`} />
+      <Item number={1} text={t("instructions.instruction_1")} />
+      <Item number={2} text={t("instructions.instruction_2")} />
+      <Item number={3} text={t("instructions.instruction_3")} />
+      <Item number={4} text={t("instructions.instruction_4")} />
     </ul>
   );
 }
