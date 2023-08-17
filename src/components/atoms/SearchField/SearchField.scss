@@ -1,0 +1,9 @@
+@import "../../../scss/colors.scss";
+@import "../../../scss/typography.scss";
+
+.searchField {
+  width: 5rem;
+  height: 30px;
+  color: $text-primary;
+  font-size: $paragraph;
+}
