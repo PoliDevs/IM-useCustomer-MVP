@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <div className={s.home}>
       {commerce ? (
-      <>
+      <div className={s.top}>
         <HugeTitle text={t("home.title")} />
         <Paragraph text={t("home.subtitle")} />
         <HugeTitle text={"Burger Store"} />
@@ -41,7 +41,7 @@ export default function Home() {
           text={t("home.instructions")}
           type="secundary"
         />
-    </>
+    </div>
       ) : (
         <LoadingPage/>
       )}

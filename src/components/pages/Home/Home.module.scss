@@ -2,15 +2,20 @@
 
 .home {
   color: $text-primary;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 90%;
-  margin: 0 auto;
-  margin-top: 80px;
-  height: 100%;
-
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  
+  .top {
+    margin: 0 auto;
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+  }
   .spacing {
     margin-bottom: 30px;
   }
@@ -51,6 +56,7 @@
   }
 
   @media screen and (min-width: 750px) {
+    
     .spacing {
       margin-bottom: 50px;
     }
