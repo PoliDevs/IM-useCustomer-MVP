@@ -1,0 +1,39 @@
+@import "../../../scss/colors.scss";
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 100%;
+  min-height: 100vh;
+  background-color: $background-scanner-page;
+  color: $text-secondary;
+  
+  .scannerContainer {
+    width: 90%;
+    max-width: 350px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    border-radius: $border-secondary-radius;
+  }
+  
+  @media screen and (min-width: 430px) {
+    .scannerContainer {
+      border-radius: $border-primary-radius;
+      height: 550px;
+      margin-bottom: 15px;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    .scannerContainer {
+      height: 600px;
+      margin-bottom: 20px;
+    }
+  }
+}
