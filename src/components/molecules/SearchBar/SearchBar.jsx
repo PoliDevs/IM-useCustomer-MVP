@@ -1,16 +1,25 @@
 import { useState } from "react";
+import { ReactComponent as SearchIcon } from "../../../assets/SearchIcon.svg";
+import { ReactComponent as XIcon } from "../../../assets/xIcon.svg";
 import SearchField from "../../atoms/SearchField/SearchField";
+import s from "./SearchBar.module.scss";
 
 export default function SearchBar() {
   const [inputValue, setInputValue] = useState();
-  
+
   const handleChange = (e) => {
     e.prevenDefault();
-    setInputValue(e.target.value)
-  }
+    setInputValue(e.target.value);
+  };
   return (
-    <div>
-      <SearchField placeholder={"Que quieres pedir?"} inputValue={inputValue} handleChange={handleChange}/>
+    <div className={s.searchBar}>
+      <SearchIcon className={s.searchIcon} />
+      <SearchField
+        placeholder={"¿Que quieres pedir?"}
+        inputValue={inputValue}
+        handleChange={handleChange}
+      />
+      <XIcon className={s.xIcon} />
     </div>
-  )
+  );
 }

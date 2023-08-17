@@ -1,4 +1,4 @@
-import s from "./SearchField.scss";
+import s from "./SearchField.module.scss";
 
 export default function SearchField({ placeholder, handleChange, inputValue }) {
 

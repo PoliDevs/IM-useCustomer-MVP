@@ -1,12 +1,14 @@
 @import "../../../scss/typography.scss";
 
 .hugeTitle {
+  position: relative;
   display: flex;
   align-items: center;
   font-family: 'Mabry Pro', sans-serif;
   font-size: $title;
   font-weight: bold;
   text-align: center;
+  z-index: 4;
 
   @media screen and (min-width: 430px) {
     font-size: 2rem;
