@@ -1,0 +1,28 @@
+@import "../../../scss/colors.scss";
+
+.searchBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 90%;
+  height: auto;
+  background-color: $background-secundary;
+  margin: 0 auto;
+  margin-top: 15px;
+  border-radius: 50px;
+
+
+  .searchIcon {
+    width: 20px;
+    height: 15px;
+    color: $color-nineth;
+  }
+
+  .xIcon {
+    width: 20px;
+    height: 15px;
+    color: $color-nineth;
+    visibility: hidden;
+  }
+}
