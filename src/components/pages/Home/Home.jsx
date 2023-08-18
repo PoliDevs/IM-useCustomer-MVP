@@ -1,4 +1,5 @@
 import Banner from "../../molecules/Banner/Banner";
+import Categories from "../../molecules/Categories/Categories";
 import SearchBar from "../../molecules/SearchBar/SearchBar";
 import s from "./Home.module.scss";
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <main className={s.home}>
       <Banner />
       <SearchBar />
+      <Categories/>
     </main>
   );
 }
