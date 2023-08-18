@@ -13,6 +13,13 @@
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;  
+  &::-webkit-input-placeholder {
+  text-align: center;
+}
+
+&:-moz-placeholder {
+  text-align: center;
+}
 
   @media screen and (min-width: 430px) {
     font-size:$paragraph;
