@@ -6,7 +6,9 @@ import s from "./Categories.module.scss";
 export default function Categories() {
   return (
     <section className={s.categories}>
-      <Paragraph text={"Categorias"}/>
+      <div className={s.sectionTitle}>
+        <Paragraph text={"Categorias"} centered={true}/>
+      </div>
       <ScrollContainer className={s.scrollContainer}>
         {iconImages?.map((icon, index)=> (<Icon key={index} icon={icon}/>))}
       </ScrollContainer>

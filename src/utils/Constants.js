@@ -14,10 +14,10 @@ import taco from "../assets/icons/taco.png";
 
 export const iconImages = [
   { name: "Pollo", src: chickenLeg },
-  { name: "Trozo de Carne", src: cutOfMeat },
+  { name: "Trozo de C...", src: cutOfMeat },
   { name: "Papas Fritas", src: frenchFries },
   { name: "Ensalada", src: greenSalad },
-  { name: "Hamburguesa", src: hamburger },
+  { name: "Hamburg...", src: hamburger },
   { name: "Pancho", src: hotDog },
   { name: "Carne", src: meat },
   { name: "Pizza", src: pizza },
