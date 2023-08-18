@@ -15,7 +15,7 @@ export default function SearchBar() {
   };
   return (
     <div className={s.searchBar}>
-      <SearchIcon className={s.searchIcon} />
+      <SearchIcon className={`${s.searchIcon} ${inputValue ? s.strong : ""}`} />
       <SearchField
         placeholder={"¿Que quieres pedir?"}
         inputValue={inputValue}
@@ -23,7 +23,7 @@ export default function SearchBar() {
       />
       <XIcon
         onClick={handleDelete}
-        className={`${s.xIcon} ${inputValue ? s.visible : ""}`}
+        className={`${s.xIcon} ${inputValue ? (`${s.visible} ${s.strong}`) : ""}`}
       />
     </div>
   );

@@ -7,7 +7,7 @@ export default function Categories() {
   return (
     <section className={s.categories}>
       <div className={s.sectionTitle}>
-        <Paragraph text={"Categorias"} centered={true}/>
+        <Paragraph text={"Categorias"} centered={true} secundary={true}/>
       </div>
       <ScrollContainer className={s.scrollContainer}>
         {iconImages?.map((icon, index)=> (<Icon key={index} icon={icon}/>))}

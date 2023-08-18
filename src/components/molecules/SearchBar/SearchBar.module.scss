@@ -27,6 +27,10 @@
   visibility: visible;
   }
 
+  .strong {
+    color: $text-primary
+  }
+
   @media screen and (min-width: 430px) {
     gap: 5px;
     .searchIcon, .xIcon {

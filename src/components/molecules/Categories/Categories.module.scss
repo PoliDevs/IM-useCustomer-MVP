@@ -1,7 +1,17 @@
+@import "../../../scss/colors.scss";
+
 .categories {
   width: 100%;
   height: 300px;
+  .sectionTitle {
+    background-color: $background-buttom-primary-active;
+    margin: 20px auto;
+    width: 100px;
+    padding: 4px;
+    border-radius: 20px;
+  }
   .scrollContainer {
+    position: relative;
     display: flex;
     height: 90px;
     &:before {
