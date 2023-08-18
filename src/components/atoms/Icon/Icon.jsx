@@ -5,7 +5,7 @@ export default function Icon({icon}) {
   return (
     <div className={s.iconContainer}>
       <img className={s.icon} src={icon.src}/>
-      <h4>{icon.name}</h4>
+      <h4 className={s.name}>{icon.name}</h4>
     </div>
   )
 }
