@@ -5,10 +5,12 @@ import SearchField from "../../atoms/SearchField/SearchField";
 import s from "./SearchBar.module.scss";
 
 export default function SearchBar() {
-  const [inputValue, setInputValue] = useState();
+  const [inputValue, setInputValue] = useState("");
+  const handleDelete = () => {
+    setInputValue("");
+  };
 
   const handleChange = (e) => {
-    e.prevenDefault();
     setInputValue(e.target.value);
   };
   return (
@@ -19,7 +21,10 @@ export default function SearchBar() {
         inputValue={inputValue}
         handleChange={handleChange}
       />
-      <XIcon className={s.xIcon} />
+      <XIcon
+        onClick={handleDelete}
+        className={`${s.xIcon} ${inputValue ? s.visible : ""}`}
+      />
     </div>
   );
 }

@@ -9,9 +9,18 @@
   display: inline-block;
   outline: none;
   border:none;
-  background-image:none;
   background-color:transparent;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;  
+
+  @media screen and (min-width: 430px) {
+    font-size:$paragraph;
+    height: 30px;
+  }
+
+  @media screen and (min-width: 750px) {
+    font-size:$line-text;
+    height: 35px;
+  }
 }
