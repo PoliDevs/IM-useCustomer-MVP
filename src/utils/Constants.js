@@ -22,6 +22,30 @@ export const iconImages = [
     price: 1250,
   },
   {
+    name: "Hot Dog",
+    src: hotDog,
+    altName: "Hot Dog Aleman",
+    description:
+      "Salchicha alemana en pan de viena, mayonesa, mostaza, ketchup, cebolla caramelizada y acompañado de papas fr...",
+    price: 2244,
+  },
+  {
+    name: "Hamburg...",
+    src: hamburger,
+    altName: "Mega cuarto bacon",
+    description:
+      "Mega hamburguesa de carne, queso cheddar, bacon, cebollita, mostaza y ketchup acompañadas de papas fritas regulares...",
+    price: 1200,
+  },
+  {
+    name: "Pizza",
+    src: pizza,
+    altName: "Pizza de pepperoni",
+    description:
+      "Pizza de masa madre con mozzarella, pepperonis frescos con oregano, al horno de barro",
+    price: 2244,
+  },
+  {
     name: "Trozo de C...",
     src: cutOfMeat,
     altName: "Bifes a la criolla",
@@ -45,22 +69,7 @@ export const iconImages = [
       "Mezcla de lechuga romana, crutones, queso parmesano, aderezo Caesar y, a veces, pollo.",
     price: 1250,
   },
-  {
-    name: "Hamburg...",
-    src: hamburger,
-    altName: "Mega cuarto bacon",
-    description:
-      "Mega hamburguesa de carne, queso cheddar, bacon, cebollita, mostaza y ketchup acompañadas de papas fritas regulares...",
-    price: 1200,
-  },
-  {
-    name: "Hot Dog",
-    src: hotDog,
-    altName: "Hot Dog Aleman",
-    description:
-      "Salchicha alemana en pan de viena, mayonesa, mostaza, ketchup, cebolla caramelizada y acompañado de papas fr...",
-    price: 2244,
-  },
+
   {
     name: "Carne",
     src: meat,
@@ -69,14 +78,7 @@ export const iconImages = [
       "Trozos de carne sazonada y a la parrilla, tradicional de la cocina latinoamericana.",
     price: 2244,
   },
-  {
-    name: "Pizza",
-    src: pizza,
-    altName: "Pizza de pepperoni",
-    description:
-      "Pizza de masa madre con mozzarella, pepperonis frescos con oregano, al horno de barro",
-    price: 2244,
-  },
+
   {
     name: "Sopa",
     src: potOfFood,
