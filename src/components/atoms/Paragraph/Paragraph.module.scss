@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   font-size: $caption;
-  margin: 4px;
+  margin: 4px 0;
   color: $text-desable;
   text-align: center;
 
@@ -28,4 +28,8 @@
 
 .secundary {
   color: $text-secondary
+}
+
+.left {
+  text-align: left;
 }
