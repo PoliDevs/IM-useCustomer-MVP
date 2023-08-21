@@ -12,9 +12,9 @@
     border-radius: 20px;
   }
   .scrollContainer {
-    position: relative;
     display: flex;
     height: 90px;
+    cursor: pointer;
     &:before {
       content: "";
       position: absolute;

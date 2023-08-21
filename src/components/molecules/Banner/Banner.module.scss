@@ -1,9 +1,8 @@
 @import "../../../scss/colors.scss";
 
 .banner {
-  // position: relative;
   width: 90%;
-  height: auto;
+  height: 80px;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 40%;
@@ -13,6 +12,9 @@
   margin-top: 10px;
 
   .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     position: relative;
     width: auto;
     color: $text-secondary;

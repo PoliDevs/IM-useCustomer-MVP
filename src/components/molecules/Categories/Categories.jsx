@@ -9,9 +9,11 @@ export default function Categories() {
       <div className={s.sectionTitle}>
         <Paragraph text={"Categorias"} centered={true} secundary={true}/>
       </div>
+      <div style={{position: "relative"}}>
       <ScrollContainer className={s.scrollContainer}>
         {iconImages?.map((icon, index)=> (<Icon key={index} icon={icon}/>))}
       </ScrollContainer>
+      </div>
     </section>
   );
 }
