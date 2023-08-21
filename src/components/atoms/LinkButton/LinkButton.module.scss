@@ -11,9 +11,9 @@
     border: $border;
     border-radius: 10px;
     height: 40px;
+    cursor: pointer;
     &:hover {
       transform: scale(1.02);
-      cursor: pointer;
     }
 
   @media screen and (min-width: 430px) {
