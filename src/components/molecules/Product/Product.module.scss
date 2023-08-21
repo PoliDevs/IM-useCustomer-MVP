@@ -1,0 +1,32 @@
+@import "../../../scss/colors.scss";
+@import "../../../scss/typography.scss";
+
+.productContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 90%;
+  height: 110px;
+  color: $text-primary;
+  border-radius: $border-secondary-radius;
+  background-color: $background-secundary;
+  padding: 10px;
+  margin: 15px auto;
+
+  
+  .productIcon {
+    height: 60px;
+    width: 60px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .infoContainer {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    margin-left: 20px;
+    justify-content: space-around;
+    height: 100%;
+  }
+}

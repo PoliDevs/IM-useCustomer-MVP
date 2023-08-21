@@ -16,7 +16,7 @@ export default function Instruction() {
   return (
 
     <div className={s.instrucciones}>
-      <Link to="/">
+      <Link to="/welcome">
         <div className={s.arrowBack}></div>
       </Link>
       <div className={s.title}>
@@ -30,7 +30,7 @@ export default function Instruction() {
         <IMenu className={s.imenuLogo} />
       </Paragraph>
       <LinkButton
-        path={"/"}
+        path={"/welcome"}
         type={"primary"}
         text={t("instructions.order")}
         centered={true}

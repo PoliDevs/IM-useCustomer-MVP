@@ -1,7 +1,7 @@
 import  ScrollContainer  from "react-indiana-drag-scroll";
 import { iconImages } from "../../../utils/Constants";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
-import Icon from "../../atoms/ICon/Icon";
+import Icon from "../Icon/Icon";
 import s from "./Categories.module.scss";
 export default function Categories() {
   return (

@@ -28,8 +28,8 @@ export default function Qr({scanResult, setScanResult}) {
     //{ facingMode: "environment" } para preferir camara trasera
     function success(result) {
       scanner.clear(); //desinyecta el scanner del dom
-      setScanResult(JSON.parse(result));
-      navigate('/home')
+      // setScanResult(JSON.parse(result));
+      navigate('/welcome')
     }
 
     function error(error) {
