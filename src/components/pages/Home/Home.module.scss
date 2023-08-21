@@ -3,5 +3,8 @@
 
 .home {
   position: relative;
+  display: flex;
+  flex-direction: column;
   background-color: $background-desable;
+  height: 100vh;
 }

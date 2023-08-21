@@ -1,10 +1,9 @@
 import Banner from "../../molecules/Banner/Banner";
 import Categories from "../../molecules/Categories/Categories";
-import Product from "../../molecules/Product/Product";
 import SearchBar from "../../molecules/SearchBar/SearchBar";
-import { iconImages } from "../../../utils/Constants";
 import s from "./Home.module.scss";
 import Products from "../../molecules/Products/Products";
+import Footer from "../../molecules/Footer/Footer";
 export default function Home() {
   return (
     <main className={s.home}>
@@ -12,6 +11,7 @@ export default function Home() {
       <SearchBar />
       <Categories/>
       <Products/>
+      <Footer/>
     </main>
   );
 }

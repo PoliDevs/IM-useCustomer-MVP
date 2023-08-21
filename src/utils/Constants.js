@@ -34,7 +34,7 @@ export const iconImages = [
     src: hamburger,
     altName: "Mega cuarto bacon",
     description:
-      "Mega hamburguesa de carne, queso cheddar, bacon, cebollita, mostaza y ketchup acompañadas de papas fritas regulares...",
+      "Mega hamburguesa de carne, queso cheddar, bacon, mostaza y ketchup acompañadas de papas fritas regulares...",
     price: 1200,
   },
   {
@@ -84,7 +84,7 @@ export const iconImages = [
     src: potOfFood,
     altName: "Sopa de fideos",
     description:
-      "Plato cocido a fuego lento con carne, vegetales y fideos, resultando en sabores integrados y reconfortantes.",
+      "Plato cocido a fuego lento con carne, vegetales y fideos, sabores integrados y reconfortantes.",
     price: 1250,
   },
   {
