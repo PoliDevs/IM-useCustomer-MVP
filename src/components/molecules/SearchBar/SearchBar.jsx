@@ -14,7 +14,7 @@ export default function SearchBar() {
     setInputValue(e.target.value);
   };
   return (
-    <div className={s.searchBar}>
+    <div className={`${s.searchBar} ${inputValue ? s.border : ""}`}>
       <SearchIcon className={`${s.searchIcon} ${inputValue ? s.strong : ""}`} />
       <SearchField
         placeholder={"¿Que quieres pedir?"}

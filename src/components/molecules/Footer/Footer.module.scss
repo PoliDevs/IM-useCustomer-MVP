@@ -16,12 +16,12 @@
     text-decoration: none;
     text-align: center;
     line-height: 1rem;
-    border: $border;
+    border: none;
     border-radius: 20px;
     padding: 4px;
     height: 35px;
     cursor: pointer;
-    background-color: $background-buttom-primary-active;
+    background-color: $background-buttom-primary-desable;
     color: $text-secondary;
     &:hover {
       transform: scale(1.02);
