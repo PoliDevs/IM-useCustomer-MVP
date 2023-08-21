@@ -1,7 +1,7 @@
 @import "../../../scss/colors.scss";
 
 .banner {
-  position: relative;
+  // position: relative;
   width: 90%;
   height: auto;
   background-position: center center;
@@ -10,13 +10,13 @@
   color: $text-secondary;
   z-index: 1;
   margin: 0 auto;
+  margin-top: 10px;
 
   .content {
     position: relative;
     width: auto;
     color: $text-secondary;
     height: 100%;
-    margin-top: 10px;
     padding: 10px;
     &:before {
       content: "";
