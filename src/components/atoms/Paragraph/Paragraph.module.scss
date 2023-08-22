@@ -10,6 +10,7 @@
   color: $text-desable;
   text-align: center;
   overflow-y: hidden;
+  line-height: $caption;
   @media screen and (min-width: 430px) {
     font-size: $paragraph;
   }

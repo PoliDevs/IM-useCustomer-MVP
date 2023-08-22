@@ -1,4 +1,4 @@
-import { iconImages } from "../../../utils/Constants";
+import { ProductsInfo } from "../../../utils/Constants";
 import ScrollContainer from "react-indiana-drag-scroll";
 import Product from "../Product/Product";
 import s from "./Products.module.scss";
@@ -6,7 +6,7 @@ import s from "./Products.module.scss";
 export default function Products() {
   return (
     <ScrollContainer className={s.productsContainer}>
-      {iconImages?.map((i, index) => (
+      {ProductsInfo?.map((i, index) => (
         <Product
           key={index}
           name={i.name}
