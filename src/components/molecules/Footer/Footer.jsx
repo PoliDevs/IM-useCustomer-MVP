@@ -9,7 +9,7 @@ export default function Footer() {
       <SubTitle text={"0 productos"} alignment={"left"}/>
       <HugeTitle text={"Total: $0"}/>
       </div>
-      <button className={s.seeProducts}>Ver productos</button>
+      <button disabled className={s.seeProducts}>Ver productos</button>
     </footer>
   )
 }

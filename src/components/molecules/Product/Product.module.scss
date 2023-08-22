@@ -2,6 +2,7 @@
 @import "../../../scss/typography.scss";
 
 .productContainer {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -29,5 +30,13 @@
     margin-left: 20px;
     justify-content: space-around;
     height: 100%;
+  }
+
+  .plus {
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    right: 4px;
+    bottom: 4px;
   }
 }

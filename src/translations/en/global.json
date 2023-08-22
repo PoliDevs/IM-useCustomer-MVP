@@ -10,10 +10,10 @@
   "instructions":{
   "title": "Instructions",
     "subtitle": "How to order with i menu!",
-    "instruction_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "instruction_2": "Id eu nisl nunc mi ipsum faucibus vitae.",
-    "instruction_3": "Et egestas quis ipsum suspendisse ultrices.",
-    "instruction_4": "Enim nec dui nunc mattis enim ut tellus elementum sagittis.",
+    "instruction_1": "Select products from the menu, touch the + to add the product.",
+    "instruction_2": "Once you've selected your products, press 'view product' to confirm your order.",
+    "instruction_3": "Make the payment for your order through MercadoPago.",
+    "instruction_4": "Your order will be on its way!",
     "poweredby": "powered by",
     "order": "Order"
   }
