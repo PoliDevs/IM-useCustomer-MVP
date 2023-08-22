@@ -1,3 +1,20 @@
 {
-    "hello-world":"Hello world"
+    "home": {
+    "title": "¡Bienvenido!",
+    "subtitle": "Estás por pedir en: ",
+    "table": "Mesa ",
+    "poweredby": "impulsado por",
+    "order": "Hacer pedido",
+    "instructions": "Instrucciones"
+  },
+  "instructions":{
+  "title": "Instructions",
+    "subtitle": "How to order with i menu!",
+    "instruction_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "instruction_2": "Id eu nisl nunc mi ipsum faucibus vitae.",
+    "instruction_3": "Et egestas quis ipsum suspendisse ultrices.",
+    "instruction_4": "Enim nec dui nunc mattis enim ut tellus elementum sagittis.",
+    "poweredby": "powered by",
+    "order": "Order"
+  }
 }

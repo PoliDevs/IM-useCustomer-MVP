@@ -7,11 +7,25 @@
 }
 
 body {
+  min-width: 0;
   margin: 0;
   padding: 0;
   color: $text-primary;
   background-color: $background-primary;
   font-family: 'Mabry Pro', sans-serif;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: $color-nineth;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: $color-nineth;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: $color-nineth;
 }
  
 h1,

@@ -1,0 +1,29 @@
+@import "../../../scss/colors.scss";
+@import "../../../scss/typography.scss";
+
+.ul {
+  list-style: none;
+  color: $text-primary;
+  width: 100%;
+  min-width: 270px;
+  margin-top: 8px;
+  &:nth-child(4) {
+    margin-bottom: 100px;
+  }
+
+  @media screen and (min-width: 430px) {
+    margin-top: 12px;
+    &:nth-child(4) {
+      margin-bottom: 130px;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    width: 100%;
+    width: 460px;
+    margin-top: 15px;
+    &:nth-child(4) {
+      margin-bottom: 150px;
+    }
+  }
+}

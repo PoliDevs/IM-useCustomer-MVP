@@ -5,14 +5,14 @@ const initalState = {
 };
 
 export const  rootReducer = (state= initalState, action) => {
-  switch (action.type) {
-    case value:
+  // switch (action.type) {
+  //   case value:
       
-      break;
+  //     break;
   
-    default:
-      return state;
-  }
+  //   default:
+  //     return state;
+  // }
 }
 
 export default rootReducer;

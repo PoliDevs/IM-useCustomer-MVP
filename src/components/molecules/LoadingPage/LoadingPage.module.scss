@@ -1,0 +1,25 @@
+@import "../../../scss/colors.scss";
+
+.loadingPage{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  width: 100vw;
+  background-color: $color-seventh;
+  gap: 15px;
+  padding-top: 80px;
+  .iMenuIcon {
+    width: 60px;
+    height: 35px;
+    background-image: url("../../../assets/ImenuVertical.svg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+    @media screen and (min-width: 750px) {
+      padding-top: 150px;
+    }
+}

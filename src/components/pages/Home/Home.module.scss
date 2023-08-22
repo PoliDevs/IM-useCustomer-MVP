@@ -1,0 +1,10 @@
+@import "../../../scss/colors.scss";
+@import "../../../scss/typography.scss";
+
+.home {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: $background-desable;
+  height: 100vh;
+}

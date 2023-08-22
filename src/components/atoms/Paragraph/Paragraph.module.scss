@@ -1,0 +1,35 @@
+@import "../../../scss/colors.scss";
+@import "../../../scss/typography.scss";
+
+.paragraph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $caption;
+  margin: 4px 0;
+  color: $text-desable;
+  text-align: center;
+  overflow-y: hidden;
+  @media screen and (min-width: 430px) {
+    font-size: $paragraph;
+  }
+  @media screen and (min-width: 750px) {
+    font-size: $line-text;
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.centered {
+  margin: 0 auto;
+}
+
+.secundary {
+  color: $text-secondary
+}
+
+.left {
+  text-align: left;
+}

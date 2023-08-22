@@ -1,0 +1,53 @@
+@import "../../../scss/colors.scss";
+
+.searchBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  width: 90%;
+  height: auto;
+  background-color: $background-secundary;
+  margin: 0 auto;
+  margin-top: 15px;
+  border-radius: 50px;
+
+
+  .searchIcon, .xIcon {
+    width: 20px;
+    height: 15px;
+    color: $color-nineth;
+    cursor: pointer;
+  }
+
+  .xIcon {
+    visibility: hidden;
+  }
+  .visible {
+  visibility: visible;
+  }
+
+  .strong {
+    color: $text-primary
+  }
+
+  
+  @media screen and (min-width: 430px) {
+    gap: 5px;
+    .searchIcon, .xIcon {
+      width: 25px;
+      height: 20px;
+    }
+  }
+  
+  @media screen and (min-width: 750px) {
+    gap: 9  px;
+    .searchIcon, .xIcon {
+      width: 30px;
+      height: 25px;
+    }
+  }
+}
+.border {
+  border: 2px solid $text-primary
+}
