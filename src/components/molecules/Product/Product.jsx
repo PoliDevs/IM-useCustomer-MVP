@@ -2,7 +2,13 @@
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import s from "./Product.module.scss";
-export default function Product({ name, description, price, bg, handleClick }) {
+export default function Product({
+  name,
+  description,
+  price,
+  bg,
+  addToCart,
+}) {
   return (
     <div className={s.productContainer}>
       <img className={s.productIcon} src={bg} />
@@ -10,7 +16,10 @@ export default function Product({ name, description, price, bg, handleClick }) {
         <SubTitle alignment={"left"} text={name} bold={true} />
         <Paragraph alignment={"left"} text={description} />
         <SubTitle alignment={"left"} text={`$ ${price}`} bold={true} />
-        <div className={s.plus} onClick={() => handleClick(name, price)}></div>
+        <div
+          className={s.plus}
+          onClick={() => addToCart(name, price)}
+        ></div>
       </div>
     </div>
   );

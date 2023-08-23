@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_PRODUCT, GET_ALL_PRODUCTS } from "./actionTypes";
+import { ADD_PRODUCT, GET_ALL_PRODUCTS, REMOVE_PRODUCT } from "./actionTypes";
 import { ProductsInfo } from "../../utils/Constants";
 
 export function addProduct (product){
@@ -23,6 +23,19 @@ export function getAllProducts (){
       })
     } catch (error) {
       console.error(error);
+    }
+  }
+}
+
+export function removeProduct (name){
+  return async function (dispatch) {
+    try {
+      return dispatch ({
+        type: REMOVE_PRODUCT,
+        payload: name
+      })
+    } catch (error) {
+      console.error(error)
     }
   }
 }
