@@ -13,7 +13,7 @@ export default function Footer({cant, total, setTotal}) {
   
 
   return (
-    <footer className={s.footer}>
+    <footer className={`${s.footer} ${cant.length ? s.active : ""}`}>
       <div className={s.textContainer}>
       <SubTitle text={`${cant ? cant.length : 0} productos`} alignment={"left"}/>
       <HugeTitle text={`Total: $ ${total}`}/>
