@@ -4,16 +4,13 @@ import SearchBar from "../../molecules/SearchBar/SearchBar";
 import s from "./Home.module.scss";
 import Products from "../../molecules/Products/Products";
 import Footer from "../../molecules/Footer/Footer";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
+import { useSelector } from "react-redux";
 export default function Home() {
-  const [cant, setCant] = useState(localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : []);
-
-  const addProduct = async (name, price) => {
-     setCant(prevCant => [...prevCant, { name: name, price: price }]);
-    };
+  const cant = useSelector(state=> state.cart);
+  
     
     useEffect(() => {
-      
       localStorage.setItem("cart", JSON.stringify(cant));
   }, [cant]);
 
@@ -22,8 +19,8 @@ export default function Home() {
       <Banner />
       <SearchBar />
       <Categories />
-      <Products addProduct={addProduct} />
-      <Footer cant={cant} setCant={setCant}/>
+      <Products />
+      <Footer cant={cant}/>
     </main>
   );
 }
