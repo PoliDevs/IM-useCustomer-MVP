@@ -120,3 +120,5 @@ export const ProductsInfo = [
     price: 1250,
   },
 ];
+
+export const cartProducts = []

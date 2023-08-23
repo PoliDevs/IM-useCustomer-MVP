@@ -3,7 +3,7 @@ import ScrollContainer from "react-indiana-drag-scroll";
 import Product from "../Product/Product";
 import s from "./Products.module.scss";
 
-export default function Products() {
+export default function Products({ addProduct }) {
   return (
     <ScrollContainer className={s.productsContainer}>
       {ProductsInfo?.map((i, index) => (
@@ -13,6 +13,7 @@ export default function Products() {
           description={i.description}
           price={i.price}
           bg={i.src}
+          addProduct={addProduct}
         />
       ))}
     </ScrollContainer>

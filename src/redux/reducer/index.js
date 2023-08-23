@@ -1,4 +1,4 @@
-import { OpenStore } from "../actions";
+
 
 const initalState = {
   openStore_reducer:false

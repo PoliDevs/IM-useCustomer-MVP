@@ -18,7 +18,7 @@ export default function WelcomePage() {
   useEffect(() => {
     setTimeout(() => {
       setCommerce(true);
-    }, 5500);
+    }, 3500);
   }, []);
 
   return (
@@ -30,7 +30,7 @@ export default function WelcomePage() {
         <HugeTitle text={"Burger Store"} />
         <div className={s.spacing}>
           <Logo className={s.logo} />
-          <Paragraph text={t("home.table")} />
+          <Paragraph text={`${t("home.table")} 1`} />
         </div>
         <Paragraph bold={true} text={t("home.poweredby")}>
           <ImenuLogo className={s.imenuLogo} />
