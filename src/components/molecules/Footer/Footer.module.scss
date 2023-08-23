@@ -18,13 +18,17 @@
     line-height: 1rem;
     border: none;
     border-radius: 20px;
-    padding: 4px;
+    padding: 5px;
     height: 35px;
     cursor: pointer;
-    background-color: $background-buttom-primary-desable;
+    background-color: $background-buttom-primary-active ;
     color: $text-secondary;
     &:hover {
       transform: scale(1.02);
     }
+  }
+
+  .disabled {
+    background-color: $background-buttom-primary-desable;
   }
 }
