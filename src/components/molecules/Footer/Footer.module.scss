@@ -7,6 +7,7 @@
   height: 100px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border: $border;
   border-radius: 10px 10px 0 0;
   z-index: 10;
@@ -31,4 +32,10 @@
   .disabled {
     background-color: $background-buttom-primary-desable;
   }
+}
+
+
+.active {
+  background-color: $background-quaternary;
+  color: $text-secondary
 }
