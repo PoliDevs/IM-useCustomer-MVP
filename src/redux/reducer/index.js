@@ -17,9 +17,10 @@ export const  rootReducer = (state= initalState, action) => {
         return {...state, cart: [...state.cart, action.payload]}
       }
       else {
+        const itemAmount = state.cart.find((p)=> p.name === action.payload.name).amount
         state = {...state, cart: state.cart.filter(p=> p.name !== action.payload.name)}
         if (action.payload.amount !== 0){
-        return {...state, cart: [...state.cart, action.payload]}
+        return {...state, cart: [...state.cart, {...action.payload, amount: action.payload.amount + itemAmount}]}
         }else {
           return state
         }      
