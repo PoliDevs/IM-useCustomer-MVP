@@ -16,8 +16,13 @@ export default function Products() {
     }, [])
     
 
-    const addToCart = (name, price, amount) => {
-      const product = { name: name, price: price, amount: amount };
+    const addToCart = (name, price, amount, comment) => {
+      const product = {
+        name: name,
+        price: price,
+        amount: amount,
+        comment: comment,
+      };
       dispatch(addProduct(product));
     };
 
