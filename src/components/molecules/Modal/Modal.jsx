@@ -1,16 +1,17 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import Paragraph from "../../atoms/Paragraph/Paragraph";
+import { ReactComponent as XIcon } from "../../../assets/xIcon.svg";
 import TextArea from "../../atoms/TextArea/TextArea";
 import s from "./Modal.module.scss";
 
-export default function Modal({ productData, addToCart, removeFromCart, isOpen, closeModal }) {
+export default function Modal({ productData, addToCart, isOpen, closeModal }) {
   const [comment, setComment] = useState("");
   const [amount, setAmount] = useState(0);
 
   return (
     <article className={`${s.modalContainer} ${isOpen && s.open}`}>
       <div className={s.modal}>
+        <XIcon className={s.closeIcon} onClick={closeModal}/>
         <div className={s.productHeader}>
           <img
             className={s.productIcon}

@@ -13,7 +13,13 @@ export const  rootReducer = (state= initalState, action) => {
     case ADD_PRODUCT:
      {
       const index = state.cart.findIndex((p) => p.name === action.payload.name);
-      return index === -1 ? {...state, cart:  [...state.cart, action.payload]} : {...state, cart: [state.cart[index]= action.payload]}
+      if (index === -1){
+        return {...state, cart: [...state.cart, action.payload]}
+      }
+      else {
+        state = {...state, cart: state.cart.filter(p=> p.name !== action.payload.name)}
+        return {...state, cart: [...state.cart, action.payload]}
+      }
     }
     case GET_ALL_PRODUCTS:
       return {...state, allProducts: action.payload}
