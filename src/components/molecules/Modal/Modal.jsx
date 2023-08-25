@@ -12,8 +12,9 @@ export default function Modal({ productData, addToCart, isOpen, closeModal }) {
     <article className={`${s.modalContainer} ${isOpen && s.open}`}>
       <div className={s.modal}>
         <XIcon className={s.closeIcon} onClick={()=>{
-          closeModal()
+          closeModal();
           setAmount(0);
+          setComment('')
         }}/>
         <div className={s.productHeader}>
           <img
