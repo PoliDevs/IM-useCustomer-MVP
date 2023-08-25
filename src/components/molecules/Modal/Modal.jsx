@@ -52,7 +52,7 @@ export default function Modal({ productData, addToCart, isOpen, closeModal }) {
             +
           </button>
         </div>
-        <button className={s.addButton} onClick={()=> addToCart(productData.name, productData.price, amount) }>
+        <button className={s.addButton} onClick={()=> addToCart(productData.name, productData.price, amount, comment) }>
           Agregar
         </button>
       </div>
