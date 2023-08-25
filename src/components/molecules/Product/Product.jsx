@@ -19,7 +19,7 @@ export default function Product({
         <SubTitle alignment={"left"} text={`$ ${price}`} bold={true} />
         <div
           className={s.plus}
-          onClick={()=> openModal(name, price)}
+          onClick={()=> openModal(name, price, bg, description)}
         ></div>
       </div>
     </div>
