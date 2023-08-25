@@ -11,7 +11,10 @@ export default function Modal({ productData, addToCart, isOpen, closeModal }) {
   return (
     <article className={`${s.modalContainer} ${isOpen && s.open}`}>
       <div className={s.modal}>
-        <XIcon className={s.closeIcon} onClick={closeModal}/>
+        <XIcon className={s.closeIcon} onClick={()=>{
+          closeModal()
+          setAmount(0);
+        }}/>
         <div className={s.productHeader}>
           <img
             className={s.productIcon}
@@ -49,7 +52,7 @@ export default function Modal({ productData, addToCart, isOpen, closeModal }) {
             +
           </button>
         </div>
-        <button className={s.addButton} onClick={()=>addToCart(productData.name, productData.price, amount)}>
+        <button className={s.addButton} onClick={()=> addToCart(productData.name, productData.price, amount) }>
           Agregar
         </button>
       </div>
