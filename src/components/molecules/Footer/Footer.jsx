@@ -8,7 +8,8 @@ export default function Footer({cant, total, setTotal}) {
 
 
   useEffect(() => {
-    if (cant) setTotal(cant.reduce((count, p) => count + p.price, 0));
+    console.log(cant);
+    if (cant.length) setTotal(cant.reduce((count, p) => count + p.price, 0));
   }, [cant])
   
 

@@ -10,14 +10,14 @@ import Modal from "../Modal/Modal";
 export default function Products() {
     const allproducts = useSelector(state=> state.allProducts);
     const dispatch = useDispatch();
-    const { isOpen, openModal, closeModal, name, price } = useModal(false);
+    const { isOpen, openModal, closeModal, productData } = useModal(false);
     useEffect(() => {
       dispatch(getAllProducts())
     }, [])
     
 
-    const addToCart = (name, price) => {
-      const product = { name: name, price: price };
+    const addToCart = (name, price, amount) => {
+      const product = { name: name, price: price, amount: amount };
       dispatch(addProduct(product));
     };
 
@@ -40,7 +40,7 @@ export default function Products() {
           />
         ))}
       </ScrollContainer>
-      <Modal isOpen={isOpen} addToCart={addToCart} removeFromCart={removeFromCart} closeModal={closeModal} name={name} price={price} />
+      <Modal isOpen={isOpen} addToCart={addToCart} removeFromCart={removeFromCart} closeModal={closeModal} productData={productData} />
     </>
   );
 }

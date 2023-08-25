@@ -11,7 +11,10 @@ const initalState = {
 export const  rootReducer = (state= initalState, action) => {
   switch (action.type) {
     case ADD_PRODUCT:
-     return {...state, cart:  [...state.cart, action.payload]};
+     {
+      const index = state.cart.findIndex((p) => p.name === action.payload.name);
+      return index === -1 ? {...state, cart:  [...state.cart, action.payload]} : {...state, cart: [state.cart[index]= action.payload]}
+    }
     case GET_ALL_PRODUCTS:
       return {...state, allProducts: action.payload}
     case REMOVE_PRODUCT:
