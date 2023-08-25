@@ -7,8 +7,9 @@ export default function Product({
   description,
   price,
   bg,
-  addToCart,
+  openModal
 }) {
+
   return (
     <div className={s.productContainer}>
       <img className={s.productIcon} src={bg} />
@@ -18,7 +19,7 @@ export default function Product({
         <SubTitle alignment={"left"} text={`$ ${price}`} bold={true} />
         <div
           className={s.plus}
-          onClick={() => addToCart(name, price)}
+          onClick={()=> openModal(name, price)}
         ></div>
       </div>
     </div>

@@ -15,7 +15,9 @@ export const  rootReducer = (state= initalState, action) => {
     case GET_ALL_PRODUCTS:
       return {...state, allProducts: action.payload}
     case REMOVE_PRODUCT:
-      return {...state, cart: state.cart.filter((p)=> p.name === action.payload)}
+      {
+        const index = state.cart.findIndex((p)=> p.name === action.payload);
+        return index !== -1 ? {...state, cart: [...state.cart.slice(0, index), ...state.cart.slice(index + 1)]} : state}
     default:
       return state;
   }

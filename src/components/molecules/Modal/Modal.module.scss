@@ -1,0 +1,18 @@
+@import "../../../scss/colors.scss";
+@import "../../../scss/typography.scss";
+
+.modalContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: rgb(0,0,0,0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.open {
+  display: flex;
+}
