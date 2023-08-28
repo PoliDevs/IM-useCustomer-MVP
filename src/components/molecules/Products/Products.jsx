@@ -14,21 +14,6 @@ export default function Products() {
     useEffect(() => {
       dispatch(getAllProducts())
     }, [])
-    
-
-    const addToCart = (name, price, amount, comment) => {
-      const product = {
-        name: name,
-        price: price,
-        amount: amount,
-        comment: comment,
-      };
-      dispatch(addProduct(product));
-    };
-
-    const removeFromCart = (name) => {
-      dispatch(removeProduct(name))
-    }
 
 
   return (
@@ -45,7 +30,7 @@ export default function Products() {
           />
         ))}
       </ScrollContainer>
-      <Modal isOpen={isOpen} addToCart={addToCart} removeFromCart={removeFromCart} closeModal={closeModal} productData={productData} />
+      <Modal isOpen={isOpen}closeModal={closeModal} productData={productData} />
     </>
   );
 }
