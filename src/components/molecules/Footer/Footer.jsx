@@ -2,10 +2,11 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { ReactComponent as DownArrow } from "../../../assets/down-arrow.svg";
-import s from "./Footer.module.scss";
 import CartProduct from "../CartProduct/CartProduct";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import HugeTitle from "../../atoms/HugeTitle/HugeTitle";
+import ScrollContainer from "react-indiana-drag-scroll";
+import s from "./Footer.module.scss";
 
 export default function Footer() {
   const [expanded, setExpanded] = useState(false);
@@ -20,12 +21,17 @@ export default function Footer() {
     >
       {expanded ? (
         <div className={s.productsList}>
-          <HugeTitle text={"Tu pedido"} alignment={"left"} />
-          <SubTitle text={`${cart.length} Productos`} alignment={"left"} />
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "15px" }}
+          >
+            <HugeTitle text={"Tu pedido"} alignment={"left"} />
+            <SubTitle text={`${cart.length} Productos`} alignment={"left"} />
+          </div>
           <DownArrow className={s.arrow} onClick={() => setExpanded(false)} />
-          {cart.map((p, i) => (
-            <div key={i}>
+          <ScrollContainer className={s.scrollContainer}>
+            {cart.map((p, i) => (
               <CartProduct
+                key={i}
                 image={p.image}
                 name={p.name}
                 description={p.description}
@@ -33,10 +39,10 @@ export default function Footer() {
                 price={p.price}
                 amount={p.amount}
               />
-            </div>
-          ))}
+            ))}
+          </ScrollContainer>
 
-          <h1>Total: {totalPrice}</h1>
+          <HugeTitle text={`Total: $ ${totalPrice}`} alignment={"left"} />
         </div>
       ) : (
         <>
