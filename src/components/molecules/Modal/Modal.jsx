@@ -3,10 +3,12 @@ import { useState } from "react";
 import { ReactComponent as XIcon } from "../../../assets/xIcon.svg";
 import TextArea from "../../atoms/TextArea/TextArea";
 import s from "./Modal.module.scss";
+import { useAmountControls } from "../../../utils/Functions";
 
-export default function Modal({ productData, addToCart, isOpen, closeModal }) {
+export default function Modal({ productData,  isOpen, closeModal }) {
   const [comment, setComment] = useState("");
   const [amount, setAmount] = useState(0);
+  const {addToCart} = useAmountControls();
 
   return (
     <article className={`${s.modalContainer} ${isOpen && s.open}`}>
@@ -53,7 +55,7 @@ export default function Modal({ productData, addToCart, isOpen, closeModal }) {
             +
           </button>
         </div>
-        <button className={s.addButton} onClick={()=> addToCart(productData.name, productData.price, amount, comment) }>
+        <button className={s.addButton} onClick={()=> addToCart(productData.image,productData.name, productData.description, productData.price, amount, comment) }>
           Agregar
         </button>
       </div>

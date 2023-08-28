@@ -11,8 +11,11 @@
   border: $border;
   border-radius: 10px 10px 0 0;
   z-index: 10;
+  .productsList {
+    display: none;
+  }
 
-  .Products {
+  .products {
     font-size: $paragraph;
     text-decoration: none;
     text-align: center;
@@ -38,4 +41,34 @@
 .active {
   background-color: $background-quaternary;
   color: $text-secondary
+}
+
+.expanded {
+  position: absolute;
+  bottom: 0;
+  height: 85vh;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: $color-sixth;
+  color: $text-primary;
+
+  .productsList {
+    display: block;
+
+    .icon {
+      height: 60px;
+      width: 60px;
+    }
+
+    .arrow { 
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      height: 24px;
+      width: 24px;
+      z-index: 999;
+    }
+  }
+
 }
