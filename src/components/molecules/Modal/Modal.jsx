@@ -35,7 +35,7 @@ export default function Modal({ productData, addToCart, isOpen, closeModal }) {
             </label>
             <p className={s.textLimit}>{`${comment.length}/140`}</p>
           </div>
-          <TextArea id="comment" text={comment} setComment={setComment} />
+          <TextArea id="comment" comment={comment} setComment={setComment} />
         </div>
         <div className={s.amount}>
           <button

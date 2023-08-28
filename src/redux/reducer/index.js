@@ -12,19 +12,31 @@ export const  rootReducer = (state= initalState, action) => {
   switch (action.type) {
     case ADD_PRODUCT:
      {
-      const index = state.cart.findIndex((p) => p.name === action.payload.name);
+      const index = state.cart.length ? state.cart.findIndex((p) => p.name === action.payload.name) : -1;
       if (index === -1 && action.payload.amount !== 0){
         return {...state, cart: [...state.cart, action.payload]}
       }
-      else {
-        const itemAmount = state.cart.find((p)=> p.name === action.payload.name).amount
-        state = {...state, cart: state.cart.filter(p=> p.name !== action.payload.name)}
-        if (action.payload.amount !== 0){
-        return {...state, cart: [...state.cart, {...action.payload, amount: action.payload.amount + itemAmount}]}
-        }else {
-          return state
-        }      
+      else if (action.payload.amount !== 0) {
+        const itemAmount = state.cart.find(
+          (p) => p.name === action.payload.name
+        ).amount;
+        state = {
+          ...state,
+          cart: state.cart.filter((p) => p.name !== action.payload.name),
+        };
+        if (action.payload.amount !== 0) {
+          return {
+            ...state,
+            cart: [
+              ...state.cart,
+              { ...action.payload, amount: action.payload.amount + itemAmount },
+            ],
+          };
+        } else {
+          return state;
+        }
       }
+      return state
     }
     case GET_ALL_PRODUCTS:
       return {...state, allProducts: action.payload}
