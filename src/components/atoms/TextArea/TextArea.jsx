@@ -1,5 +1,7 @@
+
 import s from "./TextArea.module.scss";
-export default function TextArea({ comment, setComment }) {
+export default function TextArea({comment, setComment }) {
+ 
   return (
     <textarea
       className={s.comment}
