@@ -4,12 +4,19 @@ import SearchBar from "../../molecules/SearchBar/SearchBar";
 import s from "./Home.module.scss";
 import Products from "../../molecules/Products/Products";
 import Footer from "../../molecules/Footer/Footer";
-import { useEffect} from "react";
+import { useEffect, useState} from "react";
 import { useSelector } from "react-redux";
 export default function Home() {
   const cant = useSelector(state=> state.cart);
-  
-    
+  const[red, setRed] = useState(false);  
+
+  const changeStyle = () => {
+    setRed(true);
+    setTimeout(() => {
+      setRed(false);
+    }, 1000); // 1000 milisegundos = 1 segundo
+  };
+
     useEffect(() => {
       localStorage.setItem("cart", JSON.stringify(cant));
   }, [cant]);
@@ -19,8 +26,8 @@ export default function Home() {
       <Banner />
       <SearchBar />
       <Categories />
-      <Products />
-      <Footer/>
+      <Products changeStyle={changeStyle} />
+      <Footer red={red} />
     </main>
   );
 }

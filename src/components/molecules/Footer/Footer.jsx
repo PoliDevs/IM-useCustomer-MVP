@@ -8,16 +8,19 @@ import HugeTitle from "../../atoms/HugeTitle/HugeTitle";
 import ScrollContainer from "react-indiana-drag-scroll";
 import s from "./Footer.module.scss";
 
-export default function Footer() {
+export default function Footer({red}) {
   const [expanded, setExpanded] = useState(false);
+
   const cart = useSelector((state) => state.cart);
   const totalPrice = cart.reduce((count, p) => count + p.price * p.amount, 0);
-
+  const totalProducts = cart.reduce(
+    (count, p) => count + p.amount,
+    0
+  );
+ 
   return (
     <footer
-      className={`${s.footer} ${cart.length ? s.active : ""} ${
-        expanded ? s.expanded : ""
-      }`}
+      className={`${s.footer} ${expanded ? s.expanded : ""} ${red && s.red}`}
     >
       {expanded ? (
         <div className={s.productsList}>
@@ -40,15 +43,15 @@ export default function Footer() {
                 amount={p.amount}
               />
             ))}
-          </ScrollContainer>
-
           <HugeTitle text={`Total: $ ${totalPrice}`} alignment={"left"} />
+          </ScrollContainer>
+          <button disabled={!cart.length} className={`${s.payButton} ${!cart.length && s.disabled}`}>Pagar</button>
         </div>
       ) : (
         <>
           <div className={s.textContainer}>
             <SubTitle
-              text={`${cart ? cart.length : 0} productos`}
+              text={`${cart ? totalProducts : 0} productos`}
               alignment={"left"}
             />
             <HugeTitle text={`Total: $ ${totalPrice}`} alignment={"left"} />

@@ -26,22 +26,37 @@
     padding: 5px;
     height: 35px;
     cursor: pointer;
-    background-color: $background-buttom-primary-active ;
+    background-color: $background-buttom-primary-active;
     color: $text-secondary;
     &:hover {
       transform: scale(1.02);
     }
   }
-
   .disabled {
     background-color: $background-buttom-primary-desable;
   }
+
 }
 
+.red {
+  animation-name: redStyle;
+  animation-duration: 2.5s;
+}
 
-.active {
-  background-color: $background-quaternary;
-  color: $text-secondary
+@keyframes redStyle {
+  0% {
+    background-color: $color-seventh;
+  }
+
+  50% {
+    background-color: $color-primary;
+    color: $text-secondary;
+  }
+
+  100% {
+    background-color: $color-primary;
+    color: $text-secondary;
+  }
 }
 
 .expanded {
@@ -58,13 +73,16 @@
     display: flex;
     flex-direction: column;
     overflow-y: hidden;
-    
+
     .scrollContainer {
       display: flex;
       flex-direction: column;
       height: 400px;
       margin-bottom: 15px;
       flex: 1 1;
+      &:last-child(h1) {
+        margin-top: 10px;
+      }
     }
 
     .icon {
@@ -72,7 +90,7 @@
       width: 60px;
     }
 
-    .arrow { 
+    .arrow {
       position: absolute;
       right: 20px;
       top: 15px;
@@ -82,4 +100,17 @@
     }
   }
 
+  .payButton {
+    width: 100%;
+    background-color: $background-buttom-primary-active;
+    font-size: $title;
+    border-radius: $border-primary-radius;
+    height: 61px;
+    color: $text-secondary;
+    border: none;
+  }
+
+  .disabled {
+    display: none;
+  }
 }
