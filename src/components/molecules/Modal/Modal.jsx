@@ -3,9 +3,9 @@ import { useState } from "react";
 import { ReactComponent as XIcon } from "../../../assets/xIcon.svg";
 import TextArea from "../../atoms/TextArea/TextArea";
 import s from "./Modal.module.scss";
-import { useAmountControls } from "../../../utils/Functions";
+import { useAmountControls} from "../../../utils/Functions";
 
-export default function Modal({ productData,  isOpen, closeModal }) {
+export default function Modal({ productData,  isOpen, closeModal, changeStyle}) {
   const [comment, setComment] = useState("");
   const [amount, setAmount] = useState(0);
   const {addToCart} = useAmountControls();
@@ -55,7 +55,17 @@ export default function Modal({ productData,  isOpen, closeModal }) {
             +
           </button>
         </div>
-        <button className={s.addButton} onClick={()=> addToCart(productData.image,productData.name, productData.description, productData.price, amount, comment) }>
+        <button className={s.addButton} onClick={()=> {
+          addToCart(
+            productData.image,
+            productData.name,
+            productData.description,
+            productData.price,
+            amount,
+            comment
+          );
+          changeStyle();
+        } }>
           Agregar
         </button>
       </div>
