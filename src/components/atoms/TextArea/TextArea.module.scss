@@ -1,0 +1,14 @@
+@import "../../../scss/colors.scss";
+.comment {
+  resize: none;
+  width: 100%;
+  border-radius: 10px;
+  background-color: $color-seventh;
+  border: none;
+  padding: 10px;
+  height: 78px;
+  margin-top: 10px;
+  outline: 0;
+  outline-color: transparent;
+  outline-style: none;
+}

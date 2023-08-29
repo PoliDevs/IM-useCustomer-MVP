@@ -3,13 +3,10 @@
 .subTitle {
   position: relative;
   font-family: 'Mabry Pro', sans-serif;
-  font-size: $paragraph;
+  font-size: $line-text;
   text-align: center;
   z-index: 4;
-
-  @media screen and (min-width: 430px) {
-    font-size:$line-text;
-  }
+  margin: 0;
 
   @media screen and (min-width: 750px) {
     font-size: $title;

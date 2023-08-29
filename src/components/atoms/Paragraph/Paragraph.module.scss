@@ -9,7 +9,8 @@
   margin: 4px 0;
   color: $text-desable;
   text-align: center;
-  overflow-y: hidden;
+  overflow-wrap: anywhere ;
+  line-height: $caption;
   @media screen and (min-width: 430px) {
     font-size: $paragraph;
   }
@@ -32,4 +33,5 @@
 
 .left {
   text-align: left;
+  justify-content: left;
 }

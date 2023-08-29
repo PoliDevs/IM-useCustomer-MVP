@@ -12,7 +12,7 @@ import spaghetti from "../assets/icons/spaghetti.png";
 import stuffedFlatbread from "../assets/icons/stuffed-flatbread.png";
 import taco from "../assets/icons/taco.png";
 
-export const iconImages = [
+export const ProductsInfo = [
   {
     name: "Pollo",
     src: chickenLeg,
@@ -120,3 +120,5 @@ export const iconImages = [
     price: 1250,
   },
 ];
+
+export const cartProducts = []
