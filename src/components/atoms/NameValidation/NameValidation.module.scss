@@ -1,0 +1,14 @@
+@import "../../../scss/colors.scss";
+@import "../../../scss/typography.scss";
+
+.nameValidation {
+  font-size: $caption;
+  color: $color-fifth;
+  margin: 0 auto;
+  text-align: center;
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}
