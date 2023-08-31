@@ -1,0 +1,20 @@
+@import "../../../scss/colors.scss";
+@import "../../../scss/typography.scss";
+
+.feedbackButton {
+    font-size: $title;
+    font-weight: 700;
+    background-color: $background-secundary;
+    color: $text-primary;
+    text-decoration: none;
+    text-align: center;
+    width: 142px;
+    margin: 0 auto;
+    border: $border;
+    border-radius: $border-primary-radius;
+    height: 40px;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.02);
+    }
+}

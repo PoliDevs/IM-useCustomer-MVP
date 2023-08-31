@@ -48,5 +48,17 @@ export function useAmountControls() {
   return {addToCart, removeFromCart}
 }
 
+export function useRating() {
+  const [stars, setStars] = useState(0);
+  const starsArray = [...Array(5)]
+
+  const handleStars = (currentRate) => {
+    setStars(currentRate);
+  };
+
+  return { starsArray, stars, handleStars };
+}
+
+
 
 

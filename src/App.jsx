@@ -5,6 +5,7 @@ import WelcomePage from "./components/pages/WelcomePage/WelcomePage";
 import Instruction from "./components/pages/Instructions/Instruction";
 import "semantic-ui-css/semantic.min.css";
 import Home from "./components/pages/Home/Home";
+import Review from "./components/molecules/Review/Review";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/welcome" element={<WelcomePage />} />
         <Route path="/instruction" element={<Instruction />} />
         <Route path="/home" element={<Home/>}/>
+        <Route path="/rating" element={<Review/>}/>
       </Routes>
     </>
   );

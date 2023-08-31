@@ -1,7 +1,7 @@
 import s from "./HugeTitle.module.scss"
 
-export default function HugeTitle({text, children}) {
+export default function HugeTitle({text, children, centered}) {
   return (
-    <h1 className={s.hugeTitle}>{children}{text}</h1>
+    <h1 className={`${s.hugeTitle} ${centered && s.centered}`}>{children}{text}</h1>
   )
 }

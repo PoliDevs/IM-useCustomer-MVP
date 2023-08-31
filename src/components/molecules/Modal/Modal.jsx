@@ -13,11 +13,14 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
   return (
     <article className={`${s.modalContainer} ${isOpen && s.open}`}>
       <div className={s.modal}>
-        <XIcon className={s.closeIcon} onClick={()=>{
-          closeModal();
-          setAmount(0);
-          setComment('')
-        }}/>
+        <XIcon
+          className={s.closeIcon}
+          onClick={() => {
+            closeModal();
+            setAmount(0);
+            setComment("");
+          }}
+        />
         <div className={s.productHeader}>
           <img
             className={s.productIcon}
@@ -37,7 +40,13 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
             </label>
             <p className={s.textLimit}>{`${comment.length}/140`}</p>
           </div>
-          <TextArea id="comment" comment={comment} setComment={setComment} />
+          <TextArea
+            id="comment"
+            comment={comment}
+            setComment={setComment}
+            maxLength={140}
+            placeholder={"Agregá comentarios y observaciones."}
+          />
         </div>
         <div className={s.amount}>
           <button
@@ -55,17 +64,20 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
             +
           </button>
         </div>
-        <button className={s.addButton} onClick={()=> {
-          addToCart(
-            productData.image,
-            productData.name,
-            productData.description,
-            productData.price,
-            amount,
-            comment
-          );
-          changeStyle();
-        } }>
+        <button
+          className={s.addButton}
+          onClick={() => {
+            addToCart(
+              productData.image,
+              productData.name,
+              productData.description,
+              productData.price,
+              amount,
+              comment
+            );
+            changeStyle();
+          }}
+        >
           Agregar
         </button>
       </div>

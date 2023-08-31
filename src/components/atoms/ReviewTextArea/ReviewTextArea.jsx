@@ -1,9 +1,8 @@
-
-import s from "./TextArea.module.scss";
-export default function TextArea({ comment, setComment, maxLength, placeholder }) {
+import s from "./ReviewTextArea.module.scss";
+export default function ReviewTextArea({comment, setComment, maxLength, placeholder}) {
   return (
     <textarea
-      className={s.comment}
+      className={s.feedback}
       value={comment}
       rows="5"
       cols="25"
