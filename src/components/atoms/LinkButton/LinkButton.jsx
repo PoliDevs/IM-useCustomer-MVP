@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import s from "./LinkButton.module.scss";
 import { useNavigate } from "react-router-dom";
 

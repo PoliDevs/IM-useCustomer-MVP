@@ -59,6 +59,19 @@ export function useRating() {
   return { starsArray, stars, handleStars };
 }
 
+export function useLogin() {
+  const [loginModal, setLoginModal] = useState(false);
+
+  const openLoginModal = ()=>{
+    setLoginModal(true);
+  }
+
+  const closeLoginModal = ()=>{
+    setLoginModal(false);
+  }
+  return { loginModal, openLoginModal, closeLoginModal}
+}
+
 
 
 
