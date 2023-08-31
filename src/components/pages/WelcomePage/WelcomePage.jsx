@@ -9,8 +9,9 @@ import LinkButton from "../../atoms/LinkButton/LinkButton";
 // import { getCommerce } from "../../utils/functions";
 import s from "./WelcomePage.module.scss";
 import { useEffect, useState } from "react";
-import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
 import { useLogin } from "../../../utils/Functions";
+import { signInWithGoogle } from "../../../Firebase/Firebase";
+import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
 import LoginModal from "../../molecules/LoginModal/LoginModal";
 export default function WelcomePage() {
   const [commerce, setCommerce] = useState("");
@@ -56,6 +57,7 @@ export default function WelcomePage() {
               closeLoginModal={closeLoginModal}
               name={name}
               handleName={handleName}
+              signInWithGoogle={signInWithGoogle}
             />
           )}
         </div>
