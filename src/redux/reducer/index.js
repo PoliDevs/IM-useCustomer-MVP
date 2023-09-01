@@ -2,6 +2,7 @@ import {
   ADD_PRODUCT,
   GET_ALL_PRODUCTS,
   REMOVE_PRODUCT,
+  SET_USER,
 } from "../actions/actionTypes";
 
 const initalState = {
@@ -9,6 +10,9 @@ const initalState = {
   cart: localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart"))
     : [],
+  user: localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : {},
 };
 
 export const rootReducer = (state = initalState, action) => {
@@ -50,6 +54,8 @@ export const rootReducer = (state = initalState, action) => {
         };
       }
     }
+    case SET_USER: 
+    return {...state, user: action.payload};
     default:
       return state;
   }

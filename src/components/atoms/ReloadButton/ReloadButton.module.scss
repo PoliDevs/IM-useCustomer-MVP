@@ -1,0 +1,20 @@
+@import "../../../scss/colors.scss";
+@import "../../../scss//typography.scss";
+
+.reload {
+  font-size: $paragraph;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1rem;
+    width: 70%;
+    margin: 4px 0 5px 0;
+    border-radius: 10px;
+    border: $border;
+    height: 40px;
+    cursor: pointer;
+    color: $text-secondary;
+    background-color: $background-buttom-primary-active;
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
