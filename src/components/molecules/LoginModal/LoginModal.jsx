@@ -13,13 +13,15 @@ export default function LoginModal({
   setName,
   handleName,
   signInWithGoogle,
+  getName
 }) {
+
+
   return (
-    <div className={`${s.loginContainer} ${loginModal && s.open}`}>
-      <section className={s.login}>
+    <div className={`${s.loginContainer} ${loginModal && s.open}`}><section className={s.login}>
         <HugeTitle text={"Ingresá un nombre"} centered={true} />
         <div className={s.data}>
-          <div>
+          <div style={{ display: "contents" }}>
             <input
               className={s.input}
               placeholder="Tu nombre"
@@ -37,9 +39,11 @@ export default function LoginModal({
             signInWithGoogle={signInWithGoogle}
             text={"Accede con Google"}
             closeLoginModal={closeLoginModal}
+            getName={getName}
           />
           <hr />
           <LoginButton
+            name={name}
             active={name.length >= 3}
             closeLoginModal={closeLoginModal}
             text={"Ingresar"}
