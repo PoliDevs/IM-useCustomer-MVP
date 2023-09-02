@@ -16,7 +16,7 @@ import s from "./WelcomePage.module.scss";
 export default function WelcomePage() {
   const userInfo = useSelector((state) => state.user);
   const [commerce, setCommerce] = useState("");
-  const [name, setName] = useState(localStorage.getItem("name") ? localStorage.getItem("name") : (userInfo.name ? userInfo.name : ""));
+  const [name, setName] = useState((userInfo.name ? userInfo.name : ""));
   const [error, setError] = useState(false)
   const { loginModal, openLoginModal, closeLoginModal } = useLogin();
   const { signInWithGoogle } = useFirebase(setError);
@@ -39,7 +39,7 @@ export default function WelcomePage() {
     <div className={s.home}>
       {commerce ? (
         <div className={s.top}>
-          {name || userInfo.name ? (
+          {!loginModal && (name || userInfo.name) ? (
             <>
               <HugeTitle
                 text={`${t("home.title")} ${

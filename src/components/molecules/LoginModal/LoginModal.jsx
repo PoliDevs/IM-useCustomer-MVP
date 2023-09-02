@@ -19,7 +19,7 @@ export default function LoginModal({
 
   return (
     <div className={`${s.loginContainer} ${loginModal && s.open}`}><section className={s.login}>
-        <HugeTitle text={"Ingresá un nombre"} centered={true} />
+        <HugeTitle text={"Ingresá un nombre, para una mejor experiencia!"} centered={true} />
         <div className={s.data}>
           <div style={{ display: "contents" }}>
             <input

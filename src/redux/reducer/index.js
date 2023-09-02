@@ -55,7 +55,12 @@ export const rootReducer = (state = initalState, action) => {
       }
     }
     case SET_USER: 
-    return {...state, user: action.payload};
+    // return {...state, user: action.payload};
+    {
+      state={...state, user: action.payload};
+      localStorage.setItem("user", JSON.stringify(action.payload));
+      return state;
+    }
     default:
       return state;
   }
