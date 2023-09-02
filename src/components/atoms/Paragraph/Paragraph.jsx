@@ -6,12 +6,15 @@ export default function Paragraph({text, children, bold, centered, secundary, al
     <p
       className={`${s.paragraph} ${bold ? s.bold : ""} ${
         centered ? s.centered : ""
-      } ${secundary ? s.secundary : ""} ${alignment === "left" ? s.left : ""} ${scrollable && s.scrollable}`}
+      } ${secundary ? s.secundary : ""} ${alignment === "left" ? s.left : ""} ${
+        scrollable && s.scrollable
+      } ${children && s.align}`}
     >
-      {
-        scrollable ? text :
-      ((text.length > 110) ? (`${text.substring(0, 110)}...`) : text)
-      }
+      {scrollable
+        ? text
+        : text.length > 110
+        ? `${text.substring(0, 110)}...`
+        : text}
       {children}
     </p>
   );
