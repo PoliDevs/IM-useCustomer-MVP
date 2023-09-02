@@ -36,7 +36,6 @@ export default function useFirebase(setError) {
         photo: result.user.photoURL
       }
       dispatch(setUser(user))
-      localStorage.setItem("user",JSON.stringify(user));
     } catch (error) {
       console.error(error);
       setError(true)

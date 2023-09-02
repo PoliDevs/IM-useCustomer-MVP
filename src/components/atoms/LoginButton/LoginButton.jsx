@@ -1,9 +1,15 @@
+import { useDispatch } from "react-redux";
 import s from "./LoginButton.module.scss";
-
+import { setUser } from "../../../redux/actions";
 export default function LoginButton({ text, closeLoginModal, active, name }) {
+  const dispatch = useDispatch();
+
   const handleClick = () => {
     if (active) {
-      localStorage.setItem("name", name);
+      const user = {
+        name: name,
+      }
+      dispatch(setUser(user))
       closeLoginModal();
     }
     return;
