@@ -18,7 +18,7 @@ export const ProductsInfo = [
     src: chickenLeg,
     altName: "Alitas de pollo",
     description:
-      "Alas de pollo rebozadas en pan rallado con mostaza y con mayonesa casera",
+      "Alas de pollo rebozadas en pan rallado con mostaza y con mayonesa casera aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
     price: 1250,
   },
   {

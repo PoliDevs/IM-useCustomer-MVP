@@ -10,9 +10,9 @@
   "instructions": {
     "title": "Instrucciones",
     "subtitle": "¡Como hacer tu pedido en i menu!",
-    "instruction_1": "Seleccioná productos del menú, toca el + para agregar el producto",
+    "instruction_1": "Seleccioná productos del menú, presioná la tarjeta del producto",
     "instruction_2": "Una vez seleccionados tus productos, presioná en 'ver producto' para confirmar tu pedido",
-    "instruction_3": "Realizá el pago de tu pedido a través de Mercadopago",
+    "instruction_3": "Realizá el pago de tu pedido en efectivo o a través de Mercadopago",
     "instruction_4": "¡Tu pedido estará en camino!",
     "poweredby": "impulsado por ",
     "order": "Hacer pedido"
