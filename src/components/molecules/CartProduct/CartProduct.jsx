@@ -15,7 +15,7 @@ export default function CartProduct({image, name, description, comment, price, a
       <img className={s.icon} src={image} alt={"product icon"} />
       <div className={s.info}>
         <SubTitle alignment={"left"} text={name} bold={true} />
-        <Paragraph alignment={"left"} text={description} />
+        <Paragraph alignment={"left"} text={description} scrollable={true}/>
         {comment && <Paragraph alignment={"left"} text={"*Observaciones:"} bold={true}/>}
         <Paragraph alignment={"left"} text={comment}/>
         <SubTitle alignment={"left"} text={`$ ${price * amount}`} bold={true} />

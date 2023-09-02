@@ -10,9 +10,9 @@
   "instructions":{
   "title": "Instructions",
     "subtitle": "How to order with i menu!",
-    "instruction_1": "Select products from the menu, touch the + to add the product.",
+    "instruction_1": "Select products from the menu, touch the product card to add the product.",
     "instruction_2": "Once you've selected your products, press 'view product' to confirm your order.",
-    "instruction_3": "Make the payment for your order through MercadoPago.",
+    "instruction_3": "Make the payment for your order in cash or through MercadoPago.",
     "instruction_4": "Your order will be on its way!",
     "poweredby": "powered by",
     "order": "Order"

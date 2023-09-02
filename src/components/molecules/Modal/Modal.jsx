@@ -4,6 +4,7 @@ import { ReactComponent as XIcon } from "../../../assets/xIcon.svg";
 import TextArea from "../../atoms/TextArea/TextArea";
 import s from "./Modal.module.scss";
 import { useAmountControls} from "../../../utils/Functions";
+import Paragraph from "../../atoms/Paragraph/Paragraph";
 
 export default function Modal({ productData,  isOpen, closeModal, changeStyle}) {
   const [comment, setComment] = useState("");
@@ -29,7 +30,7 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
           />
           <div className={s.productInfo}>
             <h1 className={s.productTitle}>{productData.name}</h1>
-            <p className={s.productDescription}>{productData.description}</p>
+            <Paragraph className={s.productDescription} text={productData.description} alignment={"left"}/>
             <h3 className={s.productPrice}>{`$ ${productData.price}`}</h3>
           </div>
         </div>

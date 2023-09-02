@@ -11,16 +11,15 @@ export default function Product({
 }) {
 
   return (
-    <div className={s.productContainer}>
+    <div
+      className={s.productContainer}
+      onClick={() => openModal(name, price, bg, description)}
+    >
       <img className={s.productIcon} src={bg} />
       <div className={s.infoContainer}>
         <SubTitle alignment={"left"} text={name} bold={true} />
         <Paragraph alignment={"left"} text={description} />
         <SubTitle alignment={"left"} text={`$ ${price}`} bold={true} />
-        <div
-          className={s.plus}
-          onClick={()=> openModal(name, price, bg, description)}
-        ></div>
       </div>
     </div>
   );
