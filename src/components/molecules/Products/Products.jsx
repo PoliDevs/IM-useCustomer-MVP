@@ -7,7 +7,7 @@ import Product from "../Product/Product";
 import s from "./Products.module.scss";
 import Modal from "../Modal/Modal";
 
-export default function Products({ changeStyle }) {
+export default function Products({ changeStyle, commercePlan }) {
   const allproducts = useSelector((state) => state.allProducts);
   const dispatch = useDispatch();
   const { isOpen, openModal, closeModal, productData } = useModal(false);
@@ -29,12 +29,14 @@ export default function Products({ changeStyle }) {
           />
         ))}
       </ScrollContainer>
-      <Modal
-        isOpen={isOpen}
-        closeModal={closeModal}
-        productData={productData}
-        changeStyle={changeStyle}
-      />
+      {commercePlan !== "m1" && (
+        <Modal
+          isOpen={isOpen}
+          closeModal={closeModal}
+          productData={productData}
+          changeStyle={changeStyle}
+        />
+      )}
     </>
   );
 }
