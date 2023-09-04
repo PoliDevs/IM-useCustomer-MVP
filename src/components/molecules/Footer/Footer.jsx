@@ -7,9 +7,11 @@ import SubTitle from "../../atoms/SubTitle/SubTitle";
 import HugeTitle from "../../atoms/HugeTitle/HugeTitle";
 import ScrollContainer from "react-indiana-drag-scroll";
 import s from "./Footer.module.scss";
+import { useNavigate } from "react-router-dom";
 
 export default function Footer({ red }) {
   const [expanded, setExpanded] = useState(false);
+  const navigate = useNavigate()
 
   const cart = useSelector((state) => state.cart);
   const totalPrice = cart.reduce((count, p) => count + p.price * p.amount, 0);
@@ -47,6 +49,7 @@ export default function Footer({ red }) {
           <button
             disabled={!cart.length}
             className={`${s.payButton} ${!cart.length && s.disabled}`}
+            onClick={()=>navigate("/rating")}
           >
             Pagar
           </button>

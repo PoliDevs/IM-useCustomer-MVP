@@ -6,7 +6,7 @@ import WelcomePage from "./components/pages/WelcomePage/WelcomePage";
 import Instruction from "./components/pages/Instructions/Instruction";
 import "semantic-ui-css/semantic.min.css";
 import Home from "./components/pages/Home/Home";
-import Review from "./components/molecules/Review/Review";
+import Review from "./components/pages/Review/Review";
 
 function App() {
   const [scanResult, setScanResult] = useState();

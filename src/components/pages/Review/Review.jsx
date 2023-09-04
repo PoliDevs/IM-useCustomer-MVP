@@ -61,7 +61,7 @@ export default function Review() {
                 maxLength={240}
                 placeholder={"¿Te gusta nuestra forma de hacer las cosas?"}
               />
-              <FeedbackButton text={"Enviar"} />
+              <FeedbackButton text={"Enviar"} handleSent={handleSent} />
             </>
           )
         }
@@ -72,7 +72,7 @@ export default function Review() {
             centered={true}
             newHeight={"61px"}
             newFz={"21px"}
-            onClick={handleSent}
+            
           />
         </div>
       </article>
