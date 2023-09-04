@@ -71,6 +71,7 @@ export const rootReducer = (state = initalState, action) => {
         commerce: {
           id: action.payload.id,
           name: action.payload.name,
+          active: action.payload.active,
           plan: action.payload.commercialPlan.plan,
           schedule: action.payload.workSchedule,
         },

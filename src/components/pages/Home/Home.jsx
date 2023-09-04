@@ -7,27 +7,34 @@ import s from "./Home.module.scss";
 import Products from "../../molecules/Products/Products";
 import Footer from "../../molecules/Footer/Footer";
 export default function Home() {
-  const cant = useSelector(state=> state.cart);
-  const[red, setRed] = useState(false);  
+  const cant = useSelector((state) => state.cart);
+  const commerce = useSelector((state) => state.commerce);
+  const [red, setRed] = useState(false);
 
   const changeStyle = () => {
     setRed(true);
     setTimeout(() => {
       setRed(false);
-    }, 1000); // 1000 milisegundos = 1 segundo
+    }, 1500); // 1000 milisegundos = 1 segundo
   };
 
-    useEffect(() => {
-      localStorage.setItem("cart", JSON.stringify(cant));
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cant));
   }, [cant]);
 
   return (
     <main className={s.home}>
       <Banner />
-      <SearchBar />
-      <Categories />
-      <Products changeStyle={changeStyle} />
-      <Footer red={red} />
+      {commerce.active ? (
+        <>
+          <SearchBar />
+          <Categories />
+          <Products changeStyle={changeStyle} commercePlan={commerce.plan} />
+          {commerce.plan !== "m1" && <Footer red={red} />}
+        </>
+      ) : (
+        <h2>commerce closed</h2>
+      )}
     </main>
   );
 }
