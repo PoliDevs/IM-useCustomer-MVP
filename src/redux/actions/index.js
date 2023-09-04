@@ -1,7 +1,8 @@
 import axios from "axios";
-import { ADD_PRODUCT, GET_ALL_PRODUCTS, REMOVE_PRODUCT, SET_USER } from "./actionTypes";
+import { ADD_PRODUCT, GET_ALL_PRODUCTS, REMOVE_PRODUCT, SET_USER, GET_COMMERCE } from "./actionTypes";
 import { ProductsInfo } from "../../utils/Constants";
 
+////////////////////* Cart Actions Creators *////////////////////
 export function addProduct (product){
   return async function (dispatch) {
     try {
@@ -40,6 +41,28 @@ export function removeProduct (name){
   }
 }
 
+////////////////////* Cart Actions Creators *////////////////////
+
+////////////////////* Commerce Action Creator *////////////////////
+
+export function getCommerce (id){
+  return async function (dispatch){
+    try {
+      let commerceInfo = await axios.get(
+        `http://localhost:3001/commerce/detail/${id}`
+      );
+      console.log(commerceInfo.data);
+      return dispatch ({
+        type: GET_COMMERCE,
+        payload: commerceInfo.data[0]
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+////////////////////* Commerce Action Creator *////////////////////
 export function setUser (user){
   return async function (dispatch) {
     try {

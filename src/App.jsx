@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import QrCodeScanner from "./components/pages/QrCodeScanner/QrCodeScanner";
 import WelcomePage from "./components/pages/WelcomePage/WelcomePage";
@@ -8,14 +9,26 @@ import Home from "./components/pages/Home/Home";
 import Review from "./components/molecules/Review/Review";
 
 function App() {
+  const [scanResult, setScanResult] = useState();
   return (
     <>
       <Routes>
-        <Route index element={<QrCodeScanner />} />
-        <Route path="/welcome" element={<WelcomePage />} />
+        <Route
+          index
+          element={
+            <QrCodeScanner
+              scanResult={scanResult}
+              setScanResult={setScanResult}
+            />
+          }
+        />
+        <Route
+          path="/welcome"
+          element={<WelcomePage scanResult={scanResult} />}
+        />
         <Route path="/instruction" element={<Instruction />} />
-        <Route path="/home" element={<Home/>}/>
-        <Route path="/rating" element={<Review/>}/>
+        <Route path="/home" element={<Home />} />
+        <Route path="/rating" element={<Review />} />
       </Routes>
     </>
   );

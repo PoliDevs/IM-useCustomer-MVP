@@ -3,6 +3,7 @@ import {
   GET_ALL_PRODUCTS,
   REMOVE_PRODUCT,
   SET_USER,
+  GET_COMMERCE,
 } from "../actions/actionTypes";
 
 const initalState = {
@@ -12,6 +13,9 @@ const initalState = {
     : [],
   user: localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
+    : {},
+  commerce: localStorage.getItem("commerce")
+    ? JSON.parse(localStorage.getItem("commerce"))
     : {},
 };
 
@@ -27,7 +31,9 @@ export const rootReducer = (state = initalState, action) => {
         return {
           ...state,
           cart: state.cart.map((p) =>
-            p.name === action.payload.name ? { ...p, amount: p.amount + 1, comment: action.payload.comment } : p
+            p.name === action.payload.name
+              ? { ...p, amount: p.amount + 1, comment: action.payload.comment }
+              : p
           ),
         };
       }
@@ -54,13 +60,24 @@ export const rootReducer = (state = initalState, action) => {
         };
       }
     }
-    case SET_USER: 
-    // return {...state, user: action.payload};
-    {
-      state={...state, user: action.payload};
+    case SET_USER: {
+      state = { ...state, user: action.payload };
       localStorage.setItem("user", JSON.stringify(action.payload));
       return state;
     }
+    case GET_COMMERCE:
+      state = {
+        ...state,
+        commerce: {
+          id: action.payload.id,
+          name: action.payload.name,
+          plan: action.payload.commercialPlan.plan,
+          schedule: action.payload.workSchedule,
+        },
+      };
+      localStorage.setItem("commerce", JSON.stringify(state.commerce));
+      return state;
+
     default:
       return state;
   }
