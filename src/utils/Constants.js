@@ -18,40 +18,45 @@ export const ProductsInfo = [
     src: chickenLeg,
     altName: "Alitas de pollo",
     description:
-      "Alas de pollo rebozadas en pan rallado con mostaza y con mayonesa casera aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "Alas de pollo rebozadas en pan rallado con mostaza y con mayonesa casera Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
     price: 1250,
+    category: "Pollo",
   },
   {
     name: "Hot Dog",
     src: hotDog,
     altName: "Hot Dog Aleman",
     description:
-      "Salchicha alemana en pan de viena, mayonesa, mostaza, ketchup, cebolla caramelizada y acompañado de papas fr...",
+      "Salchicha alemana en pan de viena, mayonesa, mostaza, ketchup, cebolla caramelizada y acompañado de papas fritas, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
     price: 2244,
+    category: "Sandwich",
   },
   {
     name: "Hamburg...",
     src: hamburger,
     altName: "Mega cuarto bacon",
     description:
-      "Mega hamburguesa de carne, queso cheddar, bacon, mostaza y ketchup acompañadas de papas fritas regulares...",
+      "Mega hamburguesa de carne, queso cheddar, bacon, mostaza y ketchup acompañadas de papas fritas regulares, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
     price: 1200,
+    category: "Burger",
   },
   {
     name: "Pizza",
     src: pizza,
     altName: "Pizza de pepperoni",
     description:
-      "Pizza de masa madre con mozzarella, pepperonis frescos con oregano, al horno de barro",
+      "Pizza de masa madre con mozzarella, pepperonis frescos con oregano, al horno de barro. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
     price: 2244,
+    category: "Pizza",
   },
   {
     name: "Trozo de C...",
     src: cutOfMeat,
     altName: "Bifes a la criolla",
     description:
-      " filetes de carne, cocidos en una salsa rica y sabrosa conocida como salsa criolla",
+      " filetes de carne, cocidos en una salsa rica y sabrosa conocida como salsa criolla. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
     price: 2244,
+    category: "Meat",
   },
   {
     name: "Papas Fritas",
@@ -60,6 +65,7 @@ export const ProductsInfo = [
     description:
       "Delgados bastones de papa, crujientes por fuera y tiernas por dentro, cocinadas en aceite caliente",
     price: 1200,
+    category: "Fries",
   },
   {
     name: "Ensalada",
@@ -68,6 +74,7 @@ export const ProductsInfo = [
     description:
       "Mezcla de lechuga romana, crutones, queso parmesano, aderezo Caesar y, a veces, pollo.",
     price: 1250,
+    category: "Salad",
   },
 
   {
@@ -77,6 +84,7 @@ export const ProductsInfo = [
     description:
       "Trozos de carne sazonada y a la parrilla, tradicional de la cocina latinoamericana.",
     price: 2244,
+    category: "Meat",
   },
 
   {
@@ -86,6 +94,7 @@ export const ProductsInfo = [
     description:
       "Plato cocido a fuego lento con carne, vegetales y fideos, sabores integrados y reconfortantes.",
     price: 1250,
+    category: "Soup",
   },
   {
     name: "Sandwich",
@@ -94,6 +103,7 @@ export const ProductsInfo = [
     description:
       "Dos rebanadas de pan con jamón y queso entre ellas, lechuga, tomate y mayonesa, tostado a eleccion.",
     price: 1200,
+    category: "Sandwich",
   },
   {
     name: "Spaghetti",
@@ -102,6 +112,7 @@ export const ProductsInfo = [
     description:
       " Pasta larga cocida al dente, servida con diversas salsas y acompañada a eleccion.",
     price: 1250,
+    category: "Pasta",
   },
   {
     name: "Vegano",
@@ -110,6 +121,7 @@ export const ProductsInfo = [
     description:
       " Dip vegano de garbanzos triturados, tahini, aceite de oliva, ajo, limón y especias. Acompañado de pan o verduras.",
     price: 2244,
+    category: "Vegan",
   },
   {
     name: "Taco",
@@ -118,6 +130,7 @@ export const ProductsInfo = [
     description:
       " Finas rebanadas de carne de cerdo marinadas, asadas en trompo y servidas con cebolla y piña",
     price: 1250,
+    category: "Meat",
   },
 ];
 

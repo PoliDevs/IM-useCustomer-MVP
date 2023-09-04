@@ -3,7 +3,8 @@ import { ProductsInfo } from "../../../utils/Constants";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import Icon from "../Icon/Icon";
 import s from "./Categories.module.scss";
-export default function Categories() {
+export default function Categories({handleCategory, category}) {
+
   return (
     <section className={s.categories}>
       <div className={s.sectionTitle}>
@@ -12,7 +13,7 @@ export default function Categories() {
       <div style={{ position: "relative", height: "75px" }}>
         <ScrollContainer className={s.scrollContainer}>
           {ProductsInfo?.map((icon, index) => (
-            <Icon key={index} icon={icon} />
+            <Icon key={index} icon={icon} handleCategory={handleCategory} category={category}/>
           ))}
         </ScrollContainer>
       </div>

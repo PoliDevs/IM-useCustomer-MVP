@@ -1,6 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts } from "../../../redux/actions";
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import useModal from "../../../utils/Functions";
 import ScrollContainer from "react-indiana-drag-scroll";
 import Product from "../Product/Product";
@@ -9,12 +7,7 @@ import Modal from "../Modal/Modal";
 
 export default function Products({ changeStyle, commercePlan }) {
   const allproducts = useSelector((state) => state.allProducts);
-  const dispatch = useDispatch();
   const { isOpen, openModal, closeModal, productData } = useModal(false);
-  useEffect(() => {
-    dispatch(getAllProducts());
-  }, []);
-
   return (
     <>
       <ScrollContainer className={s.productsContainer}>

@@ -6,11 +6,14 @@ import {
   GET_COMMERCE,
   GET_ACTIVE_MENUS,
   GET_ACTIVE_DISHES,
+  FILTER_CATEGORY,
+  GET_ALL_CATEGORIES,
 } from "../actions/actionTypes";
 
 const initalState = {
   allProducts: [],
   allDishes: [],
+  allCategories: [],
   cart: localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart"))
     : [],
@@ -87,12 +90,24 @@ export const rootReducer = (state = initalState, action) => {
     //     state= {...state, allProducts: allActive}
     //   }
     //   return state
-      case GET_ACTIVE_DISHES:
-        {
-          const allActive = action.payload.dishes.filter((d)=> d.commerce.id === action.payload.id)
-          state= {...state, allDishes: allActive}
-        }
-        return state;
+    case GET_ACTIVE_DISHES:
+      {
+        const allActive = action.payload.dishes.filter(
+          (d) => d.commerce.id === action.payload.id
+        );
+        state = { ...state, allDishes: allActive };
+      }
+      return state;
+    case GET_ALL_CATEGORIES:
+      return { ...state, allCategories: action.payload };
+    case FILTER_CATEGORY:
+      // return {...state, allProducts: state.allProducts.filter((c)=> c.category === action.payload)}
+      {
+        const products = [...state.allProducts];
+        const filteredResults = products.filter((p)=> p.category === action.payload);
+        return {...state, allProducts: filteredResults}
+
+      }
     default:
       return state;
   }

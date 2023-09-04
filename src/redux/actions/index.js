@@ -7,6 +7,8 @@ import {
   GET_COMMERCE,
   GET_ACTIVE_MENUS,
   GET_ACTIVE_DISHES,
+  FILTER_CATEGORY,
+  GET_ALL_CATEGORIES,
 } from "./actionTypes";
 import { ProductsInfo } from "../../utils/Constants";
 
@@ -91,10 +93,38 @@ export function getActiveDishes(id) {
       let allActiveDishes = await axios.get(
         "http://localhost:3001/dish/all_active"
       );
-      console.log(allActiveDishes.data);
       return dispatch({
         type: GET_ACTIVE_DISHES,
         payload: { dishes: allActiveDishes.data, id: id },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+}
+
+export function getAllCategorys() {
+  return async function (dispatch) {
+    try {
+      let allActiveCategorys = await axios.get(
+        "http://localhost:3001/category/all_active"
+      );
+      return dispatch({
+        type: GET_ALL_CATEGORIES,
+        payload: allActiveCategorys.data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+}
+
+export function filterCategory(name) {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: FILTER_CATEGORY,
+        payload: name,
       });
     } catch (error) {
       console.error(error);
