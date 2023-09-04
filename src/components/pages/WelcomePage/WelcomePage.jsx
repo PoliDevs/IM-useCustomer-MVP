@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { ReactComponent as Logo } from "../../../assets/Burgers.svg";
 import { ReactComponent as ImenuLogo } from "../../../assets/ImenuHorizontal.svg";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLogin } from "../../../utils/Functions";
 import HugeTitle from "../../atoms/HugeTitle/HugeTitle";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
@@ -13,11 +13,13 @@ import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
 import LoginModal from "../../molecules/LoginModal/LoginModal";
 import Error from "../Error/Error";
 import s from "./WelcomePage.module.scss";
-export default function WelcomePage() {
+import { getCommerce } from "../../../redux/actions";
+export default function WelcomePage({scanResult}) {
   const userInfo = useSelector((state) => state.user);
-  const [commerce, setCommerce] = useState("");
-  const [name, setName] = useState((userInfo.name ? userInfo.name : ""));
-  const [error, setError] = useState(false)
+  const commerce = useSelector((state)=> state.commerce);
+  const dispatch = useDispatch();
+  const [name, setName] = useState(userInfo.name ? userInfo.name : "");
+  const [error, setError] = useState(false);
   const { loginModal, openLoginModal, closeLoginModal } = useLogin();
   const { signInWithGoogle } = useFirebase(setError);
 
@@ -25,25 +27,25 @@ export default function WelcomePage() {
 
   useEffect(() => {
     setTimeout(() => {
-      setCommerce(true);
-      if(!localStorage.getItem("user") && !localStorage.getItem("name"))openLoginModal();
-    }, 1000);
+      dispatch(getCommerce(scanResult.commerceId));
+      if (!localStorage.getItem("user") && !localStorage.getItem("name"))
+        openLoginModal();
+    }, 2500);
   }, []);
 
   const handleName = (e) => {
     setName(e.target.value);
   };
 
-
   return (
     <div className={s.home}>
-      {commerce ? (
+      {Object.keys(commerce).length ? (
         <div className={s.top}>
           {!loginModal && (name || userInfo.name) ? (
             <>
               <HugeTitle
                 text={`${t("home.title")} ${
-                  !loginModal ? (userInfo.name ? userInfo.name: name) : ""
+                  !loginModal ? (userInfo.name ? userInfo.name : name) : ""
                 }`}
               />
               <Paragraph text={t("home.subtitle")} />
@@ -63,7 +65,7 @@ export default function WelcomePage() {
               />
             </>
           ) : (
-            <Error active={error}/>
+            <Error active={error} />
           )}
           {loginModal && (
             <LoginModal
