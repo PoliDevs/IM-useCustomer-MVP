@@ -8,3 +8,5 @@ export const SET_USER = "SET_USER";
 ////////////////////* Commerce Actions *////////////////////
 
 export const GET_COMMERCE = "GET_COMMERCE";
+export const GET_ACTIVE_MENUS = "GET_ACTIVE_MENUS";
+export const GET_ACTIVE_DISHES = "GET_aCTIVE_DISHES";

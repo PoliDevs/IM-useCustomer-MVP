@@ -4,10 +4,13 @@ import {
   REMOVE_PRODUCT,
   SET_USER,
   GET_COMMERCE,
+  GET_ACTIVE_MENUS,
+  GET_ACTIVE_DISHES,
 } from "../actions/actionTypes";
 
 const initalState = {
   allProducts: [],
+  allDishes: [],
   cart: localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart"))
     : [],
@@ -78,7 +81,18 @@ export const rootReducer = (state = initalState, action) => {
       };
       localStorage.setItem("commerce", JSON.stringify(state.commerce));
       return state;
-
+    // case GET_ACTIVE_MENUS:
+    //   {
+    //     const allActive = action.payload.menus.map((m)=> m.commerce.id === action.payload.id);
+    //     state= {...state, allProducts: allActive}
+    //   }
+    //   return state
+      case GET_ACTIVE_DISHES:
+        {
+          const allActive = action.payload.dishes.filter((d)=> d.commerce.id === action.payload.id)
+          state= {...state, allDishes: allActive}
+        }
+        return state;
     default:
       return state;
   }
