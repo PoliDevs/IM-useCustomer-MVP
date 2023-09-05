@@ -9,8 +9,24 @@ import {
   GET_ACTIVE_DISHES,
   FILTER_CATEGORY,
   GET_ALL_CATEGORIES,
+  GET_SEARCHED_PRODUCT,
 } from "./actionTypes";
 import { ProductsInfo } from "../../utils/Constants";
+
+////////////////////* SearchBar Action Creator *////////////////////
+
+export function searchProduct(product) {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: GET_SEARCHED_PRODUCT,
+        payload: product,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 
 ////////////////////* Cart Actions Creators *////////////////////
 export function addProduct(product) {

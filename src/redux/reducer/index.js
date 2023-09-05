@@ -8,6 +8,7 @@ import {
   GET_ACTIVE_DISHES,
   FILTER_CATEGORY,
   GET_ALL_CATEGORIES,
+  GET_SEARCHED_PRODUCT,
 } from "../actions/actionTypes";
 
 const initalState = {
@@ -27,6 +28,11 @@ const initalState = {
 
 export const rootReducer = (state = initalState, action) => {
   switch (action.type) {
+    case GET_SEARCHED_PRODUCT: {
+      
+      state = {...state, allProducts: state.allProducts.filter((p)=> p.altName.toLowerCase().includes(action.payload.toLowerCase()))}
+      return state;
+    }
     case ADD_PRODUCT: {
       const index = state.cart.length
         ? state.cart.findIndex((p) => p.name === action.payload.name)
