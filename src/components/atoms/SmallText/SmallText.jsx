@@ -12,7 +12,7 @@ export default function SmallText({ text, children, bold, noMargin, secundary, a
     >
       {scrollable
         ? text
-        : text.length > 110
+        : (text.length > 110)
         ? `${text.substring(0, 110)}...`
         : text}
     </h6>

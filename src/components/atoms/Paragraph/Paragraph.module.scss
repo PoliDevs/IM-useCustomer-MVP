@@ -38,6 +38,11 @@
   justify-content: left;
 }
 
+.right {
+  text-align: right;
+  justify-content: right;
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 .scrollable::-webkit-scrollbar {
   overflow-y: scroll;

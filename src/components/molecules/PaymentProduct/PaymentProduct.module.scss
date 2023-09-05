@@ -1,0 +1,12 @@
+.paymentProduct {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.line {
+  margin-top: 10px;
+  width: 100%;
+  &:last-of-type {
+    display: none;
+  }
+}
