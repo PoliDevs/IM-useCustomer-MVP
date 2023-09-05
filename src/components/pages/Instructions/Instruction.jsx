@@ -20,12 +20,13 @@ export default function Instruction() {
         <div className={s.arrowBack}></div>
       </Link>
       <div className={s.title}>
-        <HugeTitle text={t("instructions.title")}>
+        <SubTitle text={t("instructions.title")}>
           <div className={s.info}></div>
-        </HugeTitle>
+        </SubTitle>
       </div>
-      <SubTitle text={t("instructions.subtitle")} />
+      <Paragraph text={t("instructions.subtitle")} />
       <Ul/>
+      <div className={s.bottomContent}>
       <Paragraph text={t("instructions.poweredby")} bold={true} centered={true}>
         <IMenu className={s.imenuLogo} />
       </Paragraph>
@@ -35,6 +36,7 @@ export default function Instruction() {
         text={t("instructions.order")}
         centered={true}
       />
+      </div>
     </div>
   );
 }

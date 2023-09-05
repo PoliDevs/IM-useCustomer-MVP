@@ -8,6 +8,7 @@ import HugeTitle from "../../atoms/HugeTitle/HugeTitle";
 import ScrollContainer from "react-indiana-drag-scroll";
 import s from "./Footer.module.scss";
 import { useNavigate } from "react-router-dom";
+import Paragraph from "../../atoms/Paragraph/Paragraph";
 
 export default function Footer({ red }) {
   const [expanded, setExpanded] = useState(false);
@@ -26,8 +27,8 @@ export default function Footer({ red }) {
           <div
             style={{ display: "flex", flexDirection: "column", gap: "15px" }}
           >
-            <HugeTitle text={"Tu pedido"} alignment={"left"} />
-            <SubTitle text={`${cart.length} Productos`} alignment={"left"} />
+            <SubTitle text={"Tu pedido"} alignment={"left"} />
+            <Paragraph text={`${cart.length} Productos`} alignment={"left"} />
           </div>
           <DownArrow className={s.arrow} onClick={() => setExpanded(false)} />
           <ScrollContainer className={s.scrollContainer}>
@@ -43,7 +44,7 @@ export default function Footer({ red }) {
               />
             ))}
             <div style={{ marginTop: "10px" }}>
-              <HugeTitle text={`Total: $ ${totalPrice}`} alignment={"left"} />
+              <SubTitle text={`Total: $ ${totalPrice}`} alignment={"left"} />
             </div>
           </ScrollContainer>
           <button
@@ -57,11 +58,11 @@ export default function Footer({ red }) {
       ) : (
         <>
           <div className={s.textContainer}>
-            <SubTitle
+            <Paragraph
               text={`${cart ? totalProducts : 0} productos`}
               alignment={"left"}
             />
-            <HugeTitle text={`Total: $ ${totalPrice}`} alignment={"left"} />
+            <SubTitle text={`Total: $ ${totalPrice}`} alignment={"left"} />
           </div>
           <button
             onClick={() => {

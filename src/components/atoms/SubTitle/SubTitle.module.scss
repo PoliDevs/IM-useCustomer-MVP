@@ -1,9 +1,12 @@
 @import "../../../scss/typography.scss";
 
 .subTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   font-family: 'Mabry Pro', sans-serif;
-  font-size: $line-text;
+  font-size: $title;
   text-align: center;
   z-index: 4;
   margin: 0;
@@ -14,7 +17,7 @@
 }
 
 .left {
-  text-align: left;
+  justify-content: flex-start;
 }
 
 .bold {
