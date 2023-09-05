@@ -29,8 +29,15 @@ const initalState = {
 export const rootReducer = (state = initalState, action) => {
   switch (action.type) {
     case GET_SEARCHED_PRODUCT: {
-      
-      state = {...state, allProducts: state.allProducts.filter((p)=> p.altName.toLowerCase().includes(action.payload.toLowerCase()))}
+      const copy = [...state.allProducts];
+      const results = state.allProducts.filter((p) =>
+        p.altName.toLowerCase().includes(action.payload.toLowerCase())
+      );
+      if (results.length) {
+        return state = {...state, allProducts: results}
+      }else {
+        state = {...state, allProducts: copy}
+      }
       return state;
     }
     case ADD_PRODUCT: {

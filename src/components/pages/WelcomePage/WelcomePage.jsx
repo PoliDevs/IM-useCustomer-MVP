@@ -63,7 +63,9 @@ export default function WelcomePage({scanResult}) {
                 <LinkButton
                   path="/home"
                   text={
-                    (commerce.plan !== "m1") ? t("home.order") : "Ver productos"
+                    commerce.plan !== "m1"
+                      ? t("home.order")
+                      : t("home.viewproducts")
                   }
                 />
                 <LinkButton
@@ -87,7 +89,7 @@ export default function WelcomePage({scanResult}) {
           )}
         </div>
       ) : (
-              <LoadingPage />
+        <LoadingPage />
       )}
     </div>
   );

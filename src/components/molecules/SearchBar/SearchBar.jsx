@@ -18,7 +18,11 @@ export default function SearchBar() {
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
-    dispatch(searchProduct(inputValue));
+    if (inputValue.length > 2){
+      dispatch(searchProduct(inputValue))
+    }else {
+      dispatch(getAllProducts())
+    }
   };
 
   return (
