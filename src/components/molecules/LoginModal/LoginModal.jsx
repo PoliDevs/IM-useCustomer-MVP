@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import HugeTitle from "../../atoms/HugeTitle/HugeTitle";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import GoogleButton from "../../atoms/GoogleButton/GoogleButton";
 import LoginButton from "../../atoms/LoginButton/LoginButton";
@@ -19,7 +18,7 @@ export default function LoginModal({
 
   return (
     <div className={`${s.loginContainer} ${loginModal && s.open}`}><section className={s.login}>
-        <HugeTitle text={"Ingresá un nombre, para una mejor experiencia!"} centered={true} />
+        <SubTitle text={"Ingresá un nombre, para una mejor experiencia!"} centered={true} />
         <div className={s.data}>
           <div style={{ display: "contents" }}>
             <input

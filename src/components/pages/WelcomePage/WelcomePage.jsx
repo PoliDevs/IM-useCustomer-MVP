@@ -44,7 +44,7 @@ export default function WelcomePage({scanResult}) {
         <div className={s.top}>
           {!loginModal && (name || userInfo.name) ? (
             <>
-              <HugeTitle text={`${t("home.title")}`}/>
+              <HugeTitle text={`${t("home.title")}`} />
               <SubTitle
                 text={`${
                   !loginModal ? (userInfo.name ? userInfo.name : name) : ""
@@ -57,15 +57,22 @@ export default function WelcomePage({scanResult}) {
                 <SubTitle text={`${t("home.table")} 1`} />
               </div>
               <div className={s.bottomContent}>
-              <Paragraph bold={true} text={t("home.poweredby")}>
-                <ImenuLogo className={s.imenuLogo} />
-              </Paragraph>
-              <LinkButton path="/home" text={t("home.order")} />
-              <LinkButton
-                path="/instruction"
-                text={t("home.instructions")}
-                type="secundary"
-              />
+                <Paragraph bold={true} text={t("home.poweredby")}>
+                  <ImenuLogo className={s.imenuLogo} />
+                </Paragraph>
+                <LinkButton
+                  path="/home"
+                  text={
+                    commerce.plan !== "m1"
+                      ? t("home.order")
+                      : t("home.viewproducts")
+                  }
+                />
+                <LinkButton
+                  path="/instruction"
+                  text={t("home.instructions")}
+                  type="secundary"
+                />
               </div>
             </>
           ) : (
