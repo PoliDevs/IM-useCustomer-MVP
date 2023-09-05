@@ -6,6 +6,7 @@ import WelcomePage from "./components/pages/WelcomePage/WelcomePage";
 import Instruction from "./components/pages/Instructions/Instruction";
 import "semantic-ui-css/semantic.min.css";
 import Home from "./components/pages/Home/Home";
+import Payment from "./components/pages/Payment/Payment";
 import Review from "./components/pages/Review/Review";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         />
         <Route path="/instruction" element={<Instruction />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/payment" element={<Payment/>}/>
         <Route path="/rating" element={<Review />} />
       </Routes>
     </>

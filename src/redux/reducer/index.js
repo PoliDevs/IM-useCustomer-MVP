@@ -38,7 +38,7 @@ export const rootReducer = (state = initalState, action) => {
           ...state,
           cart: state.cart.map((p) =>
             p.name === action.payload.name
-              ? { ...p, amount: p.amount + 1, comment: action.payload.comment }
+              ? { ...p, amount: p.amount + action.payload.amount, comment: action.payload.comment }
               : p
           ),
         };

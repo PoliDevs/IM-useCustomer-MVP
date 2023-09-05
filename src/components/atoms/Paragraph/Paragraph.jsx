@@ -8,7 +8,7 @@ export default function Paragraph({text, children, bold, centered, secundary, al
         centered ? s.centered : ""
       } ${secundary ? s.secundary : ""} ${alignment === "left" ? s.left : ""} ${
         scrollable && s.scrollable
-      } ${children && s.align}`}
+      } ${children && s.align} ${alignment === "right" && s.right}`}
     >
       {scrollable
         ? text

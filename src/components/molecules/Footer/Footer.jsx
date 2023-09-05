@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { ReactComponent as DownArrow } from "../../../assets/down-arrow.svg";
 import CartProduct from "../CartProduct/CartProduct";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
-import HugeTitle from "../../atoms/HugeTitle/HugeTitle";
 import ScrollContainer from "react-indiana-drag-scroll";
 import s from "./Footer.module.scss";
 import { useNavigate } from "react-router-dom";
@@ -50,7 +49,7 @@ export default function Footer({ red }) {
           <button
             disabled={!cart.length}
             className={`${s.payButton} ${!cart.length && s.disabled}`}
-            onClick={()=>navigate("/rating")}
+            onClick={()=>navigate("/payment")}
           >
             Pagar
           </button>
