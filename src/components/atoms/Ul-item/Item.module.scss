@@ -6,13 +6,12 @@
   align-items: center;
   box-sizing: border-box;
   color: inherit;
-  font-weight: bold;
   width: 100%;
   padding: 10px;
   background-color: $color-seventh;
   border: $border;
   border-radius: $border-secondary-radius;
-  font-size: $paragraph;
+  font-size: $line-text;
   margin-bottom: 10px;
   gap: 10px;
   
@@ -24,13 +23,12 @@
   }
 
   @media screen and (min-width: 430px) {
-    font-size: $line-text;
+    font-size: $title;
     height: 70px;
     border-radius: $border-primary-radius;
   }
 
   @media screen and (min-width: 750px) {
     height: 90px;
-    font-size: $title;
   }
 }

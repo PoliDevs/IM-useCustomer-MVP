@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
+import SmallText from "../../atoms/SmallText/SmallText";
 import s from "./Product.module.scss";
 export default function Product({
   name,
@@ -17,9 +18,9 @@ export default function Product({
     >
       <img className={s.productIcon} src={bg} />
       <div className={s.infoContainer}>
-        <SubTitle alignment={"left"} text={name} bold={true} />
-        <Paragraph alignment={"left"} text={description} />
-        <SubTitle alignment={"left"} text={`$ ${price}`} bold={true} />
+        <Paragraph alignment={"left"} text={name} bold={true} />
+        <SmallText alignment={"left"} text={description} smaller={true} />
+        <Paragraph alignment={"left"} text={`$ ${price}`} bold={true} />
       </div>
     </div>
   );

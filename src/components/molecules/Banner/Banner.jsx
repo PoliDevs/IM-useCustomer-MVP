@@ -4,6 +4,7 @@ import burger from "../../../assets/Burgers.svg";
 import s from "./Banner.module.scss";
 import { useDispatch } from "react-redux";
 import { getAllProducts } from "../../../redux/actions/index";
+import Paragraph from "../../atoms/Paragraph/Paragraph";
 
 export default function Banner({ setCategory }) {
   const dispatch = useDispatch();
@@ -17,8 +18,8 @@ export default function Banner({ setCategory }) {
       }}
     >
       <div className={s.content}>
-        <HugeTitle text={"Burgers Store"} />
-        <SubTitle alignment={"left"} text={"Mesa 1"} />
+        <SubTitle text={"Burgers Store"} alignment={"left"} />
+        <Paragraph alignment={"left"} text={"Mesa 1"} secundary={true}/>
       </div>
     </section>
   );

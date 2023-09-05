@@ -14,6 +14,7 @@ import LoginModal from "../../molecules/LoginModal/LoginModal";
 import Error from "../Error/Error";
 import s from "./WelcomePage.module.scss";
 import { getCommerce } from "../../../redux/actions";
+import SubTitle from "../../atoms/SubTitle/SubTitle";
 export default function WelcomePage({scanResult}) {
   const userInfo = useSelector((state) => state.user);
   const commerce = useSelector((state)=> state.commerce);
@@ -43,17 +44,19 @@ export default function WelcomePage({scanResult}) {
         <div className={s.top}>
           {!loginModal && (name || userInfo.name) ? (
             <>
-              <HugeTitle
-                text={`${t("home.title")} ${
+              <HugeTitle text={`${t("home.title")}`}/>
+              <SubTitle
+                text={`${
                   !loginModal ? (userInfo.name ? userInfo.name : name) : ""
                 }`}
               />
-              <Paragraph text={t("home.subtitle")} />
+              <SubTitle text={t("home.subtitle")} />
               <HugeTitle text={"Burger Store"} />
               <div className={s.spacing}>
                 <Logo className={s.logo} />
-                <Paragraph text={`${t("home.table")} 1`} />
+                <SubTitle text={`${t("home.table")} 1`} />
               </div>
+              <div className={s.bottomContent}>
               <Paragraph bold={true} text={t("home.poweredby")}>
                 <ImenuLogo className={s.imenuLogo} />
               </Paragraph>
@@ -63,6 +66,7 @@ export default function WelcomePage({scanResult}) {
                 text={t("home.instructions")}
                 type="secundary"
               />
+              </div>
             </>
           ) : (
             <Error active={error} />
