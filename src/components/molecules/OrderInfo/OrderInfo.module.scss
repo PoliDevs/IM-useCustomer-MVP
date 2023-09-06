@@ -1,0 +1,35 @@
+@import "../../../scss/colors.scss";
+@import "../../../scss/typography.scss";
+
+.orderInfo {
+  background-color: $color-sixth;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 15px 20px 15px 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  .paymentTitle {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .productsContainer {
+    width: auto;
+    height: auto;
+    max-height: 150px;
+    margin-top: 10px;
+    margin-bottom: 23px;
+    overflow-x: hidden;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.border {
+  border: $border;
+}
