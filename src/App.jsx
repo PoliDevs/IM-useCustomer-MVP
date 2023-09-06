@@ -8,6 +8,7 @@ import "semantic-ui-css/semantic.min.css";
 import Home from "./components/pages/Home/Home";
 import Payment from "./components/pages/Payment/Payment";
 import Review from "./components/pages/Review/Review";
+import Mercadopago from "./components/pages/Mercadopago/Mercadopago";
 
 function App() {
   const [scanResult, setScanResult] = useState();
@@ -30,6 +31,7 @@ function App() {
         <Route path="/instruction" element={<Instruction />} />
         <Route path="/home" element={<Home />} />
         <Route path="/payment" element={<Payment/>}/>
+        <Route path="/mercadopago" element={<Mercadopago/>}/>
         <Route path="/rating" element={<Review />} />
       </Routes>
     </>
