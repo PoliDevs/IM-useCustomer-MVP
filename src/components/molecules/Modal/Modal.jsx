@@ -1,16 +1,19 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { ReactComponent as XIcon } from "../../../assets/xIcon.svg";
-import TextArea from "../../atoms/TextArea/TextArea";
-import s from "./Modal.module.scss";
 import { useAmountControls} from "../../../utils/Functions";
+import { useTranslation } from "react-i18next";
+import TextArea from "../../atoms/TextArea/TextArea";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
+import s from "./Modal.module.scss";
 
 export default function Modal({ productData,  isOpen, closeModal, changeStyle}) {
   const [comment, setComment] = useState("");
   const [amount, setAmount] = useState(0);
   const {addToCart} = useAmountControls();
+
+  const [t, i18n] = useTranslation(["global"]);
 
   return (
     <article className={`${s.modalContainer} ${isOpen && s.open}`}>
@@ -30,15 +33,24 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
             alt={`${productData.name} icon`}
           />
           <div className={s.productInfo}>
-            <SubTitle className={s.productTitle} alignment={"left"} text={productData.name}/>
-            <Paragraph className={s.productDescription} text={productData.description} alignment={"left"} scrollable={true}/>
+            <SubTitle
+              className={s.productTitle}
+              alignment={"left"}
+              text={productData.name}
+            />
+            <Paragraph
+              className={s.productDescription}
+              text={productData.description}
+              alignment={"left"}
+              scrollable={true}
+            />
             <h3 className={s.productPrice}>{`$ ${productData.price}`}</h3>
           </div>
         </div>
         <div>
           <div className={s.textAreaHeader}>
             <label className={s.label} htmlFor="comment">
-              Comentarios
+              {t("productModal.commentLabel")}
             </label>
             <p className={s.textLimit}>{`${comment.length}/140`}</p>
           </div>
@@ -47,7 +59,7 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
             comment={comment}
             setComment={setComment}
             maxLength={140}
-            placeholder={"Agregá comentarios y observaciones."}
+            placeholder={t("productModal.commentPlaceholder")}
           />
         </div>
         <div className={s.amount}>
@@ -80,7 +92,7 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
             changeStyle();
           }}
         >
-          Agregar
+          {t("productModal.addButton")}
         </button>
       </div>
     </article>

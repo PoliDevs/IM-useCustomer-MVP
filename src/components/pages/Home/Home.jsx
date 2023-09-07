@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { filterCategory, getActiveDishes, getActiveMenus, getAllCategorys, getAllProducts } from "../../../redux/actions";
 import Banner from "../../molecules/Banner/Banner";
 import Categories from "../../molecules/Categories/Categories";
 import SearchBar from "../../molecules/SearchBar/SearchBar";
-import s from "./Home.module.scss";
 import Products from "../../molecules/Products/Products";
 import Footer from "../../molecules/Footer/Footer";
-import { filterCategory, getActiveDishes, getActiveMenus, getAllCategorys, getAllProducts } from "../../../redux/actions";
+import s from "./Home.module.scss";
 export default function Home() {
   const [red, setRed] = useState(false);
   const [category, setCategory] = useState("");
   const cant = useSelector((state) => state.cart);
   const commerce = useSelector((state) => state.commerce);
   const dispatch = useDispatch();
+
+  const [t, i18n] = useTranslation(["global"]);
 
   const changeStyle = () => {
     setRed(true);
@@ -34,6 +37,8 @@ export default function Home() {
     dispatch(getAllCategorys());
     dispatch(getAllProducts());
   }, [cant]);
+
+  //! Tener en cuenta si el local esta abierto o cerrado
 
   return (
     <main className={s.home}>

@@ -4,18 +4,21 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { ReactComponent as CashIcon } from "../../../assets/CashIcon.svg";
 import { paymentUrl } from "../../../utils/Constants";
+import { useTranslation } from "react-i18next";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import Banner from "../../molecules/Banner/Banner";
 import SmallText from "../../atoms/SmallText/SmallText";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import LinkButton from "../../atoms/LinkButton/LinkButton";
 import PaymentOptionButton from "../../atoms/PaymentOptionButton/PaymentOptionButton";
-import s from "./Payment.module.scss";
 import OrderInfo from "../../molecules/OrderInfo/OrderInfo";
+import s from "./Payment.module.scss";
 
 export default function Payment() {
   const [method, setMethod] = useState('');
   const dispatch = useDispatch();
+  
+  const [t, i18n] = useTranslation(["global"]);
 
   const handleChange = (option)=> {
     setMethod(option)
@@ -30,10 +33,10 @@ export default function Payment() {
     <main className={s.paymentContainer}>
       <Banner />
       <section className={s.paymentContent}>
-        <SubTitle text={"Pagar"} alignment={"left"}>
+        <SubTitle text={t("payment.title")} alignment={"left"}>
           <CashIcon className={s.cashIcon} />
         </SubTitle>
-        <SmallText text={"Gestione su pago desde aqui"} alignment={"left"} />
+        <SmallText text={t("payment.managePayment")} alignment={"left"} />
         {/* <div className={s.orderInfo}>
           <div className={s.paymentTitle}>
             <SubTitle text={"Burger Store"} bold={true} />
@@ -59,16 +62,16 @@ export default function Payment() {
           handleChange={handleChange}
         />
         <PaymentOptionButton
-          text={"Efectivo"}
+          text={t("payment.cash")}
           option={2}
           setMethod={setMethod}
           handleChange={handleChange}
         />
         <div className={s.bottomContent}>
-          <Paragraph text={"impulsado por "} bold={true} centered={true}>
+          <Paragraph text={t("payment.poweredby")} bold={true} centered={true}>
             <IMenu className={s.imenuLogo} />
           </Paragraph>
-          <LinkButton path={paymentUrl[method]} text={"Continuar"} onClick={handleCash} />
+          <LinkButton path={paymentUrl[method]} text={t("payment.continue")} onClick={handleCash} />
         </div>
       </section>
     </main>

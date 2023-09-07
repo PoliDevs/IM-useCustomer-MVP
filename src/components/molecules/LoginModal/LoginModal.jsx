@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { useTranslation } from "react-i18next";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import GoogleButton from "../../atoms/GoogleButton/GoogleButton";
 import LoginButton from "../../atoms/LoginButton/LoginButton";
@@ -15,10 +16,12 @@ export default function LoginModal({
   getName
 }) {
 
+  const [t, i18n] = useTranslation(["global"]);
+
 
   return (
     <div className={`${s.loginContainer} ${loginModal && s.open}`}><section className={s.login}>
-        <SubTitle text={"Ingresá con google, para una mejor experiencia!"} centered={true} />
+        <SubTitle text={t("loginModal.title")} centered={true} />
         {/* <div className={s.data}> */}
           {/* <div style={{ display: "contents" }}>
             <input
@@ -36,7 +39,7 @@ export default function LoginModal({
           <SubTitle text={"O bien"} /> */}
           <GoogleButton
             signInWithGoogle={signInWithGoogle}
-            text={"Accede con Google"}
+            text={t("loginModal.googleButton")}
             closeLoginModal={closeLoginModal}
             getName={getName}
           />
@@ -45,7 +48,7 @@ export default function LoginModal({
             // name={name}
             // active={name.length >= 3}
             closeLoginModal={closeLoginModal}
-            text={"Omitir"}
+            text={t("loginModal.omitButton")}
           />
         {/* </div> */}
       </section>

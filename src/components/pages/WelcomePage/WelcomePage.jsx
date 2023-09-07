@@ -45,7 +45,7 @@ export default function WelcomePage() {
           {/* {!loginModal && (name || userInfo.name) ? ( */}
           {!loginModal ? (
             <>
-              <HugeTitle text={`${t("welcome.title")}`} />
+              <HugeTitle text={t("welcome.title")} />
               <SubTitle
                 // text={`${
                 //   !loginModal ? (userInfo.name ? userInfo.name : name) : ""
