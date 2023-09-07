@@ -18,6 +18,7 @@ import s from "./WelcomePage.module.scss";
 export default function WelcomePage() {
   const userInfo = useSelector((state) => state.user);
   const commerce = useSelector((state)=> state.commerce);
+  const Qr = JSON.parse(localStorage.getItem("QrCode"));
   const dispatch = useDispatch();
   // const [name, setName] = useState(userInfo.name ? userInfo.name : "");
   const [error, setError] = useState(false);
@@ -53,10 +54,10 @@ export default function WelcomePage() {
                 text={`${userInfo.name ? userInfo.name : ""}`}
               />
               <SubTitle text={t("welcome.subtitle")} />
-              <HugeTitle text={"Burger Store"} />
+              <HugeTitle text={commerce.name} />
               <div className={s.spacing}>
                 <Logo className={s.logo} />
-                <SubTitle text={`${t("welcome.table")} 1`} />
+                <SubTitle text={`${t("welcome.table")} ${Qr.commerceTable}`} />
               </div>
               <div className={s.bottomContent}>
                 <Paragraph bold={true} text={t("welcome.poweredby")}>

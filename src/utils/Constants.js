@@ -140,3 +140,19 @@ export const paymentUrl = {
     1: "/mercadopago",
     2: "/rating"
   }
+
+export const categoryIcons = [
+  chickenLeg,
+  cutOfMeat,
+  frenchFries,
+  greenSalad,
+  hamburger,
+  hotDog,
+  meat,
+  pizza,
+  potOfFood,
+  sandwich,
+  spaghetti,
+  stuffedFlatbread,
+  taco
+];

@@ -1,9 +1,10 @@
+import { Link } from 'react-router-dom';
 import s from './MpButton.module.scss';
 
-export default function MpButton({text}) {
+export default function MpButton({ text, path }) {
   return (
-    <button className={s.mpButton}>
+    <Link to={path} className={s.mpButton}>
       {text}
-    </button>
-  )
+    </Link>
+  );
 }

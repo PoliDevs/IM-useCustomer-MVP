@@ -3,14 +3,17 @@ import { Html5QrcodeScanType, Html5QrcodeScanner, Html5QrcodeSupportedFormats } 
 import { useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import HugeTitle from "../../atoms/HugeTitle/HugeTitle";
-import s from "./QrCodeScanner.module.scss";
 import { useDispatch } from "react-redux";
 import { getCommerce } from "../../../redux/actions";
+import { useTranslation } from "react-i18next";
+import s from "./QrCodeScanner.module.scss";
 
 export default function Qr({scanResult, setScanResult}) {
   // const [scanResult, setScanResult] = useState();
   const navigate = useNavigate();
   const dispatch = useDispatch()
+
+    const [t, i18n] = useTranslation(["global"]);
 
   useEffect(() => {
     const scanner = new Html5QrcodeScanner("reader", {
@@ -50,7 +53,7 @@ export default function Qr({scanResult, setScanResult}) {
         id="reader"
         className={s.scannerContainer}
       ></div>
-      <HugeTitle text={"Escanea un Qr"}/>
+      <HugeTitle text={t("QrScanner.title")}/>
     </div>
   );
 }

@@ -11,7 +11,7 @@ export default function Mercadopago() {
     <main className={s.mainContainer}>
       <MpLogo className={s.mpLogo} />
       <OrderInfo border={true} />
-      <MpButton text={t("mercadoPago.payButton")}/>
+      <MpButton path={"/rating"} text={t("mercadoPago.payButton")}/>
     </main>
   );
 }

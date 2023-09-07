@@ -98,26 +98,29 @@ export const rootReducer = (state = initalState, action) => {
       localStorage.setItem("commerce", JSON.stringify(state.commerce));
       return state;
     // case GET_ACTIVE_MENUS:
-    //   {
-    //     const allActive = action.payload.menus.map((m)=> m.commerce.id === action.payload.id);
-    //     state= {...state, allProducts: allActive}
-    //   }
-    //   return state
+      // {
+        // const allActive = action.payload.menus.filter((m)=> m.commerce.id === action.payload.id);
+        // state= {...state, allProducts: allActive} //!descomentar para guardar los menus activos del comercio
+      // }
+      // return state
     case GET_ACTIVE_DISHES:
       {
         const allActive = action.payload.dishes.filter(
           (d) => d.commerce.id === action.payload.id
         );
         state = { ...state, allDishes: allActive };
+        //state = { ...state, allProducts: state.allProducts.concat(allActive) };//!descomentar para agregar los platos activos del comercio
       }
       return state;
     case GET_ALL_CATEGORIES:
       return { ...state, allCategories: action.payload };
     case FILTER_CATEGORY:
-      // return {...state, allProducts: state.allProducts.filter((c)=> c.category === action.payload)}
       {
         const products = [...state.allProducts];
         const filteredResults = products.filter((p)=> p.category === action.payload);
+        // const filteredResults = products.filter(
+        //   (p) => p.id === action.payload //!descomentar para filtrar las categorias del comercio actual
+        // );
         return {...state, allProducts: filteredResults}
 
       }

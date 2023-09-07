@@ -13,6 +13,6 @@ export const GET_ACTIVE_DISHES = "GET_aCTIVE_DISHES";
 export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
 export const FILTER_CATEGORY = "FILTER_CATEGORY";
 
-////////////////////* SearchBar Action types *////////////////////
+////////////////////* SearchBar Action type *////////////////////
 
 export const GET_SEARCHED_PRODUCT = "GET_SEARCHED_PRODUCT";

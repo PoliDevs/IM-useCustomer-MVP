@@ -11,9 +11,11 @@ export default function OrderInfo({border}) {
   const commerceInfo = useSelector((state) => state.commerce);
   const Qr = JSON.parse(localStorage.getItem("QrCode"));
   const totalPrice = cart.reduce((count, p) => count + p.price * p.amount, 0);
+  //const totalPrice = cart.reduce((count, p) => count + p.cost * p.amount, 0);
 
   const [t, i18n] = useTranslation(["global"]);
 
+  //!descomentar para mostrar info del producto real
   return (
     <div className={`${s.orderInfo} ${border && s.border}`}>
       <div className={s.paymentTitle}>
@@ -27,6 +29,7 @@ export default function OrderInfo({border}) {
             amount={p.amount}
             text={p.name}
             price={p.price * p.amount}
+            //price={p.cost * p.amount}
           />
         ))}
       </ScrollContainer>

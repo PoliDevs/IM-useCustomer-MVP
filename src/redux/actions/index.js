@@ -68,6 +68,38 @@ export function removeProduct(name) {
   };
 }
 
+////////////////////* Order *////////////////////
+
+export async function postOrder(order){
+    try {
+      const newOrder = {
+        name: order.name,
+        date: "2023-08-19",
+        hour: "09:57",
+        status: "orderPlaced",
+        detail: "",
+        validity: "2023-08-18",
+        promotion: 0,
+        discount: 0,
+        surcharge: 0,
+        rating: 5,
+        feedback: order.comment,
+        menu: order.menu,
+        pos: order.table,
+        employee: 2,
+        dish: "",
+        account: 1,
+        payment: order.payment,
+        commerce: order.commerce,
+      };
+      let response = await axios.post("http://localhost:3001/order/order",newOrder);
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+
 ////////////////////* Commerce Actions Creators *////////////////////
 
 export function getCommerce(id) {
@@ -76,7 +108,6 @@ export function getCommerce(id) {
       let commerceInfo = await axios.get(
         `http://localhost:3001/commerce/detail/${id}`
       );
-      console.log(commerceInfo.data);
       return dispatch({
         type: GET_COMMERCE,
         payload: commerceInfo.data[0],

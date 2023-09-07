@@ -6,7 +6,7 @@ import s from "./Categories.module.scss";
 import SmallText from "../../atoms/SmallText/SmallText";
 import { useSelector } from "react-redux";
 export default function Categories({handleCategory, category}) {
-  const products = useSelector((state)=> state.allProducts);
+  const activeCategories = useSelector((state) => state.allCategories);
 
   const [t, i18n] = useTranslation(["global"]);
 
@@ -15,13 +15,26 @@ export default function Categories({handleCategory, category}) {
   return (
     <section className={s.categories}>
       <div className={s.sectionTitle}>
-        <SmallText text={t("categories.title")} secundary={true} noMargin={true}/>
+        <SmallText
+          text={t("categories.title")}
+          secundary={true}
+          noMargin={true}
+        />
       </div>
       <div style={{ position: "relative", height: "75px" }}>
         <ScrollContainer className={s.scrollContainer}>
           {ProductsInfo?.map((icon, index) => (
-            <Icon key={index} icon={icon} handleCategory={handleCategory} category={category}/>
+            <Icon
+              key={index}
+              icon={icon}
+              handleCategory={handleCategory}
+              category={category}
+            />
           ))}
+          
+          {/* {activeCategories?.map((categoryObject, index)=> (
+            <Icon key={index} id={categoryObject.id} name={categoryObject.category} handleCategory={handleCategory} category={category}/> //category es la categoria seleccionada (state)
+          ))} */}
         </ScrollContainer>
       </div>
     </section>

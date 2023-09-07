@@ -9,7 +9,7 @@
     width: 100%;
     margin: 4px 0 5px 0;
     border: $border;
-    border-radius: 10px;
+    border-radius: $border-primary-radius;
     height: 61px;
     cursor: pointer;
     &:hover {
