@@ -37,6 +37,10 @@ export default function useFirebase(setError) {
       }
       dispatch(setUser(user))
     } catch (error) {
+       const user = {
+         name: null,
+       };
+        localStorage.setItem("user", JSON.stringify(user));
       console.error(error);
       setError(true)
     }

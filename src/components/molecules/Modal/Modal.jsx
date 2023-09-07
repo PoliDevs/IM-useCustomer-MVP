@@ -31,7 +31,7 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
           />
           <div className={s.productInfo}>
             <SubTitle className={s.productTitle} alignment={"left"} text={productData.name}/>
-            <Paragraph className={s.productDescription} text={productData.description} alignment={"left"}/>
+            <Paragraph className={s.productDescription} text={productData.description} alignment={"left"} scrollable={true}/>
             <h3 className={s.productPrice}>{`$ ${productData.price}`}</h3>
           </div>
         </div>

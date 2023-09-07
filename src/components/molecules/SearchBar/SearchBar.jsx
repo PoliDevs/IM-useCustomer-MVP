@@ -3,7 +3,7 @@ import { ReactComponent as SearchIcon } from "../../../assets/SearchIcon.svg";
 import { ReactComponent as XIcon } from "../../../assets/xIcon.svg";
 import SearchField from "../../atoms/SearchField/SearchField";
 import s from "./SearchBar.module.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { getAllProducts, searchProduct } from "../../../redux/actions";
 
 export default function SearchBar() {

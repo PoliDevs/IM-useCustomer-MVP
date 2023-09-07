@@ -1,5 +1,11 @@
 {
-     "home": {
+  "QrScanner": {
+    "title": "Escaneá un código Qr"
+  },
+  "Welcome": {
+
+  },
+  "welcome": {
     "title": "¡Bienvenido!",
     "subtitle": "Estás por pedir en: ",
     "table": "Mesa ",

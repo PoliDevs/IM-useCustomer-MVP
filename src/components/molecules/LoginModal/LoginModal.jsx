@@ -18,9 +18,9 @@ export default function LoginModal({
 
   return (
     <div className={`${s.loginContainer} ${loginModal && s.open}`}><section className={s.login}>
-        <SubTitle text={"Ingresá un nombre, para una mejor experiencia!"} centered={true} />
-        <div className={s.data}>
-          <div style={{ display: "contents" }}>
+        <SubTitle text={"Ingresá con google, para una mejor experiencia!"} centered={true} />
+        {/* <div className={s.data}> */}
+          {/* <div style={{ display: "contents" }}>
             <input
               className={s.input}
               placeholder="Tu nombre"
@@ -33,21 +33,21 @@ export default function LoginModal({
               text={"Minimo 3 caracteres"}
             />
           </div>
-          <SubTitle text={"O bien"} />
+          <SubTitle text={"O bien"} /> */}
           <GoogleButton
             signInWithGoogle={signInWithGoogle}
             text={"Accede con Google"}
             closeLoginModal={closeLoginModal}
             getName={getName}
           />
-          <hr />
+          {/* <hr /> */}
           <LoginButton
-            name={name}
-            active={name.length >= 3}
+            // name={name}
+            // active={name.length >= 3}
             closeLoginModal={closeLoginModal}
-            text={"Ingresar"}
+            text={"Omitir"}
           />
-        </div>
+        {/* </div> */}
       </section>
     </div>
   );

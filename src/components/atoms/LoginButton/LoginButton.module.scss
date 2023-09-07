@@ -2,24 +2,27 @@
 @import "../../../scss/typography.scss";
 
 .loginButton {
-   font-size: $paragraph;
-    text-decoration: none;
-    text-align: center;
-    line-height: 1rem;
-    width: 100%;
-    margin: 4px 0 5px 0;
-    border-radius: 10px;
-    border: $text-desable;
-    height: 40px;
-    cursor: pointer;
-    background-color: $background-buttom-primary-desable;
-    &:hover {
-      transform: scale(1.02);
-    }
+  font-size: $paragraph;
+  text-decoration: none;
+  text-align: center;
+  line-height: 1rem;
+  width: 100%;
+  margin: 4px 0 5px 0;
+  border-radius: 10px;
+  background-color: $background-buttom-primary-active;
+  color: $text-secondary;
+  border: $border;
+  // border: $text-desable;
+  // background-color: $background-buttom-primary-desable;
+  height: 40px;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.02);
   }
-  
-  .active {
-    background-color: $background-buttom-primary-active;
-   color: $text-secondary;
-    border: $border;
 }
+
+//   .active {
+//     background-color: $background-buttom-primary-active;
+//    color: $text-secondary;
+//     border: $border;
+// }
