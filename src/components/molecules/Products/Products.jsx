@@ -8,6 +8,8 @@ import Modal from "../Modal/Modal";
 export default function Products({ changeStyle, commercePlan }) {
   const allproducts = useSelector((state) => state.allProducts);
   const { isOpen, openModal, closeModal, productData } = useModal(false);
+
+  //! Reemplazar los productos precargados por los productos del comercio
   return (
     <>
       <ScrollContainer className={s.productsContainer}>

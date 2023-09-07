@@ -2,20 +2,22 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { ReactComponent as DownArrow } from "../../../assets/down-arrow.svg";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import CartProduct from "../CartProduct/CartProduct";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import ScrollContainer from "react-indiana-drag-scroll";
-import s from "./Footer.module.scss";
-import { useNavigate } from "react-router-dom";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
+import s from "./Footer.module.scss";
 
 export default function Footer({ red }) {
   const [expanded, setExpanded] = useState(false);
   const navigate = useNavigate()
-
   const cart = useSelector((state) => state.cart);
   const totalPrice = cart.reduce((count, p) => count + p.price * p.amount, 0);
   const totalProducts = cart.reduce((count, p) => count + p.amount, 0);
+  
+  const [t, i18n] = useTranslation(["global"]);
 
   return (
     <footer
@@ -26,8 +28,8 @@ export default function Footer({ red }) {
           <div
             style={{ display: "flex", flexDirection: "column", gap: "15px" }}
           >
-            <SubTitle text={"Tu pedido"} alignment={"left"} />
-            <Paragraph text={`${cart.length} Productos`} alignment={"left"} />
+            <SubTitle text={t("footer.yourOrder")} alignment={"left"} />
+            <Paragraph text={`${cart.length} ${t("footer.products")}`} alignment={"left"} />
           </div>
           <DownArrow className={s.arrow} onClick={() => setExpanded(false)} />
           <ScrollContainer className={s.scrollContainer}>
@@ -43,7 +45,7 @@ export default function Footer({ red }) {
               />
             ))}
             <div style={{ marginTop: "10px" }}>
-              <SubTitle text={`Total: $ ${totalPrice}`} alignment={"left"} />
+              <SubTitle text={`${t("footer.total")}: $ ${totalPrice}`} alignment={"left"} />
             </div>
           </ScrollContainer>
           <button
@@ -51,17 +53,17 @@ export default function Footer({ red }) {
             className={`${s.payButton} ${!cart.length && s.disabled}`}
             onClick={()=>navigate("/payment")}
           >
-            Pagar
+            {t("footer.payButton")}
           </button>
         </div>
       ) : (
         <>
           <div className={s.textContainer}>
             <Paragraph
-              text={`${cart ? totalProducts : 0} productos`}
+              text={`${cart ? totalProducts : 0} ${t("footer.products")}`}
               alignment={"left"}
             />
-            <SubTitle text={`Total: $ ${totalPrice}`} alignment={"left"} />
+            <SubTitle text={`${t("footer.total")}: $ ${totalPrice}`} alignment={"left"} />
           </div>
           <button
             onClick={() => {
@@ -70,7 +72,7 @@ export default function Footer({ red }) {
             disabled={!cart.length}
             className={`${s.products} ${!cart.length ? s.disabled : ""}`}
           >
-            Ver productos
+            {t("footer.viewproducts")}
           </button>
         </>
       )}

@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import Paragraph from "../../atoms/Paragraph/Paragraph";
-import SubTitle from "../../atoms/SubTitle/SubTitle";
 import SmallText from "../../atoms/SmallText/SmallText";
 import s from "./Product.module.scss";
 export default function Product({

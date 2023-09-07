@@ -1,19 +1,24 @@
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import ScrollContainer from "react-indiana-drag-scroll";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
-import s from "./OrderInfo.module.scss";
 import PaymentProduct from "../PaymentProduct/PaymentProduct";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
-import { useSelector } from "react-redux";
+import s from "./OrderInfo.module.scss";
 
 export default function OrderInfo({border}) {
   const cart = useSelector((state) => state.cart);
+  const commerceInfo = useSelector((state) => state.commerce);
+  const Qr = JSON.parse(localStorage.getItem("QrCode"));
   const totalPrice = cart.reduce((count, p) => count + p.price * p.amount, 0);
+
+  const [t, i18n] = useTranslation(["global"]);
 
   return (
     <div className={`${s.orderInfo} ${border && s.border}`}>
       <div className={s.paymentTitle}>
-        <SubTitle text={"Burger Store"} bold={true} />
-        <SubTitle text={"Mesa 1"} />
+        <SubTitle text={commerceInfo.name} bold={true} />
+        <SubTitle text={`${t("orderInfo.table")} ${Qr.commerceTable}`} />
       </div>
       <ScrollContainer className={s.productsContainer}>
         {cart.map((p, index) => (
@@ -26,7 +31,7 @@ export default function OrderInfo({border}) {
         ))}
       </ScrollContainer>
       <Paragraph
-        text={`Total a pagar: ${totalPrice}`}
+        text={`${t("orderInfo.paymentTotal")} ${totalPrice}`}
         alignment={"right"}
         bold={true}
       />
