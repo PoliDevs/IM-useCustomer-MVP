@@ -1,29 +1,41 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../../redux/actions/index";
 import { useTranslation } from "react-i18next";
+import { ReactComponent as ArrowBackWhite } from "../../../assets/ArrowBackWhite.svg";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import burger from "../../../assets/Burgers.svg";
 import s from "./Banner.module.scss";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
+import { useNavigate } from "react-router-dom";
 
-export default function Banner({ setCategory }) {
-  const commerceName = useSelector((state)=> state.commerce.name)
+export default function Banner({ setCategory, arrow }) {
+  const commerceName = useSelector((state) => state.commerce.name);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const Qr = JSON.parse(localStorage.getItem("QrCode"));
   const [t, i18n] = useTranslation(["global"]);
 
   return (
     <section
       className={s.banner}
+      //!cambiar url segun el comercio
       style={{ backgroundImage: `url(${burger})` }}
       onClick={() => {
+        if (arrow) return;
         dispatch(getAllProducts());
         setCategory("");
       }}
     >
       <div className={s.content}>
-        <SubTitle text={commerceName} alignment={"left"} />
-        <Paragraph alignment={"left"} text={`${t("banner.table")} ${Qr.commerceTable}`} secundary={true}/>
+        {arrow && <ArrowBackWhite style={{ width: "21px", height: "21px", zIndex: "2", marginRight: "20px" }} onClick={()=>navigate('/home')}/>}
+        <div style={{display: "flex", flexDirection:"column"}}>
+          <SubTitle text={commerceName} alignment={"left"} />
+          <Paragraph
+            alignment={"left"}
+            text={`${t("banner.table")} ${Qr.commerceTable}`}
+            secundary={true}
+          />
+        </div>
       </div>
     </section>
   );
