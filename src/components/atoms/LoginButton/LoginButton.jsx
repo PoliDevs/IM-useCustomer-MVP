@@ -5,19 +5,21 @@ export default function LoginButton({ text, closeLoginModal, active, name }) {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    if (active) {
+    // if (active) {
       const user = {
-        name: name,
+        name: null,
       }
-      dispatch(setUser(user))
+    //   dispatch(setUser(user))
+      localStorage.setItem("user", JSON.stringify(user))
       closeLoginModal();
-    }
-    return;
+    // }
+    // return;
   };
 
   return (
     <button
-      className={`${s.loginButton} ${active && s.active}`}
+      // className={`${s.loginButton} ${active && s.active}`}
+      className={s.loginButton}
       onClick={handleClick}
     >
       {text}
