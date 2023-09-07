@@ -12,13 +12,15 @@ import s from "./Footer.module.scss";
 
 export default function Footer({ red }) {
   const [expanded, setExpanded] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
   const totalPrice = cart.reduce((count, p) => count + p.price * p.amount, 0);
+  //const totalPrice = cart.reduce((count, p) => count + p.cost * p.amount, 0);
   const totalProducts = cart.reduce((count, p) => count + p.amount, 0);
-  
+
   const [t, i18n] = useTranslation(["global"]);
 
+    //!descomentar para mostrar info del producto real
   return (
     <footer
       className={`${s.footer} ${expanded ? s.expanded : ""} ${red && s.red}`}
@@ -29,7 +31,10 @@ export default function Footer({ red }) {
             style={{ display: "flex", flexDirection: "column", gap: "15px" }}
           >
             <SubTitle text={t("footer.yourOrder")} alignment={"left"} />
-            <Paragraph text={`${cart.length} ${t("footer.products")}`} alignment={"left"} />
+            <Paragraph
+              text={`${cart.length} ${t("footer.products")}`}
+              alignment={"left"}
+            />
           </div>
           <DownArrow className={s.arrow} onClick={() => setExpanded(false)} />
           <ScrollContainer className={s.scrollContainer}>
@@ -37,33 +42,41 @@ export default function Footer({ red }) {
               <CartProduct
                 key={i}
                 image={p.image}
+                //image={p.photo}
                 name={p.name}
                 description={p.description}
                 comment={p.comment}
                 price={p.price}
+                //price={p.cost}
                 amount={p.amount}
               />
             ))}
             <div style={{ marginTop: "10px" }}>
-              <SubTitle text={`${t("footer.total")}: $ ${totalPrice}`} alignment={"left"} />
+              <SubTitle
+                text={`${t("footer.total")}: $ ${totalPrice}`}
+                alignment={"left"}
+              />
             </div>
           </ScrollContainer>
           <button
             disabled={!cart.length}
             className={`${s.payButton} ${!cart.length && s.disabled}`}
-            onClick={()=>navigate("/payment")}
+            onClick={() => navigate("/payment")}
           >
             {t("footer.payButton")}
           </button>
         </div>
       ) : (
         <>
-          <div className={s.textContainer}>
+          <div className={`${s.textContainer} ${red && s.red}`}>
             <Paragraph
               text={`${cart ? totalProducts : 0} ${t("footer.products")}`}
               alignment={"left"}
             />
-            <SubTitle text={`${t("footer.total")}: $ ${totalPrice}`} alignment={"left"} />
+            <SubTitle
+              text={`${t("footer.total")}: $ ${totalPrice}`}
+              alignment={"left"}
+            />
           </div>
           <button
             onClick={() => {

@@ -1,21 +1,77 @@
 {
-    "home": {
-    "title": "¡Bienvenido!",
-    "subtitle": "Estás por pedir en: ",
-    "table": "Mesa ",
-    "poweredby": "impulsado por",
-    "order": "Hacer pedido",
-    "viewproducts": "Ver productos",
-    "instructions": "Instrucciones"
-  },
-  "instructions":{
-  "title": "Instructions",
-    "subtitle": "How to order with i menu!",
-    "instruction_1": "Select products from the menu, touch the product card to add the product.",
-    "instruction_2": "Once you've selected your products, press 'view product' to confirm your order.",
-    "instruction_3": "Make the payment for your order in cash or through MercadoPago.",
-    "instruction_4": "Your order will be on its way!",
+  "QrScanner": {
+    "title": "Scan a QR code"
+},
+"loader": {
+  "title": "Please wait while we prepare the menu."
+},
+"welcome": {
+    "title": "Welcome!",
+    "subtitle": "You are about to order at: ",
+    "table": "Table ",
     "poweredby": "powered by",
-    "order": "Order"
-  }
+    "order": "Place an order",
+    "viewproducts": "View products",
+    "instructions": "Instructions"
+},
+"instructions": {
+    "title": "Instructions",
+    "subtitle": "How to place your order on i menu?",
+    "instruction_1": "Select products from the menu, press the product card",
+    "instruction_2": "Once you've selected your products, press 'view product' to confirm your order",
+    "instruction_3": "Make the payment for your order in cash or through MercadoPago",
+    "instruction_4": "Your order will be on its way!",
+    "poweredby": "powered by ",
+    "order": "Place an order"
+},
+"loginModal": {
+    "title": "Log in with Google for a better experience!",
+    "googleButton": "Log in with Google",
+    "omitButton": "Skip"
+},
+"banner": {
+    "table": "Table "
+},
+"searchbar": {
+    "placeholder": "What would you like to order?"
+},
+"categories": {
+    "title": "Categories"
+},
+"productModal": {
+    "commentLabel" : "Comments",
+    "commentPlaceholder": "Add comments and observations",
+    "addButton": "Add"
+},
+"footer": {
+    "yourOrder": "Your order",
+    "products": "Products",
+    "total": "Total",
+    "payButton": "Pay",
+    "viewproducts": "View products"
+},
+"payment": {
+    "title": "Payment",
+    "managePayment": "Manage your payment from here",
+    "cash": "Cash",
+    "poweredby": "powered by",
+    "continue": "Continue"
+},
+"orderInfo": {
+    "table": "Table",
+    "paymentTotal": "Total to pay:"
+},
+"mercadoPago": {
+    "payButton": "Pay"
+},
+"rating": {
+    "preparingOrder": "is preparing your order",
+    "reviewQuestion": "How was your experience with the app?",
+    "thanks": "Thank you!",
+    "yourOpinion": "Your opinion helps us grow",
+    "reviewLabel": "Give us your feedback",
+    "reviewPlaceholder": "Do you like the way we do things?",
+    "send": "Send",
+    "backButton": "Order again"
+}
 }

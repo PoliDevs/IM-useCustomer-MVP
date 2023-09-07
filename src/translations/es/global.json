@@ -2,6 +2,9 @@
   "QrScanner": {
     "title": "Escanea un código Qr"
   },
+"loader": {
+  "title": "Espera mientras preparamos el menu"
+},
   "welcome": {
     "title": "¡Bienvenido!",
     "subtitle": "Estas por pedir en: ",

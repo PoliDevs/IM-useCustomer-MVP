@@ -17,9 +17,12 @@ export default function Products({ changeStyle, commercePlan }) {
           <Product
             key={index}
             name={i.altName}
+            // name={i.name}
             description={i.description}
             price={i.price}
+            // price={i.cost}
             bg={i.src}
+            //bg={i.photo}
             openModal={openModal}
           />
         ))}

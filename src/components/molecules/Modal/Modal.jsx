@@ -15,6 +15,8 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
 
   const [t, i18n] = useTranslation(["global"]);
 
+
+  //!descomentar para mostrar info del producto real
   return (
     <article className={`${s.modalContainer} ${isOpen && s.open}`}>
       <div className={s.modal}>
@@ -30,6 +32,7 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
           <img
             className={s.productIcon}
             src={productData.image}
+            //src={product.photo}
             alt={`${productData.name} icon`}
           />
           <div className={s.productInfo}>
@@ -45,6 +48,7 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
               scrollable={true}
             />
             <h3 className={s.productPrice}>{`$ ${productData.price}`}</h3>
+            {/* <h3 className={s.productPrice}>{`$ ${productData.cost}`}</h3> */}
           </div>
         </div>
         <div>
@@ -83,9 +87,11 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
           onClick={() => {
             addToCart(
               productData.image,
+              //productData.photo
               productData.name,
               productData.description,
               productData.price,
+              // productData.cost,
               amount,
               comment
             );
