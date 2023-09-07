@@ -31,7 +31,7 @@ export default function Payment() {
 
   return (
     <main className={s.paymentContainer}>
-      <Banner />
+      <Banner arrow={true} />
       <section className={s.paymentContent}>
         <SubTitle text={t("payment.title")} alignment={"left"}>
           <CashIcon className={s.cashIcon} />
