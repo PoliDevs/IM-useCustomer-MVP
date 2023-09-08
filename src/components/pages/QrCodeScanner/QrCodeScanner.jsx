@@ -2,16 +2,12 @@
 import { Html5QrcodeScanType, Html5QrcodeScanner, Html5QrcodeSupportedFormats } from "html5-qrcode";
 import { useEffect} from "react";
 import { useNavigate } from "react-router-dom";
-import HugeTitle from "../../atoms/HugeTitle/HugeTitle";
-import { useDispatch } from "react-redux";
-import { getCommerce } from "../../../redux/actions";
 import { useTranslation } from "react-i18next";
+import HugeTitle from "../../atoms/HugeTitle/HugeTitle";
 import s from "./QrCodeScanner.module.scss";
 
 export default function Qr({scanResult, setScanResult}) {
-  // const [scanResult, setScanResult] = useState();
   const navigate = useNavigate();
-  const dispatch = useDispatch()
 
     const [t, i18n] = useTranslation(["global"]);
 
@@ -34,10 +30,8 @@ export default function Qr({scanResult, setScanResult}) {
     //{ facingMode: "environment" } para preferir camara trasera
     function success(result) {
       scanner.clear(); //desinyecta el scanner del dom
-      // setScanResult(JSON.parse(result));
       localStorage.setItem("QrCode", result);
-      dispatch(getCommerce(JSON.parse(result).commerceId));
-      navigate('/welcome')
+      navigate(result.substring(21));
     }
 
     function error(error) {

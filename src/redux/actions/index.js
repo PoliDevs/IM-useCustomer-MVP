@@ -10,6 +10,7 @@ import {
   FILTER_CATEGORY,
   GET_ALL_CATEGORIES,
   GET_SEARCHED_PRODUCT,
+  SET_TABLE,
 } from "./actionTypes";
 import { ProductsInfo } from "../../utils/Constants";
 
@@ -101,6 +102,19 @@ export async function postOrder(order){
 
 
 ////////////////////* Commerce Actions Creators *////////////////////
+
+export function setTable(table) {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: SET_TABLE,
+        payload: table
+      })
+    } catch (error) {
+      console,error(error)
+    }
+  }
+}
 
 export function getCommerce(id) {
   return async function (dispatch) {

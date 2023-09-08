@@ -9,7 +9,7 @@ import s from "./OrderInfo.module.scss";
 export default function OrderInfo({border}) {
   const cart = useSelector((state) => state.cart);
   const commerceInfo = useSelector((state) => state.commerce);
-  const Qr = JSON.parse(localStorage.getItem("QrCode"));
+  const table = useSelector((state)=> state.table);
   const totalPrice = cart.reduce((count, p) => count + p.price * p.amount, 0);
   //const totalPrice = cart.reduce((count, p) => count + p.cost * p.amount, 0);
 
@@ -20,7 +20,7 @@ export default function OrderInfo({border}) {
     <div className={`${s.orderInfo} ${border && s.border}`}>
       <div className={s.paymentTitle}>
         <SubTitle text={commerceInfo.name} bold={true} />
-        <SubTitle text={`${t("orderInfo.table")} ${Qr.commerceTable}`} />
+        <SubTitle text={`${t("orderInfo.table")} ${table}`} />
       </div>
       <ScrollContainer className={s.productsContainer}>
         {cart.map((p, index) => (

@@ -9,9 +9,11 @@ import {
   FILTER_CATEGORY,
   GET_ALL_CATEGORIES,
   GET_SEARCHED_PRODUCT,
+  SET_TABLE,
 } from "../actions/actionTypes";
 
 const initalState = {
+  table: localStorage.getItem("table") ? localStorage.getItem("table") : 0,
   allProducts: [],
   allDishes: [],
   allCategories: [],
@@ -28,15 +30,20 @@ const initalState = {
 
 export const rootReducer = (state = initalState, action) => {
   switch (action.type) {
+    case SET_TABLE: {
+      state = { ...state, table: action.payload };
+      localStorage.setItem("table", action.payload);
+      return state;
+    }
     case GET_SEARCHED_PRODUCT: {
       const copy = [...state.allProducts];
       const results = state.allProducts.filter((p) =>
         p.altName.toLowerCase().includes(action.payload.toLowerCase())
       );
       if (results.length) {
-        return state = {...state, allProducts: results}
-      }else {
-        state = {...state, allProducts: copy}
+        return (state = { ...state, allProducts: results });
+      } else {
+        state = { ...state, allProducts: copy };
       }
       return state;
     }
@@ -51,7 +58,11 @@ export const rootReducer = (state = initalState, action) => {
           ...state,
           cart: state.cart.map((p) =>
             p.name === action.payload.name
-              ? { ...p, amount: p.amount + action.payload.amount, comment: action.payload.comment }
+              ? {
+                  ...p,
+                  amount: p.amount + action.payload.amount,
+                  comment: action.payload.comment,
+                }
               : p
           ),
         };
@@ -98,11 +109,11 @@ export const rootReducer = (state = initalState, action) => {
       localStorage.setItem("commerce", JSON.stringify(state.commerce));
       return state;
     // case GET_ACTIVE_MENUS:
-      // {
-        // const allActive = action.payload.menus.filter((m)=> m.commerce.id === action.payload.id);
-        // state= {...state, allProducts: allActive} //!descomentar para guardar los menus activos del comercio
-      // }
-      // return state
+    // {
+    // const allActive = action.payload.menus.filter((m)=> m.commerce.id === action.payload.id);
+    // state= {...state, allProducts: allActive} //!descomentar para guardar los menus activos del comercio
+    // }
+    // return state
     case GET_ACTIVE_DISHES:
       {
         const allActive = action.payload.dishes.filter(
@@ -114,16 +125,16 @@ export const rootReducer = (state = initalState, action) => {
       return state;
     case GET_ALL_CATEGORIES:
       return { ...state, allCategories: action.payload };
-    case FILTER_CATEGORY:
-      {
-        const products = [...state.allProducts];
-        const filteredResults = products.filter((p)=> p.category === action.payload);
-        // const filteredResults = products.filter(
-        //   (p) => p.id === action.payload //!descomentar para filtrar las categorias del comercio actual
-        // );
-        return {...state, allProducts: filteredResults}
-
-      }
+    case FILTER_CATEGORY: {
+      const products = [...state.allProducts];
+      const filteredResults = products.filter(
+        (p) => p.category === action.payload
+      );
+      // const filteredResults = products.filter(
+      //   (p) => p.id === action.payload //!descomentar para filtrar las categorias del comercio actual
+      // );
+      return { ...state, allProducts: filteredResults };
+    }
     default:
       return state;
   }
