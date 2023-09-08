@@ -7,6 +7,7 @@ export const SET_USER = "SET_USER";
 
 ////////////////////* Commerce Action types *////////////////////
 
+export const SET_TABLE = "SET_TABLE";
 export const GET_COMMERCE = "GET_COMMERCE";
 export const GET_ACTIVE_MENUS = "GET_ACTIVE_MENUS";
 export const GET_ACTIVE_DISHES = "GET_aCTIVE_DISHES";

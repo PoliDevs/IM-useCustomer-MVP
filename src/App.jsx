@@ -25,7 +25,7 @@ function App() {
           }
         />
         <Route
-          path="/welcome"
+          path="/welcome/:commerceId/:tableId?"
           element={<WelcomePage scanResult={scanResult} />}
         />
         <Route path="/instruction" element={<Instruction />} />

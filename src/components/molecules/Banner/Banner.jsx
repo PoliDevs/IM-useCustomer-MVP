@@ -2,17 +2,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../../redux/actions/index";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as ArrowBackWhite } from "../../../assets/ArrowBackWhite.svg";
+import { useNavigate } from "react-router-dom";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import burger from "../../../assets/Burgers.svg";
 import s from "./Banner.module.scss";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
-import { useNavigate } from "react-router-dom";
 
 export default function Banner({ setCategory, arrow }) {
+  const table = useSelector((state)=> state.table);
   const commerceName = useSelector((state) => state.commerce.name);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const Qr = JSON.parse(localStorage.getItem("QrCode"));
   const [t, i18n] = useTranslation(["global"]);
 
   return (
@@ -27,12 +27,22 @@ export default function Banner({ setCategory, arrow }) {
       }}
     >
       <div className={s.content}>
-        {arrow && <ArrowBackWhite style={{ width: "21px", height: "21px", zIndex: "2", marginRight: "20px" }} onClick={()=>navigate('/home')}/>}
-        <div style={{display: "flex", flexDirection:"column"}}>
+        {arrow && (
+          <ArrowBackWhite
+            style={{
+              width: "21px",
+              height: "21px",
+              zIndex: "2",
+              marginRight: "20px",
+            }}
+            onClick={() => navigate("/home")}
+          />
+        )}
+        <div style={{ display: "flex", flexDirection: "column" }}>
           <SubTitle text={commerceName} alignment={"left"} />
           <Paragraph
             alignment={"left"}
-            text={`${t("banner.table")} ${Qr.commerceTable}`}
+            text={`${t("banner.table")} ${table}`}
             secundary={true}
           />
         </div>

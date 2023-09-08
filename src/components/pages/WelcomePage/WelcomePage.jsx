@@ -5,7 +5,7 @@ import { ReactComponent as ImenuLogo } from "../../../assets/ImenuHorizontal.svg
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLogin } from "../../../utils/Functions";
-import { getCommerce } from "../../../redux/actions";
+import { getCommerce, setTable } from "../../../redux/actions";
 import HugeTitle from "../../atoms/HugeTitle/HugeTitle";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import LinkButton from "../../atoms/LinkButton/LinkButton";
@@ -15,11 +15,14 @@ import LoginModal from "../../molecules/LoginModal/LoginModal";
 import Error from "../Error/Error";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import s from "./WelcomePage.module.scss";
+import { useParams } from "react-router-dom";
 export default function WelcomePage() {
+  const { commerceId, ...params } = useParams();
   const userInfo = useSelector((state) => state.user);
   const commerce = useSelector((state)=> state.commerce);
-  const Qr = JSON.parse(localStorage.getItem("QrCode"));
+  const table = useSelector((state)=> state.table);
   const dispatch = useDispatch();
+  // localStorage.setItem("table", params.tableId);
   // const [name, setName] = useState(userInfo.name ? userInfo.name : "");
   const [error, setError] = useState(false);
   const { loginModal, openLoginModal, closeLoginModal } = useLogin();
@@ -32,6 +35,8 @@ export default function WelcomePage() {
       // dispatch(getCommerce(scanResult.commerceId));
       // if (!localStorage.getItem("user") && !localStorage.getItem("name"))
     // }, 2500);
+    dispatch(setTable(params.tableId));
+    dispatch(getCommerce(commerceId));
     if (!localStorage.getItem("user")) openLoginModal();
   }, []);
 
@@ -57,7 +62,9 @@ export default function WelcomePage() {
               <HugeTitle text={commerce.name} />
               <div className={s.spacing}>
                 <Logo className={s.logo} />
-                <SubTitle text={`${t("welcome.table")} ${Qr.commerceTable}`} />
+                {/* <SubTitle text={`${t("welcome.table")} ${Qr.commerceTable}`} /> */}
+                {/* <SubTitle text={`${t("welcome.table")} ${params.tableId}`} /> */}
+                <SubTitle text={`${t("welcome.table")} ${table}`} />
               </div>
               <div className={s.bottomContent}>
                 <Paragraph bold={true} text={t("welcome.poweredby")}>
