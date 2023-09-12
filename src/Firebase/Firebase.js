@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/actions";
+import { useNavigate } from "react-router-dom";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -25,6 +26,7 @@ const provider = new GoogleAuthProvider();
 
 export default function useFirebase(setError) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const signInWithGoogle = async () => {
 
@@ -36,6 +38,7 @@ export default function useFirebase(setError) {
         photo: result.user.photoURL
       }
       dispatch(setUser(user))
+      navigate("/welcome")
     } catch (error) {
        const user = {
          name: null,

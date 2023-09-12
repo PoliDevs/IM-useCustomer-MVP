@@ -9,6 +9,7 @@ import Home from "./components/pages/Home/Home";
 import Payment from "./components/pages/Payment/Payment";
 import Review from "./components/pages/Review/Review";
 import Mercadopago from "./components/pages/Mercadopago/Mercadopago";
+import Login from "./components/pages/Login/Login";
 
 function App() {
   const [scanResult, setScanResult] = useState();
@@ -25,13 +26,18 @@ function App() {
           }
         />
         <Route
-          path="/welcome/:commerceId/:tableId?"
+          path="/login/:commerceId/:tableId?"
+          element={<Login scanResult={scanResult} />}
+        />
+        <Route
+          // path="/welcome/:commerceId/:tableId?"
+          path="/welcome"
           element={<WelcomePage scanResult={scanResult} />}
         />
         <Route path="/instruction" element={<Instruction />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/payment" element={<Payment/>}/>
-        <Route path="/mercadopago" element={<Mercadopago/>}/>
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/mercadopago" element={<Mercadopago />} />
         <Route path="/rating" element={<Review />} />
       </Routes>
     </>

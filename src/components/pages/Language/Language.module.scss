@@ -1,0 +1,24 @@
+@import "../../../scss/colors.scss";
+@import "../../../scss/typography.scss";
+
+.mainContainer {
+  min-height: 100vh;
+  width: 100%;
+  background-color: $background-quaternary;
+
+  .optionContainer {
+    width: 90%;
+    height: 85px;
+    background-color: $background-secundary;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+
+    .textContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+}
