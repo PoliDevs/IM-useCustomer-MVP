@@ -2,9 +2,13 @@
 @import "../../../scss/typography.scss";
 
 .mainContainer {
-  min-height: 100vh;
   min-width: 100vw;
+  max-height: 100dvh;
   background-color: $background-secundary;
+  display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
 
   .loginContainer {
     display: flex;

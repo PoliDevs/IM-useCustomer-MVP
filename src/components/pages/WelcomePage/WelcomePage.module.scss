@@ -3,9 +3,10 @@
 .home {
   color: $text-primary;
   width: 100vw;
-  min-height: 100vh;
+  min-height: calc(100vh - 65px);
   margin: 0;
   padding: 0;
+  background-color: $background-secundary;
   
   .top {
     margin: 0 auto;

@@ -16,6 +16,7 @@ import Error from "../Error/Error";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import s from "./WelcomePage.module.scss";
 import { useParams } from "react-router-dom";
+import NavBar from "../../molecules/NavBar/NavBar";
 export default function WelcomePage() {
   //?descomentar para volver al sistema de login con modal
   // const { commerceId, ...params } = useParams();
@@ -48,6 +49,7 @@ export default function WelcomePage() {
 
   return (
     <div className={s.home}>
+      <NavBar/>
       {Object.keys(commerce).length ? (
         <div className={s.top}>
           {/* {!loginModal && (name || userInfo.name) ? ( */}
