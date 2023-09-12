@@ -5,7 +5,7 @@
   margin-right: 20px;
 }
 
-.checkbox input[type="checkbox"] {
+.inputCheckbox {
   position: absolute;
   opacity: 0;
 }
@@ -20,7 +20,7 @@
   transition: all 0.3s;
 }
 
-.checkbox input[type="checkbox"]:checked ~ .checkbox_circle {
+.checked ~ .checkbox_circle {
   background: #4CAF50;
   border-color: #4CAF50;
 }
@@ -38,7 +38,7 @@
   transition: all 0.3s;
 }
 
-.checkbox input[type="checkbox"]:checked ~ .checkbox_circle .checkmark {
+.checked ~ .checkbox_circle .checkmark {
   opacity: 1;
 }
 
@@ -48,7 +48,7 @@
   transition: stroke-dashoffset 0.3s;
 }
 
-.checkbox input[type="checkbox"]:checked ~ .checkbox_circle .checkmark_circle {
+.checked ~ .checkbox_circle .checkmark_circle {
   stroke-dashoffset: 0;
 }
 
@@ -58,6 +58,6 @@
   transition: stroke-dashoffset 0.3s;
 }
 
-.checkbox input[type="checkbox"]:checked ~ .checkbox_circle .checkmark_kick {
+.checked ~ .checkbox_circle .checkmark_kick {
   stroke-dashoffset: 0;
 }

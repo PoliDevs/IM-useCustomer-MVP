@@ -5,6 +5,17 @@
 "loader": {
   "title": "Please wait while we prepare the menu."
 },
+"language": {
+  "button": "Start"
+},
+"login": {
+  "firstStep": "Take the first step",
+  "access": "access using your Google email",
+  "googleButton": "Log in with Google",
+  "noGoogleButton": "Access without registration",
+  "slogan": "Speed is",
+  "sloganBig": "our best dish."
+},
 "welcome": {
     "title": "Welcome!",
     "subtitle": "You are about to order at: ",

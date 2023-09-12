@@ -10,6 +10,7 @@ import Payment from "./components/pages/Payment/Payment";
 import Review from "./components/pages/Review/Review";
 import Mercadopago from "./components/pages/Mercadopago/Mercadopago";
 import Login from "./components/pages/Login/Login";
+import Language from "./components/pages/Language/Language";
 
 function App() {
   const [scanResult, setScanResult] = useState();
@@ -25,12 +26,12 @@ function App() {
             />
           }
         />
+        <Route path="/language/:commerceId/:tableId?" element={<Language />} />
         <Route
-          path="/login/:commerceId/:tableId?"
+          path="/login"
           element={<Login scanResult={scanResult} />}
         />
         <Route
-          // path="/welcome/:commerceId/:tableId?"
           path="/welcome"
           element={<WelcomePage scanResult={scanResult} />}
         />

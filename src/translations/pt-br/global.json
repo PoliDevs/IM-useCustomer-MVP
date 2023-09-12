@@ -5,6 +5,17 @@
 "loader": {
   "title": "Aguarde enquanto preparamos o cardápio."
 },
+"language": {
+  "button": "Começar"
+},
+"login": {
+  "firstStep": "Dê o primeiro passo",
+  "access": "acesso usando seu e-mail do Google",
+  "googleButton": "Acesse com o Google",
+  "noGoogleButton": "Acesso sem registro",
+    "slogan": "A velocidade é",
+  "sloganBig": " o nosso ponto forte."
+},
 "welcome": {
     "title": "Bem-vindo!",
     "subtitle": "Você está prestes a fazer um pedido em: ",
