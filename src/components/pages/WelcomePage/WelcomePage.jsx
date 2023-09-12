@@ -17,10 +17,11 @@ import SubTitle from "../../atoms/SubTitle/SubTitle";
 import s from "./WelcomePage.module.scss";
 import { useParams } from "react-router-dom";
 export default function WelcomePage() {
-  const { commerceId, ...params } = useParams();
+  //?descomentar para volver al sistema de login con modal
+  // const { commerceId, ...params } = useParams();
   const userInfo = useSelector((state) => state.user);
-  const commerce = useSelector((state)=> state.commerce);
-  const table = useSelector((state)=> state.table);
+  const commerce = useSelector((state) => state.commerce);
+  const table = useSelector((state) => state.table);
   const dispatch = useDispatch();
   // localStorage.setItem("table", params.tableId);
   // const [name, setName] = useState(userInfo.name ? userInfo.name : "");
@@ -30,15 +31,16 @@ export default function WelcomePage() {
 
   const [t, i18n] = useTranslation(["global"]);
 
-  useEffect(() => {
+  // useEffect(() => {
     // setTimeout(() => {
-      // dispatch(getCommerce(scanResult.commerceId));
-      // if (!localStorage.getItem("user") && !localStorage.getItem("name"))
+    // dispatch(getCommerce(scanResult.commerceId));
+    // if (!localStorage.getItem("user") && !localStorage.getItem("name"))
     // }, 2500);
-    dispatch(setTable(params.tableId));
-    dispatch(getCommerce(commerceId));
-    if (!localStorage.getItem("user")) openLoginModal();
-  }, []);
+    //?descomentar para volver al sistema de login con modal
+    // dispatch(setTable(params.tableId));
+    // dispatch(getCommerce(commerceId));
+    // if (!localStorage.getItem("user")) openLoginModal();
+  // }, []);
 
   // const handleName = (e) => {
   //   setName(e.target.value);
@@ -52,12 +54,7 @@ export default function WelcomePage() {
           {!loginModal ? (
             <>
               <HugeTitle text={t("welcome.title")} />
-              <SubTitle
-                // text={`${
-                //   !loginModal ? (userInfo.name ? userInfo.name : name) : ""
-                // }`}
-                text={`${userInfo.name ? userInfo.name : ""}`}
-              />
+              {/* <SubTitle text={`${userInfo.name ? userInfo.name : ""}`}/> */}
               <SubTitle text={t("welcome.subtitle")} />
               <HugeTitle text={commerce.name} />
               <div className={s.spacing}>
@@ -88,7 +85,7 @@ export default function WelcomePage() {
           ) : (
             <Error active={error} />
           )}
-          {loginModal && (
+          {/* {loginModal && (
             <LoginModal
               loginModal={loginModal}
               closeLoginModal={closeLoginModal}
@@ -96,7 +93,7 @@ export default function WelcomePage() {
               // handleName={handleName}
               signInWithGoogle={signInWithGoogle}
             />
-          )}
+          )} */}
         </div>
       ) : (
         <LoadingPage />

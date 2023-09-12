@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import HugeTitle from "../../atoms/HugeTitle/HugeTitle";
 import s from "./QrCodeScanner.module.scss";
+import SubTitle from "../../atoms/SubTitle/SubTitle";
 
 export default function Qr({scanResult, setScanResult}) {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ export default function Qr({scanResult, setScanResult}) {
         id="reader"
         className={s.scannerContainer}
       ></div>
-      <HugeTitle text={t("QrScanner.title")}/>
+      <SubTitle text={t("QrScanner.title")}/>
     </div>
   );
 }

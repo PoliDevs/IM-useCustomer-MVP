@@ -16,7 +16,7 @@ export default function Instruction() {
   return (
 
     <div className={s.instrucciones}>
-      <Link to={url}>
+      <Link to='/welcome'>
         <div className={s.arrowBack}></div>
       </Link>
       <div className={s.title}>

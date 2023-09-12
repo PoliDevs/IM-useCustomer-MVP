@@ -15,7 +15,7 @@ import global_pt_bra from './translations/pt-br/global.json';
 
 i18next.init({
   interpolation:{escapeValue:false},
-  lng:"en",
+  lng:"es",
   resources:{
     es:{
       global:global_es

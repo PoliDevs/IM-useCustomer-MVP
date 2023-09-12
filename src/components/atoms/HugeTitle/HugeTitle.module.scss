@@ -1,3 +1,4 @@
+@import "../../../scss/colors.scss";
 @import "../../../scss/typography.scss";
 
 .hugeTitle {
@@ -22,4 +23,12 @@
 
 .centered {
   justify-content: center;
+}
+
+.secundary {
+  color: $text-secondary
+}
+
+.noWeight {
+  font-weight: 400;
 }
