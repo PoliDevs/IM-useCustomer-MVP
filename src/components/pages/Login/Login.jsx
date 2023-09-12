@@ -13,41 +13,38 @@ import Error from "../Error/Error";
 import s from "./Login.module.scss";
 
 export default function Login() {
-  const { commerceId, ...params } = useParams();
+  // const { commerceId, ...params } = useParams();
   const [error, setError] = useState(false);
   const [t, i18n] = useTranslation(["global"]);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { signInWithGoogle } = useFirebase(setError);
 
   //!este useEffect va a ir en pagina de seleccion de idioma
-  useEffect(() => {
-    dispatch(setTable(params.tableId));
-    dispatch(getCommerce(commerceId));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(setTable(params.tableId));
+  //   dispatch(getCommerce(commerceId));
+  // }, []);
 
   return (
     <main className={s.mainContainer}>
       {!error ? (
         <>
           <header className={s.loginContainer}>
-            <SubTitle text={"Da el primer paso: "} bold={true}/>
-            <Paragraph
-              text={"Ingresa utilizando tu correo de Google"}
-              centered={true}
-            />
+            <SubTitle text={t("login.firstStep")} bold={true} />
+            <Paragraph text={t("login.access")} centered={true} />
             <GoogleButton
-              text={"Accede con Google"}
+              text={t("login.googleButton")}
               signInWithGoogle={signInWithGoogle}
             />
-            <LoginButton text={"Acceder sin registro"} />
+            <LoginButton text={t("login.noGoogleButton")} />
           </header>
           <section className={s.sloganContainer}>
             <HugeTitle
-              text={"La velocidad es"}
+              text={t("login.slogan")}
               secundary={true}
               noWeight={true}
             />
-            <h2 className={s.bigText}>nuestro plato fuerte</h2>
+            <h2 className={s.bigText}>{t("login.sloganBig")}</h2>
           </section>
         </>
       ) : (

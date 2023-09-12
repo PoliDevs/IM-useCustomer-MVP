@@ -1,33 +1,39 @@
-import Paragraph from '../../atoms/Paragraph/Paragraph';
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { getCommerce, setTable } from "../../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import LinkButton from "../../atoms/LinkButton/LinkButton";
-import LoginCheckBox from "../../atoms/LoginCheckBox/LoginCheckBox";
+import LanguageOption from '../../molecules/LanguageOption/LanguageOption';
 import s from './Language.module.scss';
+import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
 
 export default function Language() {
+    const commerce = useSelector((state) => state.commerce);
+
+    const [t, i18n] = useTranslation(["global"]);
+    const dispatch = useDispatch();
+    const { commerceId, ...params } = useParams();
+
+    useEffect(() => {
+      dispatch(setTable(params.tableId));
+      dispatch(getCommerce(commerceId));
+    }, []);
+
   return (
     <main className={s.mainContainer}>
-      <div className={s.optionContainer}>
-        <div className={s.textContainer}>
-          <h2>¡Bienvenido!</h2>
-          <Paragraph text={"es"} />
-        </div>
-        <LoginCheckBox />
+      {Object.keys(commerce).length ? (
+        <>
+      <div className={s.optionsMainContainer}>
+        <LanguageOption text={"¡Bienvenido!"} lang={"es"} id={1} />
+        <LanguageOption text={"¡Welcome!"} lang={"en"} id={2} />
+        <LanguageOption text={"¡Bem vindo!"} lang={"pt"} id={3} />
       </div>
-      <div className={s.optionContainer}>
-        <div className={s.textContainer}>
-          <h2>¡Welcome!</h2>
-          <Paragraph text={"en"} />
-        </div>
-        <LoginCheckBox />
+      <div className={s.buttonWrapper}>
+        <LinkButton path={"/login"} text={t("language.button")} />
       </div>
-      <div className={s.optionContainer}>
-        <div className={s.textContainer}>
-          <h2>¡Bem vindo!</h2>
-          <Paragraph text={"por"} />
-        </div>
-        <LoginCheckBox />
-      </div>
-      <LinkButton text={"Comenzar"} />
+      </>
+      ) : (<LoadingPage/>)}
     </main>
   );
 }
