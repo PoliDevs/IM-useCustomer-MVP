@@ -52,12 +52,12 @@ export default function Footer({ red }) {
               />
             ))}
             <div style={{ marginTop: "10px" }}>
+            </div>
+          </ScrollContainer>
               <SubTitle
                 text={`${t("footer.total")}: $ ${totalPrice}`}
                 alignment={"left"}
               />
-            </div>
-          </ScrollContainer>
           <button
             disabled={!cart.length}
             className={`${s.payButton} ${!cart.length && s.disabled}`}

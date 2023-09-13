@@ -37,33 +37,16 @@ export default function Payment() {
           <CashIcon className={s.cashIcon} />
         </SubTitle>
         <SmallText text={t("payment.managePayment")} alignment={"left"} />
-        {/* <div className={s.orderInfo}>
-          <div className={s.paymentTitle}>
-            <SubTitle text={"Burger Store"} bold={true} />
-            <SubTitle text={"Mesa 1"} />
-          </div>
-          <ScrollContainer className={s.productsContainer}>
-            {cart.map((p, index) => (
-              <PaymentProduct
-                key={index}
-                amount={p.amount}
-                text={p.name}
-                price={p.price * p.amount}
-              />
-            ))}
-          </ScrollContainer>
-          <Paragraph text={`Total a pagar: ${totalPrice}`} alignment={"right"} bold={true} />
-        </div> */}
         <OrderInfo />
         <PaymentOptionButton
-          text={"Mercadopago"}
-          option={1}
+          text={t("payment.cash")}
+          option={2}
           setMethod={setMethod}
           handleChange={handleChange}
         />
         <PaymentOptionButton
-          text={t("payment.cash")}
-          option={2}
+          text={"Mercadopago"}
+          option={1}
           setMethod={setMethod}
           handleChange={handleChange}
         />

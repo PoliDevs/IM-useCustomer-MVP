@@ -4,18 +4,14 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/actions";
 import { useNavigate } from "react-router-dom";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-//! guardar en archivo .env
 const firebaseConfig = {
-  apiKey: "AIzaSyDrbABqktEQ1RGNi51bxT60UwyQjgVdpDw",
-  authDomain: "imenu-login.firebaseapp.com",
-  projectId: "imenu-login",
-  storageBucket: "imenu-login.appspot.com",
-  messagingSenderId: "48426542221",
-  appId: "1:48426542221:web:70d994f07e5e6274f7eec4",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDERID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 
@@ -35,7 +31,11 @@ export default function useFirebase(setError) {
       const user = {
         name: result.user.displayName,
         email: result.user.email,
-        photo: result.user.photoURL
+        email_verified: result.user.emailVerified,
+        photo: result.user.photoURL,
+        phone: result.user.phoneNumber,
+        meta: result.user.metadata.lastSignInTime,
+        googleId: result.user.uid
       }
       dispatch(setUser(user))
       navigate("/welcome")

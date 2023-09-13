@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 export default function Review() {
   const [comment, setComment] = useState("");
   const [sent, setSent] = useState(false);
+  const [duration, setDuration] =useState(true);
   const commerceInfo = useSelector((state)=> state.commerce);
   const {width, height} = useWindowSize();
 
@@ -27,11 +28,15 @@ export default function Review() {
     setSent(true);
   }
 
+  setTimeout(() => {
+    setDuration(false)
+  }, 6000);
+
 
   return (
     <section className={s.reviewContainer}>
       <header className={s.reviewHeader}>
-        {!sent && (
+        {duration && (
           <Confetti numberOfPieces={200} height={(height / 2)} width={width} />
         )}
         <img src={logo} className={s.logo} />

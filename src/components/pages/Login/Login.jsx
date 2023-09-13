@@ -1,8 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getCommerce, setTable } from "../../../redux/actions";
 import useFirebase from "../../../Firebase/Firebase";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
@@ -13,18 +10,10 @@ import Error from "../Error/Error";
 import s from "./Login.module.scss";
 
 export default function Login() {
-  // const { commerceId, ...params } = useParams();
   const [error, setError] = useState(false);
   const [t, i18n] = useTranslation(["global"]);
   // const dispatch = useDispatch();
   const { signInWithGoogle } = useFirebase(setError);
-
-  //!este useEffect va a ir en pagina de seleccion de idioma
-  // useEffect(() => {
-  //   dispatch(setTable(params.tableId));
-  //   dispatch(getCommerce(commerceId));
-  // }, []);
-
   return (
     <main className={s.mainContainer}>
       {!error ? (

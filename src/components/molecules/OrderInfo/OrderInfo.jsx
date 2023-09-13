@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import ScrollContainer from "react-indiana-drag-scroll";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import PaymentProduct from "../PaymentProduct/PaymentProduct";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
@@ -22,7 +21,7 @@ export default function OrderInfo({border}) {
         <SubTitle text={commerceInfo.name} bold={true} />
         <SubTitle text={`${t("orderInfo.table")} ${table}`} />
       </div>
-      <ScrollContainer className={s.productsContainer}>
+      <div className={s.productsContainer}>
         {cart.map((p, index) => (
           <PaymentProduct
             key={index}
@@ -32,9 +31,9 @@ export default function OrderInfo({border}) {
             //price={p.cost * p.amount}
           />
         ))}
-      </ScrollContainer>
+      </div>
       <Paragraph
-        text={`${t("orderInfo.paymentTotal")} ${totalPrice}`}
+        text={`${t("orderInfo.paymentTotal")} $${totalPrice}`}
         alignment={"right"}
         bold={true}
       />
