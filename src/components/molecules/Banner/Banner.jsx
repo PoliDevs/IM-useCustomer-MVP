@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts } from "../../../redux/actions/index";
+import { getActiveMenus, getAllProducts } from "../../../redux/actions/index";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as ArrowBackWhite } from "../../../assets/ArrowBackWhite.svg";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +10,7 @@ import Paragraph from "../../atoms/Paragraph/Paragraph";
 
 export default function Banner({ setCategory, arrow }) {
   const table = useSelector((state)=> state.table);
-  const commerceName = useSelector((state) => state.commerce.name);
+  const commerce = useSelector((state) => state.commerce);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [t, i18n] = useTranslation(["global"]);
@@ -22,7 +22,8 @@ export default function Banner({ setCategory, arrow }) {
       style={{ backgroundImage: `url(${burger})` }}
       onClick={() => {
         if (arrow) return;
-        dispatch(getAllProducts());
+        // dispatch(getAllProducts()); 
+        dispatch(getActiveMenus(commerce.id))
         setCategory("");
       }}
     >
@@ -39,7 +40,7 @@ export default function Banner({ setCategory, arrow }) {
           />
         )}
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <SubTitle text={commerceName} alignment={"left"} />
+          <SubTitle text={commerce.name} alignment={"left"} />
           <Paragraph
             alignment={"left"}
             text={`${t("banner.table")} ${table}`}

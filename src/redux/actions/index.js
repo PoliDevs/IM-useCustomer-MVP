@@ -1,7 +1,6 @@
 import axios from "axios";
 import {
   ADD_PRODUCT,
-  GET_ALL_PRODUCTS,
   REMOVE_PRODUCT,
   SET_USER,
   GET_COMMERCE,
@@ -180,12 +179,12 @@ export function getAllCategorys() {
   };
 }
 
-export function filterCategory(name) {
+export function filterCategory(id) {
   return async function (dispatch) {
     try {
       return dispatch({
         type: FILTER_CATEGORY,
-        payload: name,
+        payload: id,
       });
     } catch (error) {
       console.error(error);

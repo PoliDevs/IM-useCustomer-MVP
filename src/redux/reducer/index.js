@@ -1,6 +1,5 @@
 import {
   ADD_PRODUCT,
-  GET_ALL_PRODUCTS,
   REMOVE_PRODUCT,
   SET_USER,
   GET_COMMERCE,
@@ -69,8 +68,6 @@ export const rootReducer = (state = initalState, action) => {
       }
       return state;
     }
-    case GET_ALL_PRODUCTS:
-      return { ...state, allProducts: action.payload };
     case REMOVE_PRODUCT: {
       const productIndex = state.cart.findIndex(
         (p) => p.name === action.payload
@@ -108,12 +105,12 @@ export const rootReducer = (state = initalState, action) => {
       };
       localStorage.setItem("commerce", JSON.stringify(state.commerce));
       return state;
-    // case GET_ACTIVE_MENUS:
-    // {
-    // const allActive = action.payload.menus.filter((m)=> m.commerce.id === action.payload.id);
-    // state= {...state, allProducts: allActive} //!descomentar para guardar los menus activos del comercio
-    // }
-    // return state
+    case GET_ACTIVE_MENUS:
+    {
+    const allActive = action.payload.menus.filter((m)=> m.commerce.id === action.payload.id);
+    state= {...state, allProducts: allActive}
+    }
+    return state
     case GET_ACTIVE_DISHES:
       {
         const allActive = action.payload.dishes.filter(
@@ -128,11 +125,8 @@ export const rootReducer = (state = initalState, action) => {
     case FILTER_CATEGORY: {
       const products = [...state.allProducts];
       const filteredResults = products.filter(
-        (p) => p.category === action.payload
+        (p) => p.category.id === action.payload 
       );
-      // const filteredResults = products.filter(
-      //   (p) => p.id === action.payload //!descomentar para filtrar las categorias del comercio actual
-      // );
       return { ...state, allProducts: filteredResults };
     }
     default:

@@ -1,10 +1,9 @@
-import { ProductsInfo } from "../../../utils/Constants";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import  ScrollContainer  from "react-indiana-drag-scroll";
+import SmallText from "../../atoms/SmallText/SmallText";
 import Icon from "../Icon/Icon";
 import s from "./Categories.module.scss";
-import SmallText from "../../atoms/SmallText/SmallText";
-import { useSelector } from "react-redux";
 export default function Categories({handleCategory, category}) {
   const activeCategories = useSelector((state) => state.allCategories);
 
@@ -23,18 +22,9 @@ export default function Categories({handleCategory, category}) {
       </div>
       <div style={{ position: "relative", height: "75px" }}>
         <ScrollContainer className={s.scrollContainer}>
-          {ProductsInfo?.map((icon, index) => (
-            <Icon
-              key={index}
-              icon={icon}
-              handleCategory={handleCategory}
-              category={category}
-            />
+          {activeCategories?.map((categoryObject, index)=> (
+            <Icon key={index} id={categoryObject.id} name={categoryObject.category} handleCategory={handleCategory} category={category}/>
           ))}
-          
-          {/* {activeCategories?.map((categoryObject, index)=> (
-            <Icon key={index} id={categoryObject.id} name={categoryObject.category} handleCategory={handleCategory} category={category}/> //category es la categoria seleccionada (state)
-          ))} */}
         </ScrollContainer>
       </div>
     </section>

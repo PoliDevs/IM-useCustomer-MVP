@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { batch, useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { filterCategory, getActiveDishes, getActiveMenus, getAllCategorys, getAllProducts } from "../../../redux/actions";
+import { filterCategory, getActiveDishes, getActiveMenus, getAllCategorys } from "../../../redux/actions";
 import Banner from "../../molecules/Banner/Banner";
 import Categories from "../../molecules/Categories/Categories";
 import SearchBar from "../../molecules/SearchBar/SearchBar";
@@ -21,13 +21,15 @@ export default function Home() {
     setRed(true);
     setTimeout(() => {
       setRed(false);
-    }, 1500); // 1000 milisegundos = 1 segundo
+    }, 1500);
   };
 
-    const handleCategory = (name) => {
-      dispatch(getAllProducts());
-      dispatch(filterCategory(name));
-      setCategory(name);
+    const handleCategory = (id) => {
+      batch(async ()=>{
+        await dispatch(getActiveMenus(commerce.id))
+        dispatch(filterCategory(id));
+      })
+      setCategory(id);
     };
 
   useEffect(() => {
@@ -35,7 +37,6 @@ export default function Home() {
     dispatch(getActiveMenus(commerce.id));
     dispatch(getActiveDishes(commerce.id));
     dispatch(getAllCategorys());
-    dispatch(getAllProducts());
   }, [cant]);
 
   //! Tener en cuenta si el local esta abierto o cerrado
@@ -43,6 +44,8 @@ export default function Home() {
   return (
     <main className={s.home}>
       <Banner setCategory={setCategory}/>
+      {//?Commerce active no indica si esta abierto -!!- modificar}
+}
       {commerce.active ? (
         <>
           <SearchBar />
