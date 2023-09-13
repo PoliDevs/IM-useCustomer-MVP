@@ -56,14 +56,14 @@ export default function Payment() {
         </div> */}
         <OrderInfo />
         <PaymentOptionButton
-          text={"Mercadopago"}
-          option={1}
+          text={t("payment.cash")}
+          option={2}
           setMethod={setMethod}
           handleChange={handleChange}
         />
         <PaymentOptionButton
-          text={t("payment.cash")}
-          option={2}
+          text={"Mercadopago"}
+          option={1}
           setMethod={setMethod}
           handleChange={handleChange}
         />

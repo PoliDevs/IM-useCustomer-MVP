@@ -10,7 +10,7 @@ export default function NavBar() {
   const [langActive, setLangActive] = useState(false);
   const navigate = useNavigate();
 
-  const handleUser = () => {
+  const handleUser= () => {
     setUserActive(!userActive);
     setLangActive(false);
   };
@@ -20,27 +20,27 @@ export default function NavBar() {
     setUserActive(false);
   };
 
+
   return (
     <nav className={s.navBar}>
-      <ArrowBack className={s.icon} onClick={()=>navigate("/login")} />
+      <ArrowBack className={s.icon} onClick={() => navigate("/login")} />
       <div className={s.infoContainer}>
         <Profile
           className={`${s.icon} ${userActive && s.pfActive} ${s.pfIcon}`}
           onClick={handleUser}
           onBlur={() => setUserActive(false)}
-        >
-        <div className={`${userActive && s.visible} ${s.userContainer}`}>
-          <div className={s.userInfo}>
-            <Profile className={s.icon} />
-            <Paragraph text={"user.email"} />
+        />
+          <div className={`${userActive && s.visible} ${s.userContainer}`}>
+            <div className={s.userInfo}>
+              <Profile className={s.icon} />
+              <Paragraph text={"user.email"} />
+            </div>
+            <hr style={{width: "90%"}}/>
+            <div className={s.logOutContainer}>
+              <ArrowBack className={s.icon} />
+              <Paragraph text={"Desconectar"} />
+            </div>
           </div>
-          <hr />
-          <div className={s.logOutContainer}>
-            <ArrowBack className={s.icon} />
-            <Paragraph text={"Desconectar"} />
-          </div>
-        </div>
-        </Profile>
         <div
           className={`${s.lang} ${langActive && s.lgActive}`}
           onClick={handleLang}

@@ -198,6 +198,15 @@ export function filterCategory(name) {
 export function setUser(user) {
   return async function (dispatch) {
     try {
+      //! revisar endpoint con Luis
+      let info= {
+        email: user.email
+      }
+      console.log("info", info);
+      let response = await axios.post(
+        "http://localhost:3001/loginaccount/loginG", info
+      );
+      console.log(response.data);
       return dispatch({
         type: SET_USER,
         payload: user,

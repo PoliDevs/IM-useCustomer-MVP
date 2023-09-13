@@ -90,7 +90,7 @@ export const rootReducer = (state = initalState, action) => {
         };
       }
     }
-    case SET_USER: {
+    case SET_USER: { //!agregar funcionalidad de token
       state = { ...state, user: action.payload };
       localStorage.setItem("user", JSON.stringify(action.payload));
       return state;
