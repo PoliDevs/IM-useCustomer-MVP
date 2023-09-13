@@ -1,0 +1,57 @@
+@import "../../../scss/colors.scss";
+@import "../../../scss/typography.scss";
+
+.reviewContainer{
+  background-color: $color-sixth;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  .reviewHeader {
+   position: relative;
+    background-color: $color-quaternary;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo {
+    border-style: none;
+    height: 192px;
+    width: 192px;
+    margin: 0 auto;
+    // margin-bottom: 36px;
+    // margin-top: 55px;
+  }
+
+  .article {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 0 auto;
+    flex: 1 1 auto;
+    gap: 12px;
+    min-height: 50vh;
+    height: 50vh;
+    padding-top: 16px;
+    .textAreaHeader {
+      display: flex;
+      justify-content: space-between;
+      margin: 0;
+      height: auto;
+      .label {
+        font-size: $line-text;
+        font-weight:bold;
+      }
+
+        .textLimit {
+        display: inline;
+        margin-left: auto;
+        color: $color-nineth
+      }
+    }
+  }
+
+
+}

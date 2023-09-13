@@ -2,12 +2,15 @@
 import { Html5QrcodeScanType, Html5QrcodeScanner, Html5QrcodeSupportedFormats } from "html5-qrcode";
 import { useEffect} from "react";
 import { useNavigate } from "react-router-dom";
-import s from "./QrCodeScanner.module.scss";
+import { useTranslation } from "react-i18next";
 import HugeTitle from "../../atoms/HugeTitle/HugeTitle";
+import s from "./QrCodeScanner.module.scss";
+import SubTitle from "../../atoms/SubTitle/SubTitle";
 
 export default function Qr({scanResult, setScanResult}) {
-  // const [scanResult, setScanResult] = useState();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+    const [t, i18n] = useTranslation(["global"]);
 
   useEffect(() => {
     const scanner = new Html5QrcodeScanner("reader", {
@@ -20,16 +23,16 @@ export default function Qr({scanResult, setScanResult}) {
       rememberLastUsedCamera: false,
       aspectRatio: 1.0,
       supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
-      showTorchButtonIfSupported: true,
       formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
+      showTorchButtonIfSupported: true,
     });
 
     scanner.render(success, error);
     //{ facingMode: "environment" } para preferir camara trasera
     function success(result) {
       scanner.clear(); //desinyecta el scanner del dom
-      // setScanResult(JSON.parse(result));
-      navigate('/welcome')
+      localStorage.setItem("QrCode", result);
+      navigate(result.substring(21));
     }
 
     function error(error) {
@@ -45,7 +48,7 @@ export default function Qr({scanResult, setScanResult}) {
         id="reader"
         className={s.scannerContainer}
       ></div>
-      <HugeTitle text={"Escanea un Qr"}/>
+      <SubTitle text={t("QrScanner.title")}/>
     </div>
   );
 }

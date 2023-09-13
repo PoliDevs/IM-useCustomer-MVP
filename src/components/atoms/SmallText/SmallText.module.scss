@@ -1,0 +1,55 @@
+@import "../../../scss/typography.scss";
+@import "../../../scss//colors.scss";
+
+.small {
+  display: flex;
+  justify-content: center;
+  font-size: $paragraph;
+  color: $text-primary;
+  line-height: $paragraph;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  line-height: $paragraph;
+  max-height: 60px;
+  font-weight: 100;
+  margin-top: 6px;
+}
+
+.secundary {
+  color: $text-secondary
+}
+
+.left {
+  text-align: left;
+  justify-content: left;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollable::-webkit-scrollbar {
+  overflow-y: scroll;
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollable {
+  overflow-y: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.align {
+  align-items: center;
+}
+
+.smaller {
+  font-size: $caption;
+  line-height: $caption;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.noMargin {
+  margin: 0;
+}

@@ -3,41 +3,57 @@
 .home {
   color: $text-primary;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
+  background-color: $background-secundary;
   
   .top {
     margin: 0 auto;
-    padding-top: 80px;
+    padding-top: 40px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     width: 90%;
-  }
-  .spacing {
-    margin-bottom: 30px;
-  }
+    min-height: calc(100vh - 65px);
 
-  .logo {
-    border-radius: 25px;
-    background-color: $color-eighth;
-    width: 180px;
-    height: 180px;
-    margin: 5px;
-  }
+    .mainContent {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
 
-  .span {
-    letter-spacing: 0.4rem;
-    margin-left: 10px;
-    // color: #2b2b2b;
-  }
+    .spacing {
+      .logo {
+        border-radius: 25px;
+        background-color: $color-eighth;
+        width: 280px;
+        height: 280px;
+        margin: 5px;
+      }
+    }
+  
+  
+    .span {
+      letter-spacing: 0.4rem;
+      margin-left: 10px;
+      // color: #2b2b2b;
+    }
+  
+    .imenuLogo {
+     width: 82px;
+    height: 40px;
+      margin: 0 5px;
+    }
 
-  .imenuLogo {
-    width: 50px;
-    // height: 30px;
-    margin: 0 5px;
+    .bottomContent {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
   }
 
   @media screen and (min-width: 430px) {
@@ -71,4 +87,6 @@
       margin-bottom: 5px;
     }
   }
+
+  
 }

@@ -1,0 +1,32 @@
+@import "../../../scss/colors.scss";
+@import "../../../scss/typography.scss";
+
+.loginButton {
+  font-size: $title;
+  font-weight: 400;
+  text-decoration: none;
+  text-align: center;
+  line-height: 1rem;
+  width: 100%;
+  margin: 4px 0 5px 0;
+  border-radius: $border-primary-radius;
+  background-color: $color-secundary;
+  color: $text-secondary;
+  // border: $border;
+  // border: $text-desable;
+  // background-color: $background-buttom-primary-desable;
+  height: 41px;
+  box-shadow: 1px 4px 10px -4px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 1px 4px 10px -4px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 4px 10px -4px rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+//   .active {
+//     background-color: $background-buttom-primary-active;
+//    color: $text-secondary;
+//     border: $border;
+// }

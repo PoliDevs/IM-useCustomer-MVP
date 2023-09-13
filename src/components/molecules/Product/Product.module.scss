@@ -31,17 +31,4 @@
     justify-content: space-around;
     height: 100%;
   }
-
-  .plus {
-    position: absolute;
-    background-image: url("../../../assets/plus.svg");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 25px;
-    width: 25px;
-    right: 4px;
-    bottom: 4px;
-    z-index: 10;
-  }
 }

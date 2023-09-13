@@ -1,0 +1,96 @@
+@import "../../../scss/colors.scss";
+@import "../../../scss/typography.scss";
+
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 100%;
+  height: 60px;
+  background-color: $background-desable;
+  padding: 0 21px;
+
+  .icon {
+    height: 24px;
+    width: 24px;
+  }
+
+  .infoContainer {
+    position: relative;
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .pfActive,
+    .lgActive {
+      background-color: $color-primary;
+    }
+
+    .lgActive {
+      border: 1px solid black;
+    }
+
+    .pfIcon {
+      border-radius: 50%;
+    }
+
+    .pfIcon,
+    .lang {
+      position: relative;
+      margin: 5px;
+    }
+
+    .userContainer,
+    .langsContainer {
+      visibility: hidden;
+    }
+
+    .userContainer {
+      position: absolute;
+      top: 60px;
+      right: 0;
+      width: 200px;
+      background-color: $background-secundary;
+      box-shadow: 1px 4px 10px -4px rgba(0, 0, 0, 0.75);
+      -webkit-box-shadow: 1px 4px 10px -4px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 1px 4px 10px -4px rgba(0, 0, 0, 0.75);
+      z-index: 999;
+    }
+
+    .userInfo {
+      height: auto;
+      display: flex;
+      justify-content: center;
+      gap: 2px;
+      padding: 10px;
+    }
+
+    .logOutContainer {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px;
+    }
+
+    .lang {
+      position: relative;
+      width: 38px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: $border-primary-radius;
+    }
+
+    .langsContainer {
+      position: absolute;
+      bottom: -65px;
+      width: 96px;
+      right: 0px;
+      border: 1px solid black;
+    }
+    .visible {
+      visibility: visible;
+    }
+  }
+}

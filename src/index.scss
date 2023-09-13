@@ -1,4 +1,5 @@
-@import './scss/colors.scss';
+@import "./scss/colors.scss";
+@import url("https://db.onlinewebfonts.com/c/e4397c6cf12af9f58d46e124d18d6d93?family=MabryPro-Regular");
 
 * {
   margin: 0;
@@ -8,30 +9,42 @@
 
 body {
   min-width: 0;
+  min-height: 100vh;
+  max-height: 100vh;
   margin: 0;
   padding: 0;
   color: $text-primary;
   background-color: $background-primary;
-  font-family: 'Mabry Pro', sans-serif;
+  font-family: "MabryPro-Regular", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: $color-nineth;
   opacity: 1; /* Firefox */
 }
 
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
   color: $color-nineth;
 }
 
-::-ms-input-placeholder { /* Microsoft Edge */
+::-ms-input-placeholder {
+  /* Microsoft Edge */
   color: $color-nineth;
 }
- 
+
 h1,
 h2,
 h3,
 h4,
 h5 {
   margin: 0;
+}
+
+button {
+   font-family: "Mabry Pro", sans-serif;
 }

@@ -2,15 +2,15 @@
 @import "../../../scss/typography.scss";
 
 .button {
-   font-size: $paragraph;
+   font-size: $title;
     text-decoration: none;
     text-align: center;
     line-height: 1rem;
     width: 100%;
     margin: 4px 0 5px 0;
     border: $border;
-    border-radius: 10px;
-    height: 40px;
+    border-radius: $border-primary-radius;
+    height: 61px;
     cursor: pointer;
     &:hover {
       transform: scale(1.02);
@@ -49,4 +49,9 @@
 
 .centered {
   margin: 0 auto
+}
+
+.darker {
+  background-color: $background-tertiary;
+  border: none
 }

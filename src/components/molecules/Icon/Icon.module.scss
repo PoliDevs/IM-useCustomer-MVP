@@ -21,3 +21,8 @@
   font-size: $caption;
 }
 }
+
+.selected {
+  background-color: $background-tertiary;
+  color: $text-secondary
+}

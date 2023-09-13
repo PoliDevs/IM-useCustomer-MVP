@@ -3,14 +3,15 @@
 
 .paragraph {
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-size: $caption;
+  font-size: $line-text;
   margin: 4px 0;
-  color: $text-desable;
   text-align: center;
-  overflow-wrap: anywhere ;
-  line-height: $caption;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  line-height: $line-text;
+  max-height: 60px;
+  z-index: 4;
   @media screen and (min-width: 430px) {
     font-size: $paragraph;
   }
@@ -34,4 +35,26 @@
 .left {
   text-align: left;
   justify-content: left;
+}
+
+.right {
+  text-align: right;
+  justify-content: right;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollable::-webkit-scrollbar {
+  overflow-y: scroll;
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollable {
+  overflow-y: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.align {
+  align-items: center;
 }

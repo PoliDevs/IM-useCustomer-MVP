@@ -1,20 +1,88 @@
 {
-     "home": {
+  "QrScanner": {
+    "title": "Escanea un código Qr"
+  },
+"loader": {
+  "title": "Espera mientras preparamos el menu"
+},
+"language": {
+  "button": "Comenzar"
+},
+"login": {
+    "firstStep": "Da el primer paso",
+    "access": "accede utilizando tu correo de Google",
+    "googleButton": "Accede con Google",
+    "noGoogleButton": "Acceder sin registro",
+      "slogan": "La velocidad es",
+  "sloganBig": "nuestro plato fuerte"
+},
+  "welcome": {
     "title": "¡Bienvenido!",
-    "subtitle": "Estás por pedir en: ",
+    "subtitle": "Estas por pedir en: ",
     "table": "Mesa ",
     "poweredby": "impulsado por",
     "order": "Hacer pedido",
+    "viewproducts": "Ver productos",
     "instructions": "Instrucciones"
   },
   "instructions": {
     "title": "Instrucciones",
-    "subtitle": "¡Como hacer tu pedido en i menu!",
-    "instruction_1": "Seleccioná productos del menú, toca el + para agregar el producto",
-    "instruction_2": "Una vez seleccionados tus productos, presioná en 'ver producto' para confirmar tu pedido",
-    "instruction_3": "Realizá el pago de tu pedido a través de Mercadopago",
+    "subtitle": "¿Como hacer tu pedido en i menu?",
+    "instruction_1": "Selecciona productos del menú, presiona la tarjeta del producto",
+    "instruction_2": "Una vez seleccionados tus productos, presiona en 'ver producto' para confirmar tu pedido",
+    "instruction_3": "Realiza el pago de tu pedido en efectivo o a través de Mercadopago",
     "instruction_4": "¡Tu pedido estará en camino!",
     "poweredby": "impulsado por ",
     "order": "Hacer pedido"
+  },
+  "loginModal": {
+    "title": "Ingresa con google, para una mejor experiencia!",
+    "googleButton": "Accede con Google",
+    "omitButton": "Omitir"
+  },
+  "banner": {
+    "table": "Mesa "
+  },
+  "searchbar": {
+    "placeholder": "¿Que quieres pedir?"
+  },
+  "categories": {
+    "title": "Categorias"
+  },
+  "productModal": {
+    "commentLabel" : "Comentarios",
+    "commentPlaceholder": "Agrega comentarios y observaciones",
+    "addButton": "Agregar"
+  },
+  "footer": {
+    "yourOrder": "Tu pedido",
+    "products": "Productos",
+    "total": "Total",
+    "payButton": "Pagar",
+    "viewproducts": "Ver productos"
+  },
+  "payment": {
+    "title": "Pagar",
+    "managePayment": "Gestione su pago desde aqui",
+    "cash": "Efectivo",
+    "poweredby": "impulsado por",
+    "continue": "Continuar"
+  },
+  "orderInfo": {
+    "table": "Mesa",
+    "paymentTotal": "Total a pagar:"
+  },
+  "mercadoPago": {
+    "payButton": "Pagar"
+  },
+  "rating": {
+    "preparingOrder": "está preparando tu pedido",
+    "reviewQuestion": "¿Como te fue con la app?",
+    "thanks": "¡Gracias!",
+    "yourOpinion": "Tu opinion nos ayuda a crecer",
+    "reviewLabel": "Danos tu opinión",
+    "reviewPlaceholder": "¿Te gusta nuestra forma de hacer las cosas?",
+    "send": "Enviar",
+    "backButton": "Volver a pedir"
   }
 }

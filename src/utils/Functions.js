@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addProduct, removeProduct } from "../redux/actions";
+import { categoryIcons } from "./Constants";
 export default function useModal(initialValue = false) {
   const [isOpen, setIsOpen] = useState(initialValue);
   const [productData, setProductData] = useState({
@@ -10,15 +11,24 @@ export default function useModal(initialValue = false) {
     description: '',
   })
 
+
+  //!descomentar para mostrar info del producto real
   const openModal = (name, price, image, description)=> {
+    //  const openModal = (name, cost, photo, description)=> {
     setIsOpen(true);
+    // setProductData({
+    //   name: name,
+    //   cost: cost,
+    //   photo: photo,
+    //   description: description,
+    // });
     setProductData({
       name: name,
       price: price,
       image: image,
-      description: description
-    })
-    };
+      description: description,
+    });
+  };
 
   const closeModal = ()=> setIsOpen(false);
 
@@ -48,5 +58,33 @@ export function useAmountControls() {
   return {addToCart, removeFromCart}
 }
 
+export function useRating() {
+  const [stars, setStars] = useState(0);
+  const starsArray = [...Array(5)]
+
+  const handleStars = (currentRate) => {
+    setStars(currentRate);
+  };
+
+  return { starsArray, stars, handleStars };
+}
+
+export function useLogin() {
+  const [loginModal, setLoginModal] = useState(false);
+
+  const openLoginModal = ()=>{
+    setLoginModal(true);
+  }
+
+  const closeLoginModal = ()=>{
+    setLoginModal(false);
+  }
+  return { loginModal, openLoginModal, closeLoginModal}
+}
+
+export const randomIcon = ()=>{
+  let icon = categoryIcons[Math.floor(Math.random()*categoryIcons.length)];
+  return icon
+}
 
 

@@ -10,7 +10,7 @@ import { I18nextProvider } from 'react-i18next';
 import i18next from 'i18next';
 import global_es from './translations/es/global.json';
 import global_en from './translations/en/global.json';
-import global_pt from './translations/pt/global.json';
+import global_pt from './translations/port/global.json';
 import global_pt_bra from './translations/pt-br/global.json';
 
 i18next.init({
@@ -23,7 +23,7 @@ i18next.init({
     en:{
       global:global_en
     },
-    pt:{
+    port:{
       global:global_pt
     },
     pt_bra:{

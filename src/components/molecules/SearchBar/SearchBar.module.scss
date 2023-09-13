@@ -4,13 +4,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 3px;
   width: 90%;
   height: auto;
   background-color: $background-secundary;
   margin: 0 auto;
   margin-top: 15px;
   border-radius: 50px;
+  border: 2px solid transparent;
 
 
   .searchIcon, .xIcon {

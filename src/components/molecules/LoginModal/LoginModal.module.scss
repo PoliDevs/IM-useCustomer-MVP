@@ -1,0 +1,67 @@
+@import "../../../scss/colors.scss";
+@import "../../../scss/typography.scss";
+
+.loginContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: rgb(0, 0, 0, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+
+  .login {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: $color-seventh;
+    justify-content: space-around;
+    width: 92%;
+    height: 300px;
+    z-index: 999;
+    padding: 20px;
+    border: $border;
+    border-radius: $border-primary-radius;
+
+    .xIcon {
+      height: 24px;
+      width: 24px;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+    }
+
+    .data {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      height: auto;
+      margin-top: 10px;
+      
+      .input {
+      width: 95%;
+      padding: 8px;
+      background-color: $color-eighth;
+      border: none;
+      height: 40px;
+      font-size: $line-text;
+      box-sizing: border-box;
+      margin: 10px auto;
+      border-radius: 4px;
+      outline: 0;
+      outline-color: transparent;
+      outline-style: none;
+      box-shadow: 1px 4px 10px -4px rgba(0, 0, 0, 0.75);
+      -webkit-box-shadow: 1px 4px 10px -4px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 1px 4px 10px -4px rgba(0, 0, 0, 0.75);
+    }
+  }
+  }
+}
+
+.open {
+  display: flex;
+}
