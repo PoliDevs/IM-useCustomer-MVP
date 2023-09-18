@@ -1,3 +1,5 @@
+import { dataDecrypt } from "../../utils/Functions";
+import CryptoJS from "crypto-js";
 import {
   ADD_PRODUCT,
   REMOVE_PRODUCT,
@@ -9,31 +11,43 @@ import {
   GET_ALL_CATEGORIES,
   GET_SEARCHED_PRODUCT,
   SET_TABLE,
+  FILTER_BY_CATEGORY,
+  REMOVE_USER,
 } from "../actions/actionTypes";
+import dotenv from "dotenv";
+
+
+const getCryptoCommerce = ()=> {
+  const clave = import.meta.env.VITE_REACT_APP_KEY;
+  const objetoCifradoRecuperado = localStorage.getItem("objetoCifradoKey");
+  const bytes = CryptoJS.AES.decrypt(
+    objetoCifradoRecuperado,
+    clave
+  );
+  const objetoOriginal = JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
+  return objetoOriginal
+}
 
 const initalState = {
-  table: localStorage.getItem("table") ? localStorage.getItem("table") : 0,
+  table: localStorage.getItem("Pos")
+    ? dataDecrypt(localStorage.getItem("Pos")).table
+    : 0,
   allProducts: [],
   allDishes: [],
   allCategories: [],
+  filtroPor: "",
   cart: localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart"))
     : [],
   user: localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : {},
-  commerce: localStorage.getItem("commerce")
-    ? JSON.parse(localStorage.getItem("commerce"))
-    : {},
+  commerce: localStorage.getItem("objetoCifradoKey") ? getCryptoCommerce() : {},
+  // commerce: {},
 };
 
 export const rootReducer = (state = initalState, action) => {
   switch (action.type) {
-    case SET_TABLE: {
-      state = { ...state, table: action.payload };
-      localStorage.setItem("table", action.payload);
-      return state;
-    }
     case GET_SEARCHED_PRODUCT: {
       const copy = [...state.allProducts];
       const results = state.allProducts.filter((p) =>
@@ -87,30 +101,38 @@ export const rootReducer = (state = initalState, action) => {
         };
       }
     }
-    case SET_USER: { //!agregar funcionalidad de token
+    case SET_USER: {
       state = { ...state, user: action.payload };
       localStorage.setItem("user", JSON.stringify(action.payload));
       return state;
     }
     case GET_COMMERCE:
-      state = {
-        ...state,
-        commerce: {
-          id: action.payload.id,
-          name: action.payload.name,
-          active: action.payload.active,
-          plan: action.payload.commercialPlan.plan,
-          schedule: action.payload.workSchedule,
-        },
-      };
-      localStorage.setItem("commerce", JSON.stringify(state.commerce));
-      return state;
+      {
+        const CM = {
+            id: action.payload.id,
+            name: action.payload.name,
+            active: action.payload.active,
+            plan: action.payload.commercialPlan.plan,
+            schedule: action.payload.workSchedule,
+          };
+          const clave = import.meta.env.VITE_REACT_APP_KEY;
+          const objetoCifrado = CryptoJS.AES.encrypt(
+            JSON.stringify(CM),
+            clave
+          ).toString();
+
+        localStorage.setItem("objetoCifradoKey", objetoCifrado);
+        return {...state, commerce : CM};
+      }
     case GET_ACTIVE_MENUS:
-    {
-    const allActive = action.payload.menus.filter((m)=> m.commerce.id === action.payload.id);
-    state= {...state, allProducts: allActive}
-    }
-    return state
+      {
+        //!comentado hasta que este listo el nuevo endpoint, desp borrar
+        // const allActive = action.payload.menus.filter((m)=> m.commerce.id === action.payload.id);
+        // state= {...state, allProducts: allActive}
+        //? nuevo endpoint, falta que Luis lo acomode(get->post)
+        state = { ...state, allProducts: action.payload.menus };
+      }
+      return state;
     case GET_ACTIVE_DISHES:
       {
         const allActive = action.payload.dishes.filter(
@@ -125,10 +147,17 @@ export const rootReducer = (state = initalState, action) => {
     case FILTER_CATEGORY: {
       const products = [...state.allProducts];
       const filteredResults = products.filter(
-        (p) => p.category.id === action.payload 
+        (p) => p.category.id === action.payload
       );
       return { ...state, allProducts: filteredResults };
     }
+    case FILTER_BY_CATEGORY:
+      return { ...state, filtroPor: action.payload };
+    case REMOVE_USER: {
+      localStorage.removeItem("user");
+      state = {...state, user: ""}
+    }
+    return state;
     default:
       return state;
   }

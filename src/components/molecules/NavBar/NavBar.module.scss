@@ -56,21 +56,29 @@
       -webkit-box-shadow: 1px 4px 10px -4px rgba(0, 0, 0, 0.75);
       -moz-box-shadow: 1px 4px 10px -4px rgba(0, 0, 0, 0.75);
       z-index: 999;
+      .userInfo {
+        height: auto;
+        display: flex;
+        justify-content: center;
+        gap: 2px;
+        padding: 10px;
+      }
+  
+      .logOutContainer {
+        display: flex;
+        justify-content: space-around;
+        padding: 10px;
+
+        
+        .iconDisabled {
+          color: $color-nineth
+        }
+      }
+      .disabled {
+        color: $color-nineth;
+      }
     }
 
-    .userInfo {
-      height: auto;
-      display: flex;
-      justify-content: center;
-      gap: 2px;
-      padding: 10px;
-    }
-
-    .logOutContainer {
-      display: flex;
-      justify-content: space-around;
-      padding: 10px;
-    }
 
     .lang {
       position: relative;
@@ -84,10 +92,21 @@
 
     .langsContainer {
       position: absolute;
-      bottom: -65px;
+      bottom: -80px;
       width: 96px;
       right: 0px;
-      border: 1px solid black;
+      background-color: $background-secundary;
+      box-shadow: 1px 4px 10px -4px rgba(0, 0, 0, 0.75);
+      -webkit-box-shadow: 1px 4px 10px -4px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 1px 4px 10px -4px rgba(0, 0, 0, 0.75);
+
+      .langOption {
+        padding: 5px
+      }
+
+      .highlight {
+        background-color: $color-primary;
+      }
     }
     .visible {
       visibility: visible;

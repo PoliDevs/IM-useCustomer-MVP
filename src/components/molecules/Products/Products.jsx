@@ -6,10 +6,20 @@ import Modal from "../Modal/Modal";
 import s from "./Products.module.scss";
 
 export default function Products({ changeStyle, commercePlan }) {
-  const allproducts = useSelector((state) => state.allProducts);
-  const { isOpen, openModal, closeModal, productData } = useModal(false);
+  // const allproducts = useSelector((state) => state.allProducts);
+  //*Probando filtro local
+  const allproducts = useSelector((state) => {
+    const { allProducts, filtroPor } = state;
 
-  
+    if (!filtroPor) {
+      return allProducts; // Sin filtro, devuelve todos los datos
+    }
+
+    // Aplica el filtro
+    return allProducts.filter((item) => item.category.id === filtroPor)
+  });
+  //*Probando filtro local
+  const { isOpen, openModal, closeModal, productData } = useModal(false);
 
   //! Reemplazar los productos precargados por los productos del comercio
   return (
