@@ -15,11 +15,66 @@
     width: 100%;
     height: auto;
     margin-top: 250px;
-
   }
   .buttonWrapper {
     width: 90%;
     margin-top: auto;
     margin-bottom: 50px;
+    display: flex;
+    justify-content: space-between;
+    .checker {
+      display: flex;
+      width: 50%;
+      gap: 10px;
+      align-items: flex-start;
+
+      .checkbox {
+        width: 20px;
+        height: 20px;
+        background-color: $color-eighth;
+        border-radius: $border-secondary-radius;
+      }
+
+      .checked {
+        background-color: $color-quaternary;
+        background-image: url("../../../assets/Checked.svg");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: white;
+      }
+
+      .checkerText {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        justify-content: space-between;
+
+        .viewConditions {
+          text-decoration: underline;
+          color: $text-primary;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .arrowButton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      list-style: none;
+      width: 30%;
+      height: 64px;
+      background-color: $background-buttom-primary-active;
+      border: none;
+      border-radius: $border-primary-radius;
+      cursor: pointer;
+    }
+
+    .buttonDisabled {
+      background-color: $background-buttom-primary-desable;
+    }
   }
 }

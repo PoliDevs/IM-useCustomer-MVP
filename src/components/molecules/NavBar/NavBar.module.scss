@@ -48,9 +48,9 @@
 
     .userContainer {
       position: absolute;
-      top: 60px;
-      right: 0;
-      width: 200px;
+      top: 41px;
+      right: 72px;
+      width: 190px;
       background-color: $background-secundary;
       box-shadow: 1px 4px 10px -4px rgba(0, 0, 0, 0.75);
       -webkit-box-shadow: 1px 4px 10px -4px rgba(0, 0, 0, 0.75);
@@ -63,22 +63,20 @@
         gap: 2px;
         padding: 10px;
       }
-  
+
       .logOutContainer {
         display: flex;
         justify-content: space-around;
         padding: 10px;
 
-        
         .iconDisabled {
-          color: $color-nineth
+          color: $color-nineth;
         }
       }
       .disabled {
         color: $color-nineth;
       }
     }
-
 
     .lang {
       position: relative;
@@ -101,7 +99,7 @@
       -moz-box-shadow: 1px 4px 10px -4px rgba(0, 0, 0, 0.75);
 
       .langOption {
-        padding: 5px
+        padding: 5px;
       }
 
       .highlight {

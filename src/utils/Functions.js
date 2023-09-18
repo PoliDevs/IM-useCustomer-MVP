@@ -70,7 +70,7 @@ export function useRating() {
   return { starsArray, stars, handleStars };
 }
 
-export function useLogin() {
+export function useTermsAndConditions () {
   const [loginModal, setLoginModal] = useState(false);
 
   const openLoginModal = ()=>{
