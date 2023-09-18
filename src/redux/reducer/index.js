@@ -12,6 +12,7 @@ import {
   GET_SEARCHED_PRODUCT,
   SET_TABLE,
   FILTER_BY_CATEGORY,
+  REMOVE_USER,
 } from "../actions/actionTypes";
 import dotenv from "dotenv";
 
@@ -152,6 +153,11 @@ export const rootReducer = (state = initalState, action) => {
     }
     case FILTER_BY_CATEGORY:
       return { ...state, filtroPor: action.payload };
+    case REMOVE_USER: {
+      localStorage.removeItem("user");
+      state = {...state, user: ""}
+    }
+    return state;
     default:
       return state;
   }

@@ -10,6 +10,7 @@ import {
   GET_ALL_CATEGORIES,
   GET_SEARCHED_PRODUCT,
   SET_TABLE,
+  REMOVE_USER,
 } from "./actionTypes";
 import { ProductsInfo } from "../../utils/Constants";
 
@@ -241,4 +242,16 @@ export function setUser(user) {
       console.error(error);
     }
   };
+}
+
+export function removeUser () {
+  return async function (dispatch) {
+    try {
+      return dispatch ({
+        type: REMOVE_USER,
+      })
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }

@@ -17,3 +17,7 @@ export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 ////////////////////* SearchBar Action type *////////////////////
 
 export const GET_SEARCHED_PRODUCT = "GET_SEARCHED_PRODUCT";
+
+////////////////////* User Action type *////////////////////
+
+export const REMOVE_USER = "REMOVE_USER";

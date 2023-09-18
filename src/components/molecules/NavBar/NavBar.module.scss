@@ -56,21 +56,29 @@
       -webkit-box-shadow: 1px 4px 10px -4px rgba(0, 0, 0, 0.75);
       -moz-box-shadow: 1px 4px 10px -4px rgba(0, 0, 0, 0.75);
       z-index: 999;
+      .userInfo {
+        height: auto;
+        display: flex;
+        justify-content: center;
+        gap: 2px;
+        padding: 10px;
+      }
+  
+      .logOutContainer {
+        display: flex;
+        justify-content: space-around;
+        padding: 10px;
+
+        
+        .iconDisabled {
+          color: $color-nineth
+        }
+      }
+      .disabled {
+        color: $color-nineth;
+      }
     }
 
-    .userInfo {
-      height: auto;
-      display: flex;
-      justify-content: center;
-      gap: 2px;
-      padding: 10px;
-    }
-
-    .logOutContainer {
-      display: flex;
-      justify-content: space-around;
-      padding: 10px;
-    }
 
     .lang {
       position: relative;
