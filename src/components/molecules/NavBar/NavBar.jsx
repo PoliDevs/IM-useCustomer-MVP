@@ -4,11 +4,15 @@ import { ReactComponent as Profile } from "../../../assets/Profile.svg";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import s from "./NavBar.module.scss";
 import { useNavigate } from "react-router-dom";
+import i18next from "i18next";
+import { useTranslation } from "react-i18next";
 
 export default function NavBar() {
   const [userActive, setUserActive] = useState(false);
   const [langActive, setLangActive] = useState(false);
+  const [t, i18n] = useTranslation("global");
   const navigate = useNavigate();
+  const current = i18next.language;
 
   const handleUser= () => {
     setUserActive(!userActive);
@@ -46,15 +50,15 @@ export default function NavBar() {
           onClick={handleLang}
           onBlur={() => setLangActive(false)}
         >
-          <Paragraph text={"Es"} />
+          <Paragraph text={current} />
           <div className={`${langActive && s.visible} ${s.langsContainer}`}>
-            <div className={s.langOption}>
+            <div className={`${s.langOption} ${(current === "Es") && s.highlight}`} onClick={()=>i18n.changeLanguage("Es")}>
               <Paragraph text={"Español"} />
             </div>
-            <div className={s.langOption}>
+            <div className={`${s.langOption} ${(current === "En") && s.highlight}`} onClick={()=>i18n.changeLanguage("En")}>
               <Paragraph text={"English"} />
             </div>
-            <div className={s.langOption}>
+            <div className={`${s.langOption} ${(current === "Por") && s.highlight}`} onClick={()=>i18n.changeLanguage("Por")}>
               <Paragraph text={"Português"} />
             </div>
           </div>

@@ -1,24 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { getCommerce, setTable } from "../../../redux/actions";
+import { getCommerce} from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { dataDecrypt } from "../../../utils/Functions";
 import LinkButton from "../../atoms/LinkButton/LinkButton";
 import LanguageOption from "../../molecules/LanguageOption/LanguageOption";
-import s from "./Language.module.scss";
 import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
+import CryptoJS from "crypto-js";
+import s from "./Language.module.scss";
 
 export default function Language() {
   const commerce = useSelector((state) => state.commerce);
-
   const [t, i18n] = useTranslation(["global"]);
   const dispatch = useDispatch();
-  const { commerceId, ...params } = useParams();
+  const  data  = useParams().data;
 
   useEffect(() => {
-    dispatch(setTable(params.tableId));
-    dispatch(getCommerce(commerceId));
-    console.log(i18n.language);
+    const decripted = dataDecrypt(data);
+    dispatch(getCommerce(decripted.commerce));
   }, []);
 
   return (
@@ -38,7 +38,7 @@ export default function Language() {
             />
             <LanguageOption
               text={"¡Bem vindo!"}
-              lang={"port"}
+              lang={"por"}
               id={3}
             />
           </div>

@@ -1,6 +1,7 @@
-
+import { dataDecrypt } from "../../../utils/Functions";
+import { getCommerce } from "../../../redux/actions";
 import { ReactComponent as IMenu } from "../../../assets/ImenuHorizontal.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { ReactComponent as CashIcon } from "../../../assets/CashIcon.svg";
 import { paymentUrl } from "../../../utils/Constants";
@@ -23,6 +24,12 @@ export default function Payment() {
   const handleChange = (option)=> {
     setMethod(option)
   }
+
+  // useEffect(() => {
+  //   const id = dataDecrypt(localStorage.getItem("Pos")).commerce;
+  //   dispatch(getCommerce(id))
+  // }, [])
+  
 
   const handleCash = ()=> {
     // if (method === 2) dispatch(postOrder());

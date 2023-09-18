@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useTranslation } from "react-i18next";
 import { ReactComponent as Logo } from "../../../assets/Burgers.svg";
 import { ReactComponent as ImenuLogo } from "../../../assets/ImenuHorizontal.svg";
-import { useSelector } from "react-redux";
+import CryptoJS from "crypto-js";
+import { useDispatch, useSelector } from "react-redux";
 import HugeTitle from "../../atoms/HugeTitle/HugeTitle";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import LinkButton from "../../atoms/LinkButton/LinkButton";
@@ -10,12 +12,15 @@ import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import NavBar from "../../molecules/NavBar/NavBar";
 import s from "./WelcomePage.module.scss";
+import { dataDecrypt } from "../../../utils/Functions";
+import { getCommerce } from "../../../redux/actions";
+import { useEffect } from "react";
 export default function WelcomePage() {
   const commerce = useSelector((state) => state.commerce);
   const table = useSelector((state) => state.table);
-
+  const dispatch = useDispatch();
   const [t, i18n] = useTranslation(["global"]);
-
+  
   return (
     <div className={s.home}>
       <NavBar />

@@ -105,6 +105,7 @@ export async function postOrder(order){
 export function setTable(table) {
   return async function (dispatch) {
     try {
+      //llamado a api para consultar datos de Pos
       return dispatch({
         type: SET_TABLE,
         payload: table
@@ -130,7 +131,6 @@ export function getCommerce(id) {
     }
   };
 }
-
 export function getActiveMenus(id) {
   return async function (dispatch) {
     try {
@@ -147,6 +147,28 @@ export function getActiveMenus(id) {
   };
 }
 
+//!comentado hasta que arreguen este nuevo endpoint
+// export function getActiveMenus(id) {
+//   return async function (dispatch) {
+//     try {
+//       let date = new Date().toJSON().slice(0, 10);
+//       const info = {
+//         commerceId: id,
+//         date: date,
+//       };
+//       let allActiveMenus = await axios.get(
+//         "http://localhost:3001/menu/menuCommerceActive",
+//         info
+//       );
+//       return dispatch({
+//         type: GET_ACTIVE_MENUS,
+//         payload: { menus: allActiveMenus.data},
+//       });
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+// }
 export function getActiveDishes(id) {
   return async function (dispatch) {
     try {
@@ -192,6 +214,12 @@ export function filterCategory(id) {
   };
 }
 
+export const setFiltro = (filtroPor) => {
+  return {
+    type: "FILTER_BY_CATEGORY",
+    payload: filtroPor,
+  };};
+
 
 ////////////////////* User Actions Creators *////////////////////
 export function setUser(user) {
@@ -201,7 +229,6 @@ export function setUser(user) {
       let info= {
         email: user.email
       }
-      console.log("info", info);
       let response = await axios.post(
         "http://localhost:3001/loginaccount/loginG", info
       );

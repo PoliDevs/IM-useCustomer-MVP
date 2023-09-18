@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addProduct, removeProduct } from "../redux/actions";
 import { categoryIcons } from "./Constants";
+import CryptoJS from "crypto-js";
 export default function useModal(initialValue = false) {
   const [isOpen, setIsOpen] = useState(initialValue);
   const [productData, setProductData] = useState({
@@ -88,3 +89,20 @@ export const randomIcon = ()=>{
 }
 
 
+const urlInfo = "2/4";
+const urlInfo2 = "1/5";
+const password = "PureBlood";
+
+//* linea para cifrar id de comercio y mesa
+const ciphredUrl = CryptoJS.AES.encrypt(urlInfo2, password).toString();
+//* linea para cifrar id de comercio y mesa
+export const dataDecrypt = (data)=>{
+
+const result = CryptoJS.AES.decrypt(data, password);
+const originalText = result.toString(CryptoJS.enc.Utf8).split("/");
+const urlInfo = {
+  commerce: originalText[0],
+  table: originalText[1],
+};
+return urlInfo;
+}
