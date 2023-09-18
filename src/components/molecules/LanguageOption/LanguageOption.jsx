@@ -3,7 +3,7 @@ import LoginCheckBox from "../../atoms/LoginCheckBox/LoginCheckBox";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import s from "./LanguageOption.module.scss";
 
-export default function LanguageOption({ text, lang, id }) {
+export default function LanguageOption({ text, lang, id, accepted }) {
   const [checked, setChecked] = useState(false);
 
   return (
@@ -17,6 +17,7 @@ export default function LanguageOption({ text, lang, id }) {
         checked={checked}
         setChecked={setChecked}
         lang={lang}
+        accepted={accepted}
       />
     </div>
   );
