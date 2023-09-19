@@ -3,7 +3,6 @@
 import { useTranslation } from "react-i18next";
 import { ReactComponent as Logo } from "../../../assets/Burgers.svg";
 import { ReactComponent as ImenuLogo } from "../../../assets/ImenuHorizontal.svg";
-import CryptoJS from "crypto-js";
 import { useDispatch, useSelector } from "react-redux";
 import HugeTitle from "../../atoms/HugeTitle/HugeTitle";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
@@ -12,13 +11,10 @@ import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import NavBar from "../../molecules/NavBar/NavBar";
 import s from "./WelcomePage.module.scss";
-import { dataDecrypt } from "../../../utils/Functions";
-import { getCommerce } from "../../../redux/actions";
-import { useEffect } from "react";
 export default function WelcomePage() {
   const commerce = useSelector((state) => state.commerce);
+  const sector = useSelector((state)=> state.sector);
   const table = useSelector((state) => state.table);
-  const dispatch = useDispatch();
   const [t, i18n] = useTranslation(["global"]);
   
   return (
@@ -32,7 +28,7 @@ export default function WelcomePage() {
           <HugeTitle text={commerce.name} />
           <div className={s.spacing}>
             <Logo className={s.logo} />
-            <SubTitle text={`${t("welcome.table")} ${table}`} />
+            <SubTitle text={`Sector ${sector} - ${t("welcome.table")} ${table}`} />
           </div>
           </div>
           <div className={s.bottomContent}>

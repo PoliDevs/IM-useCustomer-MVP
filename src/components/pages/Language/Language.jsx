@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getCommerce, setTable} from "../../../redux/actions";
+import { getCommerce, setSector, setTable} from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { dataDecrypt } from "../../../utils/Functions";
@@ -14,14 +14,17 @@ import s from "./Language.module.scss";
 export default function Language() {
   const commerce = useSelector((state) => state.commerce);
   const [accepted, setAccepted] = useState(false);
+  const [checked, setChecked] = useState("");
   const [modal, setModal] = useState(false);
   const [t, i18n] = useTranslation(["global"]);
   const dispatch = useDispatch();
-  const  data  = useParams().data;
+  const  params  = useParams();
 
   useEffect(() => {
-    const decripted = dataDecrypt(data);
+    localStorage.setItem("Pos", params['*']);
+    const decripted = dataDecrypt(params["*"]);
     dispatch(getCommerce(decripted.commerce));
+    dispatch(setSector(decripted.sector));
     dispatch(setTable(decripted.table))
   }, []);
 
@@ -30,9 +33,9 @@ export default function Language() {
       {Object.keys(commerce).length ? (
         <>
           <div className={s.optionsMainContainer}>
-            <LanguageOption text={"¡Bienvenido!"} lang={"Es"} id={1} accepted={accepted}/>
-            <LanguageOption text={"¡Welcome!"} lang={"En"} id={2} accepted={accepted}/>
-            <LanguageOption text={"¡Bem vindo!"} lang={"Por"} id={3} accepted={accepted}/>
+            <LanguageOption text={"¡Bienvenido!"} lang={"Es"} id={1} accepted={accepted} checked={checked} setChecked={setChecked}/>
+            <LanguageOption text={"¡Welcome!"} lang={"En"} id={2} accepted={accepted} checked={checked} setChecked={setChecked}/>
+            <LanguageOption text={"¡Bem vindo!"} lang={"Por"} id={3} accepted={accepted} checked={checked} setChecked={setChecked}/>
           </div>
           <div className={s.buttonWrapper}>
             <div className={s.checker}>

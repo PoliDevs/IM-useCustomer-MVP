@@ -9,16 +9,15 @@ export default function LoginCheckBox({ id, checked, setChecked, lang}) {
     <>
       <label className={s.checkbox}>
         <input
-          className={`${s.inputCheckbox} ${checked && s.checked}`}
+          className={`${s.inputCheckbox} ${checked === lang && s.checked}`}
           type="checkbox"
           id={id}
           name="language"
           checked={checked}
           onChange={() => {
-            setChecked(true);
+            setChecked(lang);
             i18n.changeLanguage(lang)
           }}
-          onBlur={() => setChecked(false)}
         />
         <div className={s.checkbox_circle}>
           <svg viewBox="0 0 52 52" className={s.checkmark}>

@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { ReactComponent as ArrowBack } from "../../../assets/ArrowBack.svg";
 import { ReactComponent as Profile } from "../../../assets/Profile.svg";
-import Paragraph from "../../atoms/Paragraph/Paragraph";
-import s from "./NavBar.module.scss";
 import { useNavigate } from "react-router-dom";
-import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../../../redux/actions";
+import Paragraph from "../../atoms/Paragraph/Paragraph";
+import i18next from "i18next";
+import s from "./NavBar.module.scss";
 
 export default function NavBar() {
   const [userActive, setUserActive] = useState(false);

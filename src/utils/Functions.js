@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { addProduct, removeProduct } from "../redux/actions";
 import { categoryIcons } from "./Constants";
 import CryptoJS from "crypto-js";
+import dotenv from "dotenv";
+
 export default function useModal(initialValue = false) {
   const [isOpen, setIsOpen] = useState(initialValue);
   const [productData, setProductData] = useState({
@@ -13,16 +15,9 @@ export default function useModal(initialValue = false) {
   })
 
 
-  //!descomentar para mostrar info del producto real
+  
   const openModal = (name, price, image, description)=> {
-    //  const openModal = (name, cost, photo, description)=> {
     setIsOpen(true);
-    // setProductData({
-    //   name: name,
-    //   cost: cost,
-    //   photo: photo,
-    //   description: description,
-    // });
     setProductData({
       name: name,
       price: price,
@@ -87,22 +82,14 @@ export const randomIcon = ()=>{
   let icon = categoryIcons[Math.floor(Math.random()*categoryIcons.length)];
   return icon
 }
-
-
-const urlInfo = "2/4";
-const urlInfo2 = "1/5";
-const password = "PureBlood";
-
-//* linea para cifrar id de comercio y mesa
-const ciphredUrl = CryptoJS.AES.encrypt(urlInfo2, password).toString();
-//* linea para cifrar id de comercio y mesa
 export const dataDecrypt = (data)=>{
-
+const password = import.meta.env.VITE_REACT_APP_KEY;
 const result = CryptoJS.AES.decrypt(data, password);
 const originalText = result.toString(CryptoJS.enc.Utf8).split("/");
 const urlInfo = {
   commerce: originalText[0],
-  table: originalText[1],
+  sector: originalText[1],
+  table: originalText[2],
 };
 return urlInfo;
 }

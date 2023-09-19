@@ -26,8 +26,7 @@ function App() {
             />
           }
         />
-        {/* <Route path="/language/:commerceId/:tableId?" element={<Language />} /> */}
-        <Route path="/language/:data" element={<Language />} />
+        <Route path="/language/*" element={<Language />} />
         <Route path="/login" element={<Login scanResult={scanResult} />} />
         <Route
           path="/welcome"
