@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getCommerce, setTable} from "../../../redux/actions";
+import { getCommerce, setSector, setTable} from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { dataDecrypt } from "../../../utils/Functions";
@@ -17,11 +17,13 @@ export default function Language() {
   const [modal, setModal] = useState(false);
   const [t, i18n] = useTranslation(["global"]);
   const dispatch = useDispatch();
-  const  data  = useParams().data;
+  const  params  = useParams();
 
   useEffect(() => {
-    const decripted = dataDecrypt(data);
+    localStorage.setItem("Pos", params['*']);
+    const decripted = dataDecrypt(params["*"]);
     dispatch(getCommerce(decripted.commerce));
+    dispatch(setSector(decripted.sector));
     dispatch(setTable(decripted.table))
   }, []);
 

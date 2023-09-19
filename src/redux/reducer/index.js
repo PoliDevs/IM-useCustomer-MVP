@@ -14,6 +14,7 @@ import {
   FILTER_BY_CATEGORY,
   REMOVE_USER,
   ADD_CART,
+  SET_SECTOR,
 } from "../actions/actionTypes";
 import dotenv from "dotenv";
 
@@ -34,21 +35,27 @@ const initalState = {
   table: localStorage.getItem("Pos")
     ? dataDecrypt(localStorage.getItem("Pos")).table
     : 0,
+  sector: localStorage.getItem("Pos")
+    ? dataDecrypt(localStorage.getItem("Pos")).sector
+    : 0,
   allProducts: [],
   allDishes: [],
   allCategories: [],
   filtroPor: "",
   cart: localStorage.getItem("cart") ? getEncriptedItem("cart") : [],
   user: localStorage.getItem("user") ? getEncriptedItem("user") : {},
-    // ? JSON.parse(localStorage.getItem("user"))
-    // : {},
+  // ? JSON.parse(localStorage.getItem("user"))
+  // : {},
   commerce: localStorage.getItem("CM") ? getEncriptedItem("CM") : {},
   // commerce: {},
 };
 
 export const rootReducer = (state = initalState, action) => {
   switch (action.type) {
-    case SET_TABLE: return {...state, table: action.payload}
+    case SET_TABLE:
+      return { ...state, table: action.payload };
+    case SET_SECTOR:
+      return { ...state, sector: action.payload };
     case GET_SEARCHED_PRODUCT: {
       const copy = [...state.allProducts];
       const results = state.allProducts.filter((p) =>
@@ -61,16 +68,17 @@ export const rootReducer = (state = initalState, action) => {
       }
       return state;
     }
-    case ADD_CART: {
-      const clave = import.meta.env.VITE_REACT_APP_KEY;
-      const objetoCifrado = CryptoJS.AES.encrypt(
-        JSON.stringify(action.payload),
-        clave
-      ).toString();
+    case ADD_CART:
+      {
+        const clave = import.meta.env.VITE_REACT_APP_KEY;
+        const objetoCifrado = CryptoJS.AES.encrypt(
+          JSON.stringify(action.payload),
+          clave
+        ).toString();
 
         localStorage.setItem("cart", objetoCifrado);
-    }
-    return state
+      }
+      return state;
     case ADD_PRODUCT: {
       const index = state.cart.length
         ? state.cart.findIndex((p) => p.name === action.payload.name)
@@ -121,29 +129,28 @@ export const rootReducer = (state = initalState, action) => {
 
       localStorage.setItem("user", objetoCifrado);
 
-      return {...state, user: action.payload}
+      return { ...state, user: action.payload };
       // state = { ...state, user: action.payload };
       // localStorage.setItem("user", JSON.stringify(action.payload));
       // return state;
     }
-    case GET_COMMERCE:
-      {
-        const CM = {
-            id: action.payload.id,
-            name: action.payload.name,
-            active: action.payload.active,
-            plan: action.payload.commercialPlan.plan,
-            schedule: action.payload.workSchedule,
-          };
-          const clave = import.meta.env.VITE_REACT_APP_KEY;
-          const objetoCifrado = CryptoJS.AES.encrypt(
-            JSON.stringify(CM),
-            clave
-          ).toString();
+    case GET_COMMERCE: {
+      const CM = {
+        id: action.payload.id,
+        name: action.payload.name,
+        active: action.payload.active,
+        plan: action.payload.commercialPlan.plan,
+        schedule: action.payload.workSchedule,
+      };
+      const clave = import.meta.env.VITE_REACT_APP_KEY;
+      const objetoCifrado = CryptoJS.AES.encrypt(
+        JSON.stringify(CM),
+        clave
+      ).toString();
 
-        localStorage.setItem("CM", objetoCifrado);
-        return {...state, commerce : CM};
-      }
+      localStorage.setItem("CM", objetoCifrado);
+      return { ...state, commerce: CM };
+    }
     case GET_ACTIVE_MENUS:
       {
         //!comentado hasta que este listo el nuevo endpoint, desp borrar
@@ -173,11 +180,12 @@ export const rootReducer = (state = initalState, action) => {
     }
     case FILTER_BY_CATEGORY:
       return { ...state, filtroPor: action.payload };
-    case REMOVE_USER: {
-      localStorage.removeItem("user");
-      state = {...state, user: ""}
-    }
-    return state;
+    case REMOVE_USER:
+      {
+        localStorage.removeItem("user");
+        state = { ...state, user: "" };
+      }
+      return state;
     default:
       return state;
   }

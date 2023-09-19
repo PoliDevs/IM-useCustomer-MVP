@@ -89,12 +89,19 @@ export const randomIcon = ()=>{
 }
 
 
-const urlInfo = "2/4";
-const urlInfo2 = "1/5";
-const password = "PureBlood";
+// const commerce1 = "1/1/1";
+// const commerce1 = "1/1/2";
+// const commerce1 = "1/1/3";
+// const commerce1 = "1/1/4";
+// const commerce2 = "2/2/5";
+// const commerce2 = "2/2/6";
+// const commerce2 = "2/2/7";
+const commerce3 = "3/6/8";
 
-//* linea para cifrar id de comercio y mesa
-const ciphredUrl = CryptoJS.AES.encrypt(urlInfo2, password).toString();
+const password = "Meteora03";
+
+//* linea para cifrar id de comercio, sector y mesa
+const ciphredUrl = CryptoJS.AES.encrypt(commerce3, password).toString();
 //* linea para cifrar id de comercio y mesa
 export const dataDecrypt = (data)=>{
 
@@ -102,7 +109,8 @@ const result = CryptoJS.AES.decrypt(data, password);
 const originalText = result.toString(CryptoJS.enc.Utf8).split("/");
 const urlInfo = {
   commerce: originalText[0],
-  table: originalText[1],
+  sector: originalText[1],
+  table: originalText[2],
 };
 return urlInfo;
 }

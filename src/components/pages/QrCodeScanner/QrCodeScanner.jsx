@@ -31,8 +31,6 @@ export default function Qr({scanResult, setScanResult}) {
     //{ facingMode: "environment" } para preferir camara trasera
     function success(result) {
       scanner.clear();
-      //!esto se puede hacer desde la pagina de home tambien
-      localStorage.setItem("Pos", result.substring(31));
       //!refactorizar segun url en produccion
       navigate(result.substring(21));
     }

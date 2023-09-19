@@ -7,12 +7,6 @@ export default function LoginButton({ text, closeLoginModal, active, name }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    // if (active) {
-      const user = {
-        name: null,
-      }
-    //   dispatch(setUser(user))
-      localStorage.setItem("user", JSON.stringify(user))
       navigate('/welcome');
       //?descomentar para volver al sistema de login con modal
       // closeLoginModal();

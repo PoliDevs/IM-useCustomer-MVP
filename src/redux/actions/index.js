@@ -12,6 +12,7 @@ import {
   SET_TABLE,
   REMOVE_USER,
   ADD_CART,
+  SET_SECTOR,
 } from "./actionTypes";
 import { ProductsInfo } from "../../utils/Constants";
 
@@ -130,6 +131,20 @@ export function setTable(table) {
       console,error(error)
     }
   }
+}
+
+export function setSector(sector) {
+  return async function (dispatch) {
+    try {
+      //llamado a api para consultar datos de Pos
+      return dispatch({
+        type: SET_SECTOR,
+        payload: sector,
+      });
+    } catch (error) {
+      console, error(error);
+    }
+  };
 }
 
 export function getCommerce(id) {
