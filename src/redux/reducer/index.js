@@ -44,10 +44,7 @@ const initalState = {
   filtroPor: "",
   cart: localStorage.getItem("cart") ? getEncriptedItem("cart") : [],
   user: localStorage.getItem("user") ? getEncriptedItem("user") : {},
-  // ? JSON.parse(localStorage.getItem("user"))
-  // : {},
   commerce: localStorage.getItem("CM") ? getEncriptedItem("CM") : {},
-  // commerce: {},
 };
 
 export const rootReducer = (state = initalState, action) => {
@@ -130,9 +127,6 @@ export const rootReducer = (state = initalState, action) => {
       localStorage.setItem("user", objetoCifrado);
 
       return { ...state, user: action.payload };
-      // state = { ...state, user: action.payload };
-      // localStorage.setItem("user", JSON.stringify(action.payload));
-      // return state;
     }
     case GET_COMMERCE: {
       const CM = {
@@ -153,10 +147,6 @@ export const rootReducer = (state = initalState, action) => {
     }
     case GET_ACTIVE_MENUS:
       {
-        //!comentado hasta que este listo el nuevo endpoint, desp borrar
-        // const allActive = action.payload.menus.filter((m)=> m.commerce.id === action.payload.id);
-        // state= {...state, allProducts: allActive}
-        //? nuevo endpoint, falta que Luis lo acomode(get->post)
         state = { ...state, allProducts: action.payload.menus };
       }
       return state;

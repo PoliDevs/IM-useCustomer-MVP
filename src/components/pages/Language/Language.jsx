@@ -14,6 +14,7 @@ import s from "./Language.module.scss";
 export default function Language() {
   const commerce = useSelector((state) => state.commerce);
   const [accepted, setAccepted] = useState(false);
+  const [checked, setChecked] = useState("");
   const [modal, setModal] = useState(false);
   const [t, i18n] = useTranslation(["global"]);
   const dispatch = useDispatch();
@@ -32,9 +33,9 @@ export default function Language() {
       {Object.keys(commerce).length ? (
         <>
           <div className={s.optionsMainContainer}>
-            <LanguageOption text={"¡Bienvenido!"} lang={"Es"} id={1} accepted={accepted}/>
-            <LanguageOption text={"¡Welcome!"} lang={"En"} id={2} accepted={accepted}/>
-            <LanguageOption text={"¡Bem vindo!"} lang={"Por"} id={3} accepted={accepted}/>
+            <LanguageOption text={"¡Bienvenido!"} lang={"Es"} id={1} accepted={accepted} checked={checked} setChecked={setChecked}/>
+            <LanguageOption text={"¡Welcome!"} lang={"En"} id={2} accepted={accepted} checked={checked} setChecked={setChecked}/>
+            <LanguageOption text={"¡Bem vindo!"} lang={"Por"} id={3} accepted={accepted} checked={checked} setChecked={setChecked}/>
           </div>
           <div className={s.buttonWrapper}>
             <div className={s.checker}>
