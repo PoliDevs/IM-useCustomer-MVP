@@ -39,9 +39,9 @@ const initalState = {
   allCategories: [],
   filtroPor: "",
   cart: localStorage.getItem("cart") ? getEncriptedItem("cart") : [],
-  user: localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user"))
-    : {},
+  user: localStorage.getItem("user") ? getEncriptedItem("user") : {},
+    // ? JSON.parse(localStorage.getItem("user"))
+    // : {},
   commerce: localStorage.getItem("CM") ? getEncriptedItem("CM") : {},
   // commerce: {},
 };
@@ -113,9 +113,18 @@ export const rootReducer = (state = initalState, action) => {
       }
     }
     case SET_USER: {
-      state = { ...state, user: action.payload };
-      localStorage.setItem("user", JSON.stringify(action.payload));
-      return state;
+      const clave = import.meta.env.VITE_REACT_APP_KEY;
+      const objetoCifrado = CryptoJS.AES.encrypt(
+        JSON.stringify(action.payload),
+        clave
+      ).toString();
+
+      localStorage.setItem("user", objetoCifrado);
+
+      return {...state, user: action.payload}
+      // state = { ...state, user: action.payload };
+      // localStorage.setItem("user", JSON.stringify(action.payload));
+      // return state;
     }
     case GET_COMMERCE:
       {
