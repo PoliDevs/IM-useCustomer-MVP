@@ -13,19 +13,21 @@ import {
   SET_TABLE,
   FILTER_BY_CATEGORY,
   REMOVE_USER,
+  ADD_CART,
 } from "../actions/actionTypes";
 import dotenv from "dotenv";
 
 
-const getCryptoCommerce = ()=> {
+const getEncriptedItem = (item)=> {
   const clave = import.meta.env.VITE_REACT_APP_KEY;
-  const objetoCifradoRecuperado = localStorage.getItem("objetoCifradoKey");
-  const bytes = CryptoJS.AES.decrypt(
+  const objetoCifradoRecuperado = localStorage.getItem(item);
+  if (objetoCifradoRecuperado){const bytes = CryptoJS.AES.decrypt(
     objetoCifradoRecuperado,
     clave
-  );
-  const objetoOriginal = JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
+    );
+    const objetoOriginal = JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
   return objetoOriginal
+}else return
 }
 
 const initalState = {
@@ -36,18 +38,17 @@ const initalState = {
   allDishes: [],
   allCategories: [],
   filtroPor: "",
-  cart: localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [],
+  cart: localStorage.getItem("cart") ? getEncriptedItem("cart") : [],
   user: localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : {},
-  commerce: localStorage.getItem("objetoCifradoKey") ? getCryptoCommerce() : {},
+  commerce: localStorage.getItem("CM") ? getEncriptedItem("CM") : {},
   // commerce: {},
 };
 
 export const rootReducer = (state = initalState, action) => {
   switch (action.type) {
+    case SET_TABLE: return {...state, table: action.payload}
     case GET_SEARCHED_PRODUCT: {
       const copy = [...state.allProducts];
       const results = state.allProducts.filter((p) =>
@@ -60,6 +61,16 @@ export const rootReducer = (state = initalState, action) => {
       }
       return state;
     }
+    case ADD_CART: {
+      const clave = import.meta.env.VITE_REACT_APP_KEY;
+      const objetoCifrado = CryptoJS.AES.encrypt(
+        JSON.stringify(action.payload),
+        clave
+      ).toString();
+
+        localStorage.setItem("cart", objetoCifrado);
+    }
+    return state
     case ADD_PRODUCT: {
       const index = state.cart.length
         ? state.cart.findIndex((p) => p.name === action.payload.name)
@@ -121,7 +132,7 @@ export const rootReducer = (state = initalState, action) => {
             clave
           ).toString();
 
-        localStorage.setItem("objetoCifradoKey", objetoCifrado);
+        localStorage.setItem("CM", objetoCifrado);
         return {...state, commerce : CM};
       }
     case GET_ACTIVE_MENUS:
