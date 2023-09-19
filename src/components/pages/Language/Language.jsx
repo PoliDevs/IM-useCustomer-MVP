@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getCommerce} from "../../../redux/actions";
+import { getCommerce, setTable} from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { dataDecrypt } from "../../../utils/Functions";
@@ -22,11 +22,12 @@ export default function Language() {
   useEffect(() => {
     const decripted = dataDecrypt(data);
     dispatch(getCommerce(decripted.commerce));
+    dispatch(setTable(decripted.table))
   }, []);
 
   return (
     <main className={s.mainContainer}>
-      {/* {Object.keys(commerce).length ? ( */}
+      {Object.keys(commerce).length ? (
         <>
           <div className={s.optionsMainContainer}>
             <LanguageOption text={"¡Bienvenido!"} lang={"Es"} id={1} accepted={accepted}/>
@@ -51,24 +52,19 @@ export default function Language() {
             <Link to={accepted && i18n.language && "/login"} className={`${s.arrowButton} ${!accepted && s.buttonDisabled}`}>
               <ArrowRight style={{width: "24px", height: "24px", color: accepted ? "#FFFFFF" : "#858585"}}/>
             </Link>
-            {/* <LinkButton
-              path={"/login"}
-              text={t("language.button")}
-              darker={true}
-            /> */}
           </div>
+          {modal && <TermsAndConditions
+            accepted={accepted}
+            setAccepted={setAccepted}
+            modal={modal}
+            setModal={setModal}
+          />}
         </>
 
-        {modal && <TermsAndConditions
-          accepted={accepted}
-          setAccepted={setAccepted}
-          modal={modal}
-          setModal={setModal}
-        />}
       
-      {/* ) : (
+      ) : (
         <LoadingPage />
-      )} */}
+      )}
     </main>
   );
 }

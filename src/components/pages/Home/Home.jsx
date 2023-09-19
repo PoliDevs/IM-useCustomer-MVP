@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { batch, useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import {
+  addCart,
   filterCategory,
   getActiveDishes,
   getActiveMenus,
@@ -38,11 +39,12 @@ export default function Home() {
   };
 
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cant));
+    // localStorage.setItem("cart", JSON.stringify(cant));
+    dispatch(addCart(cant))
     let id = dataDecrypt(localStorage.getItem("Pos")).commerce;
     // dispatch(getCommerce(id));
     dispatch(getActiveMenus(commerce.id));
-    dispatch(getAllCategorys());
+    dispatch(getAllCategorys(commerce.id));
   }, [cant]);
 
   //! Tener en cuenta si el local esta abierto o cerrado
@@ -50,9 +52,6 @@ export default function Home() {
   return (
     <main className={s.home}>
       <Banner setCategory={setCategory} />
-      {
-        //?Commerce active no indica si esta abierto -!!- modificar}
-      }
         <>
           <SearchBar />
           <Categories handleCategory={handleCategory} category={category} />

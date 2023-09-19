@@ -11,6 +11,7 @@ import {
   GET_SEARCHED_PRODUCT,
   SET_TABLE,
   REMOVE_USER,
+  ADD_CART,
 } from "./actionTypes";
 import { ProductsInfo } from "../../utils/Constants";
 
@@ -30,6 +31,20 @@ export function searchProduct(product) {
 }
 
 ////////////////////* Cart Actions Creators *////////////////////
+
+export function addCart(cart) {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: ADD_CART,
+        payload: cart
+      })
+    } catch (error) {
+      console.error(error);
+    }
+  }
+}
+
 export function addProduct(product) {
   return async function (dispatch) {
     try {
@@ -136,7 +151,7 @@ export function getActiveMenus(id) {
   return async function (dispatch) {
     try {
       let allActiveMenus = await axios.get(
-        "http://localhost:3001/menu/all_active"
+        `http://localhost:3001/menu/all_active/${id}`
       );
       return dispatch({
         type: GET_ACTIVE_MENUS,
@@ -186,11 +201,11 @@ export function getActiveDishes(id) {
   };
 }
 
-export function getAllCategorys() {
+export function getAllCategorys(id) {
   return async function (dispatch) {
     try {
       let allActiveCategorys = await axios.get(
-        "http://localhost:3001/category/all_active"
+        `http://localhost:3001/category/all_active/${id}`
       );
       return dispatch({
         type: GET_ALL_CATEGORIES,
