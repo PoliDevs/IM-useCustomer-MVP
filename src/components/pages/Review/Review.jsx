@@ -42,8 +42,8 @@ export default function Review() {
         )}
         <img src={logo} className={s.logo} />
         <div>
-        <HugeTitle text={commerceInfo.name} centered={true} />
-        <SubTitle text={t("rating.preparingOrder")} />
+        <HugeTitle text={commerceInfo.name} centered={true} review={true}/>
+        <SubTitle text={t("rating.preparingOrder")} review={true}/>
         </div>
         {/* <div className={s.progressBar}> */}
         <StepProgressBar/>

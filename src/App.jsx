@@ -11,6 +11,7 @@ import Review from "./components/pages/Review/Review";
 import Mercadopago from "./components/pages/Mercadopago/Mercadopago";
 import Login from "./components/pages/Login/Login";
 import Language from "./components/pages/Language/Language";
+import ProtectedRoutes from "./components/atoms/ProtectedRoutes/ProtectedRoutes";
 
 function App() {
   const [scanResult, setScanResult] = useState();
@@ -27,16 +28,18 @@ function App() {
           }
         />
         <Route path="/language/*" element={<Language />} />
-        <Route path="/login" element={<Login scanResult={scanResult} />} />
-        <Route
-          path="/welcome"
-          element={<WelcomePage scanResult={scanResult} />}
-        />
-        <Route path="/instruction" element={<Instruction />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/payment" element={<Payment />} />
-        <Route path="/mercadopago" element={<Mercadopago />} />
-        <Route path="/rating" element={<Review />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/login" element={<Login scanResult={scanResult} />} />
+          <Route
+            path="/welcome"
+            element={<WelcomePage scanResult={scanResult} />}
+          />
+          <Route path="/instruction" element={<Instruction />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/mercadopago" element={<Mercadopago />} />
+          <Route path="/rating" element={<Review />} />
+        </Route>
       </Routes>
     </>
   );

@@ -13,6 +13,7 @@ import {
   REMOVE_USER,
   ADD_CART,
   SET_SECTOR,
+  GET_STATUS,
 } from "./actionTypes";
 import { ProductsInfo } from "../../utils/Constants";
 
@@ -162,6 +163,23 @@ export function getCommerce(id) {
     }
   };
 }
+
+export function getStatus(id) {
+  return async function (dispatch) {
+    try {
+      let status = await axios.get(
+        `http://localhost:3001/commerce/openCommerce/${id}`
+      );
+      return dispatch({
+        type: GET_STATUS,
+        payload: status.data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+}
+
 export function getActiveMenus(id) {
   return async function (dispatch) {
     try {
