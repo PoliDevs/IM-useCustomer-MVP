@@ -10,6 +10,7 @@ export default function Paragraph({
   alignment,
   scrollable,
   disabled,
+  gap
 }) {
   return (
     <p
@@ -19,7 +20,7 @@ export default function Paragraph({
         scrollable && s.scrollable
       } ${children && s.align} ${alignment === "right" && s.right} ${
         disabled && s.disabled
-      }`}
+      } ${gap && s.gap}`}
     >
       {scrollable
         ? text

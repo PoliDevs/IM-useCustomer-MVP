@@ -15,6 +15,7 @@ import {
   REMOVE_USER,
   ADD_CART,
   SET_SECTOR,
+  GET_STATUS,
 } from "../actions/actionTypes";
 import dotenv from "dotenv";
 
@@ -45,10 +46,12 @@ const initalState = {
   cart: localStorage.getItem("cart") ? getEncriptedItem("cart") : [],
   user: localStorage.getItem("user") ? getEncriptedItem("user") : {},
   commerce: localStorage.getItem("CM") ? getEncriptedItem("CM") : {},
+  status: false
 };
 
 export const rootReducer = (state = initalState, action) => {
   switch (action.type) {
+    ////////////////////* Commerce Cases *////////////////////
     case SET_TABLE:
       return { ...state, table: action.payload };
     case SET_SECTOR:
@@ -145,6 +148,8 @@ export const rootReducer = (state = initalState, action) => {
       localStorage.setItem("CM", objetoCifrado);
       return { ...state, commerce: CM };
     }
+    case GET_STATUS: 
+    return {...state, status: action.payload}
     case GET_ACTIVE_MENUS:
       {
         state = { ...state, allProducts: action.payload.menus };

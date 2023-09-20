@@ -1,0 +1,63 @@
+@import "../../../scss/colors.scss";
+@import "../../../scss/typography.scss";
+
+.closedContainer {
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $background-secundary;
+  padding-bottom: 20px;
+
+  .contentContainer {
+    height: 100%;
+    width: auto;
+    margin: 0 auto;
+    margin-top: 60px;
+
+    .iconContainer {
+      .icon {
+        width: 310px;
+        height: 280px;
+      }
+    }
+  }
+  .textContainer {
+    width: 100%;
+    display: flex;
+    gap: 14px;
+    flex-direction: column;
+
+    .isClosed {
+      font-size: 28px;
+      text-align: center;
+    }
+
+    .imenuSpan {
+      font-weight: bold;
+      color: $color-secundary
+    }
+
+    .helpContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 45px;
+      gap: 5px;
+
+      .helpIcon {
+        width: 20px;
+        height: 20px;
+        color: #989898;
+      }
+
+      .link {
+        list-style: none;
+        text-decoration: none;
+        color: #989898;
+      }
+    }
+  }
+}
