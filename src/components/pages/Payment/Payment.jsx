@@ -2,7 +2,7 @@ import { dataDecrypt } from "../../../utils/Functions";
 import { getCommerce } from "../../../redux/actions";
 import { ReactComponent as IMenu } from "../../../assets/ImenuHorizontal.svg";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ReactComponent as CashIcon } from "../../../assets/CashIcon.svg";
 import { paymentUrl } from "../../../utils/Constants";
 import { useTranslation } from "react-i18next";
@@ -17,6 +17,7 @@ import s from "./Payment.module.scss";
 
 export default function Payment() {
   const [method, setMethod] = useState('');
+  const language = useSelector((state)=> state.language);
   const dispatch = useDispatch();
   
   const [t, i18n] = useTranslation(["global"]);
@@ -40,13 +41,13 @@ export default function Payment() {
     <main className={s.paymentContainer}>
       <Banner arrow={true} />
       <section className={s.paymentContent}>
-        <SubTitle text={t("payment.title")} alignment={"left"}>
+        <SubTitle text={language.payment_title} alignment={"left"}>
           <CashIcon className={s.cashIcon} />
         </SubTitle>
-        <SmallText text={t("payment.managePayment")} alignment={"left"} />
+        <SmallText text={language.payment_managePayment} alignment={"left"} />
         <OrderInfo />
         <PaymentOptionButton
-          text={t("payment.cash")}
+          text={language.payment_cash}
           option={2}
           setMethod={setMethod}
           handleChange={handleChange}
@@ -58,10 +59,18 @@ export default function Payment() {
           handleChange={handleChange}
         />
         <div className={s.bottomContent}>
-          <Paragraph text={t("payment.poweredby")} bold={true} centered={true}>
+          <Paragraph
+            text={language.payment_poweredby}
+            bold={true}
+            centered={true}
+          >
             <IMenu className={s.imenuLogo} />
           </Paragraph>
-          <LinkButton path={paymentUrl[method]} text={t("payment.continue")} onClick={handleCash} />
+          <LinkButton
+            path={paymentUrl[method]}
+            text={language.payment_continue}
+            onClick={handleCash}
+          />
         </div>
       </section>
     </main>

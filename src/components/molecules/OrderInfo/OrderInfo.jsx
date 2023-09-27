@@ -6,6 +6,7 @@ import Paragraph from "../../atoms/Paragraph/Paragraph";
 import s from "./OrderInfo.module.scss";
 
 export default function OrderInfo({border}) {
+  const language = useSelector((state)=> state.language);
   const cart = useSelector((state) => state.cart);
   const commerceInfo = useSelector((state) => state.commerce);
   const table = useSelector((state)=> state.table);
@@ -19,7 +20,7 @@ export default function OrderInfo({border}) {
     <div className={`${s.orderInfo} ${border && s.border}`}>
       <div className={s.paymentTitle}>
         <SubTitle text={commerceInfo.name} bold={true} />
-        <SubTitle text={`${t("orderInfo.table")} ${table}`} />
+        <SubTitle text={`${language.orderInfo_table} ${table}`} />
       </div>
       <div className={s.productsContainer}>
         {cart.map((p, index) => (
@@ -33,7 +34,7 @@ export default function OrderInfo({border}) {
         ))}
       </div>
       <Paragraph
-        text={`${t("orderInfo.paymentTotal")} $${totalPrice}`}
+        text={`${language.orderInfo_paymentTotal} $${totalPrice}`}
         alignment={"right"}
         bold={true}
       />

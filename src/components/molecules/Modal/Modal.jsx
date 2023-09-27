@@ -7,8 +7,10 @@ import TextArea from "../../atoms/TextArea/TextArea";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import s from "./Modal.module.scss";
+import { useSelector } from "react-redux";
 
 export default function Modal({ productData,  isOpen, closeModal, changeStyle}) {
+  const language = useSelector((state)=> state.language);
   const [comment, setComment] = useState("");
   const [amount, setAmount] = useState(0);
   const {addToCart} = useAmountControls();
@@ -54,7 +56,7 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
         <div>
           <div className={s.textAreaHeader}>
             <label className={s.label} htmlFor="comment">
-              {t("productModal.commentLabel")}
+              {language.productModal_commentLabel}
             </label>
             <p className={s.textLimit}>{`${comment.length}/140`}</p>
           </div>
@@ -63,7 +65,7 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
             comment={comment}
             setComment={setComment}
             maxLength={140}
-            placeholder={t("productModal.commentPlaceholder")}
+            placeholder={language.productModal_commentPlaceholder}
           />
         </div>
         <div className={s.amount}>
@@ -98,7 +100,7 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
             changeStyle();
           }}
         >
-          {t("productModal.addButton")}
+          {language.productModal_addButton}
         </button>
       </div>
     </article>

@@ -13,7 +13,9 @@ export const GET_COMMERCE = "GET_COMMERCE";
 export const GET_STATUS = "GET_STATUS";
 export const GET_ACTIVE_MENUS = "GET_ACTIVE_MENUS";
 export const GET_ACTIVE_DISHES = "GET_aCTIVE_DISHES";
+export const GET_ACTIVE_PRODUCTS = "GET_ACTIVE_PRODUCTS";
 export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
+export const GET_ALL_ADITIONALS = "GET_ALL_ADITIONALS";
 export const FILTER_CATEGORY = "FILTER_CATEGORY";
 export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 
@@ -24,3 +26,11 @@ export const GET_SEARCHED_PRODUCT = "GET_SEARCHED_PRODUCT";
 ////////////////////* User Action type *////////////////////
 
 export const REMOVE_USER = "REMOVE_USER";
+
+////////////////////* Translator Action type *////////////////////
+
+export const TRANSLATE_TEXT = "TRANSLATE_TEXT";
+
+////////////////////* Language Action type *////////////////////
+
+export const CHANGE_LANGUAGE = "CHANGE_LANGUAGE";

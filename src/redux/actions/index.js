@@ -14,8 +14,15 @@ import {
   ADD_CART,
   SET_SECTOR,
   GET_STATUS,
+  GET_ACTIVE_PRODUCTS,
+  GET_ALL_ADITIONALS,
+  CHANGE_LANGUAGE,
 } from "./actionTypes";
 import { ProductsInfo } from "../../utils/Constants";
+import { TRANSLATE_TEXT } from "./actionTypes";
+import { v4 as uuidv4 } from "uuid";
+import { all_app_texts } from "../../utils/language";
+import { translateText } from "../../utils/Functions";
 
 ////////////////////* SearchBar Action Creator *////////////////////
 
@@ -164,12 +171,13 @@ export function getCommerce(id) {
   };
 }
 
-export function getStatus(id) {
+export function getStatus(id, setIsLoading) {
   return async function (dispatch) {
     try {
       let status = await axios.get(
         `http://localhost:3001/commerce/openCommerce/${id}`
       );
+      setIsLoading(false)
       return dispatch({
         type: GET_STATUS,
         payload: status.data,
@@ -180,15 +188,18 @@ export function getStatus(id) {
   };
 }
 
-export function getActiveMenus(id) {
+export function getActiveMenus(id, setIsLoading) {
   return async function (dispatch) {
     try {
       let allActiveMenus = await axios.get(
-        `http://localhost:3001/menu/all_active/${id}`
+        // `http://localhost:3001/menu/all_active/${id}`
+        `http://localhost:3001/menu/lastMenu/${id}`
       );
+      if (setIsLoading) setIsLoading(false)
       return dispatch({
         type: GET_ACTIVE_MENUS,
-        payload: { menus: allActiveMenus.data, id: id },
+        // payload: { menus: allActiveMenus.data, id: id },
+        payload: allActiveMenus.data
       });
     } catch (error) {
       console.error(error);
@@ -227,6 +238,38 @@ export function getActiveDishes(id) {
       return dispatch({
         type: GET_ACTIVE_DISHES,
         payload: { dishes: allActiveDishes.data, id: id },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+}
+
+export function getActiveProducts(id) {
+  return async function (dispatch) {
+    try {
+      let allActiveProducts = await axios.get(
+        `http://localhost:3001/product/all_active/${id}`
+      );
+      return dispatch({
+        type: GET_ACTIVE_PRODUCTS,
+        payload: allActiveProducts.data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+}
+
+export function getActiveAditionals (id) {
+  return async function (dispatch) {
+    try {
+      let allActiveAditionals = await axios.get(
+        `http://localhost:3001/additional/all_active/${id}`
+      );
+      return dispatch({
+        type: GET_ALL_ADITIONALS,
+        payload: allActiveAditionals.data,
       });
     } catch (error) {
       console.error(error);
@@ -294,4 +337,25 @@ export function removeUser () {
       console.error(error);
     }
   }
+}
+
+////////////////////* Language Action type *////////////////////
+
+export function changeLanguage(lang, setIsloading) {
+  return async function (dispatch) {
+    try {
+      if (setIsloading) setIsloading(true);
+      const result = dispatch({
+        type: CHANGE_LANGUAGE,
+        payload: {
+          lang: lang,
+          language: await translateText(lang, all_app_texts),
+        },
+      });
+      if(setIsloading)setIsloading(false);
+      return result;
+    } catch (error) {
+      console.error(error);
+    }
+  };
 }

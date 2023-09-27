@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getCommerce, setSector, setTable} from "../../../redux/actions";
+import { changeLanguage, getCommerce, setSector, setTable} from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { dataDecrypt } from "../../../utils/Functions";
 import { ReactComponent as ArrowRight } from "../../../assets/ArrowLongRight.svg";
+import { idiomas } from "../../../utils/Constants";
+import ScrollContainer from "react-indiana-drag-scroll";
 import LanguageOption from "../../molecules/LanguageOption/LanguageOption";
 import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
 import TermsAndConditions from "../../molecules/TermsAndConditions/TermsAndConditions";
@@ -12,6 +14,7 @@ import SmallText from "../../atoms/SmallText/SmallText";
 import s from "./Language.module.scss";
 
 export default function Language() {
+  const language = useSelector((state)=> state.language);
   const commerce = useSelector((state) => state.commerce);
   const [accepted, setAccepted] = useState(false);
   const [checked, setChecked] = useState("");
@@ -26,45 +29,96 @@ export default function Language() {
     dispatch(getCommerce(decripted.commerce));
     dispatch(setSector(decripted.sector));
     dispatch(setTable(decripted.table))
+    dispatch(changeLanguage("es"))
   }, []);
 
   return (
     <main className={s.mainContainer}>
       {Object.keys(commerce).length ? (
-        <>
-          <div className={s.optionsMainContainer}>
-            <LanguageOption text={"¡Bienvenido!"} lang={"Es"} id={1} accepted={accepted} checked={checked} setChecked={setChecked}/>
-            <LanguageOption text={"¡Welcome!"} lang={"En"} id={2} accepted={accepted} checked={checked} setChecked={setChecked}/>
-            <LanguageOption text={"¡Bem vindo!"} lang={"Por"} id={3} accepted={accepted} checked={checked} setChecked={setChecked}/>
-          </div>
-          <div className={s.buttonWrapper}>
-            <div className={s.checker}>
-              <span
-                className={`${s.checkbox} ${accepted && s.checked}`}
-                onClick={() => setAccepted(!accepted)}
+        Object.keys(language).length ? (
+          <>
+            <ScrollContainer className={s.optionsMainContainer}>
+              {/* <LanguageOption
+                text={"¡Bienvenido!"}
+                lang={"Es"}
+                id={1}
+                accepted={accepted}
+                checked={checked}
+                setChecked={setChecked}
               />
-              <div className={s.checkerText}>
-              <SmallText
-                text={"Acepto los términos y condiciones de uso"}
-                noMargin={true}
-                secundary={true}
+              <LanguageOption
+                text={"¡Welcome!"}
+                lang={"En"}
+                id={2}
+                accepted={accepted}
+                checked={checked}
+                setChecked={setChecked}
               />
-              <span className={s.viewConditions} onClick={()=> setModal(true)}>Ver condiciones aqui</span>
+              <LanguageOption
+                text={"¡Bem vindo!"}
+                lang={"Por"}
+                id={3}
+                accepted={accepted}
+                checked={checked}
+                setChecked={setChecked}
+              /> */}
+              {idiomas.map((idioma, index) => (
+                  <LanguageOption
+                  text={idioma.message}
+                  lang={idioma.lang}
+                  id={index}
+                  key= {index}
+                  accepted={accepted}
+                  checked={checked}
+                  setChecked={setChecked}
+                />
+              ))}
+            </ScrollContainer>
+            <div className={s.buttonWrapper}>
+              <div className={s.checker}>
+                <span
+                  className={`${s.checkbox} ${accepted && s.checked}`}
+                  onClick={() => setAccepted(!accepted)}
+                />
+                <div className={s.checkerText}>
+                  <SmallText
+                    text={language.languages_termsConditions}
+                    noMargin={true}
+                    secundary={true}
+                  />
+                  <span
+                    className={s.viewConditions}
+                    onClick={() => setModal(true)}
+                  >
+                    {language.languages_seeConditions}
+                  </span>
+                </div>
               </div>
+              <Link
+                to={accepted && i18n.language && "/login"}
+                className={`${s.arrowButton} ${!accepted && s.buttonDisabled}`}
+              >
+                <ArrowRight
+                  style={{
+                    width: "24px",
+                    height: "24px",
+                    color: accepted ? "#FFFFFF" : "#858585",
+                  }}
+                />
+              </Link>
             </div>
-            <Link to={accepted && i18n.language && "/login"} className={`${s.arrowButton} ${!accepted && s.buttonDisabled}`}>
-              <ArrowRight style={{width: "24px", height: "24px", color: accepted ? "#FFFFFF" : "#858585"}}/>
-            </Link>
-          </div>
-          {modal && <TermsAndConditions
-            accepted={accepted}
-            setAccepted={setAccepted}
-            modal={modal}
-            setModal={setModal}
-          />}
-        </>
-
-      
+            {modal && (
+              <TermsAndConditions
+                accepted={accepted}
+                setAccepted={setAccepted}
+                modal={modal}
+                setModal={setModal}
+              />
+            )}
+          </>
+        ) : (
+          ""
+        )
       ) : (
         <LoadingPage />
       )}

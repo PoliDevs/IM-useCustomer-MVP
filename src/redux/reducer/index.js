@@ -1,4 +1,4 @@
-import { dataDecrypt } from "../../utils/Functions";
+import { dataDecrypt, translateText } from "../../utils/Functions";
 import CryptoJS from "crypto-js";
 import {
   ADD_PRODUCT,
@@ -16,8 +16,12 @@ import {
   ADD_CART,
   SET_SECTOR,
   GET_STATUS,
+  GET_ACTIVE_PRODUCTS,
+  GET_ALL_ADITIONALS,
+  CHANGE_LANGUAGE,
 } from "../actions/actionTypes";
 import dotenv from "dotenv";
+import { all_app_texts } from "../../utils/language";
 
 
 const getEncriptedItem = (item)=> {
@@ -41,12 +45,15 @@ const initalState = {
     : 0,
   allProducts: [],
   allDishes: [],
+  products: [],
+  allAditionals: [],
   allCategories: [],
   filtroPor: "",
   cart: localStorage.getItem("cart") ? getEncriptedItem("cart") : [],
   user: localStorage.getItem("user") ? getEncriptedItem("user") : {},
   commerce: localStorage.getItem("CM") ? getEncriptedItem("CM") : {},
-  status: false
+  status: false,
+  language: localStorage.getItem("Lang") ? await translateText(localStorage.getItem("Lang"), all_app_texts) : "es",
 };
 
 export const rootReducer = (state = initalState, action) => {
@@ -148,11 +155,11 @@ export const rootReducer = (state = initalState, action) => {
       localStorage.setItem("CM", objetoCifrado);
       return { ...state, commerce: CM };
     }
-    case GET_STATUS: 
-    return {...state, status: action.payload}
+    case GET_STATUS:
+      return { ...state, status: action.payload };
     case GET_ACTIVE_MENUS:
       {
-        state = { ...state, allProducts: action.payload.menus };
+        state = { ...state, allProducts: action.payload};
       }
       return state;
     case GET_ACTIVE_DISHES:
@@ -164,10 +171,17 @@ export const rootReducer = (state = initalState, action) => {
         //state = { ...state, allProducts: state.allProducts.concat(allActive) };//!descomentar para agregar los platos activos del comercio
       }
       return state;
+    case GET_ACTIVE_PRODUCTS:
+      {
+        state = { ...state, products: action.payload };
+      }
+      return state;
     case GET_ALL_CATEGORIES:
       return { ...state, allCategories: action.payload };
+    case GET_ALL_ADITIONALS:
+      return { ...state, allAditionals: action.payload };
     case FILTER_CATEGORY: {
-      const products = [...state.allProducts];
+      const products = [...state.allProducts, ...state.allDishes];
       const filteredResults = products.filter(
         (p) => p.category.id === action.payload
       );
@@ -179,6 +193,13 @@ export const rootReducer = (state = initalState, action) => {
       {
         localStorage.removeItem("user");
         state = { ...state, user: "" };
+      }
+      return state;
+    case CHANGE_LANGUAGE:
+      {
+        localStorage.setItem("Lang", action.payload.lang);
+        // state = { ...state, language: action.payload };
+        state = {...state, language: action.payload.language}
       }
       return state;
     default:

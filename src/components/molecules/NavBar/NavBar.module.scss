@@ -90,13 +90,16 @@
 
     .langsContainer {
       position: absolute;
-      bottom: -80px;
+      bottom: -203px;
       width: 96px;
+      height: 200px;
+      overflow-y: scroll;
       right: 0px;
       background-color: $background-secundary;
       box-shadow: 1px 4px 10px -4px rgba(0, 0, 0, 0.75);
       -webkit-box-shadow: 1px 4px 10px -4px rgba(0, 0, 0, 0.75);
       -moz-box-shadow: 1px 4px 10px -4px rgba(0, 0, 0, 0.75);
+      z-index: 9999;
 
       .langOption {
         padding: 5px;

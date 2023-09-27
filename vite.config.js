@@ -9,12 +9,23 @@ dotenv.config();
 export default defineConfig({
   plugins: [react(), svgr()],
   cors: true, // HabiliCORS en el servidor de desarrollo
-  build: {rollupOptions: {
-    plugins: [
-      // Reemplaza las variables de entorno durante la construcción
-      replace({
-        "process.env.REACT_APP_CLAVE_SECRETA": JSON.stringify(process.env.VITE_REACT_APP_KEY),
-      }),
-    ],
-  },}
+  build: {
+    rollupOptions: {
+      plugins: [
+        // Reemplaza las variables de entorno durante la construcción
+        replace(
+          {
+            "process.env.REACT_APP_CLAVE_SECRETA": JSON.stringify(
+              process.env.VITE_REACT_APP_KEY
+            ),
+          },
+          {
+            "process.env.VITE_MICROSOFT_TRANSLATE_KEY": JSON.stringify(
+              process.env.VITE_MICROSOFT_TRANSLATE_KEY
+            ),
+          }
+        ),
+      ],
+    },
+  },
 });
