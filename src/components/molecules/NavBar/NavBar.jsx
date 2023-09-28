@@ -4,21 +4,25 @@ import { ReactComponent as Profile } from "../../../assets/Profile.svg";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { removeUser } from "../../../redux/actions";
+import { changeLanguage, removeUser } from "../../../redux/actions";
+import { idiomas } from "../../../utils/Constants";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import i18next from "i18next";
 import s from "./NavBar.module.scss";
 
-export default function NavBar() {
+export default function NavBar({ setIsloading }) {
   const [userActive, setUserActive] = useState(false);
   const [langActive, setLangActive] = useState(false);
   const [t, i18n] = useTranslation("global");
-  const email = useSelector((state)=> state.user.email ? state.user.email : "");
+  const language = useSelector((state) => state.language);
+  const email = useSelector((state) =>
+    state.user.email ? state.user.email : ""
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const current = i18next.language;
+  const current = localStorage.getItem("Lang");
 
-  const handleUser= () => {
+  const handleUser = () => {
     setUserActive(!userActive);
     setLangActive(false);
   };
@@ -27,7 +31,6 @@ export default function NavBar() {
     setLangActive(!langActive);
     setUserActive(false);
   };
-
 
   return (
     <nav className={s.navBar}>
@@ -43,7 +46,13 @@ export default function NavBar() {
             <Profile className={`${s.icon} ${s.disabled}`} />
             <Paragraph text={email} disabled={true} />
           </div>
-          <hr style={{ width: "90%", margin: "0 auto", border: ".5px solid #BABABA" }} />
+          <hr
+            style={{
+              width: "90%",
+              margin: "0 auto",
+              border: ".5px solid #BABABA",
+            }}
+          />
           <div
             className={`${s.logOutContainer}`}
             onClick={() => dispatch(removeUser())}
@@ -51,7 +60,10 @@ export default function NavBar() {
             <ArrowBack
               className={`${s.icon} ${email == "" && s.iconDisabled}`}
             />
-            <Paragraph text={"Desconectar"} disabled={email == ""} />
+            <Paragraph
+              text={language.navBar_disconnect}
+              disabled={email == ""}
+            />
           </div>
         </div>
         <div
@@ -61,7 +73,7 @@ export default function NavBar() {
         >
           <Paragraph text={current} />
           <div className={`${langActive && s.visible} ${s.langsContainer}`}>
-            <div
+            {/* <div
               className={`${s.langOption} ${current === "Es" && s.highlight}`}
               onClick={() => i18n.changeLanguage("Es")}
             >
@@ -77,8 +89,21 @@ export default function NavBar() {
               className={`${s.langOption} ${current === "Por" && s.highlight}`}
               onClick={() => i18n.changeLanguage("Por")}
             >
-              <Paragraph text={"Português"} />
-            </div>
+              <Paragraph text={"Português"} /> */}
+            {/* </div> */}
+            {idiomas.map((idioma, index) => (
+              <div
+                key={index}
+                className={`${s.langOption} ${
+                  current === idioma.lang && s.highlight
+                }`}
+                onClick={() =>
+                  dispatch(changeLanguage(idioma.lang, setIsloading))
+                }
+              >
+                <Paragraph text={idioma.name} />
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -7,22 +7,54 @@ export default function Product({
   description,
   price,
   bg,
-  openModal
+  openModal,
+  id,
+  promotion,
+  discount,
+  surcharge,
+  product,
+  aditional,
+  menuTypeId,
+  categoryId,
+  unitTypeId,
+  productTypeId,
+  supplierId,
+  allergenType,
+  careful,
 }) {
-
-//!descomentar para mostrar info del producto real
-//   export default function Product({
-//   name,
-//   description,
-//   cost,
-//   photo,
-//   openModal
-// }) {
+  //!descomentar para mostrar info del producto real
+  //   export default function Product({
+  //   name,
+  //   description,
+  //   cost,
+  //   photo,
+  //   openModal
+  // }) {
 
   return (
     <div
       className={s.productContainer}
-      onClick={() => openModal(name, price, bg, description)}
+      onClick={() =>
+        openModal(
+          name,
+          price,
+          bg,
+          description,
+          id,
+          promotion,
+          discount,
+          surcharge,
+          product,
+          aditional,
+          menuTypeId,
+          categoryId,
+          unitTypeId,
+          productTypeId,
+          supplierId,
+          allergenType,
+          careful
+        )
+      }
       //!descomentar para mostrar info del producto real
       //onClick={()=> openModal(name, cost, photo, description)}
     >

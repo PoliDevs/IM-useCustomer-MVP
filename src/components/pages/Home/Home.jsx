@@ -4,8 +4,10 @@ import { useTranslation } from "react-i18next";
 import {
   addCart,
   filterCategory,
+  getActiveAditionals,
   getActiveDishes,
   getActiveMenus,
+  getActiveProducts,
   getAllCategorys,
   getCommerce,
   setFiltro,
@@ -17,11 +19,15 @@ import Products from "../../molecules/Products/Products";
 import Footer from "../../molecules/Footer/Footer";
 import s from "./Home.module.scss";
 import { dataDecrypt } from "../../../utils/Functions";
+import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
 export default function Home() {
-  const [red, setRed] = useState(false);
-  const [category, setCategory] = useState("");
-  const cant = useSelector((state) => state.cart);
   const commerce = useSelector((state) => state.commerce);
+  const cant = useSelector((state) => state.cart);
+  const [isLoading, setIsLoading] = useState(true);
+  const [category, setCategory] = useState(null);
+  const [aditionals, setAditionals] = useState(false);
+  const [all, setAll] = useState((category || aditionals )? false : true);
+  const [red, setRed] = useState(false);
   const dispatch = useDispatch();
 
   const [t, i18n] = useTranslation(["global"]);
@@ -36,28 +42,51 @@ export default function Home() {
   const handleCategory = (id) => {
     dispatch(setFiltro(id));
     setCategory(id);
+    setAditionals(false)
+    setAll(false)
   };
 
+    const handleAditionals = () => {
+      setAditionals(true);
+      setCategory(null);
+      dispatch(getActiveAditionals(commerce.id));
+      setAll(false);
+    };
+
   useEffect(() => {
-    // localStorage.setItem("cart", JSON.stringify(cant));
-    dispatch(addCart(cant))
+    dispatch(addCart(cant));
     let id = dataDecrypt(localStorage.getItem("Pos")).commerce;
-    // dispatch(getCommerce(id));
-    dispatch(getActiveMenus(commerce.id));
+    dispatch(getActiveMenus(commerce.id, setIsLoading));
+    dispatch(getActiveProducts(commerce.id))
     dispatch(getAllCategorys(commerce.id));
   }, [cant]);
 
-  //! Tener en cuenta si el local esta abierto o cerrado
-
   return (
     <main className={s.home}>
-      <Banner setCategory={setCategory} />
+      <Banner setCategory={setCategory} setAditionals={setAditionals} setAll={setAll}/>
+      {isLoading ? (
+        <LoadingPage />
+      ) : (
         <>
           <SearchBar />
-          <Categories handleCategory={handleCategory} category={category} />
-          <Products changeStyle={changeStyle} commercePlan={commerce.plan} />
+          <Categories
+            handleCategory={handleCategory}
+            category={category}
+            aditionals={aditionals}
+            setAditionals={setAditionals}
+            setCategory={setCategory}
+            all={all}
+            setAll={setAll}
+            handleAditionals={handleAditionals}
+          />
+          <Products
+            changeStyle={changeStyle}
+            commercePlan={commerce.plan}
+            aditionals={aditionals}
+          />
           {commerce.plan !== "m1" && <Footer red={red} />}
         </>
+      )}
     </main>
   );
 }

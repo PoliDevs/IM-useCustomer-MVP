@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { ReactComponent as SearchIcon } from "../../../assets/SearchIcon.svg";
 import { ReactComponent as XIcon } from "../../../assets/xIcon.svg";
-import { useDispatch} from "react-redux";
-import { getAllProducts, searchProduct } from "../../../redux/actions";
+import { useDispatch, useSelector} from "react-redux";
+import { clearSearchProduct, getActiveMenus, getAllProducts, searchProduct } from "../../../redux/actions";
 import { useTranslation } from "react-i18next";
 import SearchField from "../../atoms/SearchField/SearchField";
 import s from "./SearchBar.module.scss";
@@ -10,21 +10,25 @@ import s from "./SearchBar.module.scss";
 export default function SearchBar() {
   const [inputValue, setInputValue] = useState("");
   const dispatch = useDispatch();
+  const commerceId = useSelector((state) => state.commerce.id);
 
   const [t, i18n] = useTranslation(["global"]);
 
 
   const handleDelete = () => {
     setInputValue("");
-    dispatch(getAllProducts())
+    dispatch(getActiveMenus(commerceId))
+    dispatch(clearSearchProduct())
   };
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
-    if (inputValue.length > 2){
+    if (inputValue.length > 1){
       dispatch(searchProduct(inputValue))
-    }else {
-      dispatch(getAllProducts())
+    }
+    else {
+      dispatch(getActiveMenus(commerceId))
+      dispatch(clearSearchProduct());
     }
   };
 

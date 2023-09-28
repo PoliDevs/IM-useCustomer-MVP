@@ -8,55 +8,116 @@ import dotenv from "dotenv";
 export default function useModal(initialValue = false) {
   const [isOpen, setIsOpen] = useState(initialValue);
   const [productData, setProductData] = useState({
-    name: '',
+    name: "",
     price: 0,
-    image: '',
-    description: '',
-  })
+    image: "",
+    description: "",
+  });
 
-
-  
-  const openModal = (name, price, image, description)=> {
+  const openModal = (
+    name,
+    price,
+    image,
+    description,
+    id,
+    promotion,
+    discount,
+    surcharge,
+    product,
+    aditional,
+    menuTypeId,
+    categoryId,
+    unitTypeId,
+    productTypeId,
+    supplierId,
+    allergenType,
+    careful
+  ) => {
     setIsOpen(true);
     setProductData({
       name: name,
       price: price,
       image: image,
       description: description,
+      id: id,
+      promotion: promotion,
+      discount: discount,
+      surcharge: surcharge,
+      product: product,
+      aditional: aditional,
+      menuTypeId: menuTypeId,
+      categoryId: categoryId,
+      unitTypeId: unitTypeId,
+      productTypeId: productTypeId,
+      supplierId: supplierId,
+      allergenType: allergenType,
+      careful: careful,
     });
   };
 
-  const closeModal = ()=> setIsOpen(false);
+  const closeModal = () => setIsOpen(false);
 
-  return {isOpen, openModal, closeModal, productData}
+  return { isOpen, openModal, closeModal, productData };
 }
 
 export function useAmountControls() {
   const dispatch = useDispatch();
 
-  const addToCart = (image, name, description, price, amount, comment) => {
-    const product = {
+  const addToCart = (
+    image,
+    name,
+    description,
+    price,
+    amount,
+    comment,
+    id,
+    promotion,
+    discount,
+    surcharge,
+    product,
+    aditional,
+    menuTypeId,
+    categoryId,
+    unitTypeId,
+    productTypeId,
+    supplierId,
+    allergenType,
+    careful
+  ) => {
+    const item = {
       image: image,
       name: name,
       description: description,
       price: price,
       amount: amount,
       comment: comment,
+      id: id,
+      promotion: promotion,
+      discount: discount,
+      surcharge: surcharge,
+      product: product,
+      aditional: aditional,
+      menuTypeId: menuTypeId,
+      categoryId: categoryId,
+      unitTypeId: unitTypeId,
+      productTypeId: productTypeId,
+      supplierId: supplierId,
+      allergenType: allergenType,
+      careful: careful,
     };
-    dispatch(addProduct(product));
+    dispatch(addProduct(item));
   };
 
   const removeFromCart = (name) => {
     dispatch(removeProduct(name));
   };
 
-
-  return {addToCart, removeFromCart}
+  return { addToCart, removeFromCart };
 }
 
 export function useRating() {
   const [stars, setStars] = useState(0);
-  const starsArray = [...Array(5)]
+  const starsArray = [...Array(5)];
 
   const handleStars = (currentRate) => {
     setStars(currentRate);
@@ -65,31 +126,156 @@ export function useRating() {
   return { starsArray, stars, handleStars };
 }
 
-export function useTermsAndConditions () {
+export function useTermsAndConditions() {
   const [loginModal, setLoginModal] = useState(false);
 
-  const openLoginModal = ()=>{
+  const openLoginModal = () => {
     setLoginModal(true);
-  }
+  };
 
-  const closeLoginModal = ()=>{
+  const closeLoginModal = () => {
     setLoginModal(false);
-  }
-  return { loginModal, openLoginModal, closeLoginModal}
+  };
+  return { loginModal, openLoginModal, closeLoginModal };
 }
 
-export const randomIcon = ()=>{
-  let icon = categoryIcons[Math.floor(Math.random()*categoryIcons.length)];
-  return icon
-}
-export const dataDecrypt = (data)=>{
-const password = import.meta.env.VITE_REACT_APP_KEY;
-const result = CryptoJS.AES.decrypt(data, password);
-const originalText = result.toString(CryptoJS.enc.Utf8).split("/");
-const urlInfo = {
-  commerce: originalText[0],
-  sector: originalText[1],
-  table: originalText[2],
+export const randomIcon = () => {
+  let icon = categoryIcons[Math.floor(Math.random() * categoryIcons.length)];
+  return icon;
 };
-return urlInfo;
+export const dataDecrypt = (data) => {
+  const password = import.meta.env.VITE_REACT_APP_KEY;
+  const result = CryptoJS.AES.decrypt(data, password);
+  const originalText = result.toString(CryptoJS.enc.Utf8).split("/");
+  const urlInfo = {
+    commerce: originalText[0],
+    sector: originalText[1],
+    table: originalText[2],
+  };
+  return urlInfo;
+};
+
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
+import { all_app_texts } from "./language";
+
+//! funcionando -- falta pasar como variable from y to
+export async function translateText(lang = "en", all_app_texts) {
+  //! obtengo todos los valores de un array con objetos
+  const arrayTexts = all_app_texts.map((obj) => {
+    const clave = Object.keys(obj)[0];
+    const valor = obj[clave];
+    return valor;
+  });
+  //! les doy la forma que requiere microsoft translator
+  const formattedTextArray = arrayTexts.map((text) => ({ text }));
+  const objetoResultado = {};
+  //! hago la traduccion
+  return await axios({
+    baseURL: "https://api.cognitive.microsofttranslator.com",
+    url: "/translate",
+    method: "post",
+    headers: {
+      "Ocp-Apim-Subscription-Key": "7cb91588e50b4b12beffd5ab477bce1a",
+      "Ocp-Apim-Subscription-Region": "brazilsouth",
+      "Content-type": "application/json",
+      "X-ClientTraceId": uuidv4().toString(),
+    },
+    params: {
+      "api-version": "3.0",
+      from: "es",
+      to: lang,
+    },
+    data: formattedTextArray,
+    responseType: "json",
+  }).then(function (response) {
+    // console.log(JSON.stringify(response.data, null, 4));
+    const all_app_texts_translated = all_app_texts.map((o, index) => {
+      const key = Object.keys(o)[0];
+      return { [key]: response.data[index].translations[0].text };
+    });
+    // const objetoResultado = {};
+
+    for (const obj of all_app_texts_translated) {
+      Object.assign(objetoResultado, obj);
+    }
+    //! resultado en forma de objeto
+    return objetoResultado;
+  });
 }
+
+export const formattedOrder = (
+  cart,
+  productsList,
+  sectorID,
+  tableID,
+  commerceID,
+  tablePrice,
+  sectorPrice,
+  totalPrice,
+  setPrice,
+  setOrder
+) => {
+  //!todas las promociones, descuentos y recargos
+  let totalPromotion = 0;
+  let totalDiscount = 0;
+  let totalSurcharge = 0;
+  //!items segun tipo
+  let productos = [];
+  let adicionales = [];
+  let menus = [];
+  //! ordeno items por tipo y sumo promociones, descuentos y recargos
+  cart.map((p) => {
+    if (!p.menuTypeId) {
+      let result = productsList.findIndex((f) => f.name === p.name);
+      if (result !== -1) {
+        productos.push(p);
+      } else {
+        adicionales.push(p);
+      }
+    } else {
+      menus.push(p);
+    }
+    totalPromotion = totalPromotion + p.promotion * p.amount;
+    totalDiscount = totalDiscount + p.discount * p.amount;
+    totalSurcharge = totalSurcharge + p.surcharge * p.amount;
+  });
+  let sectorId = sectorID;
+  let table = tableID;
+  let commerceId = commerceID;
+  //!calculo el precio real
+  let precioMenu = totalPrice - (totalPrice * totalPromotion) / 100;
+  precioMenu = precioMenu - (precioMenu * totalDiscount) / 100;
+  precioMenu = precioMenu + (precioMenu * totalSurcharge) / 100;
+  let partial = precioMenu;
+  //!calculo precio con costo de mesa
+  precioMenu = precioMenu - (precioMenu * tablePrice.tablePromotion) / 100;
+  precioMenu = precioMenu - (precioMenu * tablePrice.tableDiscount) / 100;
+  precioMenu = precioMenu + (precioMenu * tablePrice.tableSurcharge) / 100;
+  //!calculo precio con costo de sector
+  precioMenu = precioMenu - (precioMenu * sectorPrice.sectorPromotion) / 100;
+  precioMenu = precioMenu - (precioMenu * sectorPrice.sectorDiscount) / 100;
+  precioMenu = precioMenu + (precioMenu * sectorPrice.sectorSurcharge) / 100;
+  let finalPrice = precioMenu;
+  setPrice({
+    totalPromotion,
+    totalDiscount,
+    totalSurcharge,
+    partial,
+    finalPrice,
+  });
+  //! Creo una nueva order
+  setOrder({
+    productos: productos,
+    adicionales: adicionales,
+    menus: menus,
+    totalPromotion: totalPromotion,
+    totalDiscount: totalDiscount,
+    totalSurcharge: totalSurcharge,
+    sectorId: sectorId,
+    table: table,
+    commerceId: commerceId,
+    totalPrice: precioMenu,
+  });
+  // return order;
+};
