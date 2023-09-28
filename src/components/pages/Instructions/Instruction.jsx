@@ -7,6 +7,7 @@ import SubTitle from '../../atoms/SubTitle/SubTitle';
 import LinkButton from '../../atoms/LinkButton/LinkButton';
 import Ul from '../../molecules/Ul/Ul';
 import s from "./Instruction.module.scss"
+import ContactFooter from '../../molecules/ContactFooter/ContactFooter';
 
 export default function Instruction() {
   const url = localStorage.getItem("QrCode");
@@ -37,6 +38,7 @@ export default function Instruction() {
         centered={true}
       />
       </div>
+      <ContactFooter/>
     </div>
   );
 }

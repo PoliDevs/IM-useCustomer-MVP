@@ -8,26 +8,26 @@ import { Provider } from "react-redux";
 import store from './redux/store/index.js';
 import { I18nextProvider } from 'react-i18next';
 import i18next from 'i18next';
-import global_es from './translations/es/global.json';
-import global_en from './translations/en/global.json';
-import global_pt from './translations/port/global.json';
-import global_pt_bra from './translations/pt-br/global.json';
+import global_Es from './translations/Es/global.json';
+import global_En from './translations/En/global.json';
+import global_Pt from './translations/Por/global.json';
+import global_Pt_bra from './translations/Pt-br/global.json';
 
 i18next.init({
   interpolation:{escapeValue:false},
-  lng:"es",
+  lng:"Es",
   resources:{
-    es:{
-      global:global_es
+    Es:{
+      global:global_Es
     },
-    en:{
-      global:global_en
+    En:{
+      global:global_En
     },
-    port:{
-      global:global_pt
+    Por:{
+      global:global_Pt
     },
-    pt_bra:{
-      global:global_pt_bra
+    Pt_bra:{
+      global:global_Pt_bra
     }
   }
 });

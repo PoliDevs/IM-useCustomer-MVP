@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getActiveMenus, getAllProducts } from "../../../redux/actions/index";
+import { getActiveMenus, getAllProducts, setFiltro } from "../../../redux/actions/index";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as ArrowBackWhite } from "../../../assets/ArrowBackWhite.svg";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +23,7 @@ export default function Banner({ setCategory, arrow }) {
       onClick={() => {
         if (arrow) return;
         // dispatch(getAllProducts()); 
+        dispatch(setFiltro(""))
         dispatch(getActiveMenus(commerce.id))
         setCategory("");
       }}

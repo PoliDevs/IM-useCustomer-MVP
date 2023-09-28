@@ -13,6 +13,7 @@ import useWindowSize from "react-use/lib/useWindowSize";
 import s from "./Review.module.scss";
 import FeedbackButton from "../../atoms/FeedbackButton/FeedbackButton";
 import { useSelector } from "react-redux";
+import StepProgressBar from "../../molecules/StepProgressBar/StepProgressBar";
 
 export default function Review() {
   const [comment, setComment] = useState("");
@@ -41,9 +42,12 @@ export default function Review() {
         )}
         <img src={logo} className={s.logo} />
         <div>
-        <HugeTitle text={commerceInfo.name} centered={true} />
-        <SubTitle text={t("rating.preparingOrder")} />
+        <HugeTitle text={commerceInfo.name} centered={true} review={true}/>
+        <SubTitle text={t("rating.preparingOrder")} review={true}/>
         </div>
+        {/* <div className={s.progressBar}> */}
+        <StepProgressBar/>
+        {/* </div> */}
       </header>
       <article className={s.article}>
         <ImenuLogo style={{ margin: "0 auto", height: "36px" }} />

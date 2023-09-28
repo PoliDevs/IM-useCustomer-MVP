@@ -10,6 +10,10 @@ import {
   GET_ALL_CATEGORIES,
   GET_SEARCHED_PRODUCT,
   SET_TABLE,
+  REMOVE_USER,
+  ADD_CART,
+  SET_SECTOR,
+  GET_STATUS,
 } from "./actionTypes";
 import { ProductsInfo } from "../../utils/Constants";
 
@@ -29,6 +33,20 @@ export function searchProduct(product) {
 }
 
 ////////////////////* Cart Actions Creators *////////////////////
+
+export function addCart(cart) {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: ADD_CART,
+        payload: cart
+      })
+    } catch (error) {
+      console.error(error);
+    }
+  }
+}
+
 export function addProduct(product) {
   return async function (dispatch) {
     try {
@@ -105,6 +123,7 @@ export async function postOrder(order){
 export function setTable(table) {
   return async function (dispatch) {
     try {
+      //llamado a api para consultar datos de Pos
       return dispatch({
         type: SET_TABLE,
         payload: table
@@ -113,6 +132,20 @@ export function setTable(table) {
       console,error(error)
     }
   }
+}
+
+export function setSector(sector) {
+  return async function (dispatch) {
+    try {
+      //llamado a api para consultar datos de Pos
+      return dispatch({
+        type: SET_SECTOR,
+        payload: sector,
+      });
+    } catch (error) {
+      console, error(error);
+    }
+  };
 }
 
 export function getCommerce(id) {
@@ -131,11 +164,27 @@ export function getCommerce(id) {
   };
 }
 
+export function getStatus(id) {
+  return async function (dispatch) {
+    try {
+      let status = await axios.get(
+        `http://localhost:3001/commerce/openCommerce/${id}`
+      );
+      return dispatch({
+        type: GET_STATUS,
+        payload: status.data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+}
+
 export function getActiveMenus(id) {
   return async function (dispatch) {
     try {
       let allActiveMenus = await axios.get(
-        "http://localhost:3001/menu/all_active"
+        `http://localhost:3001/menu/all_active/${id}`
       );
       return dispatch({
         type: GET_ACTIVE_MENUS,
@@ -147,6 +196,28 @@ export function getActiveMenus(id) {
   };
 }
 
+//!comentado hasta que arreguen este nuevo endpoint
+// export function getActiveMenus(id) {
+//   return async function (dispatch) {
+//     try {
+//       let date = new Date().toJSON().slice(0, 10);
+//       const info = {
+//         commerceId: id,
+//         date: date,
+//       };
+//       let allActiveMenus = await axios.get(
+//         "http://localhost:3001/menu/menuCommerceActive",
+//         info
+//       );
+//       return dispatch({
+//         type: GET_ACTIVE_MENUS,
+//         payload: { menus: allActiveMenus.data},
+//       });
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+// }
 export function getActiveDishes(id) {
   return async function (dispatch) {
     try {
@@ -163,11 +234,11 @@ export function getActiveDishes(id) {
   };
 }
 
-export function getAllCategorys() {
+export function getAllCategorys(id) {
   return async function (dispatch) {
     try {
       let allActiveCategorys = await axios.get(
-        "http://localhost:3001/category/all_active"
+        `http://localhost:3001/category/all_active/${id}`
       );
       return dispatch({
         type: GET_ALL_CATEGORIES,
@@ -192,20 +263,17 @@ export function filterCategory(id) {
   };
 }
 
+export const setFiltro = (filtroPor) => {
+  return {
+    type: "FILTER_BY_CATEGORY",
+    payload: filtroPor,
+  };};
+
 
 ////////////////////* User Actions Creators *////////////////////
 export function setUser(user) {
   return async function (dispatch) {
     try {
-      //! revisar endpoint con Luis
-      let info= {
-        email: user.email
-      }
-      console.log("info", info);
-      let response = await axios.post(
-        "http://localhost:3001/loginaccount/loginG", info
-      );
-      console.log(response.data);
       return dispatch({
         type: SET_USER,
         payload: user,
@@ -214,4 +282,16 @@ export function setUser(user) {
       console.error(error);
     }
   };
+}
+
+export function removeUser () {
+  return async function (dispatch) {
+    try {
+      return dispatch ({
+        type: REMOVE_USER,
+      })
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }

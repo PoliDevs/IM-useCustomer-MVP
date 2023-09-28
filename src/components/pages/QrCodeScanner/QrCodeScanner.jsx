@@ -30,8 +30,8 @@ export default function Qr({scanResult, setScanResult}) {
     scanner.render(success, error);
     //{ facingMode: "environment" } para preferir camara trasera
     function success(result) {
-      scanner.clear(); //desinyecta el scanner del dom
-      localStorage.setItem("QrCode", result);
+      scanner.clear();
+      //!refactorizar segun url en produccion
       navigate(result.substring(21));
     }
 

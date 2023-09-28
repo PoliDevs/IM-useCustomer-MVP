@@ -16,8 +16,7 @@ export default function Login() {
   const { signInWithGoogle } = useFirebase(setError);
   return (
     <main className={s.mainContainer}>
-      {!error ? (
-        <>
+      {!error ? <>
           <header className={s.loginContainer}>
             <SubTitle text={t("login.firstStep")} bold={true} />
             <Paragraph text={t("login.access")} centered={true} />
@@ -35,8 +34,7 @@ export default function Login() {
             />
             <h2 className={s.bigText}>{t("login.sloganBig")}</h2>
           </section>
-        </>
-      ) : (
+        </> : (
         <Error active={error} />
       )}
     </main>
