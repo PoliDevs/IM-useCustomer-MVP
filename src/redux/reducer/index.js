@@ -1,4 +1,4 @@
-import { dataDecrypt } from "../../utils/Functions";
+import { dataDecrypt, translateText } from "../../utils/Functions";
 import CryptoJS from "crypto-js";
 import {
   ADD_PRODUCT,
@@ -16,8 +16,15 @@ import {
   ADD_CART,
   SET_SECTOR,
   GET_STATUS,
+  GET_ACTIVE_PRODUCTS,
+  GET_ALL_ADITIONALS,
+  CHANGE_LANGUAGE,
+  SET_TABLE_PRICE,
+  SET_SECTOR_PRICE,
+  CLEAR_SEARCH_PRODUCT,
 } from "../actions/actionTypes";
 import dotenv from "dotenv";
+import { all_app_texts } from "../../utils/language";
 
 
 const getEncriptedItem = (item)=> {
@@ -41,12 +48,18 @@ const initalState = {
     : 0,
   allProducts: [],
   allDishes: [],
+  products: [],
+  allAditionals: [],
   allCategories: [],
   filtroPor: "",
+  search: [],
   cart: localStorage.getItem("cart") ? getEncriptedItem("cart") : [],
   user: localStorage.getItem("user") ? getEncriptedItem("user") : {},
   commerce: localStorage.getItem("CM") ? getEncriptedItem("CM") : {},
-  status: false
+  status: false,
+  language: localStorage.getItem("Lang") ? await translateText(localStorage.getItem("Lang"), all_app_texts) : "es",
+  tablePrice: {},
+  sectorPrice: {}
 };
 
 export const rootReducer = (state = initalState, action) => {
@@ -57,17 +70,22 @@ export const rootReducer = (state = initalState, action) => {
     case SET_SECTOR:
       return { ...state, sector: action.payload };
     case GET_SEARCHED_PRODUCT: {
-      const copy = [...state.allProducts];
-      const results = state.allProducts.filter((p) =>
-        p.altName.toLowerCase().includes(action.payload.toLowerCase())
+      const copy = [...state.allProducts, ...state.products, ...state.allAditionals];
+      // const results = state.allProducts.filter((p) =>
+      const results = copy.filter((p)=>
+        p.name.toLowerCase().includes(action.payload.toLowerCase())
       );
       if (results.length) {
-        return (state = { ...state, allProducts: results });
+        // return (state = { ...state, allProducts: results });
+        return (state = {...state, search: results})
       } else {
-        state = { ...state, allProducts: copy };
+        // state = { ...state, allProducts: copy };
+        return state;
       }
-      return state;
+      // return state;
     }
+    case CLEAR_SEARCH_PRODUCT:
+      return {...state, search: []}
     case ADD_CART:
       {
         const clave = import.meta.env.VITE_REACT_APP_KEY;
@@ -148,11 +166,11 @@ export const rootReducer = (state = initalState, action) => {
       localStorage.setItem("CM", objetoCifrado);
       return { ...state, commerce: CM };
     }
-    case GET_STATUS: 
-    return {...state, status: action.payload}
+    case GET_STATUS:
+      return { ...state, status: action.payload };
     case GET_ACTIVE_MENUS:
       {
-        state = { ...state, allProducts: action.payload.menus };
+        state = { ...state, allProducts: action.payload };
       }
       return state;
     case GET_ACTIVE_DISHES:
@@ -164,10 +182,17 @@ export const rootReducer = (state = initalState, action) => {
         //state = { ...state, allProducts: state.allProducts.concat(allActive) };//!descomentar para agregar los platos activos del comercio
       }
       return state;
+    case GET_ACTIVE_PRODUCTS:
+      {
+        state = { ...state, products: action.payload };
+      }
+      return state;
     case GET_ALL_CATEGORIES:
       return { ...state, allCategories: action.payload };
+    case GET_ALL_ADITIONALS:
+      return { ...state, allAditionals: action.payload };
     case FILTER_CATEGORY: {
-      const products = [...state.allProducts];
+      const products = [...state.allProducts, ...state.allDishes];
       const filteredResults = products.filter(
         (p) => p.category.id === action.payload
       );
@@ -181,6 +206,17 @@ export const rootReducer = (state = initalState, action) => {
         state = { ...state, user: "" };
       }
       return state;
+    case CHANGE_LANGUAGE:
+      {
+        localStorage.setItem("Lang", action.payload.lang);
+        // state = { ...state, language: action.payload };
+        state = { ...state, language: action.payload.language };
+      }
+      return state;
+    case SET_TABLE_PRICE:
+      return { ...state, tablePrice: action.payload };
+    case SET_SECTOR_PRICE:
+      return { ...state, sectorPrice: action.payload };
     default:
       return state;
   }

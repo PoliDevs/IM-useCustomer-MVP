@@ -8,33 +8,37 @@ import LoginButton from "../../atoms/LoginButton/LoginButton";
 import HugeTitle from "../../atoms/HugeTitle/HugeTitle";
 import Error from "../Error/Error";
 import s from "./Login.module.scss";
+import { useSelector } from "react-redux";
 
 export default function Login() {
+  const language = useSelector((state)=> state.language);
   const [error, setError] = useState(false);
   const [t, i18n] = useTranslation(["global"]);
   // const dispatch = useDispatch();
   const { signInWithGoogle } = useFirebase(setError);
   return (
     <main className={s.mainContainer}>
-      {!error ? <>
+      {!error ? (
+        <>
           <header className={s.loginContainer}>
-            <SubTitle text={t("login.firstStep")} bold={true} />
-            <Paragraph text={t("login.access")} centered={true} />
+            <SubTitle text={language.login_firstStep} bold={true} />
+            <Paragraph text={language.login_access} centered={true} />
             <GoogleButton
-              text={t("login.googleButton")}
+              text={language.login_googleButton}
               signInWithGoogle={signInWithGoogle}
             />
-            <LoginButton text={t("login.noGoogleButton")} />
+            <LoginButton text={language.login_noGoogleButton} />
           </header>
           <section className={s.sloganContainer}>
             <HugeTitle
-              text={t("login.slogan")}
+              text={language.login_slogan}
               secundary={true}
               noWeight={true}
             />
-            <h2 className={s.bigText}>{t("login.sloganBig")}</h2>
+            <h2 className={s.bigText}>{language.login_sloganBig}</h2>
           </section>
-        </> : (
+        </>
+      ) : (
         <Error active={error} />
       )}
     </main>

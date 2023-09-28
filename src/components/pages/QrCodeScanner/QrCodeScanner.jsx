@@ -6,10 +6,10 @@ import { useTranslation } from "react-i18next";
 import HugeTitle from "../../atoms/HugeTitle/HugeTitle";
 import s from "./QrCodeScanner.module.scss";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
-
+import { useSelector } from "react-redux";
 export default function Qr({scanResult, setScanResult}) {
+  const language = useSelector((state)=> state.language)
   const navigate = useNavigate();
-
     const [t, i18n] = useTranslation(["global"]);
 
   useEffect(() => {
@@ -41,14 +41,9 @@ export default function Qr({scanResult, setScanResult}) {
   }, []);
 
   return (
-    <div
-      className={s.mainContainer}
-    >
-      <div
-        id="reader"
-        className={s.scannerContainer}
-      ></div>
-      <SubTitle text={t("QrScanner.title")}/>
+    <div className={s.mainContainer}>
+      <div id="reader" className={s.scannerContainer}></div>
+      <SubTitle text={language.QrScanner_title} />
     </div>
   );
 }

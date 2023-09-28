@@ -6,19 +6,22 @@ import Modal from "../Modal/Modal";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import s from "./Products.module.scss";
 
-export default function Products({ changeStyle, commercePlan }) {
+export default function Products({ changeStyle, commercePlan, aditionals }) {
   const allproducts = useSelector((state) => {
-    const { allProducts, filtroPor } = state;
-    if (!filtroPor) {
-      return allProducts;
+    const { allProducts, filtroPor, allAditionals, products, search } = state;
+    if (search.length) return search;
+    
+    if (!filtroPor && !aditionals) {
+      return allProducts.concat(products);
     }
+    if (!filtroPor && aditionals) return allAditionals;
+
     return allProducts.filter((item) => item.category.id === filtroPor);
   });
   const { isOpen, openModal, closeModal, productData } = useModal(false);
-
   return (
     <>
-      {allproducts ? (
+      {allproducts.length ? (
         <ScrollContainer className={s.productsContainer}>
           {allproducts?.map((i, index) => (
             <Product
@@ -26,12 +29,25 @@ export default function Products({ changeStyle, commercePlan }) {
               key={index}
               // name={i.altName}
               name={i.name}
-              description={i.description}
+              description={i.description ? i.description : ""}
               // price={i.price}
               price={i.cost}
               // bg={i.src}
               bg={i.photo}
+              id={i.id}
+              promotion={i.promotion}
+              discount={i.discount}
+              surcharge={i.surcharge}
               openModal={openModal}
+              product={i.product}
+              aditional={i.aditional}
+              menuTypeId={i.menuType ? i.menuType.id : ""}
+              categoryId={i.category ? i.category.id : ""}
+              unitTypeId={i.unitType ? i.unitType.id : ""}
+              productTypeId={i.productType ? i.productType.id : ""}
+              supplierId={i.supplier ? i.supplier.id : ""}
+              allergenType={i.allergenType ? i.allergenType : ""}
+              careful={i.careful ? i.careful : ''}
             />
           ))}
         </ScrollContainer>

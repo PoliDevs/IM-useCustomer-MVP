@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 
 export default function ClosedCommerce() {
   const commerceName = useSelector((state) => state.commerce.name);
+  const language = useSelector((state)=> state.language);
+
   return (
     <main className={s.closedContainer}>
       <div className={s.contentContainer}>
@@ -18,15 +20,15 @@ export default function ClosedCommerce() {
         </div>
         <div className={s.textContainer}>
           <HugeTitle text={`${commerceName}`} centered={true} />
-          <h2 className={s.isClosed}>Se encuentra cerrado</h2>
-          <SubTitle text={"¡Vuelve pronto!"} />
+          <h2 className={s.isClosed}>{language.closed_isClosed}</h2>
+          <SubTitle text={language.closed_comeBack} />
           <hr />
-          <Paragraph text={"impulsado por "} gap={true}>
+          <Paragraph text={language.welcome_poweredby} gap={true}>
             <span className={s.imenuSpan}> i menu</span>
           </Paragraph>
           <div className={s.helpContainer}>
             <Help className={s.helpIcon} />
-            <Link className={s.link}>¿Necesitas ayuda?</Link>
+            <Link className={s.link}>{language.closed_needHelp}</Link>
           </div>
         </div>
       </div>

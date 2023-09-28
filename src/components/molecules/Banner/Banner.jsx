@@ -8,8 +8,9 @@ import burger from "../../../assets/Burgers.svg";
 import s from "./Banner.module.scss";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 
-export default function Banner({ setCategory, arrow }) {
-  const table = useSelector((state)=> state.table);
+export default function Banner({ setCategory, arrow, setAditionals, setAll }) {
+  const language = useSelector((state)=> state.language);
+  const table = useSelector((state) => state.table);
   const commerce = useSelector((state) => state.commerce);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,10 +23,12 @@ export default function Banner({ setCategory, arrow }) {
       style={{ backgroundImage: `url(${burger})` }}
       onClick={() => {
         if (arrow) return;
-        // dispatch(getAllProducts()); 
-        dispatch(setFiltro(""))
-        dispatch(getActiveMenus(commerce.id))
+        // dispatch(getAllProducts());
+        dispatch(setFiltro(""));
+        dispatch(getActiveMenus(commerce.id));
         setCategory("");
+        setAditionals(false);
+        setAll(true);
       }}
     >
       <div className={s.content}>
@@ -44,7 +47,7 @@ export default function Banner({ setCategory, arrow }) {
           <SubTitle text={commerce.name} alignment={"left"} />
           <Paragraph
             alignment={"left"}
-            text={`${t("banner.table")} ${table}`}
+            text={`${language.banner_table} ${table}`}
             secundary={true}
           />
         </div>

@@ -4,6 +4,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/actions";
 import { useNavigate } from "react-router-dom";
+// import { initialize } from "../utils/Firebase_inicialize";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -17,6 +18,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+// const app = initialize(firebaseConfig, initializeApp);
 export const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 

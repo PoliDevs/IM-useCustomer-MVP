@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import QrCodeScanner from "./components/pages/QrCodeScanner/QrCodeScanner";
 import WelcomePage from "./components/pages/WelcomePage/WelcomePage";
@@ -12,9 +12,19 @@ import Mercadopago from "./components/pages/Mercadopago/Mercadopago";
 import Login from "./components/pages/Login/Login";
 import Language from "./components/pages/Language/Language";
 import ProtectedRoutes from "./components/atoms/ProtectedRoutes/ProtectedRoutes";
+import { useDispatch } from "react-redux";
+import { changeLanguage } from "./redux/actions";
+
 
 function App() {
   const [scanResult, setScanResult] = useState();
+  const dispatch = useDispatch();
+  const lang = localStorage.getItem("Lang") ? localStorage.getItem("Lang") : 'es';
+  
+  useEffect(() => {
+    dispatch(changeLanguage(lang))  
+  }, [])
+  
   return (
     <>
       <Routes>

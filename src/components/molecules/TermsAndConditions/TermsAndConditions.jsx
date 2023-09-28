@@ -1,17 +1,19 @@
+import { useSelector } from "react-redux";
 import { ReactComponent as XIcon } from "../../../assets/xIcon.svg"
 import SmallText from "../../atoms/SmallText/SmallText";
 import SubTitle from '../../atoms/SubTitle/SubTitle';
 import s from './TermsAndConditions.module.scss';
 
 export default function TermsAndConditions({accepted, setAccepted, modal, setModal}) {
+  const language = useSelector((state)=> state.language);
 
 
   return (
     <main className={s.modalContainer}>
       <section className={s.modal}>
-        <XIcon className={s.closeIcon} onClick={()=> setModal(false)} />
+        <XIcon className={s.closeIcon} onClick={() => setModal(false)} />
         <SubTitle
-          text={"Términos y condiciones"}
+          text={language.languages_termsConditions}
           bold={true}
           alignment={"left"}
         />
@@ -156,18 +158,27 @@ export default function TermsAndConditions({accepted, setAccepted, modal, setMod
             onClick={() => setAccepted(!accepted)}
           />
           <SmallText
-            text={"Acepto los términos y condiciones de uso"}
+            text={language.languages_acceptConditions}
             noMargin={true}
           />
         </div>
-        <button className={`${s.button}`} onClick={() => {setAccepted(true);setModal(false)}}>
-          Aceptar
+        <button
+          className={`${s.button}`}
+          onClick={() => {
+            setAccepted(true);
+            setModal(false);
+          }}
+        >
+          {language.languages_acceptButton}
         </button>
         <button
           className={`${s.button} ${s.light}`}
-          onClick={() => {setModal(false); setAccepted(false)}}
+          onClick={() => {
+            setModal(false);
+            setAccepted(false);
+          }}
         >
-          Cancelar
+          {language.languages_cancelButton}
         </button>
       </section>
     </main>

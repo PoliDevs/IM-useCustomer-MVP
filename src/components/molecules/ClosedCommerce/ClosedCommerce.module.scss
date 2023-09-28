@@ -2,7 +2,7 @@
 @import "../../../scss/typography.scss";
 
 .closedContainer {
-  min-height: 100vh;
+  min-height: calc(100vh - 60px);
   min-width: 100vw;
   display: flex;
   flex-direction: column;
