@@ -8,11 +8,13 @@ import s from "./Products.module.scss";
 
 export default function Products({ changeStyle, commercePlan, aditionals }) {
   const allproducts = useSelector((state) => {
-    const { allProducts, filtroPor, allAditionals, products } = state;
+    const { allProducts, filtroPor, allAditionals, products, search } = state;
+    if (search.length) return search;
+    
     if (!filtroPor && !aditionals) {
       return allProducts.concat(products);
     }
-    if (aditionals) return allAditionals;
+    if (!filtroPor && aditionals) return allAditionals;
 
     return allProducts.filter((item) => item.category.id === filtroPor);
   });
@@ -32,7 +34,20 @@ export default function Products({ changeStyle, commercePlan, aditionals }) {
               price={i.cost}
               // bg={i.src}
               bg={i.photo}
+              id={i.id}
+              promotion={i.promotion}
+              discount={i.discount}
+              surcharge={i.surcharge}
               openModal={openModal}
+              product={i.product}
+              aditional={i.aditional}
+              menuTypeId={i.menuType ? i.menuType.id : ""}
+              categoryId={i.category ? i.category.id : ""}
+              unitTypeId={i.unitType ? i.unitType.id : ""}
+              productTypeId={i.productType ? i.productType.id : ""}
+              supplierId={i.supplier ? i.supplier.id : ""}
+              allergenType={i.allergenType ? i.allergenType : ""}
+              careful={i.careful ? i.careful : ''}
             />
           ))}
         </ScrollContainer>

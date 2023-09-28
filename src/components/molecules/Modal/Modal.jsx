@@ -10,6 +10,7 @@ import s from "./Modal.module.scss";
 import { useSelector } from "react-redux";
 
 export default function Modal({ productData,  isOpen, closeModal, changeStyle}) {
+  const cart = useSelector((state)=> state.cart);
   const language = useSelector((state)=> state.language);
   const [comment, setComment] = useState("");
   const [amount, setAmount] = useState(0);
@@ -93,9 +94,22 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
               productData.name,
               productData.description,
               productData.price,
-              // productData.cost,
               amount,
-              comment
+              comment,
+              productData.id,
+              productData.promotion,
+              productData.discount,
+              productData.surcharge,
+              productData.product,
+              productData.aditional,
+              productData.menuTypeId,
+              productData.categoryId,
+              productData.unitTypeId,
+              productData.productTypeId,
+              productData.supplierId,
+              productData.allergenType,
+              productData.careful
+              // productData.cost,
             );
             changeStyle();
           }}

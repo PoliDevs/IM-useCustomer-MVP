@@ -18,10 +18,13 @@ export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
 export const GET_ALL_ADITIONALS = "GET_ALL_ADITIONALS";
 export const FILTER_CATEGORY = "FILTER_CATEGORY";
 export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
+export const SET_TABLE_PRICE = "SET_TABLE_PRICE";
+export const SET_SECTOR_PRICE = "SET_SECTOR_PRICE";
 
 ////////////////////* SearchBar Action type *////////////////////
 
 export const GET_SEARCHED_PRODUCT = "GET_SEARCHED_PRODUCT";
+export const CLEAR_SEARCH_PRODUCT = "CLEAR_SEARCH_PRODUCT";
 
 ////////////////////* User Action type *////////////////////
 

@@ -14,13 +14,44 @@ export default function useModal(initialValue = false) {
     description: "",
   });
 
-  const openModal = (name, price, image, description) => {
+  const openModal = (
+    name,
+    price,
+    image,
+    description,
+    id,
+    promotion,
+    discount,
+    surcharge,
+    product,
+    aditional,
+    menuTypeId,
+    categoryId,
+    unitTypeId,
+    productTypeId,
+    supplierId,
+    allergenType,
+    careful
+  ) => {
     setIsOpen(true);
     setProductData({
       name: name,
       price: price,
       image: image,
       description: description,
+      id: id,
+      promotion: promotion,
+      discount: discount,
+      surcharge: surcharge,
+      product: product,
+      aditional: aditional,
+      menuTypeId: menuTypeId,
+      categoryId: categoryId,
+      unitTypeId: unitTypeId,
+      productTypeId: productTypeId,
+      supplierId: supplierId,
+      allergenType: allergenType,
+      careful: careful,
     });
   };
 
@@ -32,16 +63,49 @@ export default function useModal(initialValue = false) {
 export function useAmountControls() {
   const dispatch = useDispatch();
 
-  const addToCart = (image, name, description, price, amount, comment) => {
-    const product = {
+  const addToCart = (
+    image,
+    name,
+    description,
+    price,
+    amount,
+    comment,
+    id,
+    promotion,
+    discount,
+    surcharge,
+    product,
+    aditional,
+    menuTypeId,
+    categoryId,
+    unitTypeId,
+    productTypeId,
+    supplierId,
+    allergenType,
+    careful
+  ) => {
+    const item = {
       image: image,
       name: name,
       description: description,
       price: price,
       amount: amount,
       comment: comment,
+      id: id,
+      promotion: promotion,
+      discount: discount,
+      surcharge: surcharge,
+      product: product,
+      aditional: aditional,
+      menuTypeId: menuTypeId,
+      categoryId: categoryId,
+      unitTypeId: unitTypeId,
+      productTypeId: productTypeId,
+      supplierId: supplierId,
+      allergenType: allergenType,
+      careful: careful,
     };
-    dispatch(addProduct(product));
+    dispatch(addProduct(item));
   };
 
   const removeFromCart = (name) => {
@@ -131,22 +195,87 @@ export async function translateText(lang = "en", all_app_texts) {
       return { [key]: response.data[index].translations[0].text };
     });
     // const objetoResultado = {};
-  
+
     for (const obj of all_app_texts_translated) {
       Object.assign(objetoResultado, obj);
     }
     //! resultado en forma de objeto
     return objetoResultado;
-  })
+  });
 }
 
-// Call the function to translate text.
-// export const languageSelected = await translateText("en", all_app_texts); 
-// console.log(`${(localStorage.getItem("Lang"))}`);
-// export const languageSelected = await translateText(
-//   localStorage.getItem("Lang") ? `${localStorage.getItem("Lang")}` : "en",
-//   all_app_texts
-// ); 
-
-// storeLanguages(languageSelected);
-
+export const formattedOrder = (
+  cart,
+  productsList,
+  sectorID,
+  tableID,
+  commerceID,
+  tablePrice,
+  sectorPrice,
+  totalPrice,
+  setPrice,
+  setOrder
+) => {
+  //!todas las promociones, descuentos y recargos
+  let totalPromotion = 0;
+  let totalDiscount = 0;
+  let totalSurcharge = 0;
+  //!items segun tipo
+  let productos = [];
+  let adicionales = [];
+  let menus = [];
+  //! ordeno items por tipo y sumo promociones, descuentos y recargos
+  cart.map((p) => {
+    if (!p.menuTypeId) {
+      let result = productsList.findIndex((f) => f.name === p.name);
+      if (result !== -1) {
+        productos.push(p);
+      } else {
+        adicionales.push(p);
+      }
+    } else {
+      menus.push(p);
+    }
+    totalPromotion = totalPromotion + p.promotion * p.amount;
+    totalDiscount = totalDiscount + p.discount * p.amount;
+    totalSurcharge = totalSurcharge + p.surcharge * p.amount;
+  });
+  let sectorId = sectorID;
+  let table = tableID;
+  let commerceId = commerceID;
+  //!calculo el precio real
+  let precioMenu = totalPrice - (totalPrice * totalPromotion) / 100;
+  precioMenu = precioMenu - (precioMenu * totalDiscount) / 100;
+  precioMenu = precioMenu + (precioMenu * totalSurcharge) / 100;
+  let partial = precioMenu;
+  //!calculo precio con costo de mesa
+  precioMenu = precioMenu - (precioMenu * tablePrice.tablePromotion) / 100;
+  precioMenu = precioMenu - (precioMenu * tablePrice.tableDiscount) / 100;
+  precioMenu = precioMenu + (precioMenu * tablePrice.tableSurcharge) / 100;
+  //!calculo precio con costo de sector
+  precioMenu = precioMenu - (precioMenu * sectorPrice.sectorPromotion) / 100;
+  precioMenu = precioMenu - (precioMenu * sectorPrice.sectorDiscount) / 100;
+  precioMenu = precioMenu + (precioMenu * sectorPrice.sectorSurcharge) / 100;
+  let finalPrice = precioMenu;
+  setPrice({
+    totalPromotion,
+    totalDiscount,
+    totalSurcharge,
+    partial,
+    finalPrice,
+  });
+  //! Creo una nueva order
+  setOrder({
+    productos: productos,
+    adicionales: adicionales,
+    menus: menus,
+    totalPromotion: totalPromotion,
+    totalDiscount: totalDiscount,
+    totalSurcharge: totalSurcharge,
+    sectorId: sectorId,
+    table: table,
+    commerceId: commerceId,
+    totalPrice: precioMenu,
+  });
+  // return order;
+};
