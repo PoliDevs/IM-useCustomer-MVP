@@ -1,5 +1,5 @@
 import { dataDecrypt, formattedOrder } from "../../../utils/Functions";
-import { getActiveProducts, getCommerce, getPosValue, getSectorValue, postOrder } from "../../../redux/actions";
+import { getActiveProducts, getCommerce, getPaymentMethods, getPosValue, getSectorValue, getStatus, postOrder } from "../../../redux/actions";
 import { ReactComponent as IMenu } from "../../../assets/ImenuHorizontal.svg";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,22 +14,27 @@ import Paragraph from "../../atoms/Paragraph/Paragraph";
 import PaymentOptionButton from "../../atoms/PaymentOptionButton/PaymentOptionButton";
 import OrderInfo from "../../molecules/OrderInfo/OrderInfo";
 import s from "./Payment.module.scss";
+import ClosedCommerce from "../../molecules/ClosedCommerce/ClosedCommerce";
+import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
 
 export default function Payment() {
   const [method, setMethod] = useState('');
   const [price, setPrice] = useState({});
   const [order, setOrder] = useState({})
-  const cart = useSelector((state)=> state.cart);
-  const sectorID = useSelector((state) => state.sector);
-  const tableID = useSelector((state)=> state.table);
+  const paymentMethods = useSelector((state)=> state.paymentMethods);
+  const sectorPrice = useSelector((state)=> state.sectorPrice);
   const commerceID = useSelector((state)=> state.commerce.id);
   const productsList = useSelector((state)=> state.products);
-  const language = useSelector((state)=> state.language);
   const tablePrice = useSelector((state)=> state.tablePrice);
-  const sectorPrice = useSelector((state)=> state.sectorPrice);
+  const language = useSelector((state)=> state.language);
+  const sectorID = useSelector((state) => state.sector);
+  const open = useSelector((state) => state.status);
+  const tableID = useSelector((state)=> state.table);
+  const cart = useSelector((state)=> state.cart);
   const dispatch = useDispatch();
   const totalPrice = cart.reduce((count, p) => count + p.price * p.amount, 0);
   const [t, i18n] = useTranslation(["global"]);
+  const [isLoading, setIsloading] = useState(true);
 
   const handleChange = (option)=> {
     setMethod(option)
@@ -37,11 +42,11 @@ export default function Payment() {
 
 
   useEffect(() => {
-  
       dispatch(getPosValue(tableID));
       dispatch(getSectorValue(sectorID));
       dispatch(getActiveProducts(commerceID))
-      
+      dispatch(getStatus(commerceID, setIsloading));
+      dispatch(getPaymentMethods(commerceID));
   }, [])
 
   useEffect(() => {
@@ -61,13 +66,14 @@ export default function Payment() {
   
   const handleCash = ()=> {
     if (method === 2) {
-      setOrder({...order, paymentId: method})
-      postOrder(order)
+      const methodId = paymentMethods.filter((m)=> m.type === "efectivo")[0].id
+      postOrder(order, methodId);
     }
      return;
   }
   return (
-    <main className={s.paymentContainer}>
+    !isLoading ?
+    (open ? (<main className={s.paymentContainer}>
       <Banner arrow={true} />
       <section className={s.paymentContent}>
         <SubTitle text={language.payment_title} alignment={"left"}>
@@ -110,6 +116,5 @@ export default function Payment() {
           </Link>
         </div>
       </section>
-    </main>
-  );
+    </main>) : (<ClosedCommerce fullHeight={true}/>)) : <LoadingPage/> ); 
 }

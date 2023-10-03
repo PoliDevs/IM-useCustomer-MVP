@@ -14,6 +14,8 @@ import s from "./Review.module.scss";
 import FeedbackButton from "../../atoms/FeedbackButton/FeedbackButton";
 import { useSelector } from "react-redux";
 import StepProgressBar from "../../molecules/StepProgressBar/StepProgressBar";
+import { useRating } from "../../../utils/Functions";
+import { sendReview } from "../../../redux/actions";
 
 export default function Review() {
   const [comment, setComment] = useState("");
@@ -25,8 +27,15 @@ export default function Review() {
 
   const [t, i18n] = useTranslation(["global"]);
 
+  const { starsArray, stars, handleStars } = useRating();
+
   const handleSent = ()=> {
     //! Crear accion que envie el feedback al backend
+    const review = {
+      rating: stars,
+      feedback: comment
+    }
+    sendReview(review);
     setSent(true);
   }
 
@@ -53,7 +62,7 @@ export default function Review() {
       <article className={s.article}>
         <ImenuLogo style={{ margin: "0 auto", height: "36px" }} />
         <SubTitle text={language.rating_reviewQuestion} />
-        <Stars />
+        <Stars stars={stars} starsArray={starsArray} handleStars={handleStars} />
         {sent ? (
           <div style={{ marginTop: "50px" }}>
             <HugeTitle text={language.rating_thanks} centered={true} />

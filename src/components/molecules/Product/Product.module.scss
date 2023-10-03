@@ -17,11 +17,15 @@
 
   
   .productIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 60px;
     width: 60px;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: contain;
+    font-size: 50px;
+    // background-position: center center;
+    // background-repeat: no-repeat;
+    // background-size: contain;
   }
   .infoContainer {
     display: flex;

@@ -16,7 +16,7 @@
     width: auto;
     margin: 0 auto;
     margin-top: 60px;
-
+    
     .iconContainer {
       .icon {
         width: 310px;
@@ -29,12 +29,12 @@
     display: flex;
     gap: 14px;
     flex-direction: column;
-
+    
     .isClosed {
       font-size: 28px;
       text-align: center;
     }
-
+    
     .imenuSpan {
       font-weight: bold;
       color: $color-secundary
@@ -46,13 +46,13 @@
       align-items: center;
       margin-top: 45px;
       gap: 5px;
-
+      
       .helpIcon {
         width: 20px;
         height: 20px;
         color: #989898;
       }
-
+      
       .link {
         list-style: none;
         text-decoration: none;
@@ -60,4 +60,8 @@
       }
     }
   }
+}
+
+.fullHeight { 
+  min-height: 100vh;
 }

@@ -16,10 +16,12 @@ export const GET_ACTIVE_DISHES = "GET_aCTIVE_DISHES";
 export const GET_ACTIVE_PRODUCTS = "GET_ACTIVE_PRODUCTS";
 export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
 export const GET_ALL_ADITIONALS = "GET_ALL_ADITIONALS";
+export const GET_PAYMENT_METHODS = "GET_PAYMENT_METHODS";
 export const FILTER_CATEGORY = "FILTER_CATEGORY";
 export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 export const SET_TABLE_PRICE = "SET_TABLE_PRICE";
 export const SET_SECTOR_PRICE = "SET_SECTOR_PRICE";
+export const IS_PRODUCT_AVAILABLE = "IS_PRODUCT_AVAILABLE";
 
 ////////////////////* SearchBar Action type *////////////////////
 

@@ -57,7 +57,7 @@ export default function OrderInfo({ border, price, tablePrice, sectorPrice }) {
       )}
       {!!price.partial && (
         <Paragraph
-          text={`${language.orderInfo_pricePartial}${price.partial}`}
+          text={`${language.orderInfo_pricePartial}${price.partial.toFixed(2)}`}
           alignment={"left"}
           bold={true}
         />
@@ -104,9 +104,9 @@ export default function OrderInfo({ border, price, tablePrice, sectorPrice }) {
           bold={true}
         />
       )}
-      {price.finalPrice && (
+      {!!price.finalPrice && (
         <Paragraph
-          text={`${language.orderInfo_paymentTotal}${price.finalPrice}`}
+          text={`${language.orderInfo_paymentTotal}${price.finalPrice.toFixed(2)}`}
           alignment={"left"}
           bold={true}
         />

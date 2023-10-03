@@ -7,19 +7,47 @@ import TextArea from "../../atoms/TextArea/TextArea";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import s from "./Modal.module.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { isAvailable } from "../../../redux/actions";
 
 export default function Modal({ productData,  isOpen, closeModal, changeStyle}) {
   const cart = useSelector((state)=> state.cart);
+    const allproducts = useSelector((state) => state.allProducts);
+    const alladitionals = useSelector((state) => state.allAditionals);
+    const products = useSelector((state) => state.products);
   const language = useSelector((state)=> state.language);
+  const available = useSelector((state)=> state.productAvailable);
   const [comment, setComment] = useState("");
   const [amount, setAmount] = useState(0);
+  const dispatch = useDispatch();
   const {addToCart} = useAmountControls();
 
   const [t, i18n] = useTranslation(["global"]);
 
+   let emoji1 = "";
+   if (productData.image) {
+     const unicodeArray = productData.image.split(" ");
+     const formattedCodes = unicodeArray.map((code) => code.replace("U+", ""));
+     const emoji = String.fromCodePoint(
+       parseInt(formattedCodes[0], 16),
+       parseInt(formattedCodes[1], 16)
+     );
+     emoji1 = emoji;
+   }
 
-  //!descomentar para mostrar info del producto real
+   //? useEffect para consultar nuevamente los productos disponibles.
+  //  useEffect(() => {
+
+  //  }, []);
+   
+
+   //? useEffect para consultar si el producto abierto esta activo.
+   useEffect(() => {
+     dispatch(isAvailable(productData.name));
+   }, [allproducts, alladitionals, products]);
+
+
   return (
     <article className={`${s.modalContainer} ${isOpen && s.open}`}>
       <div className={s.modal}>
@@ -32,12 +60,9 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
           }}
         />
         <div className={s.productHeader}>
-          <img
-            className={s.productIcon}
-            src={productData.image}
-            //src={product.photo}
-            alt={`${productData.name} icon`}
-          />
+          <span role="img" aria-label="Emoji" className={s.productIcon}>
+            {emoji1}
+          </span>
           <div className={s.productInfo}>
             <SubTitle
               className={s.productTitle}
@@ -51,10 +76,10 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
               scrollable={true}
             />
             <h3 className={s.productPrice}>{`$ ${productData.price}`}</h3>
-            {/* <h3 className={s.productPrice}>{`$ ${productData.cost}`}</h3> */}
           </div>
         </div>
         <div>
+            <p className={`${s.notAvailableProduct} ${!available && s.visible}`}>Producto no disponible</p>
           <div className={s.textAreaHeader}>
             <label className={s.label} htmlFor="comment">
               {language.productModal_commentLabel}
@@ -86,32 +111,33 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
           </button>
         </div>
         <button
-          className={s.addButton}
+          className={`${s.addButton} ${!available && s.unavailable}`}
           onClick={() => {
-            addToCart(
-              productData.image,
-              //productData.photo
-              productData.name,
-              productData.description,
-              productData.price,
-              amount,
-              comment,
-              productData.id,
-              productData.promotion,
-              productData.discount,
-              productData.surcharge,
-              productData.product,
-              productData.aditional,
-              productData.menuTypeId,
-              productData.categoryId,
-              productData.unitTypeId,
-              productData.productTypeId,
-              productData.supplierId,
-              productData.allergenType,
-              productData.careful
-              // productData.cost,
-            );
-            changeStyle();
+            available &&
+              addToCart(
+                productData.image,
+                //productData.photo
+                productData.name,
+                productData.description,
+                productData.price,
+                amount,
+                comment,
+                productData.id,
+                productData.promotion,
+                productData.discount,
+                productData.surcharge,
+                productData.product,
+                productData.aditional,
+                productData.menuTypeId,
+                productData.categoryId,
+                productData.unitTypeId,
+                productData.productTypeId,
+                productData.supplierId,
+                productData.allergenType,
+                productData.careful
+                // productData.cost,
+              );
+            available && changeStyle();
           }}
         >
           {language.productModal_addButton}

@@ -20,12 +20,14 @@ import {
   SET_TABLE_PRICE,
   SET_SECTOR_PRICE,
   CLEAR_SEARCH_PRODUCT,
+  GET_PAYMENT_METHODS,
+  IS_PRODUCT_AVAILABLE,
 } from "./actionTypes";
 import { ProductsInfo } from "../../utils/Constants";
 import { TRANSLATE_TEXT } from "./actionTypes";
 import { v4 as uuidv4 } from "uuid";
 import { all_app_texts } from "../../utils/language";
-import { translateText } from "../../utils/Functions";
+import { menuTranslate, translateText } from "../../utils/Functions";
 
 ////////////////////* SearchBar Action Creator *////////////////////
 
@@ -110,10 +112,14 @@ export function removeProduct(name) {
 
 ////////////////////* Order *////////////////////
 
-export async function postOrder(order) {
+export async function postOrder(order, methodId) {
   let date = new Date().toJSON().slice(0, 10);
-  let Datehour = new Date
-  let hour = Datehour.getHours();
+  const hour = new Date().getHours();
+  const minute = new Date().getMinutes();
+  const formattedHour = hour < 10 ? "0" + hour : hour;
+  const formattedMinute = minute < 10 ? "0" + minute : minute;
+
+  const time = formattedHour + ":" + formattedMinute;
   let additionals = {
     id: [],
     name: [],
@@ -123,7 +129,7 @@ export async function postOrder(order) {
     surcharge: [],
     amount: [],
     unitTypeId: [],
-    detail: []
+    detail: [],
   };
   let products = {
     id: [],
@@ -138,7 +144,7 @@ export async function postOrder(order) {
     amount: [],
     allergenType: [],
     careful: [],
-    detail: []
+    detail: [],
   };
   let menu = {
     id: [],
@@ -154,7 +160,7 @@ export async function postOrder(order) {
     discount: [],
     surcharge: [],
     amount: [],
-    detail: []
+    detail: [],
   };
   //!armo todos los adicionales
   if (order.adicionales.length) {
@@ -167,8 +173,20 @@ export async function postOrder(order) {
       additionals.surcharge.push(`${a.surcharge}`);
       additionals.amount.push(`${a.amount}`);
       additionals.unitTypeId.push(`${a.unitTypeId}`);
-      additionals.detail.push(`${a.comment}`)
+      additionals.detail.push(`${a.comment}`);
     });
+  } else {
+    additionals = {
+      id: [""],
+      name: [""],
+      cost: [""],
+      promotion: [""],
+      discount: [""],
+      surcharge: [""],
+      amount: [""],
+      unitTypeId: [""],
+      detail: [""],
+    };
   }
   //!armo todos los productos
   if (order.productos.length) {
@@ -187,47 +205,84 @@ export async function postOrder(order) {
       products.careful.push(`${p.careful}`);
       products.detail.push(`${p.comment}`);
     });
+  } else {
+    products = {
+      id: [""],
+      name: [""],
+      cost: [""],
+      unitTypeId: [""],
+      productTypeId: [""],
+      supplierId: [""],
+      promotion: [""],
+      discount: [""],
+      surcharge: [""],
+      amount: [""],
+      allergenType: [""],
+      careful: [""],
+      detail: [""],
+    };
   }
   //!armo todos los menus
   if (order.menus.length) {
-    order.menus.map((m)=> {
-    menu.id.push(`${m.id}`)
-    menu.name.push(`${m.name}`)
-    menu.description.push(`${m.description}`)
-    menu.cost.push(`${m.price}`)
-    menu.menuTypeId.push(`${m.menuTypeId}`)
-    menu.categoryId.push(`${m.categoryId}`)
-    menu.dishes.push(`${m.dishes}`)
-    menu.product.push(`${m.product}`)
-    menu.additionalId.push(`${m.additional}`)
-    menu.promotion.push(`${m.promotion}`)
-    menu.discount.push(`${m.discount}`)
-    menu.surcharge.push(`${m.surcharge}`)
-    menu.amount.push(`${m.amount}`)
-    menu.detail.push(`${m.comment}`);
-    })
+    order.menus.map((m) => {
+      menu.id.push(`${m.id}`);
+      menu.name.push(`${m.name}`);
+      menu.description.push(`${m.description}`);
+      menu.cost.push(`${m.price}`);
+      menu.menuTypeId.push(`${m.menuTypeId}`);
+      menu.categoryId.push(`${m.categoryId}`);
+      m.dishes ? menu.dishes.push(`${m.dishes}`) : menu.dishes.push("");
+      m.product !== undefined
+        ? menu.product.push(`${m.product}`)
+        : menu.product.push("");
+      m.additionalId !== undefined
+        ? menu.additionalId.push(`${m.additional}`)
+        : menu.additionalId.push("");
+      menu.promotion.push(`${m.promotion}`);
+      menu.discount.push(`${m.discount}`);
+      menu.surcharge.push(`${m.surcharge}`);
+      menu.amount.push(`${m.amount}`);
+      menu.detail.push(`${m.comment}`);
+    });
+  } else {
+    menu = {
+      id: [""],
+      name: [""],
+      description: [""],
+      cost: [""],
+      menuTypeId: [""],
+      categoryId: [""],
+      dishes: [""],
+      product: [""],
+      additionalId: [""],
+      promotion: [""],
+      discount: [""],
+      surcharge: [""],
+      amount: [""],
+      detail: [""],
+    };
   }
   try {
     const newOrder = {
-      name: order.name ? order.name : "",
+      name: order.name ? order.name : "sss",
       date: date,
-      hour: hour,
+      hour: time,
       status: "orderPlaced",
       detail: "",
       validity: date,
       promotion: 0,
       discount: 0,
       surcharge: 0,
-      poId: order.table,
+      poId: parseInt(order.table),
       employeeId: 3,
-      accountId: 0,
-      paymentId: order.paymentId,
+      accountId: null,
+      paymentId: methodId,
       commerceId: order.commerceId,
-      deliveryId: 0,
-      paid: order.totalPrice,
-      courierId: 0,
+      deliveryId: null,
+      paid: order.totalPrice.toFixed(2),
+      courierId: null,
       costDelivery: 0,
-      sectorId: order.sectorId,
+      sectorId: parseInt(order.sectorId),
       accountemail: order.email ? order.email : "",
       accountname: order.name ? order.name : "",
       accountphone: order.phone ? order.phone : "",
@@ -253,16 +308,27 @@ export async function postOrder(order) {
         discount: [""],
         surcharge: [""],
         amount: [""],
+        detail: [""],
       },
       menu,
     };
     let response = await axios.post(
-      "http://localhost:3001/order/order",
+      "http://localhost:3001/order/new",
       newOrder
     );
     return response;
   } catch (error) {
     console.error(error);
+  }
+}
+
+
+export const sendReview = (review, orderId) => {
+  try {
+    let response = axios.put(`http://localhost:3001/order/rating/${orderId}`, review);
+    return response.data;
+  } catch (error) {
+    console.error(error)
   }
 }
 
@@ -318,10 +384,26 @@ export function getStatus(id, setIsLoading) {
       let status = await axios.get(
         `http://localhost:3001/commerce/openCommerce/${id}`
       );
-      setIsLoading(false);
+      if (setIsLoading) setIsLoading(false);
       return dispatch({
         type: GET_STATUS,
         payload: status.data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+}
+
+export function getPaymentMethods(id) {
+  return async function (dispatch) {
+    try {
+      let payments = await axios.get(
+        `http://localhost:3001/payment/all_active/${id}`
+      );
+      return dispatch({
+        type: GET_PAYMENT_METHODS,
+        payload: payments.data,
       });
     } catch (error) {
       console.error(error);
@@ -407,10 +489,29 @@ export function getActiveAditionals(id) {
     try {
       let allActiveAditionals = await axios.get(
         `http://localhost:3001/additional/all_active/${id}`
-      );
+        );
+      const traduccion = async () => {
+        //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
+        let results = menuTranslate(allActiveAditionals.data);
+        //* Traduzco todos los nombres
+        let translatedNames = await translateText(
+          localStorage.getItem("Lang"),
+          results.nombres,
+          true
+        );
+        //* Reemplazo los nombres originales por los nombres traducidos
+        const translatedAdittionals = allActiveAditionals.data.map(
+          (a, index) => {
+            a.name = translatedNames[index].name;
+            return a;
+          }
+        );
+        return translatedAdittionals;
+      };
+
       return dispatch({
         type: GET_ALL_ADITIONALS,
-        payload: allActiveAditionals.data,
+        payload: await traduccion(),
       });
     } catch (error) {
       console.error(error);
@@ -453,6 +554,13 @@ export const setFiltro = (filtroPor) => {
     payload: filtroPor,
   };
 };
+
+export const isAvailable = (name)=> {
+  return {
+    type: IS_PRODUCT_AVAILABLE,
+    payload: name
+  }
+ }
 
 export function getPosValue(id) {
   return async function (dispatch) {

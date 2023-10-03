@@ -1,4 +1,4 @@
-import { dataDecrypt, translateText } from "../../utils/Functions";
+import { dataDecrypt, menuTranslate, translateText } from "../../utils/Functions";
 import CryptoJS from "crypto-js";
 import {
   ADD_PRODUCT,
@@ -22,6 +22,8 @@ import {
   SET_TABLE_PRICE,
   SET_SECTOR_PRICE,
   CLEAR_SEARCH_PRODUCT,
+  GET_PAYMENT_METHODS,
+  IS_PRODUCT_AVAILABLE,
 } from "../actions/actionTypes";
 import dotenv from "dotenv";
 import { all_app_texts } from "../../utils/language";
@@ -53,6 +55,8 @@ const initalState = {
   allCategories: [],
   filtroPor: "",
   search: [],
+  paymentMethods: [],
+  productAvailable: true,
   cart: localStorage.getItem("cart") ? getEncriptedItem("cart") : [],
   user: localStorage.getItem("user") ? getEncriptedItem("user") : {},
   commerce: localStorage.getItem("CM") ? getEncriptedItem("CM") : {},
@@ -168,6 +172,8 @@ export const rootReducer = (state = initalState, action) => {
     }
     case GET_STATUS:
       return { ...state, status: action.payload };
+    case GET_PAYMENT_METHODS:
+      return {...state, paymentMethods: action.payload}
     case GET_ACTIVE_MENUS:
       {
         state = { ...state, allProducts: action.payload };
@@ -189,8 +195,22 @@ export const rootReducer = (state = initalState, action) => {
       return state;
     case GET_ALL_CATEGORIES:
       return { ...state, allCategories: action.payload };
-    case GET_ALL_ADITIONALS:
+    case GET_ALL_ADITIONALS:{
+      // const traduccion = async () => {
+      //   //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
+      //   let results = menuTranslate(action.payload);
+      //   //* Traduzco todos los nombres
+      //   let translatedNames = await translateText(localStorage.getItem("Lang"), results.nombres, true);
+      //   //* Reemplazo los nombres originales por los nombres traducidos
+      //   const translatedAdittionals = action.payload.map((a, index)=> {
+      //       a.name = translatedNames[index].name;
+      //       return a
+      //     })
+      //     return translatedAdittionals
+      //   }
+      //   const newAdditionals = traduccion();
       return { ...state, allAditionals: action.payload };
+    }
     case FILTER_CATEGORY: {
       const products = [...state.allProducts, ...state.allDishes];
       const filteredResults = products.filter(
@@ -200,6 +220,16 @@ export const rootReducer = (state = initalState, action) => {
     }
     case FILTER_BY_CATEGORY:
       return { ...state, filtroPor: action.payload };
+    case IS_PRODUCT_AVAILABLE:
+      {
+        const allItemsAvailable = [...state.allProducts, ...state.allAditionals, state.products];
+        let available = allItemsAvailable.findIndex((i)=> i.name === action.payload);
+        if (available !== -1){
+          return {...state, productAvailable: true}
+        }else {
+          return {...state, productAvailable: false}
+        }
+      }
     case REMOVE_USER:
       {
         localStorage.removeItem("user");
