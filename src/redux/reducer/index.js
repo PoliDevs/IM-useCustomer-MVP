@@ -223,10 +223,12 @@ export const rootReducer = (state = initalState, action) => {
     case IS_PRODUCT_AVAILABLE:
       {
         const allItemsAvailable = [...state.allProducts, ...state.allAditionals, state.products];
-        let available = allItemsAvailable.findIndex((i)=> i.name === action.payload);
+        let available = allItemsAvailable.findIndex((i)=> i.name === action.payload.name);
         if (available !== -1){
+          action.payload.setLoading(false)
           return {...state, productAvailable: true}
         }else {
+          action.payload.setLoading(false);
           return {...state, productAvailable: false}
         }
       }

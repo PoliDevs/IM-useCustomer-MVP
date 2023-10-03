@@ -13,13 +13,14 @@ import { isAvailable } from "../../../redux/actions";
 
 export default function Modal({ productData,  isOpen, closeModal, changeStyle}) {
   const cart = useSelector((state)=> state.cart);
-    const allproducts = useSelector((state) => state.allProducts);
-    const alladitionals = useSelector((state) => state.allAditionals);
-    const products = useSelector((state) => state.products);
+  const allproducts = useSelector((state) => state.allProducts);
+  const alladitionals = useSelector((state) => state.allAditionals);
+  const products = useSelector((state) => state.products);
   const language = useSelector((state)=> state.language);
   const available = useSelector((state)=> state.productAvailable);
   const [comment, setComment] = useState("");
   const [amount, setAmount] = useState(0);
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const {addToCart} = useAmountControls();
 
@@ -36,15 +37,9 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
      emoji1 = emoji;
    }
 
-   //? useEffect para consultar nuevamente los productos disponibles.
-  //  useEffect(() => {
-
-  //  }, []);
-   
-
    //? useEffect para consultar si el producto abierto esta activo.
    useEffect(() => {
-     dispatch(isAvailable(productData.name));
+     productData.name && dispatch(isAvailable(productData.name, setLoading));
    }, [allproducts, alladitionals, products]);
 
 
@@ -79,7 +74,14 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
           </div>
         </div>
         <div>
-            <p className={`${s.notAvailableProduct} ${!available && s.visible}`}>Producto no disponible</p>
+          {loading === false && available === false && (
+            <p
+              className={`${s.notAvailableProduct} ${s.visible
+              }`}
+            >
+              Producto no disponible
+            </p>
+          )}
           <div className={s.textAreaHeader}>
             <label className={s.label} htmlFor="comment">
               {language.productModal_commentLabel}

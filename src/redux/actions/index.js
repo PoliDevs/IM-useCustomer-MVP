@@ -418,11 +418,33 @@ export function getActiveMenus(id, setIsLoading) {
         // `http://localhost:3001/menu/all_active/${id}`
         `http://localhost:3001/menu/lastMenu/${id}`
       );
+      const traduccion = async () => {
+        //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
+        let results = menuTranslate(allActiveMenus.data);
+        //* Traduzco todos los nombres y las descripciones
+        let translatedNames = await translateText(
+          localStorage.getItem("Lang"),
+          results.nombres,
+          true
+        );
+        let translatedDescriptions = await translateText(
+          localStorage.getItem("Lang"),
+          results.descripciones,
+          true
+        );
+        //* Reemplazo los nombres originales por los nombres traducidos
+        const translatedMenus = allActiveMenus.data.map((a, index) => {
+          a.name = translatedNames[index].name;
+          if (a.description)  a.description = translatedDescriptions[index].description
+          return a;
+        });
+        return translatedMenus;
+      };
       if (setIsLoading) setIsLoading(false);
       return dispatch({
         type: GET_ACTIVE_MENUS,
         // payload: { menus: allActiveMenus.data, id: id },
-        payload: allActiveMenus.data,
+        payload: await traduccion(),
       });
     } catch (error) {
       console.error(error);
@@ -474,9 +496,26 @@ export function getActiveProducts(id) {
       let allActiveProducts = await axios.get(
         `http://localhost:3001/product/all_active/${id}`
       );
+       const traduccion = async () => {
+         //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
+         let results = menuTranslate(allActiveProducts.data);
+         //* Traduzco todos los nombres
+         let translatedNames = await translateText(
+           localStorage.getItem("Lang"),
+           results.nombres,
+           true
+         );
+         //* Reemplazo los nombres originales por los nombres traducidos
+         const translatedProducts = allActiveProducts.data.map((a, index) => {
+           a.name = translatedNames[index].name;
+           return a;
+         });
+         return translatedProducts;
+       };
+
       return dispatch({
         type: GET_ACTIVE_PRODUCTS,
-        payload: allActiveProducts.data,
+        payload: await traduccion(),
       });
     } catch (error) {
       console.error(error);
@@ -555,11 +594,11 @@ export const setFiltro = (filtroPor) => {
   };
 };
 
-export const isAvailable = (name)=> {
+export const isAvailable = (name, setLoading)=> {
   return {
     type: IS_PRODUCT_AVAILABLE,
-    payload: name
-  }
+    payload: { name: name, setLoading: setLoading },
+  };
  }
 
 export function getPosValue(id) {
