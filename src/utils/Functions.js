@@ -174,6 +174,19 @@ export function menuTranslate (array) {
 }
 //* Funcion para obtener nombres y descripciones del menu
 
+//* Funcion para obtener nombres de las categorias
+export function categoryTranslate(array) {
+
+  const nombres= [];
+
+  array.map((c) => {
+    nombres.push({ name: c.category })
+  });
+
+  return nombres;
+}
+//* Funcion para obtener nombres de las categorias
+
 
 //! funcionando -- falta pasar como variable from y to
 export async function translateText(lang = "en", all_app_texts, menu=false) {

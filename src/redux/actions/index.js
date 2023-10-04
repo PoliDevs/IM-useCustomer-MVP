@@ -27,7 +27,7 @@ import { ProductsInfo } from "../../utils/Constants";
 import { TRANSLATE_TEXT } from "./actionTypes";
 import { v4 as uuidv4 } from "uuid";
 import { all_app_texts } from "../../utils/language";
-import { menuTranslate, translateText } from "../../utils/Functions";
+import { categoryTranslate, menuTranslate, translateText } from "../../utils/Functions";
 
 ////////////////////* SearchBar Action Creator *////////////////////
 
@@ -561,12 +561,32 @@ export function getActiveAditionals(id) {
 export function getAllCategorys(id) {
   return async function (dispatch) {
     try {
-      let allActiveCategorys = await axios.get(
+      let allActiveCategories = await axios.get(
         `http://localhost:3001/category/all_active/${id}`
       );
+      const traduccion = async () => {
+        //* Obtengo todos los nombres de las categorias
+        let results = categoryTranslate(allActiveCategories.data);
+        console.log('results', results);
+        //* Traduzco todos los nombres
+        let translatedNames = await translateText(
+          localStorage.getItem("Lang"),
+          results,
+          true
+        );
+        console.log('translatedNames', translatedNames);
+        //* Reemplazo los nombres originales por los nombres traducidos
+        const translatedCategories = allActiveCategories.data.map(
+          (a, index) => {
+            a.category = translatedNames[index].name;
+            return a;
+          }
+        );
+        return translatedCategories;
+      };
       return dispatch({
         type: GET_ALL_CATEGORIES,
-        payload: allActiveCategorys.data,
+        payload: await traduccion(),
       });
     } catch (error) {
       console.error(error);
