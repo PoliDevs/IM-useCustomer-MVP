@@ -31,7 +31,7 @@ export default function Footer({ red }) {
           <div
             style={{ display: "flex", flexDirection: "column", gap: "15px" }}
           >
-            <SubTitle text={language.footer_yourOrder} alignment={"left"} />
+            <SubTitle text={language.footer_yourOrder} alignment={"left"} bold={true}/>
             <Paragraph
               text={`${cart.length} ${language.footer_products}`}
               alignment={"left"}
@@ -53,11 +53,11 @@ export default function Footer({ red }) {
               />
             ))}
             <div style={{ marginTop: "10px" }}></div>
-          </ScrollContainer>
           <SubTitle
             text={`${language.footer_total}: $ ${totalPrice}`}
             alignment={"left"}
           />
+          </ScrollContainer>
           <button
             disabled={!cart.length}
             className={`${s.payButton} ${!cart.length && s.disabled}`}
@@ -76,6 +76,7 @@ export default function Footer({ red }) {
             <SubTitle
               text={`${language.footer_total}: $ ${totalPrice}`}
               alignment={"left"}
+              bold={true}
             />
           </div>
           <button

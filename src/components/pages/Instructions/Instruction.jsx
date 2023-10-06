@@ -1,14 +1,14 @@
-
-import { Link } from 'react-router-dom';
+import iMenuFull from "../../../assets/logo-imenu-full.png";
+import { Link } from "react-router-dom";
 import { ReactComponent as IMenu } from "../../../assets/ImenuHorizontal.svg";
-import { useTranslation } from 'react-i18next';
-import Paragraph from '../../atoms/Paragraph/Paragraph';
-import SubTitle from '../../atoms/SubTitle/SubTitle';
-import LinkButton from '../../atoms/LinkButton/LinkButton';
-import Ul from '../../molecules/Ul/Ul';
-import s from "./Instruction.module.scss"
-import ContactFooter from '../../molecules/ContactFooter/ContactFooter';
-import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+import Paragraph from "../../atoms/Paragraph/Paragraph";
+import SubTitle from "../../atoms/SubTitle/SubTitle";
+import LinkButton from "../../atoms/LinkButton/LinkButton";
+import Ul from "../../molecules/Ul/Ul";
+import s from "./Instruction.module.scss";
+import ContactFooter from "../../molecules/ContactFooter/ContactFooter";
+import { useSelector } from "react-redux";
 
 export default function Instruction() {
   const url = localStorage.getItem("QrCode");
@@ -21,7 +21,7 @@ export default function Instruction() {
         <div className={s.arrowBack}></div>
       </Link>
       <div className={s.title}>
-        <SubTitle text={language.instructions_title}>
+        <SubTitle text={language.instructions_title} bold={true}>
           <div className={s.info}></div>
         </SubTitle>
       </div>
@@ -33,7 +33,8 @@ export default function Instruction() {
           bold={true}
           centered={true}
         >
-          <IMenu className={s.imenuLogo} />
+          {/* <IMenu className={s.imenuLogo} /> */}
+          <img src={iMenuFull} className={s.imemuLogo} width={"70px"}/>
         </Paragraph>
         <LinkButton
           path={"/home"}

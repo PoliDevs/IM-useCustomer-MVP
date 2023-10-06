@@ -2,6 +2,7 @@
 /* eslint-disable react/prop-types */
 import { useTranslation } from "react-i18next";
 import { ReactComponent as Logo } from "../../../assets/Burgers.svg";
+import iMenuFull from '../../../assets/logo-imenu-full.png';
 import { ReactComponent as ImenuLogo } from "../../../assets/ImenuHorizontal.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -45,6 +46,8 @@ export default function WelcomePage() {
                   <HugeTitle text={commerce.name} />
                   <div className={s.spacing}>
                     <Logo className={s.logo} />
+                    
+                     {/* <img src={iMenuFull} className={s.logo}/> */}
                     <SubTitle
                       text={`${language.welcome_sector} ${sector} - ${language.welcome_table} ${table}`}
                     />
@@ -52,7 +55,8 @@ export default function WelcomePage() {
                 </div>
                 <div className={s.bottomContent}>
                   <Paragraph bold={true} text={language.welcome_poweredby}>
-                    <ImenuLogo className={s.imenuLogo} />
+                    {/* <ImenuLogo className={s.imenuLogo} /> */}
+                    <img src={iMenuFull} className={s.imemuLogo} width={"70px"}/>
                   </Paragraph>
                   <LinkButton
                     path="/home"

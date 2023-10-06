@@ -20,12 +20,14 @@ import {
   SET_TABLE_PRICE,
   SET_SECTOR_PRICE,
   CLEAR_SEARCH_PRODUCT,
+  GET_PAYMENT_METHODS,
+  IS_PRODUCT_AVAILABLE,
+  GET_ORDER_STATUS,
 } from "./actionTypes";
-import { ProductsInfo } from "../../utils/Constants";
 import { TRANSLATE_TEXT } from "./actionTypes";
 import { v4 as uuidv4 } from "uuid";
 import { all_app_texts } from "../../utils/language";
-import { translateText } from "../../utils/Functions";
+import { categoryTranslate, detectLanguage, menuTranslate, translateText } from "../../utils/Functions";
 
 ////////////////////* SearchBar Action Creator *////////////////////
 
@@ -110,10 +112,14 @@ export function removeProduct(name) {
 
 ////////////////////* Order *////////////////////
 
-export async function postOrder(order) {
+export async function postOrder(order, methodId) {
   let date = new Date().toJSON().slice(0, 10);
-  let Datehour = new Date
-  let hour = Datehour.getHours();
+  const hour = new Date().getHours();
+  const minute = new Date().getMinutes();
+  const formattedHour = hour < 10 ? "0" + hour : hour;
+  const formattedMinute = minute < 10 ? "0" + minute : minute;
+
+  const time = formattedHour + ":" + formattedMinute;
   let additionals = {
     id: [],
     name: [],
@@ -123,7 +129,7 @@ export async function postOrder(order) {
     surcharge: [],
     amount: [],
     unitTypeId: [],
-    detail: []
+    detail: [],
   };
   let products = {
     id: [],
@@ -138,7 +144,7 @@ export async function postOrder(order) {
     amount: [],
     allergenType: [],
     careful: [],
-    detail: []
+    detail: [],
   };
   let menu = {
     id: [],
@@ -154,7 +160,7 @@ export async function postOrder(order) {
     discount: [],
     surcharge: [],
     amount: [],
-    detail: []
+    detail: [],
   };
   //!armo todos los adicionales
   if (order.adicionales.length) {
@@ -167,8 +173,20 @@ export async function postOrder(order) {
       additionals.surcharge.push(`${a.surcharge}`);
       additionals.amount.push(`${a.amount}`);
       additionals.unitTypeId.push(`${a.unitTypeId}`);
-      additionals.detail.push(`${a.comment}`)
+      additionals.detail.push(`${a.comment}`);
     });
+  } else {
+    additionals = {
+      id: [""],
+      name: [""],
+      cost: [""],
+      promotion: [""],
+      discount: [""],
+      surcharge: [""],
+      amount: [""],
+      unitTypeId: [""],
+      detail: [""],
+    };
   }
   //!armo todos los productos
   if (order.productos.length) {
@@ -187,47 +205,84 @@ export async function postOrder(order) {
       products.careful.push(`${p.careful}`);
       products.detail.push(`${p.comment}`);
     });
+  } else {
+    products = {
+      id: [""],
+      name: [""],
+      cost: [""],
+      unitTypeId: [""],
+      productTypeId: [""],
+      supplierId: [""],
+      promotion: [""],
+      discount: [""],
+      surcharge: [""],
+      amount: [""],
+      allergenType: [""],
+      careful: [""],
+      detail: [""],
+    };
   }
   //!armo todos los menus
   if (order.menus.length) {
-    order.menus.map((m)=> {
-    menu.id.push(`${m.id}`)
-    menu.name.push(`${m.name}`)
-    menu.description.push(`${m.description}`)
-    menu.cost.push(`${m.price}`)
-    menu.menuTypeId.push(`${m.menuTypeId}`)
-    menu.categoryId.push(`${m.categoryId}`)
-    menu.dishes.push(`${m.dishes}`)
-    menu.product.push(`${m.product}`)
-    menu.additionalId.push(`${m.additional}`)
-    menu.promotion.push(`${m.promotion}`)
-    menu.discount.push(`${m.discount}`)
-    menu.surcharge.push(`${m.surcharge}`)
-    menu.amount.push(`${m.amount}`)
-    menu.detail.push(`${m.comment}`);
-    })
+    order.menus.map((m) => {
+      menu.id.push(`${m.id}`);
+      menu.name.push(`${m.name}`);
+      menu.description.push(`${m.description}`);
+      menu.cost.push(`${m.price}`);
+      menu.menuTypeId.push(`${m.menuTypeId}`);
+      menu.categoryId.push(`${m.categoryId}`);
+      m.dishes ? menu.dishes.push(`${m.dishes}`) : menu.dishes.push("");
+      m.product !== undefined
+        ? menu.product.push(`${m.product}`)
+        : menu.product.push("");
+      m.additionalId !== undefined
+        ? menu.additionalId.push(`${m.additional}`)
+        : menu.additionalId.push("");
+      menu.promotion.push(`${m.promotion}`);
+      menu.discount.push(`${m.discount}`);
+      menu.surcharge.push(`${m.surcharge}`);
+      menu.amount.push(`${m.amount}`);
+      menu.detail.push(`${m.comment}`);
+    });
+  } else {
+    menu = {
+      id: [""],
+      name: [""],
+      description: [""],
+      cost: [""],
+      menuTypeId: [""],
+      categoryId: [""],
+      dishes: [""],
+      product: [""],
+      additionalId: [""],
+      promotion: [""],
+      discount: [""],
+      surcharge: [""],
+      amount: [""],
+      detail: [""],
+    };
   }
   try {
     const newOrder = {
-      name: order.name ? order.name : "",
+      name: order.name ? order.name : "sss",
       date: date,
-      hour: hour,
+      hour: time,
       status: "orderPlaced",
       detail: "",
       validity: date,
       promotion: 0,
       discount: 0,
       surcharge: 0,
-      poId: order.table,
+      poId: parseInt(order.table),
       employeeId: 3,
-      accountId: 0,
-      paymentId: order.paymentId,
+      accountId: null,
+      paymentId: methodId,
       commerceId: order.commerceId,
-      deliveryId: 0,
-      paid: order.totalPrice,
-      courierId: 0,
+      deliveryId: null,
+      paid: order.totalPrice.toFixed(2),
+      courierId: null,
       costDelivery: 0,
-      sectorId: order.sectorId,
+      sectorId: parseInt(order.sectorId),
       accountemail: order.email ? order.email : "",
       accountname: order.name ? order.name : "",
       accountphone: order.phone ? order.phone : "",
@@ -253,18 +308,36 @@ export async function postOrder(order) {
         discount: [""],
         surcharge: [""],
         amount: [""],
+        detail: [""],
       },
       menu,
     };
     let response = await axios.post(
-      "http://localhost:3001/order/order",
+      "http://localhost:3001/order/new",
       newOrder
     );
+    localStorage.setItem('CSMO_ID',(response.data.id));
+    localStorage.setItem("CSMO", response.data.order);
+    localStorage.removeItem('cart');
     return response;
   } catch (error) {
     console.error(error);
   }
 }
+
+
+export const sendReview = (review, commerceId) => {
+  try {
+    let orderName = localStorage.getItem("CSMO");
+    let response = axios.put(
+      `http://localhost:3001/order/rating/${orderName}/${commerceId}`,
+      review
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 ////////////////////* Commerce Actions Creators *////////////////////
 
@@ -318,7 +391,7 @@ export function getStatus(id, setIsLoading) {
       let status = await axios.get(
         `http://localhost:3001/commerce/openCommerce/${id}`
       );
-      setIsLoading(false);
+      if (setIsLoading) setIsLoading(false);
       return dispatch({
         type: GET_STATUS,
         payload: status.data,
@@ -329,18 +402,76 @@ export function getStatus(id, setIsLoading) {
   };
 }
 
-export function getActiveMenus(id, setIsLoading) {
+export function getPaymentMethods(id) {
   return async function (dispatch) {
+    try {
+      let payments = await axios.get(
+        `http://localhost:3001/payment/all_active/${id}`
+      );
+      return dispatch({
+        type: GET_PAYMENT_METHODS,
+        payload: payments.data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+}
+
+export function getActiveMenus(id, setIsLoading) {
+  return async function (dispatch, getState) {
     try {
       let allActiveMenus = await axios.get(
         // `http://localhost:3001/menu/all_active/${id}`
         `http://localhost:3001/menu/lastMenu/${id}`
       );
+      let equals = false;
+      if (getState().allProducts.length) {
+        let allProducts = getState().allProducts;
+
+        // Convertimos los arrays a objetos con las propiedades que queremos comparar
+        const objects1 = allActiveMenus.data.map((obj) => ({
+          ...obj,
+          ...{ name: undefined, description: undefined },
+        }));
+        const objects2 = allProducts.map((obj) => ({
+          ...obj,
+          ...{ name: undefined, description: undefined },
+        }));
+
+        // Comparamos los objetos
+        equals = JSON.stringify(objects1) === JSON.stringify(objects2);
+      }
+      //si los menus cargados son los mismos, no los vuelve a cargar
+      if (equals === true) {if (setIsLoading) setIsLoading(false);return}
+      const traduccion = async () => {
+        //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
+        let results = menuTranslate(allActiveMenus.data);
+        //* Traduzco todos los nombres y las descripciones
+        let translatedNames = await translateText(
+          localStorage.getItem("Lang"),
+          results.nombres,
+          true
+        );
+        let translatedDescriptions = await translateText(
+          localStorage.getItem("Lang"),
+          results.descripciones,
+          true
+        );
+        //* Reemplazo los nombres originales por los nombres traducidos
+        const translatedMenus = allActiveMenus.data.map((a, index) => {
+          a.name = translatedNames[index].name;
+          if (a.description)
+            a.description = translatedDescriptions[index].description;
+          return a;
+        });
+        return translatedMenus;
+      };
       if (setIsLoading) setIsLoading(false);
       return dispatch({
         type: GET_ACTIVE_MENUS,
         // payload: { menus: allActiveMenus.data, id: id },
-        payload: allActiveMenus.data,
+        payload: await traduccion(),
       });
     } catch (error) {
       console.error(error);
@@ -387,14 +518,49 @@ export function getActiveDishes(id) {
 }
 
 export function getActiveProducts(id) {
-  return async function (dispatch) {
+  return async function (dispatch, getState) {
     try {
       let allActiveProducts = await axios.get(
         `http://localhost:3001/product/all_active/${id}`
       );
+      let equals = false;
+      if (getState().products.length) {
+        let products = getState().products;
+        // Convertimos los arrays a objetos con las propiedades que queremos comparar
+        const objects1 = allActiveProducts.data.map((obj) => ({
+          ...obj,
+          ...{ name: undefined },
+        }));
+        const objects2 = products.map((obj) => ({
+          ...obj,
+          ...{ name: undefined },
+        }));
+
+        // Comparamos los objetos
+        equals = JSON.stringify(objects1) === JSON.stringify(objects2);
+      }
+      //si las categorias cargadas son las mismas, no las vuelve a cargar
+      if (equals === true) return;
+      const traduccion = async () => {
+        //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
+        let results = menuTranslate(allActiveProducts.data);
+        //* Traduzco todos los nombres
+        let translatedNames = await translateText(
+          localStorage.getItem("Lang"),
+          results.nombres,
+          true
+        );
+        //* Reemplazo los nombres originales por los nombres traducidos
+        const translatedProducts = allActiveProducts.data.map((a, index) => {
+          a.name = translatedNames[index].name;
+          return a;
+        });
+        return translatedProducts;
+      };
+
       return dispatch({
         type: GET_ACTIVE_PRODUCTS,
-        payload: allActiveProducts.data,
+        payload: await traduccion(),
       });
     } catch (error) {
       console.error(error);
@@ -403,14 +569,51 @@ export function getActiveProducts(id) {
 }
 
 export function getActiveAditionals(id) {
-  return async function (dispatch) {
+  return async function (dispatch, getState) {
     try {
       let allActiveAditionals = await axios.get(
         `http://localhost:3001/additional/all_active/${id}`
       );
+      let equals = false;
+      if (getState().allAditionals.length) {
+        let aditionals = getState().allAditionals;
+        // Convertimos los arrays a objetos con las propiedades que queremos comparar
+        const objects1 = allActiveAditionals.data.map((obj) => ({
+          ...obj,
+          ...{ name: undefined },
+        }));
+        const objects2 = aditionals.map((obj) => ({
+          ...obj,
+          ...{ name: undefined },
+        }));
+
+        // Comparamos los objetos
+        equals = JSON.stringify(objects1) === JSON.stringify(objects2);
+      }
+      //si las categorias cargadas son las mismas, no las vuelve a cargar
+      if (equals === true) return;
+      const traduccion = async () => {
+        //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
+        let results = menuTranslate(allActiveAditionals.data);
+        //* Traduzco todos los nombres
+        let translatedNames = await translateText(
+          localStorage.getItem("Lang"),
+          results.nombres,
+          true
+        );
+        //* Reemplazo los nombres originales por los nombres traducidos
+        const translatedAdittionals = allActiveAditionals.data.map(
+          (a, index) => {
+            a.name = translatedNames[index].name;
+            return a;
+          }
+        );
+        return translatedAdittionals;
+      };
+
       return dispatch({
         type: GET_ALL_ADITIONALS,
-        payload: allActiveAditionals.data,
+        payload: await traduccion(),
       });
     } catch (error) {
       console.error(error);
@@ -419,14 +622,50 @@ export function getActiveAditionals(id) {
 }
 
 export function getAllCategorys(id) {
-  return async function (dispatch) {
+  return async function (dispatch, getState) {
     try {
-      let allActiveCategorys = await axios.get(
+      let allActiveCategories = await axios.get(
         `http://localhost:3001/category/all_active/${id}`
       );
+      let equals = false;
+      if (getState().allCategories.length) {
+        let categorias = getState().allCategories;
+        // Convertimos los arrays a objetos con las propiedades que queremos comparar
+        const objects1 = allActiveCategories.data.map((obj) => ({
+          ...obj,
+          ...{ category: undefined },
+        }));
+        const objects2 = categorias.map((obj) => ({
+          ...obj,
+          ...{ category: undefined },
+        }));
+
+        // Comparamos los objetos
+        equals = JSON.stringify(objects1) === JSON.stringify(objects2);
+      }
+      //si las categorias cargadas son las mismas, no las vuelve a cargar
+      if (equals === true) return;
+      const traduccion = async () => {
+        //* Obtengo todos los nombres de las categorias
+        let results = categoryTranslate(allActiveCategories.data);
+        //* Traduzco todos los nombres
+        let translatedNames = await translateText(
+          localStorage.getItem("Lang"),
+          results,
+          true
+        );
+        //* Reemplazo los nombres originales por los nombres traducidos
+        const translatedCategories = allActiveCategories.data.map(
+          (a, index) => {
+            a.category = translatedNames[index].name;
+            return a;
+          }
+        );
+        return translatedCategories;
+      };
       return dispatch({
         type: GET_ALL_CATEGORIES,
-        payload: allActiveCategorys.data,
+        payload: await traduccion(),
       });
     } catch (error) {
       console.error(error);
@@ -453,6 +692,13 @@ export const setFiltro = (filtroPor) => {
     payload: filtroPor,
   };
 };
+
+export const isAvailable = (name, setLoading)=> {
+  return {
+    type: IS_PRODUCT_AVAILABLE,
+    payload: { name: name, setLoading: setLoading },
+  };
+ }
 
 export function getPosValue(id) {
   return async function (dispatch) {
@@ -544,4 +790,24 @@ export function changeLanguage(lang, setIsloading) {
       console.error(error);
     }
   };
+}
+
+////////////////////* Order Action type *////////////////////
+
+export function getOrderStatus (orderId, commerceId) {
+  return async function (dispatch) {
+    try {
+      const date = new Date
+      let fecha = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
+      let response = await axios.get(
+        `http://localhost:3001/order/paidOrderes/${commerceId}?startDate=${fecha}&endDate=${fecha}`
+      );
+      return dispatch({
+        type: GET_ORDER_STATUS,
+        payload: {orderId: orderId, allOrders: response.data}
+      })
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }
