@@ -25,9 +25,9 @@ export default function Categories({handleCategory, category, setCategory,handle
           noMargin={true}
         />
       </div>
-      <div style={{ position: "relative", height: "75px" }}>
+      <div style={{ position: "relative", height: "auto" }}>
         <ScrollContainer className={s.scrollContainer}>
-          <AllCategoryIcon
+          {/* <AllCategoryIcon
             all={all}
             setAll={setAll}
             commerceId={commerceId}
@@ -39,7 +39,7 @@ export default function Categories({handleCategory, category, setCategory,handle
             handleAditionals={handleAditionals}
             handleCategory={handleCategory}
             text={language.categories_aditionals}
-          />
+          /> */}
           {activeCategories?.map((categoryObject, index) => (
             <Icon
               key={index}

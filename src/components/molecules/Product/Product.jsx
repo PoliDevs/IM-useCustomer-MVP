@@ -10,6 +10,7 @@ import {
   isAvailable,
 } from "../../../redux/actions";
 import { useEffect, useState } from "react";
+import { emojiPng } from "../../../utils/Constants";
 
 export default function Product({
   name,
@@ -50,6 +51,13 @@ export default function Product({
     emoji1 = emoji;
   }
 
+  const getPng = (text) =>{
+    if (text){
+    let png = emojiPng.find((e)=> e.name === text)
+    return png.src
+  }
+  }
+
   return (
     <div
       className={s.productContainer}
@@ -79,12 +87,26 @@ export default function Product({
         // setIsClicked(true)
       }}
     >
-      <span role="img" aria-label="Emoji" className={s.productIcon}>
+      <img src={getPng(bg)} style={{width: "60px", height:"60px"}}/>
+      {/* <div style={{backgroundImage: getPng(bg)}} className={s.productIcon}></div> */}
+      {/* <span role="img" aria-label="Emoji" className={s.productIcon}>
         {emoji1}
-      </span>
+      </span> */}
       <div className={s.infoContainer}>
-        <Paragraph alignment={"left"} text={name} bold={true} />
-        <SmallText alignment={"left"} text={description} smaller={true} />
+        <div className={s.headerInfo}>
+          <Paragraph
+            alignment={"left"}
+            text={name}
+            bold={true}
+            noMargin={true}
+          />
+          <SmallText
+            alignment={"left"}
+            text={description}
+            smaller={true}
+            noMargin={true}
+          />
+        </div>
         {/* <Paragraph alignment={"left"} text={`$ ${cost}`} bold={true} /> */}
         <Paragraph alignment={"left"} text={`$ ${price}`} bold={true} />
       </div>

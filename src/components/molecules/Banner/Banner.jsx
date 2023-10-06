@@ -44,7 +44,7 @@ export default function Banner({ setCategory, arrow, setAditionals, setAll }) {
           />
         )}
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <SubTitle text={commerce.name} alignment={"left"} />
+          <SubTitle text={commerce.name} alignment={"left"} bold={true}/>
           <Paragraph
             alignment={"left"}
             text={`${language.banner_table} ${table}`}

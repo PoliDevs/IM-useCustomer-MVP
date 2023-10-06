@@ -8,6 +8,7 @@ import Paragraph from "../../atoms/Paragraph/Paragraph";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import SmallText from "../../atoms/SmallText/SmallText";
 import s from "./CartProduct.module.scss";
+import { emojiPng } from "../../../utils/Constants";
 
 export default function CartProduct({image, name, description, comment, price, amount}) {
   const { addToCart, removeFromCart } = useAmountControls();
@@ -28,12 +29,23 @@ export default function CartProduct({image, name, description, comment, price, a
     emoji1 = emoji;
   }
 
+    const getPng = (text) => {
+      if (text) {
+        let png = emojiPng.find((e) => e.name === text);
+        return png.src;
+      }
+    };
+
   return (
     <div className={s.cartProduct}>
       {/* <img className={s.icon} src={image} alt={"product icon"} /> */}
-      <span role="img" aria-label="Emoji" className={s.icon}>
+      {/* <span role="img" aria-label="Emoji" className={s.icon}>
         {emoji1}
-      </span>
+      </span> */}
+      <img
+        src={getPng(image)}
+        style={{ width: "60px", height: "60px" }}
+      />
       <div className={s.info}>
         <Paragraph alignment={"left"} text={name} bold={true} />
         <SmallText alignment={"left"} text={description} />

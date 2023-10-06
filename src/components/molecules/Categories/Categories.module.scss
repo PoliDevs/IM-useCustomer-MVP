@@ -3,7 +3,7 @@
 .categories {
   width: 100%;
   height: auto;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
   .sectionTitle {
     background-color: $background-buttom-primary-active;
     margin: 15px auto;
@@ -13,7 +13,8 @@
   }
   .scrollContainer {
     display: flex;
-    height: 90px;
+    // height: 90px; comentado hasta que tenga imagenes
+    height: auto;
     cursor: pointer;
     &:before {
       content: "";

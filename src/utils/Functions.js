@@ -325,3 +325,37 @@ export const formattedOrder = (
   });
   // return order;
 };
+
+
+export const detectLanguage = async (textSample = 'How are you') => {
+  try {
+    return await axios({
+      baseURL: import.meta.env.VITE_MICROSOFT_TRANSLATE_ENDPOINT,
+      url: "/detect",
+      method: "post",
+      headers: {
+        "Ocp-Apim-Subscription-Key": import.meta.env
+          .VITE_MICROSOFT_TRANSLATE_KEY,
+        "Ocp-Apim-Subscription-Region": import.meta.env.VITE_MICROSOFT_LOCATION,
+        "Content-type": "application/json",
+        "X-ClientTraceId": uuidv4().toString(),
+      },
+      params: {
+        "api-version": "3.0",
+        // from: "en",
+        // to: ["fr", "zu"],
+      },
+      data: [
+        {
+          text: textSample,
+        },
+      ],
+      responseType: "json",
+    }).then(function (response) {
+      console.log(response.data[0].language);
+      return response.data[0].language;
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};

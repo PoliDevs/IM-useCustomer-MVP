@@ -39,3 +39,7 @@ export const TRANSLATE_TEXT = "TRANSLATE_TEXT";
 ////////////////////* Language Action type *////////////////////
 
 export const CHANGE_LANGUAGE = "CHANGE_LANGUAGE";
+
+////////////////////* Order Action type *////////////////////
+
+export const GET_ORDER_STATUS = "GET_ORDER_STATUS";

@@ -1,6 +1,7 @@
 @import "../../../scss/colors.scss";
 
 .searchBar {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,7 +25,9 @@
     visibility: hidden;
   }
   .visible {
-  visibility: visible;
+    visibility: visible;
+    position: absolute;
+    right: 5px
   }
 
   .strong {

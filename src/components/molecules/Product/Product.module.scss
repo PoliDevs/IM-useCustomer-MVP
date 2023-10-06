@@ -22,10 +22,10 @@
     justify-content: center;
     height: 60px;
     width: 60px;
-    font-size: 50px;
-    // background-position: center center;
-    // background-repeat: no-repeat;
-    // background-size: contain;
+    // font-size: 50px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
   }
   .infoContainer {
     display: flex;
@@ -34,5 +34,13 @@
     margin-left: 20px;
     justify-content: space-around;
     height: 100%;
+
+    .headerInfo {
+      display: flex;
+      flex-direction: column;
+      height: auto;
+      width: auto;
+      gap: 10px
+    }
   }
 }

@@ -24,6 +24,7 @@ import {
   CLEAR_SEARCH_PRODUCT,
   GET_PAYMENT_METHODS,
   IS_PRODUCT_AVAILABLE,
+  GET_ORDER_STATUS,
 } from "../actions/actionTypes";
 import dotenv from "dotenv";
 import { all_app_texts } from "../../utils/language";
@@ -61,9 +62,15 @@ const initalState = {
   user: localStorage.getItem("user") ? getEncriptedItem("user") : {},
   commerce: localStorage.getItem("CM") ? getEncriptedItem("CM") : {},
   status: false,
-  language: localStorage.getItem("Lang") ? await translateText(localStorage.getItem("Lang"), all_app_texts) : "es",
+  language: localStorage.getItem("Lang")
+    ? await translateText(localStorage.getItem("Lang"), all_app_texts)
+    : "es",
   tablePrice: {},
-  sectorPrice: {}
+  sectorPrice: {},
+  orderId: localStorage.getItem("CSMO_ID")
+    ? localStorage.getItem("CSMO_ID")
+    : "",
+  orderStatus: "",
 };
 
 export const rootReducer = (state = initalState, action) => {
@@ -176,7 +183,8 @@ export const rootReducer = (state = initalState, action) => {
       return {...state, paymentMethods: action.payload}
     case GET_ACTIVE_MENUS:
       {
-        state = { ...state, allProducts: action.payload };
+        const allActive = action.payload.filter((m)=> m.active === true);
+        state = { ...state, allProducts: allActive };
       }
       return state;
     case GET_ACTIVE_DISHES:
@@ -242,13 +250,18 @@ export const rootReducer = (state = initalState, action) => {
       {
         localStorage.setItem("Lang", action.payload.lang);
         // state = { ...state, language: action.payload };
-        state = { ...state, language: action.payload.language };
+        state = { ...state, language: action.payload.language, allProducts: [], allAditionals: [], products: [] };
       }
       return state;
     case SET_TABLE_PRICE:
       return { ...state, tablePrice: action.payload };
     case SET_SECTOR_PRICE:
       return { ...state, sectorPrice: action.payload };
+    case GET_ORDER_STATUS:
+      { 
+        let status = action.payload.allOrders.find((o)=> o.id == action.payload.orderId).status;
+        return {...state, orderStatus: status}
+      }
     default:
       return state;
   }

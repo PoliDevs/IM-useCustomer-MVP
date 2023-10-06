@@ -16,7 +16,7 @@ import OrderInfo from "../../molecules/OrderInfo/OrderInfo";
 import s from "./Payment.module.scss";
 import ClosedCommerce from "../../molecules/ClosedCommerce/ClosedCommerce";
 import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
-
+import iMenuFull from "../../../assets/logo-imenu-full.png";
 export default function Payment() {
   const [method, setMethod] = useState('');
   const [price, setPrice] = useState({});
@@ -71,50 +71,69 @@ export default function Payment() {
     }
      return;
   }
-  return (
-    !isLoading ?
-    (open ? (<main className={s.paymentContainer}>
-      <Banner arrow={true} />
-      <section className={s.paymentContent}>
-        <SubTitle text={language.payment_title} alignment={"left"}>
-          <CashIcon className={s.cashIcon} />
-        </SubTitle>
-        <SmallText text={language.payment_managePayment} alignment={"left"} />
-        <OrderInfo price={price} tablePrice={tablePrice} sectorPrice={sectorPrice} />
-        <PaymentOptionButton
-          text={language.payment_cash}
-          option={2}
-          setMethod={setMethod}
-          handleChange={handleChange}
-        />
-        <PaymentOptionButton
-          text={"Mercadopago"}
-          option={1}
-          setMethod={setMethod}
-          handleChange={handleChange}
-        />
-        <PaymentOptionButton
-          text={language.payment_deferred}
-          option={3}
-          setMethod={setMethod}
-          handleChange={handleChange}
-        />
-        <div className={s.bottomContent}>
-          <Paragraph
-            text={language.payment_poweredby}
+  return !isLoading ? (
+    open ? (
+      <main className={s.paymentContainer}>
+        <Banner arrow={true} />
+        <section className={s.paymentContent}>
+          <SubTitle
+            text={language.payment_title}
+            alignment={"left"}
             bold={true}
-            centered={true}
           >
-            <IMenu className={s.imenuLogo} />
-          </Paragraph>
-          <Link
-            className={s.linkButton}
-            to={paymentUrl[method]}
-            onClick={handleCash}
-          >
-            {language.payment_continue}
-          </Link>
-        </div>
-      </section>
-    </main>) : (<ClosedCommerce fullHeight={true}/>)) : <LoadingPage/> ); 
+            <CashIcon className={s.cashIcon} />
+          </SubTitle>
+          <SmallText
+            text={language.payment_managePayment}
+            alignment={"left"}
+            standarSpacing={true}
+          />
+          <OrderInfo
+            price={price}
+            tablePrice={tablePrice}
+            sectorPrice={sectorPrice}
+          />
+          <PaymentOptionButton
+            text={language.payment_cash}
+            option={2}
+            setMethod={setMethod}
+            handleChange={handleChange}
+          />
+          <PaymentOptionButton
+            text={"Mercadopago"}
+            option={1}
+            setMethod={setMethod}
+            handleChange={handleChange}
+          />
+          <PaymentOptionButton
+            text={language.payment_deferred}
+            option={3}
+            setMethod={setMethod}
+            handleChange={handleChange}
+          />
+          <div className={s.bottomContent}>
+            <Paragraph
+              text={language.payment_poweredby}
+              bold={true}
+              centered={true}
+            >
+              {/* <IMenu className={s.imenuLogo} /> */}
+              <img src={iMenuFull} className={s.imemuLogo} width={"70px"} />
+            </Paragraph>
+            <Link
+              className={s.linkButton}
+              to={paymentUrl[method]}
+              onClick={handleCash}
+            >
+              {language.payment_continue}
+            </Link>
+          </div>
+        </section>
+      </main>
+    ) : (
+      <ClosedCommerce fullHeight={true} />
+    )
+  ) : (
+    <LoadingPage />
+  ); 
 }

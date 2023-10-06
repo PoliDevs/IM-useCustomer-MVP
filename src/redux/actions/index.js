@@ -22,12 +22,12 @@ import {
   CLEAR_SEARCH_PRODUCT,
   GET_PAYMENT_METHODS,
   IS_PRODUCT_AVAILABLE,
+  GET_ORDER_STATUS,
 } from "./actionTypes";
-import { ProductsInfo } from "../../utils/Constants";
 import { TRANSLATE_TEXT } from "./actionTypes";
 import { v4 as uuidv4 } from "uuid";
 import { all_app_texts } from "../../utils/language";
-import { categoryTranslate, menuTranslate, translateText } from "../../utils/Functions";
+import { categoryTranslate, detectLanguage, menuTranslate, translateText } from "../../utils/Functions";
 
 ////////////////////* SearchBar Action Creator *////////////////////
 
@@ -316,6 +316,9 @@ export async function postOrder(order, methodId) {
       "http://localhost:3001/order/new",
       newOrder
     );
+    localStorage.setItem('CSMO_ID',(response.data.id));
+    localStorage.setItem("CSMO", response.data.order);
+    localStorage.removeItem('cart');
     return response;
   } catch (error) {
     console.error(error);
@@ -323,14 +326,18 @@ export async function postOrder(order, methodId) {
 }
 
 
-export const sendReview = (review, orderId) => {
+export const sendReview = (review, commerceId) => {
   try {
-    let response = axios.put(`http://localhost:3001/order/rating/${orderId}`, review);
+    let orderName = localStorage.getItem("CSMO");
+    let response = axios.put(
+      `http://localhost:3001/order/rating/${orderName}/${commerceId}`,
+      review
+    );
     return response.data;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-}
+};
 
 ////////////////////* Commerce Actions Creators *////////////////////
 
@@ -412,12 +419,31 @@ export function getPaymentMethods(id) {
 }
 
 export function getActiveMenus(id, setIsLoading) {
-  return async function (dispatch) {
+  return async function (dispatch, getState) {
     try {
       let allActiveMenus = await axios.get(
         // `http://localhost:3001/menu/all_active/${id}`
         `http://localhost:3001/menu/lastMenu/${id}`
       );
+      let equals = false;
+      if (getState().allProducts.length) {
+        let allProducts = getState().allProducts;
+
+        // Convertimos los arrays a objetos con las propiedades que queremos comparar
+        const objects1 = allActiveMenus.data.map((obj) => ({
+          ...obj,
+          ...{ name: undefined, description: undefined },
+        }));
+        const objects2 = allProducts.map((obj) => ({
+          ...obj,
+          ...{ name: undefined, description: undefined },
+        }));
+
+        // Comparamos los objetos
+        equals = JSON.stringify(objects1) === JSON.stringify(objects2);
+      }
+      //si los menus cargados son los mismos, no los vuelve a cargar
+      if (equals === true) {if (setIsLoading) setIsLoading(false);return}
       const traduccion = async () => {
         //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
         let results = menuTranslate(allActiveMenus.data);
@@ -435,7 +461,8 @@ export function getActiveMenus(id, setIsLoading) {
         //* Reemplazo los nombres originales por los nombres traducidos
         const translatedMenus = allActiveMenus.data.map((a, index) => {
           a.name = translatedNames[index].name;
-          if (a.description)  a.description = translatedDescriptions[index].description
+          if (a.description)
+            a.description = translatedDescriptions[index].description;
           return a;
         });
         return translatedMenus;
@@ -491,27 +518,45 @@ export function getActiveDishes(id) {
 }
 
 export function getActiveProducts(id) {
-  return async function (dispatch) {
+  return async function (dispatch, getState) {
     try {
       let allActiveProducts = await axios.get(
         `http://localhost:3001/product/all_active/${id}`
       );
-       const traduccion = async () => {
-         //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
-         let results = menuTranslate(allActiveProducts.data);
-         //* Traduzco todos los nombres
-         let translatedNames = await translateText(
-           localStorage.getItem("Lang"),
-           results.nombres,
-           true
-         );
-         //* Reemplazo los nombres originales por los nombres traducidos
-         const translatedProducts = allActiveProducts.data.map((a, index) => {
-           a.name = translatedNames[index].name;
-           return a;
-         });
-         return translatedProducts;
-       };
+      let equals = false;
+      if (getState().products.length) {
+        let products = getState().products;
+        // Convertimos los arrays a objetos con las propiedades que queremos comparar
+        const objects1 = allActiveProducts.data.map((obj) => ({
+          ...obj,
+          ...{ name: undefined },
+        }));
+        const objects2 = products.map((obj) => ({
+          ...obj,
+          ...{ name: undefined },
+        }));
+
+        // Comparamos los objetos
+        equals = JSON.stringify(objects1) === JSON.stringify(objects2);
+      }
+      //si las categorias cargadas son las mismas, no las vuelve a cargar
+      if (equals === true) return;
+      const traduccion = async () => {
+        //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
+        let results = menuTranslate(allActiveProducts.data);
+        //* Traduzco todos los nombres
+        let translatedNames = await translateText(
+          localStorage.getItem("Lang"),
+          results.nombres,
+          true
+        );
+        //* Reemplazo los nombres originales por los nombres traducidos
+        const translatedProducts = allActiveProducts.data.map((a, index) => {
+          a.name = translatedNames[index].name;
+          return a;
+        });
+        return translatedProducts;
+      };
 
       return dispatch({
         type: GET_ACTIVE_PRODUCTS,
@@ -524,11 +569,29 @@ export function getActiveProducts(id) {
 }
 
 export function getActiveAditionals(id) {
-  return async function (dispatch) {
+  return async function (dispatch, getState) {
     try {
       let allActiveAditionals = await axios.get(
         `http://localhost:3001/additional/all_active/${id}`
-        );
+      );
+      let equals = false;
+      if (getState().allAditionals.length) {
+        let aditionals = getState().allAditionals;
+        // Convertimos los arrays a objetos con las propiedades que queremos comparar
+        const objects1 = allActiveAditionals.data.map((obj) => ({
+          ...obj,
+          ...{ name: undefined },
+        }));
+        const objects2 = aditionals.map((obj) => ({
+          ...obj,
+          ...{ name: undefined },
+        }));
+
+        // Comparamos los objetos
+        equals = JSON.stringify(objects1) === JSON.stringify(objects2);
+      }
+      //si las categorias cargadas son las mismas, no las vuelve a cargar
+      if (equals === true) return;
       const traduccion = async () => {
         //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
         let results = menuTranslate(allActiveAditionals.data);
@@ -559,22 +622,38 @@ export function getActiveAditionals(id) {
 }
 
 export function getAllCategorys(id) {
-  return async function (dispatch) {
+  return async function (dispatch, getState) {
     try {
       let allActiveCategories = await axios.get(
         `http://localhost:3001/category/all_active/${id}`
       );
+      let equals = false;
+      if (getState().allCategories.length) {
+        let categorias = getState().allCategories;
+        // Convertimos los arrays a objetos con las propiedades que queremos comparar
+        const objects1 = allActiveCategories.data.map((obj) => ({
+          ...obj,
+          ...{ category: undefined },
+        }));
+        const objects2 = categorias.map((obj) => ({
+          ...obj,
+          ...{ category: undefined },
+        }));
+
+        // Comparamos los objetos
+        equals = JSON.stringify(objects1) === JSON.stringify(objects2);
+      }
+      //si las categorias cargadas son las mismas, no las vuelve a cargar
+      if (equals === true) return;
       const traduccion = async () => {
         //* Obtengo todos los nombres de las categorias
         let results = categoryTranslate(allActiveCategories.data);
-        console.log('results', results);
         //* Traduzco todos los nombres
         let translatedNames = await translateText(
           localStorage.getItem("Lang"),
           results,
           true
         );
-        console.log('translatedNames', translatedNames);
         //* Reemplazo los nombres originales por los nombres traducidos
         const translatedCategories = allActiveCategories.data.map(
           (a, index) => {
@@ -711,4 +790,24 @@ export function changeLanguage(lang, setIsloading) {
       console.error(error);
     }
   };
+}
+
+////////////////////* Order Action type *////////////////////
+
+export function getOrderStatus (orderId, commerceId) {
+  return async function (dispatch) {
+    try {
+      const date = new Date
+      let fecha = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
+      let response = await axios.get(
+        `http://localhost:3001/order/paidOrderes/${commerceId}?startDate=${fecha}&endDate=${fecha}`
+      );
+      return dispatch({
+        type: GET_ORDER_STATUS,
+        payload: {orderId: orderId, allOrders: response.data}
+      })
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }

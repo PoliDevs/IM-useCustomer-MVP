@@ -10,6 +10,7 @@ import s from "./Modal.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { isAvailable } from "../../../redux/actions";
+import { emojiPng } from "../../../utils/Constants";
 
 export default function Modal({ productData,  isOpen, closeModal, changeStyle}) {
   const cart = useSelector((state)=> state.cart);
@@ -42,6 +43,12 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
      productData.name && dispatch(isAvailable(productData.name, setLoading));
    }, [allproducts, alladitionals, products]);
 
+    const getPng = (text) => {
+      if (text) {
+        let png = emojiPng.find((e) => e.name === text);
+        return png.src;
+      }
+    };
 
   return (
     <article className={`${s.modalContainer} ${isOpen && s.open}`}>
@@ -55,9 +62,13 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
           }}
         />
         <div className={s.productHeader}>
-          <span role="img" aria-label="Emoji" className={s.productIcon}>
+          {/* <span role="img" aria-label="Emoji" className={s.productIcon}>
             {emoji1}
-          </span>
+          </span> */}
+          <img
+            src={getPng(productData.image)}
+            style={{ width: "60px", height: "60px" }}
+          />
           <div className={s.productInfo}>
             <SubTitle
               className={s.productTitle}
@@ -75,10 +86,7 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
         </div>
         <div>
           {loading === false && available === false && (
-            <p
-              className={`${s.notAvailableProduct} ${s.visible
-              }`}
-            >
+            <p className={`${s.notAvailableProduct} ${s.visible}`}>
               Producto no disponible
             </p>
           )}
@@ -140,6 +148,8 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
                 // productData.cost,
               );
             available && changeStyle();
+            setAmount(0);
+            closeModal();
           }}
         >
           {language.productModal_addButton}
