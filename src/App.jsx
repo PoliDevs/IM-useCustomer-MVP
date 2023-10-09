@@ -48,7 +48,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/mercadopago" element={<Mercadopago />} />
-          <Route path="/rating" element={<Review />} />
+          <Route path="/rating/:id?" element={<Review />} />
         </Route>
       </Routes>
     </>
