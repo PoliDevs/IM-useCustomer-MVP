@@ -27,6 +27,7 @@ export default function Payment() {
   const productsList = useSelector((state)=> state.products);
   const tablePrice = useSelector((state)=> state.tablePrice);
   const language = useSelector((state)=> state.language);
+  const user = useSelector((state) => state.user);
   const sectorID = useSelector((state) => state.sector);
   const open = useSelector((state) => state.status);
   const tableID = useSelector((state)=> state.table);
@@ -51,6 +52,7 @@ export default function Payment() {
 
   useEffect(() => {
     formattedOrder(
+      user,
       cart,
       productsList,
       sectorID,

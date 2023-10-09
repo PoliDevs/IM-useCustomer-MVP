@@ -25,6 +25,7 @@ import {
   GET_PAYMENT_METHODS,
   IS_PRODUCT_AVAILABLE,
   GET_ORDER_STATUS,
+  PUT_ORDER_DATA,
 } from "../actions/actionTypes";
 import dotenv from "dotenv";
 import { all_app_texts } from "../../utils/language";
@@ -262,6 +263,8 @@ export const rootReducer = (state = initalState, action) => {
         let status = action.payload.allOrders.find((o)=> o.id == action.payload.orderId).status;
         return {...state, orderStatus: status}
       }
+    case PUT_ORDER_DATA:
+      return { ...state, orderId: action.payload.CSMO_ID };
     default:
       return state;
   }

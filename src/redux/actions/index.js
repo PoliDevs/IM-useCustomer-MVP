@@ -283,12 +283,12 @@ export async function postOrder(order, methodId) {
       courierId: null,
       costDelivery: 0,
       sectorId: parseInt(order.sectorId),
-      accountemail: order.email ? order.email : "",
-      accountname: order.name ? order.name : "",
-      accountphone: order.phone ? order.phone : "",
-      accountbirthDate: order.birthDate ? order.birthDate : "",
-      accountaddress: order.address ? order.address : "",
-      googleemail: order.email ? order.email : "",
+      accountemail: order.user.email ? order.email : "",
+      accountname: order.user.name ? order.name : "",
+      accountphone: order.user.phone ? order.phone : "",
+      accountbirthDate: order.user.birthDate ? order.birthDate : "",
+      accountaddress: order.user.address ? order.address : "",
+      googleEmail: order.user.email ? order.email : "",
       additionals,
       products,
       dishes: {
@@ -798,7 +798,9 @@ export function getOrderStatus (orderId, commerceId) {
   return async function (dispatch) {
     try {
       const date = new Date
-      let fecha = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
+      let month = date.getMonth() + 1;
+      let day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+      let fecha = `${date.getFullYear()}-${month}-${day}`;
       let response = await axios.get(
         `http://localhost:3001/order/paidOrderes/${commerceId}?startDate=${fecha}&endDate=${fecha}`
       );

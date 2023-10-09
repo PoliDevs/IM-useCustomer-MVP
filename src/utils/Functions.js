@@ -237,6 +237,7 @@ export async function translateText(lang = "en", all_app_texts, menu=false) {
 }
 
 export const formattedOrder = (
+  user,
   cart,
   productsList,
   sectorID,
@@ -312,6 +313,7 @@ export const formattedOrder = (
   });
   //! Creo una nueva order
   setOrder({
+    user: user,
     productos: productos,
     adicionales: adicionales,
     menus: menus,

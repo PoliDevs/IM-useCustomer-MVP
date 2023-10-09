@@ -18,6 +18,7 @@ import { useRating } from "../../../utils/Functions";
 import { getOrderStatus, sendReview } from "../../../redux/actions";
 import { useEffect } from "react";
 import iMenuFull from "../../../assets/logo-imenu-full.png";
+import { useParams } from "react-router-dom";
 export default function Review() {
   const [comment, setComment] = useState("");
   const [sent, setSent] = useState(false);
@@ -28,7 +29,8 @@ export default function Review() {
   const orderId = useSelector((state)=> state.orderId);
   const {width, height} = useWindowSize();
   const dispatch = useDispatch();
-
+  const { id } = useParams();
+  if (id) localStorage.setItem('CSMO_ID', id)
   const [t, i18n] = useTranslation(["global"]);
 
   const { starsArray, stars, handleStars } = useRating();
@@ -48,9 +50,10 @@ export default function Review() {
   }, 6000);
 
   useEffect(() => {
-    return async function () {
+    const updateStatus = async () => {
       orderId && (await dispatch(getOrderStatus(orderId, commerceInfo.id)));
     };
+    updateStatus();
   }, []);
   
 

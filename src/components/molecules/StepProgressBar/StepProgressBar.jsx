@@ -8,7 +8,6 @@ export default function StepProgressBar() {
   const orderStatus = useSelector((state)=> state.orderStatus);
 
   const stepPercentage = {
-    '': 25,
     orderPlaced: 25,
     orderInPreparation: 75,
     orderReady: 100,
