@@ -23,6 +23,8 @@ import {
   GET_PAYMENT_METHODS,
   IS_PRODUCT_AVAILABLE,
   GET_ORDER_STATUS,
+  GET_ORDER_PENDING,
+  REMOVE_CART,
 } from "./actionTypes";
 import { TRANSLATE_TEXT } from "./actionTypes";
 import { v4 as uuidv4 } from "uuid";
@@ -810,6 +812,38 @@ export function getOrderStatus (orderId, commerceId) {
       })
     } catch (error) {
       console.error(error);
+    }
+  }
+}
+
+export function getOrderPending (commerceId, sectorID, tableID){
+  return async function (dispatch){
+    try {
+      const date = new Date();
+      let month = date.getMonth() + 1;
+      let day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+      let fecha = `${date.getFullYear()}-${month}-${day}`;
+      let response = await axios.get(
+        `http://localhost:3001/order/dates/${commerceId}?startDate=${fecha}&endDate=${fecha}`
+      );     
+      return dispatch ({
+        type: GET_ORDER_PENDING,
+        payload: {allOrders: response.data, sectorID: sectorID, tableID: tableID}
+      })
+    } catch (error) {
+      return(error)
+    }
+  }
+}
+
+export function removerCart(){
+  return function(dispatch){
+    try {
+      return dispatch({
+        type: REMOVE_CART,
+      })
+    } catch (error) {
+      console.error(error)
     }
   }
 }

@@ -4,6 +4,7 @@ export const ADD_CART = "ADD_CART";
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 export const SET_USER = "SET_USER";
+export const REMOVE_CART = "REMOVE_CART";
 
 ////////////////////* Commerce Action types *////////////////////
 
@@ -44,3 +45,4 @@ export const CHANGE_LANGUAGE = "CHANGE_LANGUAGE";
 
 export const GET_ORDER_STATUS = "GET_ORDER_STATUS";
 export const PUT_ORDER_DATA = "PUT_ORDER_DATA";
+export const GET_ORDER_PENDING = "GET_ORDER_PENDING";

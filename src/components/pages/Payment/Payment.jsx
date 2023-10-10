@@ -1,5 +1,5 @@
 import { dataDecrypt, formattedOrder } from "../../../utils/Functions";
-import { getActiveProducts, getCommerce, getPaymentMethods, getPosValue, getSectorValue, getStatus, postOrder } from "../../../redux/actions";
+import { getActiveProducts, getCommerce, getPaymentMethods, getPosValue, getSectorValue, getStatus, postOrder, removerCart } from "../../../redux/actions";
 import { ReactComponent as IMenu } from "../../../assets/ImenuHorizontal.svg";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -70,6 +70,7 @@ export default function Payment() {
     if (method === 2) {
       const methodId = paymentMethods.filter((m)=> m.type === "efectivo")[0].id
       postOrder(order, methodId);
+      dispatch(removerCart())
     }
      return;
   }
