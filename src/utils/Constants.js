@@ -527,7 +527,7 @@ export const cartProducts = []
 
 export const paymentUrl = {
     1: "/mercadopago",
-    2: "/rating/24",
+    2: "/rating",
     3: "/rating"
   }
 

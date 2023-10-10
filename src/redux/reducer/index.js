@@ -26,6 +26,8 @@ import {
   IS_PRODUCT_AVAILABLE,
   GET_ORDER_STATUS,
   PUT_ORDER_DATA,
+  GET_ORDER_PENDING,
+  REMOVE_CART,
 } from "../actions/actionTypes";
 import dotenv from "dotenv";
 import { all_app_texts } from "../../utils/language";
@@ -83,18 +85,14 @@ export const rootReducer = (state = initalState, action) => {
       return { ...state, sector: action.payload };
     case GET_SEARCHED_PRODUCT: {
       const copy = [...state.allProducts, ...state.products, ...state.allAditionals];
-      // const results = state.allProducts.filter((p) =>
       const results = copy.filter((p)=>
         p.name.toLowerCase().includes(action.payload.toLowerCase())
       );
       if (results.length) {
-        // return (state = { ...state, allProducts: results });
         return (state = {...state, search: results})
       } else {
-        // state = { ...state, allProducts: copy };
         return state;
       }
-      // return state;
     }
     case CLEAR_SEARCH_PRODUCT:
       return {...state, search: []}
@@ -194,7 +192,6 @@ export const rootReducer = (state = initalState, action) => {
           (d) => d.commerce.id === action.payload.id
         );
         state = { ...state, allDishes: allActive };
-        //state = { ...state, allProducts: state.allProducts.concat(allActive) };//!descomentar para agregar los platos activos del comercio
       }
       return state;
     case GET_ACTIVE_PRODUCTS:
@@ -205,19 +202,6 @@ export const rootReducer = (state = initalState, action) => {
     case GET_ALL_CATEGORIES:
       return { ...state, allCategories: action.payload };
     case GET_ALL_ADITIONALS:{
-      // const traduccion = async () => {
-      //   //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
-      //   let results = menuTranslate(action.payload);
-      //   //* Traduzco todos los nombres
-      //   let translatedNames = await translateText(localStorage.getItem("Lang"), results.nombres, true);
-      //   //* Reemplazo los nombres originales por los nombres traducidos
-      //   const translatedAdittionals = action.payload.map((a, index)=> {
-      //       a.name = translatedNames[index].name;
-      //       return a
-      //     })
-      //     return translatedAdittionals
-      //   }
-      //   const newAdditionals = traduccion();
       return { ...state, allAditionals: action.payload };
     }
     case FILTER_CATEGORY: {
@@ -260,11 +244,29 @@ export const rootReducer = (state = initalState, action) => {
       return { ...state, sectorPrice: action.payload };
     case GET_ORDER_STATUS:
       { 
-        let status = action.payload.allOrders.find((o)=> o.id == action.payload.orderId).status;
+        let orderId = action.payload.allOrders.find(
+          (o) => o.id == action.payload.orderId
+        );
+        let status = orderId ? orderId.status : '';
         return {...state, orderStatus: status}
       }
     case PUT_ORDER_DATA:
       return { ...state, orderId: action.payload.CSMO_ID };
+    case GET_ORDER_PENDING:
+      {
+        let pendingOrder = action.payload.allOrders.filter((o)=> {
+          let pending = (o.status !== 'delivered') && (o.sector.id == action.payload.sectorID) && (o.po.id == action.payload.tableID)
+          return pending
+        })
+        if (pendingOrder.length ){
+          localStorage.setItem("CSMO_ID", pendingOrder[0].id);
+          return {...state, orderId: pendingOrder && pendingOrder[0].id}
+        }else{
+          return state
+        }
+      }
+    case REMOVE_CART: 
+    return {...state, cart: []}
     default:
       return state;
   }

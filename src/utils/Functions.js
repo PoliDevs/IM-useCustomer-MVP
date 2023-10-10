@@ -1,3 +1,6 @@
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
+import { all_app_texts } from "./language";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addProduct, removeProduct } from "../redux/actions";
@@ -155,9 +158,6 @@ export const dataDecrypt = (data) => {
   return urlInfo;
 };
 
-import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
-import { all_app_texts } from "./language";
 
 //* Funcion para obtener nombres y descripciones del menu
 export function menuTranslate (array) {
