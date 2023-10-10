@@ -19,7 +19,8 @@ export default function Mercadopago() {
   const language = useSelector((state) => state.language);
   const paymentMethods = useSelector((state) => state.paymentMethods);
   const sectorPrice = useSelector((state) => state.sectorPrice);
-  const commerceID = useSelector((state) => state.commerce.id);
+  const commerce = useSelector((state) => state.commerce);
+  const commerceID = commerce.id;
   const productsList = useSelector((state) => state.products);
   const tablePrice = useSelector((state) => state.tablePrice);
   const user = useSelector((state) => state.user);
@@ -60,7 +61,8 @@ export default function Mercadopago() {
 
   const handleMp = () => {
     const methodId = paymentMethods.filter((m) => m.type === "mercadopago")[0].id;
-    postOrder(order, methodId);
+    let mercadoPago = true;
+    postOrder(order, methodId, mercadoPago, commerce.name);
     dispatch(removerCart());
     return;
   };

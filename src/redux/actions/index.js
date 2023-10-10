@@ -114,7 +114,7 @@ export function removeProduct(name) {
 
 ////////////////////* Order *////////////////////
 
-export async function postOrder(order, methodId) {
+export async function postOrder(order, methodId, mercadoPago, commerceName) {
   let date = new Date().toJSON().slice(0, 10);
   const hour = new Date().getHours();
   const minute = new Date().getMinutes();
@@ -314,6 +314,18 @@ export async function postOrder(order, methodId) {
       },
       menu,
     };
+    if (mercadoPago){
+    let orderMp = { commerce: { commerce: commerceName }, order: newOrder };
+    let response = await axios.post(
+      "http://localhost:3001/mp/create-order",
+      orderMp
+    );
+    //!mercadoPago retorna una url a la que hay que redirigir
+    localStorage.setItem("CSMO_ID", response.data.id);
+    localStorage.setItem("CSMO", response.data.order);
+    localStorage.removeItem("cart");
+    return response;
+    }else{
     let response = await axios.post(
       "http://localhost:3001/order/new",
       newOrder
@@ -322,6 +334,7 @@ export async function postOrder(order, methodId) {
     localStorage.setItem("CSMO", response.data.order);
     localStorage.removeItem('cart');
     return response;
+  }
   } catch (error) {
     console.error(error);
   }
