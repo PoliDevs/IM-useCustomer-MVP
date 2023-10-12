@@ -46,6 +46,10 @@
         height: 60px;
         width: 60px;
         display: inline;
+        font-size: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
       .productInfo {
         display: inline;
@@ -66,6 +70,17 @@
           font-size: $title;
         }
       }
+    }
+
+    .notAvailableProduct {
+      color: red;
+      text-align: right;
+      font-size: $line-text;
+      visibility: hidden;
+    }
+
+    .visible {
+      visibility: visible;
     }
 
     .textAreaHeader {
@@ -115,9 +130,13 @@
       color: $text-secondary;
       border: none
     }
+    .unavailable {
+      background-color: $background-buttom-primary-desable;
+    }
   }
 }
 
 .open {
   display: flex;
 }
+

@@ -6,19 +6,23 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 75px;
-  height: 70px;
-  margin: 5px;
+  // min-width: 75px;
+  // height: 70px;
+  height: auto;
+  margin: 0 5px;
+  padding: 12px;
   background-color: $background-secundary;
   border-radius: 15px;
 .icon {
-  display: inline-block;
+  // display: inline-block;
+  display: none;
   width: 30px;
   height: 35px;
   margin: 0 auto
 }
 .name {
   font-size: $caption;
+  text-wrap:nowrap
 }
 }
 

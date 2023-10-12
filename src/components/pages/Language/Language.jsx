@@ -26,6 +26,7 @@ export default function Language() {
   useEffect(() => {
     localStorage.setItem("Pos", params['*']);
     const decripted = dataDecrypt(params["*"]);
+    if (localStorage.getItem('cart')) localStorage.removeItem('cart');
     dispatch(getCommerce(decripted.commerce));
     dispatch(setSector(decripted.sector));
     dispatch(setTable(decripted.table))
@@ -38,30 +39,6 @@ export default function Language() {
         Object.keys(language).length ? (
           <>
             <ScrollContainer className={s.optionsMainContainer}>
-              {/* <LanguageOption
-                text={"¡Bienvenido!"}
-                lang={"Es"}
-                id={1}
-                accepted={accepted}
-                checked={checked}
-                setChecked={setChecked}
-              />
-              <LanguageOption
-                text={"¡Welcome!"}
-                lang={"En"}
-                id={2}
-                accepted={accepted}
-                checked={checked}
-                setChecked={setChecked}
-              />
-              <LanguageOption
-                text={"¡Bem vindo!"}
-                lang={"Por"}
-                id={3}
-                accepted={accepted}
-                checked={checked}
-                setChecked={setChecked}
-              /> */}
               {idiomas.map((idioma, index) => (
                   <LanguageOption
                   text={idioma.message}

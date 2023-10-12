@@ -10,7 +10,7 @@ import AditionalsCategoryIcon from "../../atoms/AditionalsCategoryIcon/Aditional
 export default function Categories({handleCategory, category, setCategory,handleAditionals, aditionals, setAditionals, all, setAll}) {
   const activeCategories = useSelector((state) => state.allCategories);
   const commerceId = useSelector((state)=> state.commerce.id);
-
+  const language = useSelector((state)=> state.language);
   const [t, i18n] = useTranslation(["global"]);
   const dispatch = useDispatch();
 
@@ -20,17 +20,26 @@ export default function Categories({handleCategory, category, setCategory,handle
     <section className={s.categories}>
       <div className={s.sectionTitle}>
         <SmallText
-          text={t("categories.title")}
+          text={language.categories_title}
           secundary={true}
           noMargin={true}
         />
       </div>
-      <div style={{ position: "relative", height: "75px" }}>
+      <div style={{ position: "relative", height: "auto" }}>
         <ScrollContainer className={s.scrollContainer}>
-          <AllCategoryIcon all={all} setAll={setAll} commerceId={commerceId} handleCategory={handleCategory}/>
-          <AditionalsCategoryIcon aditionals={aditionals}
-            handleAditionals={handleAditionals} handleCategory={handleCategory}
+          {/* <AllCategoryIcon
+            all={all}
+            setAll={setAll}
+            commerceId={commerceId}
+            handleCategory={handleCategory}
+            text={language.categories_all}
           />
+          <AditionalsCategoryIcon
+            aditionals={aditionals}
+            handleAditionals={handleAditionals}
+            handleCategory={handleCategory}
+            text={language.categories_aditionals}
+          /> */}
           {activeCategories?.map((categoryObject, index) => (
             <Icon
               key={index}
