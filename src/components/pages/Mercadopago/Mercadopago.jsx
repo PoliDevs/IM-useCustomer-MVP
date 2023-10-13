@@ -57,32 +57,19 @@ export default function Mercadopago() {
         mercadoPago,
         commerce.name
       );
-      const { preferenceId } = response.data;
+/*       const { preferenceId } = response.data;
       console.log(preferenceId)
-      setPreferenceId(preferenceId)
-      //return preferenceId; 
+      return preferenceId;  */
 
-/*       const { paymentURL } = response.data;
+      const { paymentURL } = response.data;
       console.log(paymentURL);
-      return paymentURL; */
+      return paymentURL;
     } catch (error) {
       console.log(error);
     }
   };
 
-
-/*   const id =async ()=>{
-    await createPreference();
-    console.log(id,"id 105")
-    if (id) {
-      setPreferenceId(id);
-    } 
-  }  */
   //!
-
-  useEffect(()=>{
-    createPreference()
-  },[postOrder])
 
   useEffect(() => {
     dispatch(getPosValue(tableID));
@@ -116,13 +103,13 @@ export default function Mercadopago() {
     await postOrder(order, methodId, mercadoPago, commerce.name);
     dispatch(removerCart());
     //!
-  }
-/*       const url = await createPreference();
+    const url = await createPreference();
     console.log(url,"id 105")
     if (url) {
       window.location.href = url;
-    } */
+    }
     //!
+  }
   
 
   return (
@@ -134,11 +121,11 @@ export default function Mercadopago() {
         tablePrice={tablePrice}
         sectorPrice={sectorPrice}
       />
-      {/* <MpButton
-        path={"/rating"} text={language.mercadoPago_payButton}
+       <MpButton
+        /* path={"/rating"}  */text={language.mercadoPago_payButton}
         onClick={handleMp}
-      /> */}
-      <Wallet /* onClick={handleMp} */  initialization={createPreference}/>
+      /> 
+     {/*  {preferenceId && <Wallet initialization={createPreference}/>} */}
     </main>
   );
-}
+};
