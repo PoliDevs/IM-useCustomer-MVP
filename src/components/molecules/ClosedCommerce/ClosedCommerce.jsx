@@ -8,12 +8,12 @@ import ContactFooter from "../ContactFooter/ContactFooter";
 import s from "./ClosedCommerce.module.scss";
 import { Link } from "react-router-dom";
 
-export default function ClosedCommerce() {
+export default function ClosedCommerce({fullHeight}) {
   const commerceName = useSelector((state) => state.commerce.name);
   const language = useSelector((state)=> state.language);
 
   return (
-    <main className={s.closedContainer}>
+    <main className={`${s.closedContainer} ${fullHeight && s.fullHeight}`}>
       <div className={s.contentContainer}>
         <div className={s.iconContainer}>
           <Closed className={s.icon} />

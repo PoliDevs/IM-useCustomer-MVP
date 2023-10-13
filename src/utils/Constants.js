@@ -11,126 +11,515 @@ import sandwich from "../assets/icons/sandwich.png";
 import spaghetti from "../assets/icons/spaghetti.png";
 import stuffedFlatbread from "../assets/icons/stuffed-flatbread.png";
 import taco from "../assets/icons/taco.png";
+import bacon from "../assets/icons/bacon.png";
+import bagel from "../assets/icons/bagel.png";
+import baguetteBread from "../assets/icons/baguette-bread.png";
+import banana from "../assets/icons/banana.png";
+import beerMug from "../assets/icons/beer-mug.png";
+import bentoBox from "../assets/icons/bento-box.png";
+import beverageBox from "../assets/icons/beverage-box.png";
+import birthdayCake from "../assets/icons/birthday-cake.png";
+import bottleWithPoppingCork from "../assets/icons/bottle-with-popping-cork.png";
+import bowlWithSpoon from "../assets/icons/bowl-with-spoon.png";
+import bread from "../assets/icons/bread.png";
+import burrito from "../assets/icons/burrito.png";
+import butter from "../assets/icons/butter.png";
+import candy from "../assets/icons/candy.png";
+import cannedFood from "../assets/icons/canned-food.png";
+import cheeseWedge from "../assets/icons/cheese-wedge.png";
+import cherries from "../assets/icons/cherries.png";
+import chocolateBar from "../assets/icons/chocolate-bar.png";
+import chopsticks from "../assets/icons/chopsticks.png";
+import clinkingBeerMugs from "../assets/icons/clinking-beer-mugs.png";
+import clinkingGlasses from "../assets/icons/clinking-glasses.png";
+import cocktailGlass from "../assets/icons/cocktail-glass.png";
+import coconut from "../assets/icons/coconut.png";
+import coockedRice from "../assets/icons/cooked-rice.png";
+import cookie from "../assets/icons/cookie.png";
+import cooking from "../assets/icons/cooking.png";
+import crab from "../assets/icons/crab.png";
+import croissant from "../assets/icons/croissant.png";
+import cupWithStraw from "../assets/icons/cup-with-straw.png";
+import cupcacke from "../assets/icons/cupcake.png";
+import curryRice from "../assets/icons/curry-rice.png";
+import custard from "../assets/icons/custard.png";
+import dango from "../assets/icons/dango.png";
+import doughnut from "../assets/icons/doughnut.png";
+import dumpling from "../assets/icons/dumpling.png";
+import egg from "../assets/icons/egg.png";
+import falafel from "../assets/icons/falafel.png";
+import fishCakeWithSwirl from "../assets/icons/fish-cake-with-swirl.png";
+import forkAndKnifeAndPlate from "../assets/icons/fork-and-knife-with-plate.png";
+import forkAndKnife from "../assets/icons/fork-and-knife.png";
+import fortuneCookie from "../assets/icons/fortune-cookie.png";
+import friedShrimp from "../assets/icons/fried-shrimp.png";
+import glassOfMilk from "../assets/icons/glass-of-milk.png";
+import grapes from "../assets/icons/grapes.png";
+import greenApple from "../assets/icons/green-apple.png";
+import honeyPot from "../assets/icons/honey-pot.png";
+import hotBeverage from "../assets/icons/hot-beverage.png";
+import ice from "../assets/icons/ice.png";
+import kitchenKnife from "../assets/icons/kitchen-knife.png";
+import kiwiFruit from "../assets/icons/kiwi-fruit.png";
+import lemon from "../assets/icons/lemon.png";
+import lobster from "../assets/icons/lobster.png";
+import lollipop from "../assets/icons/lollipop.png";
+import mango from "../assets/icons/mango.png";
+import mate from "../assets/icons/mate.png";
+import melon from "../assets/icons/melon.png";
+import mooncake from "../assets/icons/moon-cake.png";
+import oden from "../assets/icons/oden.png";
+import oyster from "../assets/icons/oyster.png";
+import pancakes from "../assets/icons/pancakes.png";
+import peach from "../assets/icons/peach.png";
+import pear from "../assets/icons/pear.png";
+import pie from "../assets/icons/pie.png";
+import pineapple from "../assets/icons/pineapple.png";
+import popcorn from "../assets/icons/popcorn.png";
+import pretzel from "../assets/icons/pretzel.png";
+import redApple from "../assets/icons/red-apple.png";
+import riceBall from "../assets/icons/rice-ball.png";
+import riceCracker from "../assets/icons/rice-cracker.png";
+import roastedSweetPotato from "../assets/icons/roasted-sweet-potato.png";
+import salt from "../assets/icons/salt.png";
+import shallowPanOfFood from "../assets/icons/shallow-pan-of-food.png";
+import shavedIce from "../assets/icons/shaved-ice.png";
+import shortcake from "../assets/icons/shortcake.png";
+import shrimp from "../assets/icons/shrimp.png";
+import softIceCream from "../assets/icons/soft-ice-cream.png";
+import spoon from "../assets/icons/spoon.png";
+import squid from "../assets/icons/squid.png";
+import steamingBowl from "../assets/icons/steaming-bowl.png";
+import strawberry from "../assets/icons/strawberry.png";
+import sushi from "../assets/icons/sushi.png";
+import takeoutbox from "../assets/icons/takeout-box.png";
+import tangerine from "../assets/icons/tangerine.png";
+import tomato from "../assets/icons/tomato.png";
+import tropicalDrink from "../assets/icons/tropical-drink.png";
+import tumberGlass from "../assets/icons/tumbler-glass.png";
+import waffle from "../assets/icons/waffle.png";
+import watermelon from "../assets/icons/watermelon.png";
+import wineGlass from "../assets/icons/wine-glass.png";
+import iceCream from "../assets/icons/ice-cream.png"
 
-export const ProductsInfo = [
+export const emojiPng = [
   {
-    name: "Pollo",
-    src: chickenLeg,
-    altName: "Alitas de pollo",
-    description:
-      "Alas de pollo rebozadas en pan rallado con mostaza y con mayonesa casera Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-    price: 1250,
-    category: "Pollo",
-  },
-  {
-    name: "Hot Dog",
-    src: hotDog,
-    altName: "Hot Dog Aleman",
-    description:
-      "Salchicha alemana en pan de viena, mayonesa, mostaza, ketchup, cebolla caramelizada y acompañado de papas fritas, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-    price: 2244,
-    category: "Sandwich",
-  },
-  {
-    name: "Hamburg...",
+    name: "U+D83C U+DF54",
     src: hamburger,
-    altName: "Mega cuarto bacon",
-    description:
-      "Mega hamburguesa de carne, queso cheddar, bacon, mostaza y ketchup acompañadas de papas fritas regulares, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-    price: 1200,
-    category: "Burger",
   },
   {
-    name: "Pizza",
-    src: pizza,
-    altName: "Pizza de pepperoni",
-    description:
-      "Pizza de masa madre con mozzarella, pepperonis frescos con oregano, al horno de barro. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-    price: 2244,
-    category: "Pizza",
+    name: "U+D83C U+DF2D",
+    src: hotDog,
   },
   {
-    name: "Trozo de C...",
-    src: cutOfMeat,
-    altName: "Bifes a la criolla",
-    description:
-      " filetes de carne, cocidos en una salsa rica y sabrosa conocida como salsa criolla. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-    price: 2244,
-    category: "Meat",
-  },
-  {
-    name: "Papas Fritas",
-    src: frenchFries,
-    altName: "Porcion de papas fritas",
-    description:
-      "Delgados bastones de papa, crujientes por fuera y tiernas por dentro, cocinadas en aceite caliente",
-    price: 1200,
-    category: "Fries",
-  },
-  {
-    name: "Ensalada",
-    src: greenSalad,
-    altName: "Ensalada Caesar",
-    description:
-      "Mezcla de lechuga romana, crutones, queso parmesano, aderezo Caesar y, a veces, pollo.",
-    price: 1250,
-    category: "Salad",
-  },
-
-  {
-    name: "Carne",
-    src: meat,
-    altName: "Carne Asada",
-    description:
-      "Trozos de carne sazonada y a la parrilla, tradicional de la cocina latinoamericana.",
-    price: 2244,
-    category: "Meat",
-  },
-
-  {
-    name: "Sopa",
-    src: potOfFood,
-    altName: "Sopa de fideos",
-    description:
-      "Plato cocido a fuego lento con carne, vegetales y fideos, sabores integrados y reconfortantes.",
-    price: 1250,
-    category: "Soup",
-  },
-  {
-    name: "Sandwich",
-    src: sandwich,
-    altName: "Sandwich de J & Q",
-    description:
-      "Dos rebanadas de pan con jamón y queso entre ellas, lechuga, tomate y mayonesa, tostado a eleccion.",
-    price: 1200,
-    category: "Sandwich",
-  },
-  {
-    name: "Spaghetti",
-    src: spaghetti,
-    altName: "Porcion de pasta spaghetti",
-    description:
-      " Pasta larga cocida al dente, servida con diversas salsas y acompañada a eleccion.",
-    price: 1250,
-    category: "Pasta",
-  },
-  {
-    name: "Vegano",
-    src: stuffedFlatbread,
-    altName: "Hummus",
-    description:
-      " Dip vegano de garbanzos triturados, tahini, aceite de oliva, ajo, limón y especias. Acompañado de pan o verduras.",
-    price: 2244,
-    category: "Vegan",
-  },
-  {
-    name: "Taco",
+    name: "U+D83C U+DF2E",
     src: taco,
-    altName: "Tacos al pastor",
-    description:
-      " Finas rebanadas de carne de cerdo marinadas, asadas en trompo y servidas con cebolla y piña",
-    price: 1250,
-    category: "Meat",
+  },
+  {
+    name: "U+D83C U+DF2F",
+    src: burrito,
+  },
+  {
+    name: "U+D83C U+DF55",
+    src: pizza,
+  },
+  {
+    name: "U+D83C U+DF56",
+    src: meat,
+  },
+  {
+    name: "U+D83C U+DF57",
+    src: chickenLeg,
+  },
+
+  {
+    name: "U+D83C U+DF5E",
+    src: bread,
+  },
+  {
+    name: "U+D83C U+DF5F",
+    src: frenchFries,
+  },
+  {
+    name: "U+D83C U+DF72",
+    src: potOfFood,
+  },
+  {
+    name: "U+D83C U+DF73",
+    src: cooking,
+  },
+  {
+    name: "U+D83C U+DF7F",
+    src: popcorn,
+  },
+  {
+    name: "U+D83E U+DD50",
+    src: croissant,
+  },
+  {
+    name: "U+D83E U+DD53",
+    src: bacon,
+  },
+  {
+    name: "U+D83E U+DD56",
+    src: baguetteBread,
+  },
+  {
+    name: "U+D83E U+DD57",
+    src: greenSalad,
+  },
+  {
+    name: "U+D83E U+DD58",
+    src: shallowPanOfFood,
+  },
+  {
+    name: "U+D83E U+DD59",
+    src: stuffedFlatbread,
+  },
+  {
+    name: "U+D83E U+DD5A",
+    src: egg,
+  },
+  {
+    name: "U+D83E U+DD5E",
+    src: pancakes,
+  },
+  {
+    name: "U+D83E U+DD63",
+    src: bowlWithSpoon,
+  },
+  {
+    name: "U+D83E U+DD68",
+    src: pretzel,
+  },
+  {
+    name: "U+D83E U+DD69",
+    src: cutOfMeat,
+  },
+  {
+    name: "U+D83E U+DD6A",
+    src: sandwich,
+  },
+  {
+    name: "U+D83E U+DD6B",
+    src: cannedFood,
+  },
+  {
+    name: "U+D83E U+DD6F",
+    src: bagel,
+  },
+  {
+    name: "U+D83E U+DDC0",
+    src: cheeseWedge,
+  },
+  {
+    name: "U+D83E U+DD50",
+    src: croissant,
+  },
+  {
+    name: "U+D83E U+DDC2",
+    src: salt,
+  },
+  {
+    name: "U+D83E U+DDC6",
+    src: falafel,
+  },
+  {
+    name: "U+D83E U+DDC7",
+    src: waffle,
+  },
+  {
+    name: "U+D83E U+DDC8",
+    src: butter,
+  },
+  {
+    name: "U+D83C U+DF58",
+    src: riceCracker,
+  },
+  {
+    name: "U+D83C U+DF59",
+    src: riceBall,
+  },
+
+  {
+    name: "U+D83C U+DF5A",
+    src: coockedRice,
+  },
+  {
+    name: "U+D83C U+DF5B",
+    src: curryRice,
+  },
+  {
+    name: "U+D83C U+DF5C",
+    src: steamingBowl,
+  },
+  {
+    name: "U+D83C U+DF5D",
+    src: spaghetti,
+  },
+  {
+    name: "U+D83C U+DF60",
+    src: roastedSweetPotato,
+  },
+  {
+    name: "U+D83C U+DF61",
+    src: dango,
+  },
+  {
+    name: "U+D83C U+DF62",
+    src: oden,
+  },
+  {
+    name: "U+D83C U+DF63",
+    src: sushi,
+  },
+  {
+    name: "U+D83C U+DF64",
+    src: friedShrimp,
+  },
+  {
+    name: "U+D83C U+DF65",
+    src: fishCakeWithSwirl,
+  },
+  {
+    name: "U+D83C U+DF71",
+    src: bentoBox,
+  },
+  {
+    name: "U+D83E U+DD5F",
+    src: dumpling,
+  },
+  {
+    name: "U+D83E U+DD60",
+    src: fortuneCookie,
+  },
+  {
+    name: "U+D83E U+DD61",
+    src: takeoutbox,
+  },
+  {
+    name: "U+D83E U+DD6E",
+    src: mooncake,
+  },
+  {
+    name: "U+D83C U+DF45",
+    src: tomato,
+  },
+  {
+    name: "U+D83C U+DF47",
+    src: grapes,
+  },
+  {
+    name: "U+D83C U+DF48",
+    src: melon,
+  },
+  {
+    name: "U+D83C U+DF49",
+    src: watermelon,
+  },
+  {
+    name: "U+D83C U+DF4A",
+    src: tangerine,
+  },
+  {
+    name: "U+D83C U+DF4B",
+    src: lemon,
+  },
+  {
+    name: "U+D83C U+DF4C",
+    src: banana,
+  },
+  {
+    name: "U+D83C U+DF4D",
+    src: pineapple,
+  },
+  {
+    name: "U+D83C U+DF4E",
+    src: redApple,
+  },
+  {
+    name: "U+D83C U+DF4F",
+    src: greenApple,
+  },
+  {
+    name: "U+D83C U+DF50",
+    src: pear,
+  },
+  {
+    name: "U+D83C U+DF51",
+    src: peach,
+  },
+  {
+    name: "U+D83C U+DF52",
+    src: cherries,
+  },
+  {
+    name: "U+D83C U+DF53",
+    src: strawberry,
+  },
+  {
+    name: "U+D83E U+DD5D",
+    src: kiwiFruit,
+  },
+  {
+    name: "U+D83E U+DD65",
+    src: coconut,
+  },
+  {
+    name: "U+D83E U+DD6D",
+    src: mango,
+  },
+  {
+    name: "U+D83E U+DD80",
+    src: crab,
+  },
+  {
+    name: "U+D83E U+DD90",
+    src: shrimp,
+  },
+  {
+    name: "U+D83E U+DD91",
+    src: squid,
+  },
+  {
+    name: "U+D83E U+DD9E",
+    src: lobster,
+  },
+  {
+    name: "U+D83E U+DDAA",
+    src: oyster,
+  },
+  {
+    name: "U+D83C U+DF66",
+    src: softIceCream,
+  },
+  {
+    name: "U+D83C U+DF67",
+    src: shavedIce,
+  },
+  {
+    name: "U+D83C U+DF68",
+    src: iceCream,
+  },
+  {
+    name: "U+D83C U+DF69",
+    src: doughnut,
+  },
+  {
+    name: "U+D83C U+DF6A",
+    src: cookie,
+  },
+  {
+    name: "U+D83C U+DF6B",
+    src: chocolateBar,
+  },
+  {
+    name: "U+D83C U+DF6C",
+    src: candy,
+  },
+  {
+    name: "U+D83C U+DF6D",
+    src: lollipop,
+  },
+  {
+    name: "U+D83C U+DF6E",
+    src: custard,
+  },
+  {
+    name: "U+D83C U+DF6F",
+    src: honeyPot,
+  },
+  {
+    name: "U+D83C U+DF70",
+    src: shortcake,
+  },
+  {
+    name: "U+D83C U+DF82",
+    src: birthdayCake,
+  },
+  {
+    name: "U+D83E U+DD67",
+    src: pie,
+  },
+  {
+    name: "U+D83E U+DDC1",
+    src: cupcacke,
+  },
+  {
+    name: "U+D83C U+DF77",
+    src: wineGlass,
+  },
+  {
+    name: "U+D83C U+DF78",
+    src: cocktailGlass,
+  },
+  {
+    name: "U+D83C U+DF79",
+    src: tropicalDrink,
+  },
+  {
+    name: "U+D83C U+DF7A",
+    src: beerMug,
+  },
+  {
+    name: "U+D83C U+DF7B",
+    src: clinkingBeerMugs,
+  },
+  {
+    name: "U+D83C U+DF7E",
+    src: bottleWithPoppingCork,
+  },
+  {
+    name: "U+D83E U+DD42",
+    src: clinkingGlasses,
+  },
+  {
+    name: "U+D83E U+DD43",
+    src: tumberGlass,
+  },
+  {
+    name: "U+D83E U+DD5B",
+    src: glassOfMilk,
+  },
+  {
+    name: "U+D83E U+DD64",
+    src: cupWithStraw,
+  },
+  {
+    name: "U+D83E U+DDC3",
+    src: beverageBox,
+  },
+  {
+    name: "U+D83E U+DDC9",
+    src: mate,
+  },
+  {
+    name: "U+D83E U+DDCA",
+    src: ice,
+  },
+  {
+    name: "U+2615",
+    src: hotBeverage,
+  },
+  {
+    name: "U+D83C U+DF74",
+    src: forkAndKnife,
+  },
+  {
+    name: "U+D83C U+DF7D",
+    src: forkAndKnifeAndPlate,
+  },
+  {
+    name: "U+D83D U+DD2A",
+    src: kitchenKnife,
+  },
+  {
+    name: "U+D83E U+DD44",
+    src: spoon,
+  },
+  {
+    name: "U+D83E U+DD62",
+    src: chopsticks,
   },
 ];
 
@@ -252,3 +641,123 @@ export const idiomas = [
   { lang: "yo", message: "Kí í wá", name: "yoruba" },
   { lang: "zu", message: "Wamkeleki", name: "isiZulu" },
 ];
+
+// const emojis = [
+//   { emoji: "🍔" },
+//   { emoji: "🌭" },
+//   { emoji: "🌮" },
+//   { emoji: "🌯" },
+//   { emoji: "🍕" },
+//   { emoji: "🍖" },
+//   { emoji: "🍗" },
+//   { emoji: "🍞" },
+//   { emoji: "🍟" },
+//   { emoji: "🍲" },
+//   { emoji: "🍳" },
+//   { emoji: "🍿" },
+//   { emoji: "🥐" },
+//   { emoji: "🥓" },
+//   { emoji: "🥖" },
+//   { emoji: "🥗" },
+//   { emoji: "🥘" },
+//   { emoji: "🥙" },
+//   { emoji: "🥚" },
+//   { emoji: "🥞" },
+//   { emoji: "🥣" },
+//   { emoji: "🥨" },
+//   { emoji: "🥩" },
+//   { emoji: "🥪" },
+//   { emoji: "🥫" },
+//   { emoji: "🥯" },
+//   { emoji: "🧀" },
+//   { emoji: "🧂" },
+//   { emoji: "🧆" },
+//   { emoji: "🧇" },
+//   { emoji: "🧈" },
+//   { emoji: "🍘" },
+//   { emoji: "🍙" },
+//   { emoji: "🍚" },
+//   { emoji: "🍛" },
+//   { emoji: "🍜" },
+//   { emoji: "🍝" },
+//   { emoji: "🍠" },
+//   { emoji: "🍡" },
+//   { emoji: "🍢" },
+//   { emoji: "🍣" },
+//   { emoji: "🍤" },
+//   { emoji: "🍥" },
+//   { emoji: "🍱" },
+//   { emoji: "🥟" },
+//   { emoji: "🥠" },
+//   { emoji: "🥡" },
+//   { emoji: "🥮" },
+//   { emoji: "🍅" },
+//   { emoji: "🍇" },
+//   { emoji: "🍈" },
+//   { emoji: "🍉" },
+//   { emoji: "🍊" },
+//   { emoji: "🍋" },
+//   { emoji: "🍌" },
+//   { emoji: "🍍" },
+//   { emoji: "🍎" },
+//   { emoji: "🍏" },
+//   { emoji: "🍐" },
+//   { emoji: "🍑" },
+//   { emoji: "🍒" },
+//   { emoji: "🍓" },
+//   { emoji: "🥝" },
+//   { emoji: "🥥" },
+//   { emoji: "🥭" },
+//   { emoji: "🦀" },
+//   { emoji: "🦐" },
+//   { emoji: "🦑" },
+//   { emoji: "🦞" },
+//   { emoji: "🦪" },
+//   { emoji: "🍦" },
+//   { emoji: "🍧" },
+//   { emoji: "🍨" },
+//   { emoji: "🍩" },
+//   { emoji: "🍪" },
+//   { emoji: "🍫" },
+//   { emoji: "🍬" },
+//   { emoji: "🍭" },
+//   { emoji: "🍮" },
+//   { emoji: "🍯" },
+//   { emoji: "🍰" },
+//   { emoji: "🎂" },
+//   { emoji: "🥧" },
+//   { emoji: "🧁" },
+//   { emoji: "🍷" },
+//   { emoji: "🍸" },
+//   { emoji: "🍹" },
+//   { emoji: "🍺" },
+//   { emoji: "🍻" },
+//   { emoji: "🍾" },
+//   { emoji: "🥂" },
+//   { emoji: "🥃" },
+//   { emoji: "🥛" },
+//   { emoji: "🥤" },
+//   { emoji: "🧃" },
+//   { emoji: "🧉" },
+//   { emoji: "🧊" },
+//   { emoji: "☕" },
+//   { emoji: "🍴" },
+//   { emoji: "🍽" },
+//   { emoji: "🔪" },
+//   { emoji: "🥄" },
+//   { emoji: "🥢" },
+// ];
+
+// function emojiToUnicode(emoji) {
+//   const codeUnits = [];
+//   for (let i = 0; i < emoji.length; i++) {
+//     codeUnits.push(emoji.charCodeAt(i).toString(16).toUpperCase());
+//   }
+//   return `U+${codeUnits.join(" U+")}`;
+// }
+
+// emojis.map((e)=>{
+//   console.log('emoji: ',e.emoji);
+//   console.log('unicode: ',emojiToUnicode(e.emoji));
+// }
+// )

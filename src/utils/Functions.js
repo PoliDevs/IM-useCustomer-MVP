@@ -1,3 +1,6 @@
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
+import { all_app_texts } from "./language";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addProduct, removeProduct } from "../redux/actions";
@@ -155,12 +158,38 @@ export const dataDecrypt = (data) => {
   return urlInfo;
 };
 
-import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
-import { all_app_texts } from "./language";
+
+//* Funcion para obtener nombres y descripciones del menu
+export function menuTranslate (array) {
+  const menuData = {
+    nombres: [],
+    descripciones: []
+  }
+  array.map((m)=>{
+    menuData.nombres.push({name: m.name});
+    if (m.description) menuData.descripciones.push({description: m.description});
+  })
+
+  return menuData
+}
+//* Funcion para obtener nombres y descripciones del menu
+
+//* Funcion para obtener nombres de las categorias
+export function categoryTranslate(array) {
+
+  const nombres= [];
+
+  array.map((c) => {
+    nombres.push({ name: c.category })
+  });
+
+  return nombres;
+}
+//* Funcion para obtener nombres de las categorias
+
 
 //! funcionando -- falta pasar como variable from y to
-export async function translateText(lang = "en", all_app_texts) {
+export async function translateText(lang = "en", all_app_texts, menu=false) {
   //! obtengo todos los valores de un array con objetos
   const arrayTexts = all_app_texts.map((obj) => {
     const clave = Object.keys(obj)[0];
@@ -172,12 +201,12 @@ export async function translateText(lang = "en", all_app_texts) {
   const objetoResultado = {};
   //! hago la traduccion
   return await axios({
-    baseURL: "https://api.cognitive.microsofttranslator.com",
+    baseURL: import.meta.env.VITE_MICROSOFT_TRANSLATE_ENDPOINT,
     url: "/translate",
     method: "post",
     headers: {
-      "Ocp-Apim-Subscription-Key": "7cb91588e50b4b12beffd5ab477bce1a",
-      "Ocp-Apim-Subscription-Region": "brazilsouth",
+      "Ocp-Apim-Subscription-Key": import.meta.env.VITE_MICROSOFT_TRANSLATE_KEY,
+      "Ocp-Apim-Subscription-Region": import.meta.env.VITE_MICROSOFT_LOCATION,
       "Content-type": "application/json",
       "X-ClientTraceId": uuidv4().toString(),
     },
@@ -194,17 +223,21 @@ export async function translateText(lang = "en", all_app_texts) {
       const key = Object.keys(o)[0];
       return { [key]: response.data[index].translations[0].text };
     });
-    // const objetoResultado = {};
 
-    for (const obj of all_app_texts_translated) {
+    if(!menu){
+      for (const obj of all_app_texts_translated) {
       Object.assign(objetoResultado, obj);
     }
     //! resultado en forma de objeto
     return objetoResultado;
+  } else {
+    return all_app_texts_translated
+  }
   });
 }
 
 export const formattedOrder = (
+  user,
   cart,
   productsList,
   sectorID,
@@ -244,18 +277,34 @@ export const formattedOrder = (
   let table = tableID;
   let commerceId = commerceID;
   //!calculo el precio real
-  let precioMenu = totalPrice - (totalPrice * totalPromotion) / 100;
-  precioMenu = precioMenu - (precioMenu * totalDiscount) / 100;
-  precioMenu = precioMenu + (precioMenu * totalSurcharge) / 100;
+  let precioMenu = totalPrice;
+  // let precioMenu =
+  //   totalPromotion ? totalPrice - (totalPrice * totalPromotion) / 100 : totalPrice;
+  // precioMenu = totalDiscount ? precioMenu - (precioMenu * totalDiscount) / 100 : precioMenu;
+  // precioMenu = totalSurcharge ? precioMenu + (precioMenu * totalSurcharge) / 100 : precioMenu;
   let partial = precioMenu;
   //!calculo precio con costo de mesa
-  precioMenu = precioMenu - (precioMenu * tablePrice.tablePromotion) / 100;
-  precioMenu = precioMenu - (precioMenu * tablePrice.tableDiscount) / 100;
-  precioMenu = precioMenu + (precioMenu * tablePrice.tableSurcharge) / 100;
+  //!si tienen promocion, descuento, recargo calculo, sino no
+  precioMenu =
+    tablePrice.tablePromotion ? precioMenu -
+    (precioMenu * tablePrice.tablePromotion) / 100 : precioMenu;
+  precioMenu = 
+  tablePrice.tableDiscount ? precioMenu -
+  (precioMenu * tablePrice.tableDiscount) / 100
+    : precioMenu;
+  precioMenu =
+    tablePrice.tableSurcharge ? precioMenu +
+    (precioMenu * tablePrice.tableSurcharge) / 100 : precioMenu;
   //!calculo precio con costo de sector
-  precioMenu = precioMenu - (precioMenu * sectorPrice.sectorPromotion) / 100;
-  precioMenu = precioMenu - (precioMenu * sectorPrice.sectorDiscount) / 100;
-  precioMenu = precioMenu + (precioMenu * sectorPrice.sectorSurcharge) / 100;
+  precioMenu =
+    sectorPrice.sectorPromotion ? precioMenu -
+    (precioMenu * sectorPrice.sectorPromotion) / 100 : precioMenu;
+  precioMenu =
+    sectorPrice.sectorDiscount ? precioMenu -
+    (precioMenu * sectorPrice.sectorDiscount) / 100 : precioMenu;
+  precioMenu =
+    sectorPrice.sectorSurcharge ? precioMenu +
+    (precioMenu * sectorPrice.sectorSurcharge) / 100 : precioMenu;
   let finalPrice = precioMenu;
   setPrice({
     totalPromotion,
@@ -266,6 +315,7 @@ export const formattedOrder = (
   });
   //! Creo una nueva order
   setOrder({
+    user: user,
     productos: productos,
     adicionales: adicionales,
     menus: menus,
@@ -278,4 +328,38 @@ export const formattedOrder = (
     totalPrice: precioMenu,
   });
   // return order;
+};
+
+
+export const detectLanguage = async (textSample = 'How are you') => {
+  try {
+    return await axios({
+      baseURL: import.meta.env.VITE_MICROSOFT_TRANSLATE_ENDPOINT,
+      url: "/detect",
+      method: "post",
+      headers: {
+        "Ocp-Apim-Subscription-Key": import.meta.env
+          .VITE_MICROSOFT_TRANSLATE_KEY,
+        "Ocp-Apim-Subscription-Region": import.meta.env.VITE_MICROSOFT_LOCATION,
+        "Content-type": "application/json",
+        "X-ClientTraceId": uuidv4().toString(),
+      },
+      params: {
+        "api-version": "3.0",
+        // from: "en",
+        // to: ["fr", "zu"],
+      },
+      data: [
+        {
+          text: textSample,
+        },
+      ],
+      responseType: "json",
+    }).then(function (response) {
+      console.log(response.data[0].language);
+      return response.data[0].language;
+    });
+  } catch (error) {
+    console.error(error);
+  }
 };
