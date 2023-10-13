@@ -46,6 +46,10 @@ const getEncriptedItem = (item)=> {
 }else return
 }
 
+const translation = async () => {
+  await translateText(localStorage.getItem("Lang"), all_app_texts);
+}
+
 const initalState = {
   table: localStorage.getItem("Pos")
     ? dataDecrypt(localStorage.getItem("Pos")).table
@@ -67,7 +71,8 @@ const initalState = {
   commerce: localStorage.getItem("CM") ? getEncriptedItem("CM") : {},
   status: false,
   language: localStorage.getItem("Lang")
-    ? await translateText(localStorage.getItem("Lang"), all_app_texts)
+    // ? await translateText(localStorage.getItem("Lang"), all_app_texts)
+    ? translation()
     : "es",
   tablePrice: {},
   sectorPrice: {},
