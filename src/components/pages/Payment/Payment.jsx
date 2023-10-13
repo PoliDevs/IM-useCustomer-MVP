@@ -70,6 +70,7 @@ export default function Payment() {
     if (method === 2) {
       const methodId = paymentMethods.filter((m)=> m.type === "efectivo")[0].id
       postOrder(order, methodId);
+      localStorage.removeItem("cart");
       dispatch(removerCart())
     }
      return;

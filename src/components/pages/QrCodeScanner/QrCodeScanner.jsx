@@ -31,8 +31,18 @@ export default function Qr({scanResult, setScanResult}) {
     //{ facingMode: "environment" } para preferir camara trasera
     function success(result) {
       scanner.clear();
-      //!refactorizar segun url en produccion
-      navigate(result.substring(21));
+      const partesURL = result.split("/");
+
+      const indexLanguage = partesURL.indexOf("language");
+
+      if (indexLanguage !== -1 && indexLanguage < partesURL.length - 1) {
+        const loQueVieneDespués = partesURL
+          .slice(indexLanguage, partesURL.length)
+          .join("/");
+        navigate(loQueVieneDespués)
+      } else {
+        return
+      }
     }
 
     function error(error) {
