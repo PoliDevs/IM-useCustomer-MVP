@@ -25,6 +25,7 @@ import {
   GET_ORDER_STATUS,
   GET_ORDER_PENDING,
   REMOVE_CART,
+  REMOVE_ORDER_ID,
 } from "./actionTypes";
 import { TRANSLATE_TEXT } from "./actionTypes";
 import { v4 as uuidv4 } from "uuid";
@@ -318,18 +319,17 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
     let orderMp = { commerce: { commerce: commerceName }, order: newOrder };
     /* console.log(orderMp) */
     let response = await axios.post(
-      "http://localhost:3001/mp/create-order",
+      "mp/create-order",
       orderMp
     );
     //!mercadoPago retorna una url a la que hay que redirigir
     localStorage.setItem("CSMO_ID", response.data.id);
     localStorage.setItem("CSMO", response.data.order);
-    localStorage.removeItem("cart");
-    console.log(response)
+    // localStorage.removeItem("cart");
     return response;
     }else{
     let response = await axios.post(
-      "http://localhost:3001/order/new",
+      "order/new",
       newOrder
     );
     localStorage.setItem('CSMO_ID',(response.data.id));
@@ -347,7 +347,7 @@ export const sendReview = (review, commerceId) => {
   try {
     let orderName = localStorage.getItem("CSMO");
     let response = axios.put(
-      `http://localhost:3001/order/rating/${orderName}/${commerceId}`,
+      `order/rating/${orderName}/${commerceId}`,
       review
     );
     return response.data;
@@ -390,7 +390,7 @@ export function getCommerce(id) {
   return async function (dispatch) {
     try {
       let commerceInfo = await axios.get(
-        `http://localhost:3001/commerce/detail/${id}`
+        `commerce/detail/${id}`
       );
       return dispatch({
         type: GET_COMMERCE,
@@ -406,7 +406,7 @@ export function getStatus(id, setIsLoading) {
   return async function (dispatch) {
     try {
       let status = await axios.get(
-        `http://localhost:3001/commerce/openCommerce/${id}`
+        `commerce/openCommerce/${id}`
       );
       if (setIsLoading) setIsLoading(false);
       return dispatch({
@@ -423,7 +423,7 @@ export function getPaymentMethods(id) {
   return async function (dispatch) {
     try {
       let payments = await axios.get(
-        `http://localhost:3001/payment/all_active/${id}`
+        `payment/all_active/${id}`
       );
       return dispatch({
         type: GET_PAYMENT_METHODS,
@@ -440,7 +440,7 @@ export function getActiveMenus(id, setIsLoading) {
     try {
       let allActiveMenus = await axios.get(
         // `http://localhost:3001/menu/all_active/${id}`
-        `http://localhost:3001/menu/lastMenu/${id}`
+        `menu/lastMenu/${id}`
       );
       let equals = false;
       if (getState().allProducts.length) {
@@ -522,7 +522,7 @@ export function getActiveDishes(id) {
   return async function (dispatch) {
     try {
       let allActiveDishes = await axios.get(
-        "http://localhost:3001/dish/all_active"
+        "dish/all_active"
       );
       return dispatch({
         type: GET_ACTIVE_DISHES,
@@ -538,7 +538,7 @@ export function getActiveProducts(id) {
   return async function (dispatch, getState) {
     try {
       let allActiveProducts = await axios.get(
-        `http://localhost:3001/product/all_active/${id}`
+        `product/all_active/${id}`
       );
       let equals = false;
       if (getState().products.length) {
@@ -589,7 +589,7 @@ export function getActiveAditionals(id) {
   return async function (dispatch, getState) {
     try {
       let allActiveAditionals = await axios.get(
-        `http://localhost:3001/additional/all_active/${id}`
+        `additional/all_active/${id}`
       );
       let equals = false;
       if (getState().allAditionals.length) {
@@ -642,7 +642,7 @@ export function getAllCategorys(id) {
   return async function (dispatch, getState) {
     try {
       let allActiveCategories = await axios.get(
-        `http://localhost:3001/category/all_active/${id}`
+        `category/all_active/${id}`
       );
       let equals = false;
       if (getState().allCategories.length) {
@@ -720,7 +720,7 @@ export const isAvailable = (name, setLoading)=> {
 export function getPosValue(id) {
   return async function (dispatch) {
     try {
-      let response = await axios.get(`http://localhost:3001/pos/detail/${id}`);
+      let response = await axios.get(`pos/detail/${id}`);
       let tableSurcharge = response.data[0].surcharge
       let tableDiscount = response.data[0].discount
       let tablePromotion = response.data[0].promotion
@@ -743,7 +743,7 @@ export function getPosValue(id) {
 export function getSectorValue(id) {
   return async function (dispatch) {
     try {
-      let response = await axios.get(`http://localhost:3001/pos/detail/${id}`);
+      let response = await axios.get(`pos/detail/${id}`);
       let sectorSurcharge = response.data[0].surcharge;
       let sectorDiscount = response.data[0].discount;
       let sectorPromotion = response.data[0].promotion;
@@ -819,7 +819,7 @@ export function getOrderStatus (orderId, commerceId) {
       let day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
       let fecha = `${date.getFullYear()}-${month}-${day}`;
       let response = await axios.get(
-        `http://localhost:3001/order/paidOrderes/${commerceId}?startDate=${fecha}&endDate=${fecha}`
+        `order/paidOrderes/${commerceId}?startDate=${fecha}&endDate=${fecha}`
       );
       return dispatch({
         type: GET_ORDER_STATUS,
@@ -839,7 +839,7 @@ export function getOrderPending (commerceId, sectorID, tableID){
       let day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
       let fecha = `${date.getFullYear()}-${month}-${day}`;
       let response = await axios.get(
-        `http://localhost:3001/order/dates/${commerceId}?startDate=${fecha}&endDate=${fecha}`
+        `order/dates/${commerceId}?startDate=${fecha}&endDate=${fecha}`
       );     
       return dispatch ({
         type: GET_ORDER_PENDING,
@@ -860,5 +860,234 @@ export function removerCart(){
     } catch (error) {
       console.error(error)
     }
+  }
+}
+
+export function removerOrderId() {
+  return function (dispatch) {
+    try {
+      return dispatch({
+        type: REMOVE_ORDER_ID,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+}
+
+export async function postMpOrder(order, methodId, mpInfo, commerceName) {
+  let date = new Date().toJSON().slice(0, 10);
+  const hour = new Date().getHours();
+  const minute = new Date().getMinutes();
+  const formattedHour = hour < 10 ? "0" + hour : hour;
+  const formattedMinute = minute < 10 ? "0" + minute : minute;
+
+  const time = formattedHour + ":" + formattedMinute;
+  let additionals = {
+    id: [],
+    name: [],
+    cost: [],
+    promotion: [],
+    discount: [],
+    surcharge: [],
+    amount: [],
+    unitTypeId: [],
+    detail: [],
+  };
+  let products = {
+    id: [],
+    name: [],
+    cost: [],
+    unitTypeId: [],
+    productTypeId: [],
+    supplierId: [],
+    promotion: [],
+    discount: [],
+    surcharge: [],
+    amount: [],
+    allergenType: [],
+    careful: [],
+    detail: [],
+  };
+  let menu = {
+    id: [],
+    name: [],
+    description: [],
+    cost: [],
+    menuTypeId: [],
+    categoryId: [],
+    dishes: [],
+    product: [],
+    additionalId: [],
+    promotion: [],
+    discount: [],
+    surcharge: [],
+    amount: [],
+    detail: [],
+  };
+  //!armo todos los adicionales
+  if (order.adicionales?.length) {
+    order.adicionales.map((a) => {
+      additionals.id.push(`${a.id}`);
+      additionals.name.push(`${a.name}`);
+      additionals.cost.push(`${a.price}`);
+      additionals.promotion.push(`${a.promotion}`);
+      additionals.discount.push(`${a.discount}`);
+      additionals.surcharge.push(`${a.surcharge}`);
+      additionals.amount.push(`${a.amount}`);
+      additionals.unitTypeId.push(`${a.unitTypeId}`);
+      additionals.detail.push(`${a.comment}`);
+    });
+  } else {
+    additionals = {
+      id: [""],
+      name: [""],
+      cost: [""],
+      promotion: [""],
+      discount: [""],
+      surcharge: [""],
+      amount: [""],
+      unitTypeId: [""],
+      detail: [""],
+    };
+  }
+  //!armo todos los productos
+  if (order.productos?.length) {
+    order.productos.map((p) => {
+      products.id.push(`${p.id}`);
+      products.name.push(`${p.name}`);
+      products.cost.push(`${p.price}`);
+      products.unitTypeId.push(`${p.unitTypeId}`);
+      products.productTypeId.push(`${p.productTypeId}`);
+      products.supplierId.push(`${p.supplierId}`);
+      products.promotion.push(`${p.promotion}`);
+      products.discount.push(`${p.discount}`);
+      products.surcharge.push(`${p.surcharge}`);
+      products.amount.push(`${p.amount}`);
+      products.allergenType.push(`${p.allergenType}`);
+      products.careful.push(`${p.careful}`);
+      products.detail.push(`${p.comment}`);
+    });
+  } else {
+    products = {
+      id: [""],
+      name: [""],
+      cost: [""],
+      unitTypeId: [""],
+      productTypeId: [""],
+      supplierId: [""],
+      promotion: [""],
+      discount: [""],
+      surcharge: [""],
+      amount: [""],
+      allergenType: [""],
+      careful: [""],
+      detail: [""],
+    };
+  }
+  //!armo todos los menus
+  if (order.menus?.length) {
+    order.menus.map((m) => {
+      menu.id.push(`${m.id}`);
+      menu.name.push(`${m.name}`);
+      menu.description.push(`${m.description}`);
+      menu.cost.push(`${m.price}`);
+      menu.menuTypeId.push(`${m.menuTypeId}`);
+      menu.categoryId.push(`${m.categoryId}`);
+      m.dishes ? menu.dishes.push(`${m.dishes}`) : menu.dishes.push("");
+      m.product !== undefined
+        ? menu.product.push(`${m.product}`)
+        : menu.product.push("");
+      m.additionalId !== undefined
+        ? menu.additionalId.push(`${m.additional}`)
+        : menu.additionalId.push("");
+      menu.promotion.push(`${m.promotion}`);
+      menu.discount.push(`${m.discount}`);
+      menu.surcharge.push(`${m.surcharge}`);
+      menu.amount.push(`${m.amount}`);
+      menu.detail.push(`${m.comment}`);
+    });
+  } else {
+    menu = {
+      id: [""],
+      name: [""],
+      description: [""],
+      cost: [""],
+      menuTypeId: [""],
+      categoryId: [""],
+      dishes: [""],
+      product: [""],
+      additionalId: [""],
+      promotion: [""],
+      discount: [""],
+      surcharge: [""],
+      amount: [""],
+      detail: [""],
+    };
+  }
+  try {
+    const newOrder = {
+      name: order.name ? order.name : "sss",
+      date: date,
+      hour: time,
+      status: "orderPlaced",
+      detail: "",
+      validity: date,
+      promotion: 0,
+      discount: 0,
+      surcharge: 0,
+      poId: parseInt(order.table),
+      employeeId: 3,
+      accountId: null,
+      paymentId: methodId,
+      commerceId: order.commerceId,
+      deliveryId: null,
+      paid: order.totalPrice.toFixed(2),
+      courierId: null,
+      costDelivery: 0,
+      sectorId: parseInt(order.sectorId),
+      accountemail: order.user.email ? order.user.email : "",
+      accountname: order.user.name ? order.user.name : "",
+      accountphone: order.user.phone ? order.user.phone : "",
+      accountbirthDate: order.user.birthDate ? order.user.birthDate : "",
+      accountaddress: order.user.address ? order.user.address : "",
+      googleEmail: order.user.email ? order.user.email : "",
+      additionals,
+      products,
+      dishes: {
+        id: [""],
+        name: [""],
+        description: [""],
+        photo: [""],
+        cost: [""],
+        estimatedTime: [""],
+        additionalId: [""],
+        amountAdditional: [""],
+        supplyId: [""],
+        amountSupplies: [""],
+        recipeId: [""],
+        dishTypeId: [""],
+        promotion: [""],
+        discount: [""],
+        surcharge: [""],
+        amount: [""],
+        detail: [""],
+      },
+      menu,
+      mpPayment: {
+        Payment: mpInfo.payment,
+        Status: "approved",
+        MerchantOrder: mpInfo.merchantOrder,
+        ExternalReference: mpInfo.externalReference,
+        PaymentType: mpInfo.paymentType,
+      },
+    };
+  let response = await axios.post("order/new", newOrder);
+  localStorage.setItem("CSMO_ID", response.data.id);
+  localStorage.setItem("CSMO", response.data.order);
+  localStorage.removeItem('mporder');
+  // localStorage.removeItem("cart");
+  } catch (error) {
+    console.error(error);
   }
 }

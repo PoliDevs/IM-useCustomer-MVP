@@ -10,6 +10,7 @@ import {
   getActiveProducts,
   getAllCategorys,
   getCommerce,
+  removerOrderId,
   setFiltro,
 } from "../../../redux/actions";
 import Banner from "../../molecules/Banner/Banner";
@@ -59,6 +60,7 @@ export default function Home() {
     dispatch(getActiveMenus(commerce.id, setIsLoading));
     dispatch(getActiveProducts(commerce.id))
     dispatch(getAllCategorys(commerce.id));
+    dispatch(removerOrderId())
   }, [cant]);
 
   return (
