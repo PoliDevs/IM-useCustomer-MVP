@@ -28,6 +28,7 @@ import {
   PUT_ORDER_DATA,
   GET_ORDER_PENDING,
   REMOVE_CART,
+  REMOVE_ORDER_ID,
 } from "../actions/actionTypes";
 import dotenv from "dotenv";
 import { all_app_texts } from "../../utils/language";
@@ -267,6 +268,8 @@ export const rootReducer = (state = initalState, action) => {
       }
     case REMOVE_CART: 
     return {...state, cart: []}
+    case REMOVE_ORDER_ID:
+      return {...state, orderId: ''}
     default:
       return state;
   }

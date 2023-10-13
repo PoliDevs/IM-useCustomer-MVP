@@ -17,6 +17,7 @@ import {
 import { formattedOrder } from "../../../utils/Functions";
 //!
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
+import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
 
 export default function Mercadopago() {
   const language = useSelector((state) => state.language);
@@ -57,6 +58,13 @@ export default function Mercadopago() {
         mercadoPago,
         commerce.name
       );
+      let mpOrder = {
+        order: order,
+        methodId: methodId,
+        mercadoPago: mercadoPago,
+        commerceName: commerce.name
+      }
+      localStorage.setItem('mporder', JSON.stringify(mpOrder))
 /*       const { preferenceId } = response.data;
       console.log(preferenceId)
       return preferenceId;  */
@@ -96,7 +104,7 @@ export default function Mercadopago() {
   }, [tablePrice, sectorPrice, productsList]);
 
   const handleMp = async () => {
-    console.log(1231)
+    setIsloading(true)
     const methodId = paymentMethods.filter((m) => m.type === "mercadopago")[0]
       .id;
     let mercadoPago = true;
@@ -114,18 +122,23 @@ export default function Mercadopago() {
 
   return (
     <main className={s.mainContainer}>
-      <MpLogo className={s.mpLogo} />
-      <OrderInfo
-        border={true}
-        price={price}
-        tablePrice={tablePrice}
-        sectorPrice={sectorPrice}
-      />
-       <MpButton
-        /* path={"/rating"}  */text={language.mercadoPago_payButton}
-        onClick={handleMp}
-      /> 
-     {/*  {preferenceId && <Wallet initialization={createPreference}/>} */}
+      { !isLoading ? 
+        <>
+          {" "}
+          <MpLogo className={s.mpLogo} />
+          <OrderInfo
+            border={true}
+            price={price}
+            tablePrice={tablePrice}
+            sectorPrice={sectorPrice}
+          />
+          <MpButton
+            /* path={"/rating"}  */ text={language.mercadoPago_payButton}
+            onClick={handleMp}
+          />{" "}
+        </> : <LoadingPage/>
+      }
+      {/*  {preferenceId && <Wallet initialization={createPreference}/>} */}
     </main>
   );
 };
