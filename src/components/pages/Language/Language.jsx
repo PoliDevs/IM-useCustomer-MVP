@@ -72,7 +72,7 @@ export default function Language() {
                 </div>
               </div>
               <Link
-                to={accepted && i18n.language && "/login"}
+                to={accepted  && "/login"}
                 className={`${s.arrowButton} ${!accepted && s.buttonDisabled}`}
               >
                 <ArrowRight
