@@ -96,7 +96,6 @@ export default function Mercadopago() {
   }, [tablePrice, sectorPrice, productsList]);
 
   const handleMp = async () => {
-    console.log(1231)
     const methodId = paymentMethods.filter((m) => m.type === "mercadopago")[0]
       .id;
     let mercadoPago = true;
