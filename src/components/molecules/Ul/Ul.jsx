@@ -1,4 +1,5 @@
-import Item from "../../atoms/Ul_item/item";
+
+import Item from "../../atoms/Ul_item/Item";
 import { useTranslation } from "react-i18next";
 import { useSelector } from 'react-redux';
 import s from "./Ul.module.scss";
