@@ -9,9 +9,11 @@ import SubTitle from "../../atoms/SubTitle/SubTitle";
 import SmallText from "../../atoms/SmallText/SmallText";
 import s from "./CartProduct.module.scss";
 import { emojiPng } from "../../../utils/Constants";
+import { useSelector } from "react-redux";
 
 export default function CartProduct({image, name, description, comment, price, amount}) {
   const { addToCart, removeFromCart } = useAmountControls();
+  const language = useSelector((state)=> state.language);
   
   let emoji1 = "";
   if (image) {
@@ -42,15 +44,16 @@ export default function CartProduct({image, name, description, comment, price, a
       {/* <span role="img" aria-label="Emoji" className={s.icon}>
         {emoji1}
       </span> */}
-      <img
-        src={getPng(image)}
-        style={{ width: "60px", height: "60px" }}
-      />
+      <img src={getPng(image)} style={{ width: "60px", height: "60px" }} />
       <div className={s.info}>
         <Paragraph alignment={"left"} text={name} bold={true} />
         <SmallText alignment={"left"} text={description} />
         {comment && (
-          <SmallText alignment={"left"} text={"*Observaciones:"} bold={true} />
+          <SmallText
+            alignment={"left"}
+            text={`*${language.cartProduct_comment}:`}
+            bold={true}
+          />
         )}
         <Paragraph alignment={"left"} text={comment} />
         <Paragraph

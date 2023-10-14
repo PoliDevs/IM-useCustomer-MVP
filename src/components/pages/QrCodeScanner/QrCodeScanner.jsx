@@ -20,7 +20,7 @@ export default function Qr({scanResult, setScanResult}) {
       },
       fps: 10,
       disableFlip: false,
-      rememberLastUsedCamera: false,
+      rememberLastUsedCamera: true,
       aspectRatio: 1.0,
       supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
       formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],

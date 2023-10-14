@@ -26,7 +26,6 @@ export default function Language() {
   useEffect(() => {
     localStorage.setItem("Pos", params['*']);
     const decripted = dataDecrypt(params["*"]);
-    console.log('decripted: ', decripted);
     if (localStorage.getItem('cart')) localStorage.removeItem('cart');
     dispatch(getCommerce(decripted.commerce));
     dispatch(setSector(decripted.sector));
