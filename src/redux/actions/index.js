@@ -328,6 +328,7 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
     // localStorage.removeItem("cart");
     return response;
     }else{
+      console.log(newOrder);
     let response = await axios.post(
       "order/new",
       newOrder
