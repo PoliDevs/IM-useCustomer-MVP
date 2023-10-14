@@ -332,6 +332,7 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
       "order/new",
       newOrder
     );
+    console.log(response.data);
     localStorage.setItem('CSMO_ID',(response.data.id));
     localStorage.setItem("CSMO", response.data.order);
     localStorage.removeItem('cart');

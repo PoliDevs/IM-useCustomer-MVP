@@ -61,6 +61,7 @@ export let all_app_texts = [
   { footer_total: "Total" },
   { footer_payButton: "Pagar" },
   { footer_viewproducts: "Ver productos" },
+  { cartProduct_comment: "Observaciones" },
   { payment_title: "Pagar" },
   { payment_managePayment: "Gestione su pago desde aqui" },
   { payment_cash: "Dinero en efectivo" },

@@ -150,13 +150,11 @@ export const dataDecrypt = (data) => {
   const password = import.meta.env.VITE_REACT_APP_KEY;
   const result = CryptoJS.AES.decrypt(data, password);
   const originalText = result.toString(CryptoJS.enc.Utf8).split("/");
-  console.log('texto con split: ', originalText);
   const urlInfo = {
     commerce: originalText[0],
     sector: originalText[1],
     table: originalText[2],
   };
-  console.log('urlInfo: ', urlInfo);
   return urlInfo;
 };
 
