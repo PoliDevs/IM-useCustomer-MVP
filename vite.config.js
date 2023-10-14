@@ -2,12 +2,13 @@ import { defineConfig } from 'vite'
 import replace from "@rollup/plugin-replace";
 import svgr from "vite-plugin-svgr";
 import react from '@vitejs/plugin-react'
+import ViteSassPlugin from 'vite-plugin-sass';
 import dotenv from "dotenv";
 
 dotenv.config();
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), svgr()],
+  plugins: [react(), svgr(),ViteSassPlugin()],
   cors: true, // HabiliCORS en el servidor de desarrollo
   build: {
     rollupOptions: {
