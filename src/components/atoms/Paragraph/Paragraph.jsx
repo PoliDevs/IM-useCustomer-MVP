@@ -13,6 +13,9 @@ export default function Paragraph({
   noMargin,
   gap
 }) {
+  const truncatedText =
+    text && text.length > 110 ? `${text.substring(0, 110)}...` : text;
+
   return (
     <p
       className={`${s.paragraph} ${bold ? s.bold : ""} ${
@@ -23,11 +26,12 @@ export default function Paragraph({
         disabled && s.disabled
       } ${gap && s.gap} ${noMargin && s.noMargin}`}
     >
-      {scrollable
+      {/* {scrollable
         ? text
         : text.length > 110
         ? `${text.substring(0, 110)}...`
-        : text}
+        : text} */}
+      {text && scrollable ? text : truncatedText}
       {children}
     </p>
   );
