@@ -235,7 +235,7 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
       menu.menuTypeId.push(`${m.menuTypeId}`);
       menu.categoryId.push(`${m.categoryId}`);
       m.dishes ? menu.dishes.push(`${m.dishes}`) : menu.dishes.push("");
-      m.product !== undefined
+      m.product !== undefined && m.product !== null
         ? menu.product.push(`${m.product}`)
         : menu.product.push("");
       m.additionalId !== undefined
@@ -270,7 +270,7 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
       name: order.name ? order.name : "sss",
       date: date,
       hour: time,
-      status: "orderPlaced",
+      // status: "orderPlaced",
       detail: "",
       validity: date,
       promotion: 0,
