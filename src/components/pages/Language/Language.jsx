@@ -36,7 +36,7 @@ export default function Language() {
   return (
     <main className={s.mainContainer}>
       {Object.keys(commerce).length ? (
-        Object.keys(language).length ? (
+        // Object.keys(language).length ? (
           <>
             <ScrollContainer className={s.optionsMainContainer}>
               {idiomas.map((idioma, index) => (
@@ -93,9 +93,9 @@ export default function Language() {
               />
             )}
           </>
-        ) : (
-          ""
-        )
+        // ) : (
+        //   ""
+        // )
       ) : (
         <LoadingPage />
       )}
