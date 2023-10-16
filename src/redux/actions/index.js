@@ -1084,6 +1084,7 @@ export async function postMpOrder(order, methodId, mpInfo, commerceName) {
         PaymentType: mpInfo.paymentType,
       },
     };
+    console.log(newOrder);
   let response = await axios.post("order/new", newOrder);
   localStorage.setItem("CSMO_ID", response.data.id);
   localStorage.setItem("CSMO", response.data.order);
