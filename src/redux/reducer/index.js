@@ -241,7 +241,7 @@ export const rootReducer = (state = initalState, action) => {
       {
         localStorage.setItem("Lang", action.payload.lang);
         // state = { ...state, language: action.payload };
-        state = { ...state, language: action.payload.language, allProducts: [], allAditionals: [], products: [] };
+        state = { ...state, language: action.payload.language, allProducts: [], allAditionals: [], products: [], allCategories: [] };
       }
       return state;
     case SET_TABLE_PRICE:
