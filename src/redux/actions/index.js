@@ -328,12 +328,10 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
     // localStorage.removeItem("cart");
     return response;
     }else{
-      console.log(newOrder);
     let response = await axios.post(
       "order/new",
       newOrder
     );
-    console.log(response.data);
     localStorage.setItem('CSMO_ID',(response.data.id));
     localStorage.setItem("CSMO", response.data.order);
     localStorage.removeItem('cart');
@@ -464,28 +462,31 @@ export function getActiveMenus(id, setIsLoading) {
       //si los menus cargados son los mismos, no los vuelve a cargar
       if (equals === true) {if (setIsLoading) setIsLoading(false);return}
       const traduccion = async () => {
-        //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
-        let results = menuTranslate(allActiveMenus.data);
-        //* Traduzco todos los nombres y las descripciones
-        let translatedNames = await translateText(
-          localStorage.getItem("Lang"),
-          results.nombres,
-          true
-        );
-        let translatedDescriptions = await translateText(
-          localStorage.getItem("Lang"),
-          results.descripciones,
-          true
-        );
-        //* Reemplazo los nombres originales por los nombres traducidos
-        const translatedMenus = allActiveMenus.data.map((a, index) => {
-          a.name = translatedNames[index].name;
-          if (a.description)
-            a.description = translatedDescriptions[index].description;
-          return a;
-        });
-        return translatedMenus;
-      };
+        try {
+          //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
+          let results = menuTranslate(allActiveMenus.data);
+          //* Traduzco todos los nombres y las descripciones
+          let translatedNames = await translateText(
+            localStorage.getItem("Lang"),
+            results.nombres,
+            true
+          );
+          let translatedDescriptions = await translateText(
+            localStorage.getItem("Lang"),
+            results.descripciones,
+            true
+          );
+          //* Reemplazo los nombres originales por los nombres traducidos
+          const translatedMenus = allActiveMenus.data.map((a, index) => {
+            a.name = translatedNames[index].name;
+            if (a.description)
+              a.description = translatedDescriptions[index].description;
+            return a;
+          });
+          return translatedMenus;        
+        } catch (error) {
+          return allActiveMenus.data
+        }}
       if (setIsLoading) setIsLoading(false);
       return dispatch({
         type: GET_ACTIVE_MENUS,
@@ -538,10 +539,12 @@ export function getActiveDishes(id) {
 
 export function getActiveProducts(id) {
   return async function (dispatch, getState) {
+    let allActiveProducts = []
     try {
-      let allActiveProducts = await axios.get(
+      allActiveProducts = await axios.get(
         `product/all_active/${id}`
       );
+      if(allActiveProducts == null || allActiveProducts == undefined) console.log('respuesta undefined');
       let equals = false;
       if (getState().products.length) {
         let products = getState().products;
@@ -561,28 +564,36 @@ export function getActiveProducts(id) {
       //si las categorias cargadas son las mismas, no las vuelve a cargar
       if (equals === true) return;
       const traduccion = async () => {
-        //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
-        let results = menuTranslate(allActiveProducts.data);
-        //* Traduzco todos los nombres
-        let translatedNames = await translateText(
-          localStorage.getItem("Lang"),
-          results.nombres,
-          true
-        );
-        //* Reemplazo los nombres originales por los nombres traducidos
-        const translatedProducts = allActiveProducts.data.map((a, index) => {
-          a.name = translatedNames[index].name;
-          return a;
-        });
-        return translatedProducts;
-      };
-
+        try {
+          //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
+          let results = menuTranslate(allActiveProducts.data);
+          //* Traduzco todos los nombres
+          let translatedNames = await translateText(
+            localStorage.getItem("Lang"),
+            results.nombres,
+            true
+          );
+          //* Reemplazo los nombres originales por los nombres traducidos
+          const translatedProducts = allActiveProducts.data.map((a, index) => {
+            a.name = translatedNames[index].name;
+            return a;
+          });
+          return translatedProducts;
+        } catch (error) {
+          return allActiveProducts.data  
+        }
+      }
       return dispatch({
         type: GET_ACTIVE_PRODUCTS,
         payload: await traduccion(),
       });
     } catch (error) {
-      console.error(error);
+    }
+    if( !allActiveProducts.length ){
+      return dispatch({
+        type: GET_ACTIVE_PRODUCTS,
+        payload: [],
+      });
     }
   };
 }
@@ -612,23 +623,26 @@ export function getActiveAditionals(id) {
       //si las categorias cargadas son las mismas, no las vuelve a cargar
       if (equals === true) return;
       const traduccion = async () => {
-        //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
-        let results = menuTranslate(allActiveAditionals.data);
-        //* Traduzco todos los nombres
-        let translatedNames = await translateText(
-          localStorage.getItem("Lang"),
-          results.nombres,
-          true
-        );
-        //* Reemplazo los nombres originales por los nombres traducidos
-        const translatedAdittionals = allActiveAditionals.data.map(
-          (a, index) => {
-            a.name = translatedNames[index].name;
-            return a;
-          }
-        );
-        return translatedAdittionals;
-      };
+        try {
+          //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
+          let results = menuTranslate(allActiveAditionals.data);
+          //* Traduzco todos los nombres
+          let translatedNames = await translateText(
+            localStorage.getItem("Lang"),
+            results.nombres,
+            true
+          );
+          //* Reemplazo los nombres originales por los nombres traducidos
+          const translatedAdittionals = allActiveAditionals.data.map(
+            (a, index) => {
+              a.name = translatedNames[index].name;
+              return a;
+            }
+          );
+          return translatedAdittionals;          
+        } catch (error) {
+          return allActiveAditionals.data
+        }}
 
       return dispatch({
         type: GET_ALL_ADITIONALS,
@@ -665,23 +679,27 @@ export function getAllCategorys(id) {
       //si las categorias cargadas son las mismas, no las vuelve a cargar
       if (equals === true) return;
       const traduccion = async () => {
-        //* Obtengo todos los nombres de las categorias
-        let results = categoryTranslate(allActiveCategories.data);
-        //* Traduzco todos los nombres
-        let translatedNames = await translateText(
-          localStorage.getItem("Lang"),
-          results,
-          true
-        );
-        //* Reemplazo los nombres originales por los nombres traducidos
-        const translatedCategories = allActiveCategories.data.map(
-          (a, index) => {
-            a.category = translatedNames[index].name;
-            return a;
-          }
-        );
-        return translatedCategories;
-      };
+        try {
+          //* Obtengo todos los nombres de las categorias
+          let results = categoryTranslate(allActiveCategories.data);
+          //* Traduzco todos los nombres
+          let translatedNames = await translateText(
+            localStorage.getItem("Lang"),
+            results,
+            true
+          );
+          //* Reemplazo los nombres originales por los nombres traducidos
+          const translatedCategories = allActiveCategories.data.map(
+            (a, index) => {
+              a.category = translatedNames[index].name;
+              return a;
+            }
+          );
+          return translatedCategories;
+        } catch (error) {
+          return allActiveCategories.data;
+        }
+      }
       return dispatch({
         type: GET_ALL_CATEGORIES,
         payload: await traduccion(),
@@ -1084,7 +1102,6 @@ export async function postMpOrder(order, methodId, mpInfo, commerceName) {
         PaymentType: mpInfo.paymentType,
       },
     };
-    console.log(newOrder);
   let response = await axios.post("order/new", newOrder);
   localStorage.setItem("CSMO_ID", response.data.id);
   localStorage.setItem("CSMO", response.data.order);

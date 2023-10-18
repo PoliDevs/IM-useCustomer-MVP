@@ -109,12 +109,12 @@ export default function Payment() {
             setMethod={setMethod}
             handleChange={handleChange}
           />
-          <PaymentOptionButton
+          {/* <PaymentOptionButton
             text={language.payment_deferred}
             option={3}
             setMethod={setMethod}
             handleChange={handleChange}
-          />
+          /> */}
           <div className={s.bottomContent}>
             <Paragraph
               text={language.payment_poweredby}
