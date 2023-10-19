@@ -2,9 +2,10 @@
 @import "../../../scss/typography.scss";
 
 .home {
-  position: relative;
+  position: fixed;
   display: flex;
   flex-direction: column;
   background-color: $background-desable;
   height: 100%;
+  width: 100%;
 }
