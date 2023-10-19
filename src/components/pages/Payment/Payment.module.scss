@@ -2,8 +2,9 @@
 @import "../../../scss//typography.scss";
 
 .paymentContainer {
-  height: 100vh;
-  min-width: 100vw;
+  position: fixed;
+  height: 100%;
+  width: 100%;
   background-color: $color-seventh;
 
   .paymentContent {

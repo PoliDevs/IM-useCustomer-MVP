@@ -1,9 +1,10 @@
 @import "../../../scss/colors.scss";
 
 .home {
+  position: fixed;
   color: $text-primary;
-  width: 100vw;
-  min-height: 100vh;
+  width: 100%;
+  min-height: 100%;
   margin: 0;
   padding: 0;
   background-color: $background-secundary;
