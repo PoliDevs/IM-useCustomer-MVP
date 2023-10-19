@@ -16,7 +16,6 @@
   .top {
     margin: 0 auto;
     // padding-top: 40px;
-    padding-top: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -76,12 +75,28 @@
       height: 220px;
       margin: 10px;
     }
-
+    
     .imenuLogo {
       width: 70px;
     }
   }
+  
+  @media screen and (min-height: 690px) {
+    .top {
+      padding-top: 40px;
 
+      .spacing {
+        .logo {
+          border-radius: 25px;
+          background-color: $color-eighth;
+          width: 280px;
+          height: 280px;
+          margin: 5px;
+        }
+      }
+    }
+  
+  }
   @media screen and (min-width: 750px) {
     
     .spacing {
@@ -99,22 +114,6 @@
     }
   }
 
-  @media screen and (min-height: 690px) {
-    .top {
-      padding-top: 40px;
-
-      .spacing {
-        .logo {
-          border-radius: 25px;
-          background-color: $color-eighth;
-          width: 280px;
-          height: 280px;
-          margin: 5px;
-        }
-      }
-    }
-  
-  }
 
   
 }
