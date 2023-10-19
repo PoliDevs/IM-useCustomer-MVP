@@ -13,16 +13,27 @@
   background-color: $background-quaternary;
 
   .optionsMainContainer {
+    // width: 100%;
+    // height: 350px;
+    // margin-top: 250px;
     width: 100%;
-    height: 350px;
+    height: 100px;
     margin-top: 250px;
+    flex: 1 1 auto;
   }
   .buttonWrapper {
+    // width: 90%;
+    // margin-top: auto;
+    // margin-bottom: 50px;
+    // display: flex;
+    // justify-content: space-between;
     width: 90%;
     margin-top: auto;
     margin-bottom: 50px;
     display: flex;
+    align-items: flex-end;
     justify-content: space-between;
+    flex: 1 auto;
     .checker {
       display: flex;
       gap: 10px;
