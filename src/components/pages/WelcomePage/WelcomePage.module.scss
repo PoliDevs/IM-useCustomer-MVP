@@ -15,7 +15,8 @@
   
   .top {
     margin: 0 auto;
-    padding-top: 40px;
+    // padding-top: 40px;
+    padding-top: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -37,8 +38,10 @@
       .logo {
         border-radius: 25px;
         background-color: $color-eighth;
-        width: 280px;
-        height: 280px;
+        // width: 280px;
+        // height: 280px;
+        width: 190px;
+        height: 190px;
         margin: 5px;
       }
     }
@@ -94,6 +97,23 @@
       height: 280px;
       margin-bottom: 5px;
     }
+  }
+
+  @media screen and (min-height: 670px) {
+    .top {
+      padding-top: 40px;
+
+      .spacing {
+        .logo {
+          border-radius: 25px;
+          background-color: $color-eighth;
+          width: 280px;
+          height: 280px;
+          margin: 5px;
+        }
+      }
+    }
+  
   }
 
   
