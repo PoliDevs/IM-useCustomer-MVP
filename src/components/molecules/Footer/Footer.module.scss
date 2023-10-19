@@ -2,6 +2,9 @@
 @import "../../../scss/typography.scss";
 
 .footer {
+  position: absolute;
+  bottom: 0;
+  background-color: #fefefe;
   width: 100%;
   padding: 20px;
   height: 100px;
