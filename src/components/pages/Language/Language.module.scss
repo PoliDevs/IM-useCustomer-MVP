@@ -9,7 +9,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 25px;
+  gap: 18px;
   background-color: $background-quaternary;
 
   .optionsMainContainer {
@@ -18,7 +18,7 @@
     // margin-top: 250px;
     width: 100%;
     height: 100px;
-    margin-top: 250px;
+    margin-top: 150px;
     flex: 1 1 auto;
   }
   .buttonWrapper {
@@ -87,6 +87,13 @@
 
     .buttonDisabled {
       background-color: $background-buttom-primary-desable;
+    }
+  }
+
+  @media screen and (min-height: 690px) {
+    gap: 25px;
+    .optionsMainContainer {
+      margin-top: 250px;
     }
   }
 }
