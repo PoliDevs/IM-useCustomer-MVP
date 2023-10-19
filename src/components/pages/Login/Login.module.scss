@@ -20,7 +20,7 @@
     height: 40%;
     width: 88%;
     margin: 0 auto;
-    margin-bottom: 50px;
+    margin-bottom: 35px;
   }
 
   .sloganContainer {
@@ -31,8 +31,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding: 50px;
-    padding-left: 36px;
+    padding: 35px;
+    padding-left: 26px;
     background-image: url("../../../assets/LoginBackground.png");
     background-repeat: no-repeat;
     background-size: cover;
@@ -57,12 +57,26 @@
   
     .bigText {
       font-family: 'Mabry Pro', sans-serif;
-      font-size: 56px;
+      font-size: 46px;
       text-align: left;
       color: $text-secondary;
       z-index: 4;
     }
 
+  }
+
+  @media screen and (min-height: 690px) {
+    .loginContainer {
+      margin-bottom: 50px;
+    }
+    .sloganContainer {
+      padding: 50px;
+      padding-left: 36px;
+
+      .bigText {
+        font-size: 56px;
+      }
+    }
   }
   
 }
