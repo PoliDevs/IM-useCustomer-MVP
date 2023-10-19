@@ -2,11 +2,13 @@
 @import "../../../scss/typography.scss";
   
   .instrucciones {
+    position: fixed;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: auto;
-    min-height: 100vh;
+    min-height: 100%;
+    width: 100%;
     margin: 0 auto;
     padding: 15px;
     margin-top: 10px;
