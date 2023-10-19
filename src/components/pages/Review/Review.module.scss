@@ -11,7 +11,7 @@
   .reviewHeader {
    position: relative;
     background-color: $color-quaternary;
-    height: 50vh;
+    height: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -42,8 +42,8 @@
     margin: 0 auto;
     flex: 1 1 auto;
     gap: 12px;
-    min-height: 50vh;
-    height: 50vh;
+    min-height: 50%;
+    height: 50%;
     padding-top: 16px;
     .textAreaHeader {
       display: flex;
