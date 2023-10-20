@@ -6,6 +6,10 @@
   background-color: $color-sixth;
   height: 100%;
   width: 100%;
+  max-width: 450px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -61,6 +65,12 @@
         margin-left: auto;
         color: $color-nineth
       }
+    }
+
+    .buttonWrapper {
+      margin: auto 0 15px 0;
+      display: flex;
+      justify-content: center;
     }
   }
 
