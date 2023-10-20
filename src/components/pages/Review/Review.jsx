@@ -158,8 +158,8 @@ export default function Review() {
                 path={"/home"}
                 onClick={()=>{localStorage.removeItem("cart")}}
                 centered={true}
-                newHeight={"61px"}
-                newFz={"21px"}
+                // newHeight={"61px"}
+                // newFz={"21px"}
               />
             </div>
           </article>

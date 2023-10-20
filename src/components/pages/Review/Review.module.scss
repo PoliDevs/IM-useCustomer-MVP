@@ -8,6 +8,9 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
   .reviewHeader {
    position: relative;
     background-color: $color-quaternary;
@@ -21,15 +24,15 @@
       position: relative;
       display: flex;
       width: 100%;
-      height: 200px;
+      height: 120px;
       padding: 50px
     }
   }
 
   .logo {
     border-style: none;
-    height: 108px;
-    width: 108px;
+    height: 90px;
+    width: 90px;
     margin: 0 auto;
     // margin-bottom: 36px;
     // margin-top: 55px;
@@ -61,5 +64,18 @@
     }
   }
 
+  @media screen and (min-height: 690px) {
+    .reviewHeader {
+      .logo {
+        height: 108px;
+        width: 108px;
+      }
+    }
+  }
 
+}
+
+.reviewContainer::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
 }

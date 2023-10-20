@@ -1,4 +1,16 @@
 
 .ratingContainer {
   margin: 0 auto;
+
+  .stars {
+    width: 25px;
+    height: 25px;
+  }
+
+  @media screen and (min-height: 690px) {
+    .stars {
+      width: 35px;
+      height: 35px;
+    }
+  }
 }

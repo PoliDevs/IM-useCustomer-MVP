@@ -14,9 +14,23 @@
   .orderContainer {
     height: auto;
     width: 90%;
+    overflow-y: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
   }
+  .orderContainer::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+}
   .mpLogo {
+    width: 90px;
+    height: 90px;
+  }
+
+  @media screen and (min-height: 690px) {
+    .mpLogo {
     width: 130px;
     height: 130px;
+    }
   }
 }

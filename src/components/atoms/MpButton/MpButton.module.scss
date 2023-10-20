@@ -3,7 +3,7 @@
 
 .mpButton {
   width: 90%;
-  height: 61px;
+  height: 41px;
   line-height: $title;
   display: flex;
   align-items: center;
@@ -11,7 +11,7 @@
   text-align: center;
   background-color: #00a8e7;
   border: none;
-  font-size: $title;
+  font-size: $line-text;
   color: $text-secondary;
   border-radius: $border-primary-radius;
   margin-top: 84px;
@@ -20,4 +20,9 @@
   color: white;
   cursor: pointer;
 }
+
+  @media screen and (min-height: 690px) {
+   font-size: $title;
+   height: 61px; 
+  }
 }
