@@ -152,7 +152,7 @@ export default function Review() {
                 />
               </>
             )}
-            <div style={{ margin: "auto 0 15px 0" }}>
+            <div className={s.buttonWrapper}>
               <LinkButton
                 text={language.rating_backButton}
                 path={"/home"}
