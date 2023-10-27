@@ -15,19 +15,32 @@
   height: 50px;
   background-color: $background-desable;
   padding: 0 21px;
+  z-index: 6;
 
   .icon {
     height: 20px;
     width: 20px;
   }
-
+  
+  .ordersButton{
+    position: absolute;
+    width: auto;
+    border-radius: $border-primary-radius;
+    border: none;
+    background-color: $color-primary;
+    padding: 10px;
+    margin: 0 auto;
+    top: 30px;
+    transform: translateX(-50%) translateY(-50%);
+    left: 50%;
+  }
   .infoContainer {
     position: relative;
-    width: 120px;
+    width: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    
     .pfActive,
     .lgActive {
       background-color: $color-primary;
@@ -127,4 +140,8 @@
     width: 24px;
   }
   }
+}
+
+.spaceBetween {
+  justify-content: space-between;
 }

@@ -27,7 +27,7 @@ i18next.init({
     Por:{
       global:global_Pt
     },
-    Por_bra:{
+    Bra:{
       global:global_Pt_bra
     }
   }

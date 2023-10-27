@@ -10,7 +10,7 @@ import Paragraph from "../../atoms/Paragraph/Paragraph";
 import i18next from "i18next";
 import s from "./NavBar.module.scss";
 
-export default function NavBar({ setIsloading, navarrow, path }) {
+export default function NavBar({ ordersButton, setIsloading, navarrow, path }) {
   const [userActive, setUserActive] = useState(false);
   const [langActive, setLangActive] = useState(false);
   const [t, i18n] = useTranslation("global");
@@ -33,8 +33,9 @@ export default function NavBar({ setIsloading, navarrow, path }) {
   };
 
   return (
-    <nav className={s.navBar} style={{justifyContent: navarrow ? "space-between" : "flex-end"}}>
+    <nav className={`${s.navBar} ${ordersButton && s.spaceBetween}`} style={{justifyContent: navarrow ? "space-between" : "flex-end"}}>
       {navarrow && <ArrowBack className={s.icon} onClick={() => navigate(path)} />}
+        {ordersButton ? <button className={s.ordersButton} onClick={()=> navigate('/myorders')}>Ver mis pedidos</button> : null}
       <div className={s.infoContainer}>
         <Profile
           className={`${s.icon} ${userActive && s.pfActive} ${s.pfIcon}`}
@@ -102,11 +103,11 @@ export default function NavBar({ setIsloading, navarrow, path }) {
             </div>
             <div
               className={`${s.langOption} ${
-                current === "Por_Bra" && s.highlight
+                current === "Bra" && s.highlight
               }`}
               onClick={() => {
-                i18n.changeLanguage("Por_Bra");
-                localStorage.setItem("Lang", "Por_Bra");
+                i18n.changeLanguage("Bra");
+                localStorage.setItem("Lang", "Bra");
               }}
             >
               <Paragraph text={"Português Bra"} />

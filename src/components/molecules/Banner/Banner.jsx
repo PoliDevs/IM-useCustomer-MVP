@@ -10,7 +10,7 @@ import Paragraph from "../../atoms/Paragraph/Paragraph";
 import NavBar from "../NavBar/NavBar";
 
 //? agrego setIsLoading a navbar
-export default function Banner({ setCategory, arrow, navarrow, path, setAditionals, setAll, setIsLoading }) {
+export default function Banner({ setCategory, ordersButton, arrow, navarrow, path, setAditionals, setAll, setIsLoading }) {
   const language = useSelector((state)=> state.language);
   const table = useSelector((state) => state.table);
   const commerce = useSelector((state) => state.commerce);
@@ -35,7 +35,7 @@ export default function Banner({ setCategory, arrow, navarrow, path, setAditiona
       }}
     >
       {/* //? agrego setIsLoading a navbar */}
-      <NavBar path={path} navarrow={navarrow} setIsloading={setIsLoading} />
+      <NavBar ordersButton={ordersButton} path={path} navarrow={navarrow} setIsloading={setIsLoading} />
       <div className={s.content}>
         {arrow && (
           <ArrowBackWhite

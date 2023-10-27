@@ -271,7 +271,7 @@ export const rootReducer = (state = initalState, action) => {
         })
         if (pendingOrder.length ){
           localStorage.setItem("CSMO_ID", pendingOrder[0].id);
-          return {...state, orderId: pendingOrder && pendingOrder[0].id}
+          return {...state, orderId: pendingOrder && pendingOrder[0].id, orderStatus: pendingOrder[0].status}
         }else{
           localStorage.removeItem("CSMO_ID")
           return state

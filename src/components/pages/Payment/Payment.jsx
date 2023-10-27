@@ -80,7 +80,7 @@ export default function Payment() {
   return !isLoading ? (
     open ? (
       <main className={s.paymentContainer}>
-        <Banner navarrow={false} path={"/home"} arrow={true} />
+        <Banner ordersButton={false} navarrow={false} path={"/home"} arrow={true} />
         <section className={s.paymentContent}>
           <SubTitle text={t("payment.title")} alignment={"left"} bold={true}>
             <CashIcon className={s.cashIcon} />

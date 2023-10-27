@@ -52,7 +52,7 @@ export default function Language() {
                 />
               ))} */}
             <LanguageOption
-              text={"Español"}
+              text={"Bienvenido"}
               lang={"Es"}
               // id={index}
               // key={index}
@@ -61,7 +61,7 @@ export default function Language() {
               setChecked={setChecked}
             />
             <LanguageOption
-              text={"English"}
+              text={"Welcome"}
               lang={"En"}
               // id={index}
               // key={index}
@@ -70,7 +70,7 @@ export default function Language() {
               setChecked={setChecked}
             />
             <LanguageOption
-              text={"Portugues"}
+              text={"Bem-vindo"}
               lang={"Por"}
               // id={index}
               // key={index}
@@ -79,8 +79,8 @@ export default function Language() {
               setChecked={setChecked}
             />
             <LanguageOption
-              text={"Portugues (Brazil)"}
-              lang={"Por_bra"}
+              text={"Bem-vindo (Br)"}
+              lang={"Bra"}
               // id={index}
               // key={index}
               accepted={accepted}

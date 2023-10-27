@@ -26,6 +26,7 @@ export default function Home() {
   const commerce = useSelector((state) => state.commerce);
   const userEmail = useSelector((state)=> state.user.email)
   const cant = useSelector((state) => state.cart);
+  const pendingOrders = useSelector((state)=> state.ordersByUser);
   const [isLoading, setIsLoading] = useState(true);
   const [category, setCategory] = useState(null);
   const [aditionals, setAditionals] = useState(false);
@@ -60,7 +61,7 @@ export default function Home() {
     dispatch(addCart(cant));
     let id = dataDecrypt(localStorage.getItem("Pos")).commerce;
     dispatch(getActiveMenus(commerce.id, setIsLoading));
-    dispatch(getActiveProducts(commerce.id))
+    // dispatch(getActiveProducts(commerce.id))
     dispatch(getAllCategorys(commerce.id));
     dispatch(removerOrderId())
     dispatch(getOrdersByUser(userEmail, commerce.id))
@@ -69,7 +70,7 @@ export default function Home() {
   return (
     <main className={s.home}>
       {/* //?agregado setIsLoading a navBar */}
-      <Banner navarrow={true} path={"/welcome"} setCategory={setCategory} setAditionals={setAditionals} setAll={setAll} setIsLoading={setIsLoading}/>
+      <Banner ordersButton={pendingOrders.length && true} navarrow={true} path={"/welcome"} setCategory={setCategory} setAditionals={setAditionals} setAll={setAll} setIsLoading={setIsLoading}/>
       {isLoading ? (
         <LoadingPage />
       ) : (
@@ -90,7 +91,7 @@ export default function Home() {
             commercePlan={commerce.plan}
             aditionals={aditionals}
           />
-          {commerce.plan !== "m1" && <Footer red={red} />}
+          {!isLoading && commerce.plan !== "m1" && <Footer red={red} />}
         </>
       )}
     </main>
