@@ -26,6 +26,8 @@ import {
   GET_ORDER_PENDING,
   REMOVE_CART,
   REMOVE_ORDER_ID,
+  GET_ORDERS_BY_USER,
+  CLEAR_ORDER_STATUS,
 } from "./actionTypes";
 import { TRANSLATE_TEXT } from "./actionTypes";
 import { v4 as uuidv4 } from "uuid";
@@ -824,6 +826,7 @@ export function changeLanguage(lang, setIsloading) {
       if (setIsloading) setIsloading(false);
       return result;
     } catch (error) {
+      if (setIsloading) setIsloading(false);
       console.error(error);
     }
   };
@@ -1109,5 +1112,32 @@ export async function postMpOrder(order, methodId, mpInfo, commerceName) {
   // localStorage.removeItem("cart");
   } catch (error) {
     console.error(error);
+  }
+}
+
+export const getOrdersByUser = (email, commerceId) => {
+  return async function (dispatch) {
+    try {
+      let result = await axios.get(`/order/orderes/${commerceId}`);
+      let orders = result.data.filter((o) => o.googleEmail === email);
+      return dispatch({
+        type: GET_ORDERS_BY_USER,
+        payload: orders
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const clearStatus = () => {
+  return function (dispatch){
+    try {
+      return dispatch({
+        type: CLEAR_ORDER_STATUS,
+      })
+    } catch (error) {
+      console.error(error)
+    }
   }
 }

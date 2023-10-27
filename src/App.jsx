@@ -15,17 +15,18 @@ import ProtectedRoutes from "./components/atoms/ProtectedRoutes/ProtectedRoutes"
 import { useDispatch } from "react-redux";
 import { changeLanguage } from "./redux/actions";
 import axios from 'axios';
-// axios.defaults.baseURL = "http://localhost:3001/";
-axios.defaults.baseURL='https://nodejs-production-bbf9.up.railway.app';
+import MyOrders from "./components/pages/MyOrders/MyOrders";
+axios.defaults.baseURL = "http://localhost:3001/";
+// axios.defaults.baseURL='https://nodejs-production-bbf9.up.railway.app';
 
 function App() {
   const [scanResult, setScanResult] = useState();
   const dispatch = useDispatch();
   const lang = localStorage.getItem("Lang") ? localStorage.getItem("Lang") : 'es';
   
-  useEffect(() => {
-    dispatch(changeLanguage(lang))  
-  }, [])
+  // useEffect(() => {
+  //   dispatch(changeLanguage(lang))  
+  // }, [])
   
   return (
     <>
@@ -51,6 +52,7 @@ function App() {
           <Route path="/payment" element={<Payment />} />
           <Route path="/mercadopago" element={<Mercadopago />} />
           <Route path="/rating/:id?" element={<Review />} />
+          <Route path='/myorders' element={<MyOrders/>} />
         </Route>
       </Routes>
     </>

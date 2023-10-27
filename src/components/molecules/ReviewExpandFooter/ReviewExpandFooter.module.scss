@@ -1,0 +1,66 @@
+@import '../../../scss/colors.scss';
+@import '../../../scss/typography.scss';
+
+.footerExpandContainer {
+  height: auto;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  padding: 20px;
+  background-color: $color-sixth;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  .arrowDown, .arrowUp {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    display: none;
+  }
+  .arrowUp {
+    display: none;
+  }
+
+  
+  .imenuLogo {
+    display: block;
+    margin: 0 auto
+  }
+  
+  .contentContainer {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 10px;
+    .textAreaHeader {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin: 0;
+      height: auto;
+      .label {
+        font-size: $line-text;
+        font-weight:bold;
+      }
+      
+      .textLimit {
+        display: inline;
+        margin-left: auto;
+        color: $color-nineth
+      }
+    }
+  }
+  
+  .buttonWrapper {
+    width: 100%;
+  }
+  .visible {
+    display: flex;
+  }
+}

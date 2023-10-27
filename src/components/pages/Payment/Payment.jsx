@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ReactComponent as CashIcon } from "../../../assets/CashIcon.svg";
 import { paymentUrl } from "../../../utils/Constants";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import Banner from "../../molecules/Banner/Banner";
 import SmallText from "../../atoms/SmallText/SmallText";
@@ -36,13 +36,15 @@ export default function Payment() {
   const totalPrice = cart.reduce((count, p) => count + p.price * p.amount, 0);
   const [t, i18n] = useTranslation(["global"]);
   const [isLoading, setIsloading] = useState(true);
-
+  const navigate = useNavigate();
   const handleChange = (option)=> {
     setMethod(option)
   }
 
 
   useEffect(() => {
+    !cart.length && navigate('/home');
+      localStorage.removeItem("CSMO");
       dispatch(getPosValue(tableID));
       dispatch(getSectorValue(sectorID));
       dispatch(getActiveProducts(commerceID))
@@ -78,17 +80,13 @@ export default function Payment() {
   return !isLoading ? (
     open ? (
       <main className={s.paymentContainer}>
-        <Banner arrow={true} />
+        <Banner navarrow={false} path={"/home"} arrow={true} />
         <section className={s.paymentContent}>
-          <SubTitle
-            text={language.payment_title}
-            alignment={"left"}
-            bold={true}
-          >
+          <SubTitle text={t("payment.title")} alignment={"left"} bold={true}>
             <CashIcon className={s.cashIcon} />
           </SubTitle>
           <SmallText
-            text={language.payment_managePayment}
+            text={t("payment.managePayment")}
             alignment={"left"}
             standarSpacing={true}
           />
@@ -98,17 +96,17 @@ export default function Payment() {
             sectorPrice={sectorPrice}
           />
           <PaymentOptionButton
-            text={language.payment_cash}
+            text={t("payment.cash")}
             option={2}
             setMethod={setMethod}
             handleChange={handleChange}
           />
-          <PaymentOptionButton
+          {/* <PaymentOptionButton
             text={"Mercadopago"}
             option={1}
             setMethod={setMethod}
             handleChange={handleChange}
-          />
+          /> */}
           {/* <PaymentOptionButton
             text={language.payment_deferred}
             option={3}
@@ -117,7 +115,7 @@ export default function Payment() {
           /> */}
           <div className={s.bottomContent}>
             <Paragraph
-              text={language.payment_poweredby}
+              text={t("payment.poweredby")}
               bold={true}
               centered={true}
             >
@@ -129,7 +127,7 @@ export default function Payment() {
               to={paymentUrl[method]}
               onClick={handleCash}
             >
-              {language.payment_continue}
+              {t("payment.continue")}
             </Link>
           </div>
         </section>

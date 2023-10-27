@@ -10,6 +10,7 @@ import {
   getActiveProducts,
   getAllCategorys,
   getCommerce,
+  getOrdersByUser,
   removerOrderId,
   setFiltro,
 } from "../../../redux/actions";
@@ -23,6 +24,7 @@ import { dataDecrypt } from "../../../utils/Functions";
 import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
 export default function Home() {
   const commerce = useSelector((state) => state.commerce);
+  const userEmail = useSelector((state)=> state.user.email)
   const cant = useSelector((state) => state.cart);
   const [isLoading, setIsLoading] = useState(true);
   const [category, setCategory] = useState(null);
@@ -61,11 +63,13 @@ export default function Home() {
     dispatch(getActiveProducts(commerce.id))
     dispatch(getAllCategorys(commerce.id));
     dispatch(removerOrderId())
+    dispatch(getOrdersByUser(userEmail, commerce.id))
   }, [cant]);
 
   return (
     <main className={s.home}>
-      <Banner setCategory={setCategory} setAditionals={setAditionals} setAll={setAll}/>
+      {/* //?agregado setIsLoading a navBar */}
+      <Banner navarrow={true} path={"/welcome"} setCategory={setCategory} setAditionals={setAditionals} setAll={setAll} setIsLoading={setIsLoading}/>
       {isLoading ? (
         <LoadingPage />
       ) : (

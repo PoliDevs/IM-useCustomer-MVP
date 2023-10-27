@@ -2,6 +2,12 @@
 @import "../../../scss/typography.scss";
 
 .navBar {
+  //? estilos para mostrar navbar en home
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  color: #2b2b2b;
   display: flex;
   justify-content: space-between;
   align-items: center;

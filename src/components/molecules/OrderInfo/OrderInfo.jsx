@@ -21,7 +21,7 @@ export default function OrderInfo({ border, price, tablePrice, sectorPrice }) {
     <div className={`${s.orderInfo} ${border && s.border}`}>
       <div className={s.paymentTitle}>
         <SubTitle text={commerceInfo.name} bold={true} />
-        <SubTitle text={`${language.orderInfo_table} ${table}`} />
+        <SubTitle text={`${t("orderInfo.table")} ${table}`} />
       </div>
       <div className={s.productsContainer}>
         {cart.map((p, index) => (
@@ -112,7 +112,7 @@ export default function OrderInfo({ border, price, tablePrice, sectorPrice }) {
         />
       )} */}
       <Paragraph
-        text={`${language.orderInfo_paymentTotal}${totalPrice}`}
+        text={`${t("orderInfo.paymentTotal")}${totalPrice}`}
         alignment={"right"}
         bold={true}
       />

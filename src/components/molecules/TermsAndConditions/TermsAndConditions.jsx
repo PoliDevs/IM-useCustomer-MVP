@@ -1,22 +1,19 @@
 import { useSelector } from "react-redux";
 import { ReactComponent as XIcon } from "../../../assets/xIcon.svg"
+import { useTranslation } from "react-i18next";
 import SmallText from "../../atoms/SmallText/SmallText";
 import SubTitle from '../../atoms/SubTitle/SubTitle';
 import s from './TermsAndConditions.module.scss';
 
 export default function TermsAndConditions({accepted, setAccepted, modal, setModal}) {
   const language = useSelector((state)=> state.language);
-
+    const [t, i18n] = useTranslation(["global"]);
 
   return (
     <main className={s.modalContainer}>
       <section className={s.modal}>
         <XIcon className={s.closeIcon} onClick={() => setModal(false)} />
-        <SubTitle
-          text={language.languages_termsConditions}
-          bold={true}
-          alignment={"left"}
-        />
+        <SubTitle text={t("language.terms")} bold={true} alignment={"left"} />
         <div className={s.terms}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -157,10 +154,7 @@ export default function TermsAndConditions({accepted, setAccepted, modal, setMod
             className={`${s.checkbox} ${accepted && s.checked}`}
             onClick={() => setAccepted(!accepted)}
           />
-          <SmallText
-            text={language.languages_acceptConditions}
-            noMargin={true}
-          />
+          <SmallText text={t("language.terms")} noMargin={true} />
         </div>
         <button
           className={`${s.button}`}
@@ -169,7 +163,7 @@ export default function TermsAndConditions({accepted, setAccepted, modal, setMod
             setModal(false);
           }}
         >
-          {language.languages_acceptButton}
+          {t("language.acceptButton")}
         </button>
         <button
           className={`${s.button} ${s.light}`}
@@ -178,7 +172,7 @@ export default function TermsAndConditions({accepted, setAccepted, modal, setMod
             setAccepted(false);
           }}
         >
-          {language.languages_cancelButton}
+          {t("language.cancelButton")}
         </button>
       </section>
     </main>

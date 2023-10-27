@@ -1,89 +1,123 @@
 {
-"QrScanner": {
-    "title": "Digitalizar um código QR"
-},
+  "QrScanner": {
+    "title": "Digitalize um código QR"
+  },
 "loader": {
-  "title":  "Aguarde enquanto preparamos o menu."
+  "title": "Aguarde enquanto preparamos o menu"
 },
 "language": {
-  "button": "Começar"
+  "button": "Começar",
+  "terms": "Aceito os termos e condições de uso",
+  "viewConditions": "Ver condições aqui",
+  "acceptButton": "Aceitar",
+  "cancelButton": "Cancelar"
 },
 "login": {
-  "firstStep": "Dê o primeiro passo",
-  "access": "acesso usando o seu email do Google",
-  "googleButton": "Aceder com o Google",
-  "noGoogleButton": "Acesso sem registro",
-    "slogan": "A velocidade é",
-  "sloganBig": "o nosso ponto forte."
+    "firstStep": "Dê o primeiro passo",
+    "access": "acesse usando o seu e-mail do Google",
+    "googleButton": "Entrar com o Google",
+    "noGoogleButton": "Entrar sem registo",
+      "slogan": "A velocidade é",
+  "sloganBig": "o nosso ponto forte"
 },
-"welcome": {
+  "navBar":{
+    "disconnect": "Desconectar"
+  },
+  "welcome": {
     "title": "Bem-vindo!",
-    "subtitle": "Estás prestes a fazer um pedido em: ",
+    "subtitle": "Está prestes a fazer um pedido em: ",
+    "sector": "Setor",
     "table": "Mesa ",
-    "poweredby": "potenciado por",
+    "poweredby": "desenvolvido por",
     "order": "Fazer pedido",
     "viewproducts": "Ver produtos",
     "instructions": "Instruções"
-},
-"instructions": {
+  },
+  "instructions": {
     "title": "Instruções",
     "subtitle": "Como fazer o seu pedido no iMenu?",
-    "instruction_1": "Seleciona produtos do menu, toca no cartão do produto",
-    "instruction_2": "Uma vez selecionados os teus produtos, toca em 'ver produto' para confirmar o teu pedido",
-    "instruction_3": "Realiza o pagamento do teu pedido em dinheiro ou através do MercadoPago",
-    "instruction_4": "O teu pedido estará a caminho!",
-    "poweredby": "potenciado por ",
+    "instruction_1": "Selecione produtos do menu, pressione o cartão do produto",
+    "instruction_2": "Uma vez selecionados os seus produtos, pressione em 'ver produto' para confirmar o seu pedido",
+    "instruction_3": "Realize o pagamento do seu pedido em dinheiro",
+    "instruction_3_mp": "ou através do Mercadopago",
+    "instruction_4": "O seu pedido estará a caminho!",
+    "poweredby": "desenvolvido por ",
     "order": "Fazer pedido"
-},
-"loginModal": {
-    "title": "Inicia sessão com o Google para uma melhor experiência!",
-    "googleButton": "Iniciar sessão com o Google",
-    "omitButton": "Ignorar"
-},
-"banner": {
-    "table": "Mesa "
-},
-"searchbar": {
-    "placeholder": "O que desejas pedir?"
-},
-"categories": {
+  },
+  "closedCommerce": {
+    "closed": "Fechado",
+    "back": "Volte em breve!",
+    "help": "Precisa de ajuda?"
+  },
+  "contactFooter": {
+    "contact": "Contacte-nos",
+    "imenu": "Quero iMenu"
+  },
+  "banner": {
+    "Sector": "Setor",
+    "Table": "Mesa "
+  },
+  "searchbar": {
+    "placeholder": "O que deseja pedir?"
+  },
+  "categories": {
     "title": "Categorias"
-},
-"productModal": {
+  },
+  "productModal": {
+    "available": "O produto não está disponível.",
     "commentLabel" : "Comentários",
-    "commentPlaceholder": "Adiciona comentários e observações",
+    "commentPlaceholder": "Adicione comentários e observações",
     "addButton": "Adicionar"
-},
-"footer": {
-    "yourOrder": "O teu pedido",
+  },
+  "footer": {
+    "yourOrder": "O seu pedido",
     "products": "Produtos",
     "total": "Total",
     "payButton": "Pagar",
-    "viewproducts": "Ver produtos"
-},
-"payment": {
+    "viewproducts": "Ver produtos",
+    "observations": "Observações"
+  },
+  "payment": {
     "title": "Pagamento",
-    "managePayment": "Gerir o teu pagamento a partir daqui",
+    "managePayment": "Gerir o seu pagamento a partir daqui",
     "cash": "Dinheiro",
-    "poweredby": "potenciado por",
+    "diferred": "Pagar no checkout",
+    "poweredby": "desenvolvido por",
     "continue": "Continuar"
-},
-"orderInfo": {
+  },
+  "orderInfo": {
     "table": "Mesa",
-    "paymentTotal": "Total a pagar:"
-},
-"mercadoPago": {
+    "paymentTotal": "Total a pagar: €"
+  },
+  "mercadoPago": {
     "payButton": "Pagar"
-},
-"rating": {
-    "preparingOrder": "está a preparar o teu pedido",
-    "reviewQuestion": "Como correu a tua experiência com a aplicação?",
+  },
+  "rating": {
+    "preparingOrder": "está a preparar o seu pedido",
+    "progressBar_received": "Pedido recebido",
+    "progressBar_preparing": "Pedido a preparar",
+    "progressBar_ready": "O seu pedido está pronto!",
+    "reviewQuestion": "Como correu a sua experiência com a app?",
+    "viewOrders": "Ver os meus pedidos",
+    "order": "Pedido: ",
     "thanks": "Obrigado!",
-    "yourOpinion": "A tua opinião ajuda-nos a crescer",
-    "reviewLabel": "Dá-nos a tua opinião",
-    "reviewPlaceholder": "Gostas da nossa forma de fazer as coisas?",
+    "yourOpinion": "A sua opinião ajuda-nos a crescer",
+    "reviewLabel": "Dê-nos a sua opinião",
+    "reviewPlaceholder": "Gosta da nossa forma de trabalhar?",
     "send": "Enviar",
-    "backButton": "Pedir novamente"
-}
-
+    "backButton": "Voltar a pedir"
+  },
+  "myorders": {
+    "thanks": "Obrigado por encomendar em: ",
+    "table": "Mesa ",
+    "follow": "Seguimento de pedidos"
+  },
+  "orderCard": {
+    "table": "Mesa ",
+    "orderPlaced": "O seu pedido foi entregue",
+    "orderInPreparation": "O seu pedido está a ser preparado",
+    "orderReady": "O seu pedido está pronto!",
+    "orderDelivered": "O seu pedido está pronto!",
+    "total": "Total a pagar: $"
+  }
 }

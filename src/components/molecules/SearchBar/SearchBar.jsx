@@ -36,7 +36,7 @@ export default function SearchBar() {
     <div className={`${s.searchBar} ${inputValue ? s.border : ""}`}>
       <SearchIcon className={`${s.searchIcon} ${inputValue ? s.strong : ""}`} />
       <SearchField
-        placeholder={language.searchbar_placeholder}
+        placeholder={t("searchbar.placeholder")}
         inputValue={inputValue}
         handleChange={handleChange}
       />

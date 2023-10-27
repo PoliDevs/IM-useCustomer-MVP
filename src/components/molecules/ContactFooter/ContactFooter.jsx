@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import SmallText from "../../atoms/SmallText/SmallText";
 import s from './ContactFooter.module.scss';
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 export default function ContactFooter() {
   const language = useSelector((state)=> state.language);
+  const [t, i18n] = useTranslation(["global"]);
 
   return (
     <footer className={s.contactFooter}>
@@ -16,21 +18,21 @@ export default function ContactFooter() {
       |
       <Link className={s.link} to={"/"}>
         <SmallText
-          text={language.contactFooter_contact}
+          text={t("contactFooter.contact")}
           smaller={true}
           noMargin={true}
         />
       </Link>
       |
       <SmallText
-        text={language.contactFooter_iMenu}
+        text={t("contactFooter.imenu")}
         smaller={true}
         noMargin={true}
       />
-      <Link className={s.link} to={"/"}>
+      <Link className={s.link}>
         <FacebookLogo className={s.icon} />
       </Link>
-      <Link className={s.link} to={"/"}>
+      <Link className={s.link}>
         <InstagramLogo className={s.icon} />
       </Link>
     </footer>
