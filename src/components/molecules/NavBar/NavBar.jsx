@@ -72,7 +72,7 @@ export default function NavBar({ ordersButton, setIsloading, navarrow, path }) {
           onClick={handleLang}
           onBlur={() => setLangActive(false)}
         >
-          <Paragraph text={current} />
+          <Paragraph text={i18next.language} />
           <div className={`${langActive && s.visible} ${s.langsContainer}`}>
             <div
               className={`${s.langOption} ${current === "es" && s.highlight}`}
@@ -93,10 +93,10 @@ export default function NavBar({ ordersButton, setIsloading, navarrow, path }) {
               <Paragraph text={"English"} />
             </div>
             <div
-              className={`${s.langOption} ${current === "bor" && s.highlight}`}
+              className={`${s.langOption} ${current === "por" && s.highlight}`}
               onClick={() => {
-                i18n.changeLanguage("bor");
-                localStorage.setItem("Lang", "bor");
+                i18n.changeLanguage("por");
+                localStorage.setItem("Lang", "por");
               }}
             >
               <Paragraph text={"Português"} />
