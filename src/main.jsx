@@ -11,7 +11,7 @@ import { I18nextProvider } from 'react-i18next';
 import i18next from 'i18next';
 import global_Es from './translations/es/global.json';
 import global_En from './translations/en/global.json';
-import global_Pt from './translations/por/global.json';
+import global_Pt from './translations/port/global.json';
 import global_Pt_bra from './translations/pt-br/global.json';
 
 i18next.init({
