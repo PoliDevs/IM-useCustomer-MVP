@@ -18,16 +18,16 @@ i18next.init({
   interpolation:{escapeValue:false},
   lng: localStorage.getItem("Lang") ? localStorage.getItem("Lang") : "Es",
   resources:{
-    Es:{
+    es:{
       global:global_Es
     },
-    En:{
+    en:{
       global:global_En
     },
-    Por:{
+    por:{
       global:global_Pt
     },
-    Bra:{
+    bra:{
       global:global_Pt_bra
     }
   }
