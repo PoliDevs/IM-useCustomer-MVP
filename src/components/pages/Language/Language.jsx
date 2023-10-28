@@ -53,7 +53,7 @@ export default function Language() {
               ))} */}
             <LanguageOption
               text={"Bienvenido"}
-              lang={"Es"}
+              lang={"es"}
               // id={index}
               // key={index}
               accepted={accepted}
@@ -62,7 +62,7 @@ export default function Language() {
             />
             <LanguageOption
               text={"Welcome"}
-              lang={"En"}
+              lang={"en"}
               // id={index}
               // key={index}
               accepted={accepted}
@@ -71,7 +71,7 @@ export default function Language() {
             />
             <LanguageOption
               text={"Bem-vindo"}
-              lang={"Por"}
+              lang={"por"}
               // id={index}
               // key={index}
               accepted={accepted}
@@ -80,7 +80,7 @@ export default function Language() {
             />
             <LanguageOption
               text={"Bem-vindo (Br)"}
-              lang={"Bra"}
+              lang={"bra"}
               // id={index}
               // key={index}
               accepted={accepted}

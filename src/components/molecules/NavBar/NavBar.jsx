@@ -72,42 +72,42 @@ export default function NavBar({ ordersButton, setIsloading, navarrow, path }) {
           onClick={handleLang}
           onBlur={() => setLangActive(false)}
         >
-          <Paragraph text={current} />
+          <Paragraph text={i18next.language} />
           <div className={`${langActive && s.visible} ${s.langsContainer}`}>
             <div
-              className={`${s.langOption} ${current === "Es" && s.highlight}`}
+              className={`${s.langOption} ${current === "es" && s.highlight}`}
               onClick={() => {
-                i18n.changeLanguage("Es");
-                localStorage.setItem("Lang", "Es");
+                i18n.changeLanguage("es");
+                localStorage.setItem("Lang", "es");
               }}
             >
               <Paragraph text={"Español"} />
             </div>
             <div
-              className={`${s.langOption} ${current === "En" && s.highlight}`}
+              className={`${s.langOption} ${current === "en" && s.highlight}`}
               onClick={() => {
-                i18n.changeLanguage("En");
-                localStorage.setItem("Lang", "En");
+                i18n.changeLanguage("en");
+                localStorage.setItem("Lang", "en");
               }}
             >
               <Paragraph text={"English"} />
             </div>
             <div
-              className={`${s.langOption} ${current === "Por" && s.highlight}`}
+              className={`${s.langOption} ${current === "por" && s.highlight}`}
               onClick={() => {
-                i18n.changeLanguage("Por");
-                localStorage.setItem("Lang", "Por");
+                i18n.changeLanguage("por");
+                localStorage.setItem("Lang", "por");
               }}
             >
               <Paragraph text={"Português"} />
             </div>
             <div
               className={`${s.langOption} ${
-                current === "Bra" && s.highlight
+                current === "bra" && s.highlight
               }`}
               onClick={() => {
-                i18n.changeLanguage("Bra");
-                localStorage.setItem("Lang", "Bra");
+                i18n.changeLanguage("bra");
+                localStorage.setItem("Lang", "bra");
               }}
             >
               <Paragraph text={"Português Bra"} />
