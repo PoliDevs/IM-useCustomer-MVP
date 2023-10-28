@@ -209,7 +209,6 @@ export async function translateText(lang = "en", all_app_texts, menu=false) {
       method: "post",
       headers: {
         "Ocp-Apim-Subscription-Key": import.meta.env.VITE_MICROSOFT_TRANSLATE_KEY,
-        // "Ocp-Apim-Subscription-Key": "asdjh123jasdj123",
         "Ocp-Apim-Subscription-Region": import.meta.env.VITE_MICROSOFT_LOCATION,
         "Content-type": "application/json",
         "X-ClientTraceId": uuidv4().toString(),

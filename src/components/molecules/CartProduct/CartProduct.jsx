@@ -10,10 +10,12 @@ import SmallText from "../../atoms/SmallText/SmallText";
 import s from "./CartProduct.module.scss";
 import { emojiPng } from "../../../utils/Constants";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 export default function CartProduct({image, name, description, comment, price, amount}) {
   const { addToCart, removeFromCart } = useAmountControls();
   const language = useSelector((state)=> state.language);
+  const [t, i18n] = useTranslation(["global"]);
   
   let emoji1 = "";
   if (image) {
@@ -51,7 +53,7 @@ export default function CartProduct({image, name, description, comment, price, a
         {comment && (
           <SmallText
             alignment={"left"}
-            text={`*${language.cartProduct_comment}:`}
+            text={`*${t("productModal.commentLabel")}:`}
             bold={true}
           />
         )}

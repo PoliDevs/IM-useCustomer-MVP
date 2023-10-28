@@ -25,6 +25,10 @@
   justify-content: flex-start;
 }
 
+.right {
+  justify-content: flex-end;
+}
+
 .bold {
   font-weight: bold;
 }
@@ -35,4 +39,8 @@
 
 .review {
   color: #49ff71
+}
+
+.noLineheight {
+  line-height: unset;
 }

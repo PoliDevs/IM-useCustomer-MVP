@@ -21,21 +21,21 @@ export default function Login() {
       {!error ? (
         <>
           <header className={s.loginContainer}>
-            <SubTitle text={language.login_firstStep} bold={true} />
-            <Paragraph text={language.login_access} centered={true} />
+            <SubTitle text={t("login.firstStep")} bold={true} />
+            <Paragraph text={t("login.access")} centered={true} />
             <GoogleButton
-              text={language.login_googleButton}
+              text={t("login.googleButton")}
               signInWithGoogle={signInWithGoogle}
             />
-            <LoginButton text={language.login_noGoogleButton} />
+            <LoginButton text={t("login.noGoogleButton")} />
           </header>
           <section className={s.sloganContainer}>
             <HugeTitle
-              text={language.login_slogan}
+              text={t("login.slogan")}
               secundary={true}
               noWeight={true}
             />
-            <h2 className={s.bigText}>{language.login_sloganBig}</h2>
+            <h2 className={s.bigText}>{t("login.sloganBig")}</h2>
           </section>
         </>
       ) : (

@@ -7,8 +7,10 @@ import SubTitle from "../../atoms/SubTitle/SubTitle";
 import burger from "../../../assets/Burgers.svg";
 import s from "./Banner.module.scss";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
+import NavBar from "../NavBar/NavBar";
 
-export default function Banner({ setCategory, arrow, setAditionals, setAll }) {
+//? agrego setIsLoading a navbar
+export default function Banner({ setCategory, ordersButton, arrow, navarrow, path, setAditionals, setAll, setIsLoading }) {
   const language = useSelector((state)=> state.language);
   const table = useSelector((state) => state.table);
   const commerce = useSelector((state) => state.commerce);
@@ -24,13 +26,16 @@ export default function Banner({ setCategory, arrow, setAditionals, setAll }) {
       onClick={() => {
         if (arrow) return;
         // dispatch(getAllProducts());
-        dispatch(setFiltro(""));
-        dispatch(getActiveMenus(commerce.id));
-        setCategory("");
-        setAditionals(false);
-        setAll(true);
+        //? agregada nueva navbar a home
+        // dispatch(setFiltro(""));
+        // dispatch(getActiveMenus(commerce.id));
+        // setCategory("");
+        // setAditionals(false);
+        // setAll(true);
       }}
     >
+      {/* //? agrego setIsLoading a navbar */}
+      <NavBar ordersButton={ordersButton} path={path} navarrow={navarrow} setIsloading={setIsLoading} />
       <div className={s.content}>
         {arrow && (
           <ArrowBackWhite
@@ -40,14 +45,14 @@ export default function Banner({ setCategory, arrow, setAditionals, setAll }) {
               zIndex: "2",
               marginRight: "20px",
             }}
-            onClick={() => navigate("/home")}
+            onClick={() => navigate(-1)}
           />
         )}
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <SubTitle text={commerce.name} alignment={"left"} bold={true}/>
+          <SubTitle text={commerce.name} alignment={"left"} bold={true} />
           <Paragraph
             alignment={"left"}
-            text={`${language.banner_table} ${table}`}
+            text={` ${t("banner.Table")} ${table && table}`}
             secundary={true}
           />
         </div>

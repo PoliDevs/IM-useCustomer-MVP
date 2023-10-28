@@ -13,7 +13,7 @@ export default function LoadingPage({small}) {
       <Loader />
       {/* <div className={s.iMenuIcon}></div> */}
       <img src={iMenuFull} className={s.imemuLogo} width={"70px"} style={{margin: "0 auto"}}/>
-      <SubTitle text={language.loader_wait} />
+      <SubTitle text={t("loader.title")} />
     </div>
   );
 }

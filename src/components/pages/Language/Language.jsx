@@ -30,16 +30,17 @@ export default function Language() {
     dispatch(getCommerce(decripted.commerce));
     dispatch(setSector(decripted.sector));
     dispatch(setTable(decripted.table))
-    dispatch(changeLanguage("es"))
+    // dispatch(changeLanguage("es"))
   }, []);
 
   return (
     <main className={s.mainContainer}>
       {Object.keys(commerce).length ? (
         // Object.keys(language).length ? (
-          <>
-            <ScrollContainer className={s.optionsMainContainer}>
-              {idiomas.map((idioma, index) => (
+        <>
+          <ScrollContainer className={s.optionsMainContainer}>
+            {/* //!Comentadas opciones de traduccion con Microsoft */}
+            {/* {idiomas.map((idioma, index) => (
                   <LanguageOption
                   text={idioma.message}
                   lang={idioma.lang}
@@ -49,54 +50,91 @@ export default function Language() {
                   checked={checked}
                   setChecked={setChecked}
                 />
-              ))}
-            </ScrollContainer>
-            <div className={s.buttonWrapper}>
-              <div className={s.checker}>
-                <span
-                  className={`${s.checkbox} ${accepted && s.checked}`}
-                  onClick={() => setAccepted(!accepted)}
-                />
-                <div className={s.checkerText}>
-                  <SmallText
-                    text={language.languages_termsConditions}
-                    noMargin={true}
-                    secundary={true}
-                  />
-                  <span
-                    className={s.viewConditions}
-                    onClick={() => setModal(true)}
-                  >
-                    {language.languages_seeConditions}
-                  </span>
-                </div>
-              </div>
-              <Link
-                to={accepted  && "/login"}
-                className={`${s.arrowButton} ${!accepted && s.buttonDisabled}`}
-              >
-                <ArrowRight
-                  style={{
-                    width: "24px",
-                    height: "24px",
-                    color: accepted ? "#FFFFFF" : "#858585",
-                  }}
-                />
-              </Link>
-            </div>
-            {modal && (
-              <TermsAndConditions
-                accepted={accepted}
-                setAccepted={setAccepted}
-                modal={modal}
-                setModal={setModal}
+              ))} */}
+            <LanguageOption
+              text={"Bienvenido"}
+              lang={"Es"}
+              // id={index}
+              // key={index}
+              accepted={accepted}
+              checked={checked}
+              setChecked={setChecked}
+            />
+            <LanguageOption
+              text={"Welcome"}
+              lang={"En"}
+              // id={index}
+              // key={index}
+              accepted={accepted}
+              checked={checked}
+              setChecked={setChecked}
+            />
+            <LanguageOption
+              text={"Bem-vindo"}
+              lang={"Por"}
+              // id={index}
+              // key={index}
+              accepted={accepted}
+              checked={checked}
+              setChecked={setChecked}
+            />
+            <LanguageOption
+              text={"Bem-vindo (Br)"}
+              lang={"Bra"}
+              // id={index}
+              // key={index}
+              accepted={accepted}
+              checked={checked}
+              setChecked={setChecked}
+            />
+          </ScrollContainer>
+          <div className={s.buttonWrapper}>
+            <div className={s.checker}>
+              <span
+                className={`${s.checkbox} ${accepted && s.checked}`}
+                onClick={() => setAccepted(!accepted)}
               />
-            )}
-          </>
+              <div className={s.checkerText}>
+                <SmallText
+                  // text={language.languages_termsConditions}
+                  text={t("language.terms")}
+                  noMargin={true}
+                  secundary={true}
+                />
+                <span
+                  className={s.viewConditions}
+                  onClick={() => setModal(true)}
+                >
+                  {t("language.viewConditions")}
+                </span>
+              </div>
+            </div>
+            <Link
+              to={accepted && "/login"}
+              className={`${s.arrowButton} ${!accepted && s.buttonDisabled}`}
+            >
+              <ArrowRight
+                style={{
+                  width: "24px",
+                  height: "24px",
+                  color: accepted ? "#FFFFFF" : "#858585",
+                }}
+              />
+            </Link>
+          </div>
+          {modal && (
+            <TermsAndConditions
+              accepted={accepted}
+              setAccepted={setAccepted}
+              modal={modal}
+              setModal={setModal}
+            />
+          )}
+        </>
+      ) : (
         // ) : (
         //   ""
         // )
-      ) : (
         <LoadingPage />
       )}
     </main>

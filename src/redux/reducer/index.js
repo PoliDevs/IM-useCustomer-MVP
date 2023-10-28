@@ -29,6 +29,8 @@ import {
   GET_ORDER_PENDING,
   REMOVE_CART,
   REMOVE_ORDER_ID,
+  GET_ORDERS_BY_USER,
+  CLEAR_ORDER_STATUS,
 } from "../actions/actionTypes";
 import dotenv from "dotenv";
 import { all_app_texts } from "../../utils/language";
@@ -70,16 +72,17 @@ const initalState = {
   user: localStorage.getItem("user") ? getEncriptedItem("user") : {},
   commerce: localStorage.getItem("CM") ? getEncriptedItem("CM") : {},
   status: false,
-  language: localStorage.getItem("Lang")
-    // ? await translateText(localStorage.getItem("Lang"), all_app_texts)
-    ? translation()
-    : "es",
+  // language: localStorage.getItem("Lang")
+  //   ? // ? await translateText(localStorage.getItem("Lang"), all_app_texts)
+  //     translation()
+  //   : "es",
   tablePrice: {},
   sectorPrice: {},
   orderId: localStorage.getItem("CSMO_ID")
     ? localStorage.getItem("CSMO_ID")
     : "",
   orderStatus: "",
+  ordersByUser: [],
 };
 
 export const rootReducer = (state = initalState, action) => {
@@ -241,7 +244,9 @@ export const rootReducer = (state = initalState, action) => {
       {
         localStorage.setItem("Lang", action.payload.lang);
         // state = { ...state, language: action.payload };
-        state = { ...state, language: action.payload.language, allProducts: [], allAditionals: [], products: [], allCategories: [] };
+        //!descomentar - probando loader en cambio de idioma - home
+        // state = { ...state, language: action.payload.language, allProducts: [], allAditionals: [], products: [], allCategories: [] };
+        state = { ...state, language: action.payload.language}
       }
       return state;
     case SET_TABLE_PRICE:
@@ -266,15 +271,20 @@ export const rootReducer = (state = initalState, action) => {
         })
         if (pendingOrder.length ){
           localStorage.setItem("CSMO_ID", pendingOrder[0].id);
-          return {...state, orderId: pendingOrder && pendingOrder[0].id}
+          return {...state, orderId: pendingOrder && pendingOrder[0].id, orderStatus: pendingOrder[0].status}
         }else{
+          localStorage.removeItem("CSMO_ID")
           return state
         }
       }
+    case GET_ORDERS_BY_USER:
+      return {...state, ordersByUser: action.payload}
     case REMOVE_CART: 
     return {...state, cart: []}
     case REMOVE_ORDER_ID:
       return {...state, orderId: ''}
+    case CLEAR_ORDER_STATUS:
+      return {...state, orderStatus: ''}
     default:
       return state;
   }

@@ -21,25 +21,25 @@ export default function Instruction() {
         <div className={s.arrowBack}></div>
       </Link>
       <div className={s.title}>
-        <SubTitle text={language.instructions_title} bold={true}>
+        <SubTitle text={t("instructions.title")} bold={true}>
           <div className={s.info}></div>
         </SubTitle>
       </div>
-      <Paragraph text={language.instructions_subtitle} />
+      <Paragraph text={t("instructions.subtitle")} />
       <Ul />
       <div className={s.bottomContent}>
         <Paragraph
-          text={language.instructions_poweredby}
+          text={t("instructions.poweredby")}
           bold={true}
           centered={true}
         >
           {/* <IMenu className={s.imenuLogo} /> */}
-          <img src={iMenuFull} className={s.imemuLogo} width={"70px"}/>
+          <img src={iMenuFull} className={s.imemuLogo} width={"70px"} />
         </Paragraph>
         <LinkButton
           path={"/home"}
           type={"primary"}
-          text={language.instructions_order}
+          text={t("instructions.order")}
           centered={true}
         />
         <ContactFooter />

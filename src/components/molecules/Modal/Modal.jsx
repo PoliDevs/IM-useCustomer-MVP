@@ -87,12 +87,12 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
         <div>
           {loading === false && available === false && (
             <p className={`${s.notAvailableProduct} ${s.visible}`}>
-              Producto no disponible
+              {t("productModal.available")}
             </p>
           )}
           <div className={s.textAreaHeader}>
             <label className={s.label} htmlFor="comment">
-              {language.productModal_commentLabel}
+              {t("productModal.commentLabel")}
             </label>
             <p className={s.textLimit}>{`${comment.length}/140`}</p>
           </div>
@@ -101,7 +101,7 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
             comment={comment}
             setComment={setComment}
             maxLength={140}
-            placeholder={language.productModal_commentPlaceholder}
+            placeholder={t("productModal.commentPlaceholder")}
           />
         </div>
         <div className={s.amount}>
@@ -153,7 +153,7 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
             closeModal();
           }}
         >
-          {language.productModal_addButton}
+          {t("productModal.addButton")}
         </button>
       </div>
     </article>

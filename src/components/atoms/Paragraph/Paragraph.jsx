@@ -11,7 +11,9 @@ export default function Paragraph({
   scrollable,
   disabled,
   noMargin,
-  gap
+  gap,
+  color,
+  underline
 }) {
   const truncatedText =
     text && text.length > 110 ? `${text.substring(0, 110)}...` : text;
@@ -24,7 +26,8 @@ export default function Paragraph({
         scrollable && s.scrollable
       } ${children && s.align} ${alignment === "right" && s.right} ${
         disabled && s.disabled
-      } ${gap && s.gap} ${noMargin && s.noMargin}`}
+      } ${gap && s.gap} ${noMargin && s.noMargin} ${underline && s.underline}`}
+      style={{color: color && color }}
     >
       {/* {scrollable
         ? text

@@ -16,7 +16,10 @@ import SubTitle from "../../atoms/SubTitle/SubTitle";
 import NavBar from "../../molecules/NavBar/NavBar";
 import s from "./WelcomePage.module.scss";
 import ContactFooter from "../../molecules/ContactFooter/ContactFooter";
+import { useNavigate } from "react-router-dom";
 export default function WelcomePage() {
+  const orderStatus = useSelector((state)=> state.orderStatus)
+  const orderPending = useSelector((state)=> state.orderId);
   const language = useSelector((state) => state.language);
   const commerce = useSelector((state) => state.commerce);
   const sector = useSelector((state) => state.sector);
@@ -25,16 +28,22 @@ export default function WelcomePage() {
   const [isLoading, setIsloading] = useState(true);
   const [t, i18n] = useTranslation(["global"]);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getOrderPending(commerce.id, sector, table))
     dispatch(getStatus(commerce.id, setIsloading));
   }, []);
 
+  useEffect(() => {
+    orderPending && orderStatus !== "delivered" && orderStatus !== "" && navigate('/rating');
+  }, [orderPending])
+  
+
   return (
     <div className={s.home}>
       <>
-        <NavBar setIsloading={setIsloading} />
+        <NavBar navarrow={true} path={"/login"} setIsloading={setIsloading} />
         {isLoading ? (
           <LoadingPage />
         ) : (
@@ -42,34 +51,40 @@ export default function WelcomePage() {
             {open ? (
               <div className={s.top}>
                 <div className={s.mainContent}>
-                  <HugeTitle text={language.welcome_title} />
-                  <SubTitle text={language.welcome_subtitle} />
+                  <HugeTitle text={t("welcome.title")} />
+                  <SubTitle text={t("welcome.subtitle")} />
                   <HugeTitle text={commerce.name} />
                   <div className={s.spacing}>
                     <Logo className={s.logo} />
-                    
-                     {/* <img src={iMenuFull} className={s.logo}/> */}
+
+                    {/* <img src={iMenuFull} className={s.logo}/> */}
                     <SubTitle
-                      text={`${language.welcome_sector} ${sector} - ${language.welcome_table} ${table}`}
+                      text={`${t("welcome.sector")} ${sector} - ${t(
+                        "welcome.table"
+                      )} ${table}`}
                     />
                   </div>
                 </div>
                 <div className={s.bottomContent}>
-                  <Paragraph bold={true} text={language.welcome_poweredby}>
+                  <Paragraph bold={true} text={t("welcome.poweredby")}>
                     {/* <ImenuLogo className={s.imenuLogo} /> */}
-                    <img src={iMenuFull} className={s.imemuLogo} width={"70px"}/>
+                    <img
+                      src={iMenuFull}
+                      className={s.imemuLogo}
+                      width={"70px"}
+                    />
                   </Paragraph>
                   <LinkButton
                     path="/home"
                     text={
                       commerce.plan !== "m1"
-                        ? language.welcome_order
-                        : language.welcome_viewproducts
+                        ? t("welcome.order")
+                        : t("welcome.viewproducts")
                     }
                   />
                   <LinkButton
                     path="/instruction"
-                    text={language.welcome_instructions}
+                    text={t("welcome.instructions")}
                     type="secundary"
                   />
                   <ContactFooter />

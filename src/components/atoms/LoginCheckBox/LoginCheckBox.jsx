@@ -18,8 +18,8 @@ export default function LoginCheckBox({ id, checked, setChecked, lang}) {
           checked={checked}
           onChange={() => {
             setChecked(lang);
-            // i18n.changeLanguage(lang)
-            dispatch(changeLanguage(lang.toLowerCase()))
+            i18n.changeLanguage(lang)
+            // dispatch(changeLanguage(lang.toLowerCase()))
           }}
         />
         <div className={s.checkbox_circle}>

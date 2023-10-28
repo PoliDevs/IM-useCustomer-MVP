@@ -53,7 +53,7 @@ export default function Qr({scanResult, setScanResult}) {
   return (
     <div className={s.mainContainer}>
       <div id="reader" className={s.scannerContainer}></div>
-      <SubTitle text={language.QrScanner_title} />
+      <SubTitle text={t("QrScanner.title")} />
     </div>
   );
 }
