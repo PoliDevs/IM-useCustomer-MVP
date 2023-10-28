@@ -16,8 +16,8 @@ import { useDispatch } from "react-redux";
 import { changeLanguage } from "./redux/actions";
 import axios from 'axios';
 import MyOrders from "./components/pages/MyOrders/MyOrders";
-axios.defaults.baseURL = "http://localhost:3001/";
-// axios.defaults.baseURL='https://nodejs-production-bbf9.up.railway.app';
+// axios.defaults.baseURL = "http://localhost:3001/";
+axios.defaults.baseURL='https://nodejs-production-bbf9.up.railway.app';
 
 function App() {
   const [scanResult, setScanResult] = useState();
