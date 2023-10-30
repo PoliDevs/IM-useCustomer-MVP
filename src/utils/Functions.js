@@ -291,26 +291,26 @@ export const formattedOrder = (
   let partial = precioMenu;
   //!calculo precio con costo de mesa
   //!si tienen promocion, descuento, recargo calculo, sino no
-  precioMenu =
-    tablePrice.tablePromotion ? precioMenu -
-    (precioMenu * tablePrice.tablePromotion) / 100 : precioMenu;
-  precioMenu = 
-  tablePrice.tableDiscount ? precioMenu -
-  (precioMenu * tablePrice.tableDiscount) / 100
-    : precioMenu;
-  precioMenu =
-    tablePrice.tableSurcharge ? precioMenu +
-    (precioMenu * tablePrice.tableSurcharge) / 100 : precioMenu;
+  // precioMenu =
+  //   tablePrice.tablePromotion ? precioMenu -
+  //   (precioMenu * tablePrice.tablePromotion) / 100 : precioMenu;
+  // precioMenu = 
+  // tablePrice.tableDiscount ? precioMenu -
+  // (precioMenu * tablePrice.tableDiscount) / 100
+  //   : precioMenu;
+  // precioMenu =
+  //   tablePrice.tableSurcharge ? precioMenu +
+  //   (precioMenu * tablePrice.tableSurcharge) / 100 : precioMenu;
   //!calculo precio con costo de sector
-  precioMenu =
-    sectorPrice.sectorPromotion ? precioMenu -
-    (precioMenu * sectorPrice.sectorPromotion) / 100 : precioMenu;
-  precioMenu =
-    sectorPrice.sectorDiscount ? precioMenu -
-    (precioMenu * sectorPrice.sectorDiscount) / 100 : precioMenu;
-  precioMenu =
-    sectorPrice.sectorSurcharge ? precioMenu +
-    (precioMenu * sectorPrice.sectorSurcharge) / 100 : precioMenu;
+  // precioMenu =
+  //   sectorPrice.sectorPromotion ? precioMenu -
+  //   (precioMenu * sectorPrice.sectorPromotion) / 100 : precioMenu;
+  // precioMenu =
+  //   sectorPrice.sectorDiscount ? precioMenu -
+  //   (precioMenu * sectorPrice.sectorDiscount) / 100 : precioMenu;
+  // precioMenu =
+  //   sectorPrice.sectorSurcharge ? precioMenu +
+  //   (precioMenu * sectorPrice.sectorSurcharge) / 100 : precioMenu;
   let finalPrice = precioMenu;
   setPrice({
     totalPromotion,
