@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import s from "./LoginButton.module.scss";
-import { setUser } from "../../../redux/actions";
+import { removeUser, setUser } from "../../../redux/actions";
 import { useNavigate } from "react-router-dom";
 export default function LoginButton({ text, closeLoginModal, active, name }) {
   const dispatch = useDispatch();
@@ -8,6 +8,7 @@ export default function LoginButton({ text, closeLoginModal, active, name }) {
 
   const handleClick = () => {
       navigate('/welcome');
+      dispatch(removeUser());
       //?descomentar para volver al sistema de login con modal
       // closeLoginModal();
     // }
