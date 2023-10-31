@@ -33,10 +33,23 @@ export default function NavBar({ ordersButton, setIsloading, navarrow, path }) {
   };
 
   return (
-    <nav className={`${s.navBar} ${ordersButton && s.spaceBetween}`} style={{justifyContent: navarrow ? "space-between" : "flex-end"}}>
-      {navarrow && <ArrowBack className={s.icon} onClick={() => navigate(path)} />}
-        {ordersButton ? <button className={s.ordersButton} onClick={()=> navigate('/myorders')}>Ver mis pedidos</button> : null}
+    <nav
+      className={`${s.navBar} ${ordersButton && s.spaceBetween}`}
+      style={{ justifyContent: navarrow ? "space-between" : "flex-end" }}
+    >
+      {navarrow && (
+        <ArrowBack className={s.icon} onClick={() => navigate(path)} />
+      )}
+      {ordersButton ? (
+        <button
+          className={s.ordersButton}
+          onClick={() => navigate("/myorders")}
+        >
+          Ver mis pedidos
+        </button>
+      ) : null}
       <div className={s.infoContainer}>
+        <h4 >v.mvp</h4>
         <Profile
           className={`${s.icon} ${userActive && s.pfActive} ${s.pfIcon}`}
           onClick={handleUser}
@@ -61,10 +74,7 @@ export default function NavBar({ ordersButton, setIsloading, navarrow, path }) {
             <ArrowBack
               className={`${s.icon} ${email == "" && s.iconDisabled}`}
             />
-            <Paragraph
-              text={t("navBar.disconnect")}
-              disabled={email == ""}
-            />
+            <Paragraph text={t("navBar.disconnect")} disabled={email == ""} />
           </div>
         </div>
         <div
@@ -102,9 +112,7 @@ export default function NavBar({ ordersButton, setIsloading, navarrow, path }) {
               <Paragraph text={"Português"} />
             </div>
             <div
-              className={`${s.langOption} ${
-                current === "bra" && s.highlight
-              }`}
+              className={`${s.langOption} ${current === "bra" && s.highlight}`}
               onClick={() => {
                 i18n.changeLanguage("bra");
                 localStorage.setItem("Lang", "bra");
