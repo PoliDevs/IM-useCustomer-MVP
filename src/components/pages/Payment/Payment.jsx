@@ -20,7 +20,8 @@ import iMenuFull from "../../../assets/logo-imenu-full.png";
 export default function Payment() {
   const [method, setMethod] = useState('');
   const [price, setPrice] = useState({});
-  const [order, setOrder] = useState({})
+  const [order, setOrder] = useState({});
+  const [mp, setMp] = useState([]);
   const paymentMethods = useSelector((state)=> state.paymentMethods);
   const sectorPrice = useSelector((state)=> state.sectorPrice);
   const commerceID = useSelector((state)=> state.commerce.id);
@@ -34,12 +35,18 @@ export default function Payment() {
   const cart = useSelector((state)=> state.cart);
   const dispatch = useDispatch();
   const totalPrice = cart.reduce((count, p) => count + p.price * p.amount, 0);
+  // let mercadopago = null;
   const [t, i18n] = useTranslation(["global"]);
   const [isLoading, setIsloading] = useState(true);
   const navigate = useNavigate();
   const handleChange = (option)=> {
     setMethod(option)
   }
+
+  useEffect(() => {
+    setMp(paymentMethods.filter((p)=> p.type === "mercadopago"));
+  }, [paymentMethods])
+  
 
 
   useEffect(() => {
@@ -101,12 +108,12 @@ export default function Payment() {
             setMethod={setMethod}
             handleChange={handleChange}
           />
-          {/* <PaymentOptionButton
+          {mp.length? <PaymentOptionButton
             text={"Mercadopago"}
             option={1}
             setMethod={setMethod}
             handleChange={handleChange}
-          /> */}
+          /> : ""}
           {/* <PaymentOptionButton
             text={language.payment_deferred}
             option={3}
