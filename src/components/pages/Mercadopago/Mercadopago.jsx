@@ -122,24 +122,26 @@ export default function Mercadopago() {
 
   return (
     <main className={s.mainContainer}>
-      { !isLoading ? 
+      {!isLoading ? (
         <>
           {" "}
           <MpLogo className={s.mpLogo} />
           <div className={s.orderContainer}>
-          <OrderInfo
-            border={true}
-            price={price}
-            tablePrice={tablePrice}
-            sectorPrice={sectorPrice}
-          />
+            <OrderInfo
+              border={true}
+              price={price}
+              tablePrice={tablePrice}
+              sectorPrice={sectorPrice}
+            />
           </div>
           <MpButton
-            /* path={"/rating"}  */ text={language.mercadoPago_payButton}
+            /* path={"/rating"}  */ text={t("mercadoPago.payButton")}
             onClick={handleMp}
           />{" "}
-        </> : <LoadingPage/>
-      }
+        </>
+      ) : (
+        <LoadingPage />
+      )}
       {/*  {preferenceId && <Wallet initialization={createPreference}/>} */}
     </main>
   );

@@ -13,10 +13,10 @@ import SmallText from "../../atoms/SmallText/SmallText";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import PaymentOptionButton from "../../atoms/PaymentOptionButton/PaymentOptionButton";
 import OrderInfo from "../../molecules/OrderInfo/OrderInfo";
-import s from "./Payment.module.scss";
 import ClosedCommerce from "../../molecules/ClosedCommerce/ClosedCommerce";
 import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
 import iMenuFull from "../../../assets/logo-imenu-full.png";
+import s from "./Payment.module.scss";
 export default function Payment() {
   const [method, setMethod] = useState('');
   const [price, setPrice] = useState({});
