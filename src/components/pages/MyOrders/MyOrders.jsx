@@ -10,6 +10,7 @@ import s from "./MyOrders.module.scss";
 import ScrollContainer from "react-indiana-drag-scroll";
 import { getOrdersByUser } from "../../../redux/actions";
 import ReviewExpandFooter from "../../molecules/ReviewExpandFooter/ReviewExpandFooter";
+import { useNavigate } from "react-router-dom";
 
 export default function MyOrders() {
   const userEmail = useSelector((state)=> state.user.email);
@@ -17,8 +18,14 @@ export default function MyOrders() {
   const commerce = useSelector((state)=> state.commerce);
   const table = useSelector((state)=> state.table)
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [t, i18n] = useTranslation(["global"]);
+
+  useEffect(() => {
+    if (!userEmail) navigate('/home');
+  }, [])
+  
 
   useEffect(() => {
     userEmail && dispatch(getOrdersByUser(userEmail, commerce.id));
