@@ -49,7 +49,7 @@ export default function NavBar({ ordersButton, setIsloading, navarrow, path }) {
         </button>
       ) : null}
       <div className={s.infoContainer}>
-        <h4 >v.mvp</h4>
+        <h4 style={{ color: "#bbbbbb" }}>v.mvp</h4>
         <Profile
           className={`${s.icon} ${userActive && s.pfActive} ${s.pfIcon}`}
           onClick={handleUser}

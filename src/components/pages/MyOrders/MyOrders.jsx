@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
-import HugeTitle from "../../atoms/HugeTitle/HugeTitle";
-import SubTitle from "../../atoms/SubTitle/SubTitle";
-import logo from "../../../assets/ReviewIcon.png";
-import { useDispatch, useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
-import MyOrdersHeader from "../../molecules/MyOrdersHeader/MyOrdersHeader";
-import OrderCard from "../../molecules/OrderCard/OrderCard";
-import s from "./MyOrders.module.scss";
-import ScrollContainer from "react-indiana-drag-scroll";
 import { getOrdersByUser } from "../../../redux/actions";
-import ReviewExpandFooter from "../../molecules/ReviewExpandFooter/ReviewExpandFooter";
+import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import MyOrdersHeader from "../../molecules/MyOrdersHeader/MyOrdersHeader";
+import ReviewExpandFooter from "../../molecules/ReviewExpandFooter/ReviewExpandFooter";
+import OrderCard from "../../molecules/OrderCard/OrderCard";
+import ScrollContainer from "react-indiana-drag-scroll";
+import s from "./MyOrders.module.scss";
 
 export default function MyOrders() {
   const userEmail = useSelector((state)=> state.user.email);
