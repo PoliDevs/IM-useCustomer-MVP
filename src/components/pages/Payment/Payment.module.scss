@@ -40,7 +40,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: $title;
+        font-size: $line-text;
         text-decoration: none;
         text-align: center;
         line-height: 1rem;
@@ -48,7 +48,7 @@
         margin: 4px 0 5px 0;
         border: $border;
         border-radius: $border-primary-radius;
-        height: 61px;
+        height: 41px;
         cursor: pointer;
         background-color: $background-buttom-primary-active;
         color: $text-secondary;
@@ -60,4 +60,17 @@
     width: 0;
     height: 0;
 }
+
+  @media screen and (min-height: 590px) {
+    .paymentContent {
+      .bottomContent {
+        .linkButton {
+          font-size: $title;
+          height: 61px;
+        }
+      }
+    }
+  }
+
+
 }

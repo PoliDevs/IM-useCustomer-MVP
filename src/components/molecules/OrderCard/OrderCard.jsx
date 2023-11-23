@@ -2,12 +2,12 @@
 import React from 'react'
 import { ReactComponent as ArrowDown } from "../../../assets/ArrowDown.svg";
 import { ReactComponent as ArrowUp } from "../../../assets/ArrowUp.svg";
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import SubTitle from '../../atoms/SubTitle/SubTitle';
 import Paragraph from '../../atoms/Paragraph/Paragraph'
 import PaymentProduct from '../../molecules/PaymentProduct/PaymentProduct';
 import s from "./OrderCard.module.scss";
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 export default function OrderCard({commerce, table, order}) {
   const [openCard, setOpenCard] = useState(true);
@@ -50,8 +50,27 @@ export default function OrderCard({commerce, table, order}) {
         alignment={"left"}
         bold={true}
       />
-      <div className={`${!openCard && s.hidden}`}>
-        <Paragraph text={`Mesa ${table}`} alignment={"left"} bold={true} />
+      <div className={`${!openCard && s.hidden} ${openCard && s.flex}`}>
+        <Paragraph
+          text={`${t("orderCard.table")} ${table}`}
+          alignment={"left"}
+          bold={true}
+          noMargin={true}
+        />
+        <div style={{ margin: "5px" }}>
+          <Paragraph
+            text={`${t("orderCard.date")}: ${order.date}`}
+            alignment={"right"}
+            bold={true}
+            // noMargin={true}
+          />
+          <Paragraph
+            text={`${t("orderCard.time")}: ${order.hour}`}
+            alignment={"left"}
+            bold={true}
+            // noMargin={true}
+          />
+        </div>
       </div>
       <Paragraph
         text={orderStatus[order.status]}

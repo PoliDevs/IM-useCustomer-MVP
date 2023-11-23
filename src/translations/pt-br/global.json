@@ -118,5 +118,7 @@
     "orderInPreparation": "Seu pedido está sendo preparado",
     "orderReady": "¡Seu pedido está pronto!",
     "orderDelivered": "¡Seu pedido está pronto!",
-    "total": "Total a pagar: R$"
+    "total": "Total a pagar: R$",
+    "date": "Data",
+    "time": "Hora"
   }}

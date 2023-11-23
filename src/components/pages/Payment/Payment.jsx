@@ -1,27 +1,29 @@
-import { dataDecrypt, formattedOrder } from "../../../utils/Functions";
 import { getActiveProducts, getCommerce, getPaymentMethods, getPosValue, getSectorValue, getStatus, postOrder, removerCart } from "../../../redux/actions";
 import { ReactComponent as IMenu } from "../../../assets/ImenuHorizontal.svg";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { dataDecrypt, formattedOrder } from "../../../utils/Functions";
 import { ReactComponent as CashIcon } from "../../../assets/CashIcon.svg";
+import { useDispatch, useSelector } from "react-redux";
 import { paymentUrl } from "../../../utils/Constants";
-import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
-import SubTitle from "../../atoms/SubTitle/SubTitle";
-import Banner from "../../molecules/Banner/Banner";
-import SmallText from "../../atoms/SmallText/SmallText";
-import Paragraph from "../../atoms/Paragraph/Paragraph";
+import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
 import PaymentOptionButton from "../../atoms/PaymentOptionButton/PaymentOptionButton";
-import OrderInfo from "../../molecules/OrderInfo/OrderInfo";
 import ClosedCommerce from "../../molecules/ClosedCommerce/ClosedCommerce";
 import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
+import OrderInfo from "../../molecules/OrderInfo/OrderInfo";
 import iMenuFull from "../../../assets/logo-imenu-full.png";
+import SmallText from "../../atoms/SmallText/SmallText";
+import Paragraph from "../../atoms/Paragraph/Paragraph";
+import SubTitle from "../../atoms/SubTitle/SubTitle";
+import Banner from "../../molecules/Banner/Banner";
 import s from "./Payment.module.scss";
+
 export default function Payment() {
   const [method, setMethod] = useState('');
   const [price, setPrice] = useState({});
   const [order, setOrder] = useState({});
   const [mp, setMp] = useState([]);
+  const [cash, setCash] = useState([]);
   const paymentMethods = useSelector((state)=> state.paymentMethods);
   const sectorPrice = useSelector((state)=> state.sectorPrice);
   const commerceID = useSelector((state)=> state.commerce.id);
@@ -45,6 +47,7 @@ export default function Payment() {
 
   useEffect(() => {
     setMp(paymentMethods.filter((p)=> p.type === "mercadopago"));
+    setCash(paymentMethods.filter((p)=> p.type === "efectivo"));
   }, [paymentMethods])
   
 
@@ -102,12 +105,12 @@ export default function Payment() {
             tablePrice={tablePrice}
             sectorPrice={sectorPrice}
           />
-          <PaymentOptionButton
+          {cash.length ? <PaymentOptionButton
             text={t("payment.cash")}
             option={2}
             setMethod={setMethod}
             handleChange={handleChange}
-          />
+          /> : ""}
           {mp.length? <PaymentOptionButton
             text={"Mercadopago"}
             option={1}

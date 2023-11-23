@@ -1,27 +1,28 @@
-import { useState } from "react";
-import { ReactComponent as ImenuLogo } from "../../../assets/ImenuHorizontal.svg";
-import { useTranslation } from "react-i18next";
+import { clearStatus, getOrderStatus, removerCart, sendReview } from "../../../redux/actions";
 import { ReactComponent as ArrowRight } from '../../../assets/ArrowLongRight.svg'
+import { ReactComponent as ImenuLogo } from "../../../assets/ImenuHorizontal.svg";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { postMpOrder } from "../../../redux/actions";
+import { useRating } from "../../../utils/Functions";
+import { useTranslation } from "react-i18next";
+import { useState } from "react";
+import { useEffect } from "react";
+import StepProgressBar from "../../molecules/StepProgressBar/StepProgressBar";
+import CopyOrderCode from "../../molecules/CopyOrderCode/CopyOrderCode";
+import ReviewTextArea from "../../atoms/ReviewTextArea/ReviewTextArea";
+import FeedbackButton from "../../atoms/FeedbackButton/FeedbackButton";
+import iMenuFull from "../../../assets/logo-imenu-full.png";
 import LinkButton from "../../atoms/LinkButton/LinkButton";
-import logo from "../../../assets/ReviewIcon.png";
 import HugeTitle from "../../atoms/HugeTitle/HugeTitle";
-import SubTitle from "../../atoms/SubTitle/SubTitle";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
+import useWindowSize from "react-use/lib/useWindowSize";
+import SubTitle from "../../atoms/SubTitle/SubTitle";
+import logo from "../../../assets/ReviewIcon.png";
 import Stars from "../../atoms/Stars/Stars";
 import Confetti from "react-confetti";
-import ReviewTextArea from "../../atoms/ReviewTextArea/ReviewTextArea";
-import useWindowSize from "react-use/lib/useWindowSize";
 import s from "./Review.module.scss";
-import FeedbackButton from "../../atoms/FeedbackButton/FeedbackButton";
-import { useDispatch, useSelector } from "react-redux";
-import StepProgressBar from "../../molecules/StepProgressBar/StepProgressBar";
-import { useRating } from "../../../utils/Functions";
-import { clearStatus, getOrderStatus, removerCart, sendReview } from "../../../redux/actions";
-import { useEffect } from "react";
-import iMenuFull from "../../../assets/logo-imenu-full.png";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { postMpOrder } from "../../../redux/actions";
-import CopyOrderCode from "../../molecules/CopyOrderCode/CopyOrderCode";
+
 export default function Review() {
   const [comment, setComment] = useState("");
   const [sent, setSent] = useState(false);
@@ -109,11 +110,12 @@ export default function Review() {
           {userEmail ? (
             <Link
               to="/myorders"
-              style={{
-                textDecoration: "underline",
-                color: "#2b2b2b",
-                marginTop: "30px",
-              }}
+              className={s.myOrdersLink}
+              // style={{
+              //   textDecoration: "underline",
+              //   color: "#2b2b2b",
+              //   marginTop: "30px",
+              // }}
             >
               <Paragraph text={t("rating.viewOrders")}>
                 <ArrowRight style={{ width: "30px", height: "20px" }} />

@@ -18,7 +18,7 @@ export default function MyOrdersHeader({ commerce, table }) {
         />
         <div className={s.headerText}>
           <SubTitle text={t("myorders.thanks")} alignment={"left"} bold={true} noLineheight={true}/>
-          <HugeTitle text={`${commerce}`} alignment={"left"}/>
+          <HugeTitle text={`${commerce}`} left={true}/>
           <SubTitle text={`${t("myorders.table")} ${table}`} alignment={"left"} bold={true} noLineheight={true}/>
         </div>
       </div>
