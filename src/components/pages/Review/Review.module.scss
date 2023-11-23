@@ -31,6 +31,12 @@
       height: 120px;
       padding: 50px
     }
+
+    .myOrdersLink {
+      text-decoration: underline;
+      color: #2b2b2b;
+      margin-top: 8px;
+    }
   }
 
   .logo {
@@ -47,7 +53,7 @@
     flex-direction: column;
     width: 90%;
     margin: 0 auto;
-    gap: 12px;
+    gap: 5px;
     height: 50%;
     padding-top: 16px;
     .textAreaHeader {
@@ -80,6 +86,14 @@
         height: 108px;
         width: 108px;
       }
+
+      .myOrdersLink {
+        margin-top: 30px;
+      }
+    }
+
+    .article {
+      gap: 12px
     }
   }
 

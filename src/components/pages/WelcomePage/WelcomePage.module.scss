@@ -21,6 +21,7 @@
     justify-content: space-around;
     align-items: center;
     width: 90%;
+    margin-top: 50px;
     // min-height: calc(100% - 65px);
     //nuevo
     height: auto;
@@ -85,7 +86,7 @@
   @media screen and (min-height: 690px) {
     .top {
       padding-top: 40px;
-
+      margin-top: 60px;
       .spacing {
         .logo {
           border-radius: 25px;
