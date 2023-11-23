@@ -25,10 +25,12 @@
   .ordersButton{
     position: absolute;
     width: auto;
+    height: 30px;
+    font-size: 12px;
     border-radius: $border-primary-radius;
     border: none;
     background-color: $color-primary;
-    padding: 10px;
+    padding: 0 8px;
     margin: 0 auto;
     top: 30px;
     transform: translateX(-50%) translateY(-50%);
@@ -87,6 +89,7 @@
         display: flex;
         justify-content: space-around;
         padding: 10px;
+        padding-bottom: 0;
 
         .iconDisabled {
           color: $color-nineth;

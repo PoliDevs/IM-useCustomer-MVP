@@ -22,6 +22,7 @@ export default function Payment() {
   const [price, setPrice] = useState({});
   const [order, setOrder] = useState({});
   const [mp, setMp] = useState([]);
+  const [cash, setCash] = useState([]);
   const paymentMethods = useSelector((state)=> state.paymentMethods);
   const sectorPrice = useSelector((state)=> state.sectorPrice);
   const commerceID = useSelector((state)=> state.commerce.id);
@@ -45,6 +46,7 @@ export default function Payment() {
 
   useEffect(() => {
     setMp(paymentMethods.filter((p)=> p.type === "mercadopago"));
+    setCash(paymentMethods.filter((p)=> p.type === "efectivo"));
   }, [paymentMethods])
   
 
@@ -102,12 +104,12 @@ export default function Payment() {
             tablePrice={tablePrice}
             sectorPrice={sectorPrice}
           />
-          <PaymentOptionButton
+          {cash.length ? <PaymentOptionButton
             text={t("payment.cash")}
             option={2}
             setMethod={setMethod}
             handleChange={handleChange}
-          />
+          /> : ""}
           {mp.length? <PaymentOptionButton
             text={"Mercadopago"}
             option={1}

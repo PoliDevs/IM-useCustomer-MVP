@@ -45,11 +45,10 @@ export default function NavBar({ ordersButton, setIsloading, navarrow, path }) {
           className={s.ordersButton}
           onClick={() => navigate("/myorders")}
         >
-          Ver mis pedidos
+          {t("rating.viewOrders")}
         </button>
       ) : null}
       <div className={s.infoContainer}>
-        <h4 style={{ color: "#bbbbbb" }}>v.mvp</h4>
         <Profile
           className={`${s.icon} ${userActive && s.pfActive} ${s.pfIcon}`}
           onClick={handleUser}
@@ -76,6 +75,7 @@ export default function NavBar({ ordersButton, setIsloading, navarrow, path }) {
             />
             <Paragraph text={t("navBar.disconnect")} disabled={email == ""} />
           </div>
+            <h4 style={{ color: "#bbbbbb", textAlign: "center", margin: "8px" }}>v.mvp</h4>
         </div>
         <div
           className={`${s.lang} ${langActive && s.lgActive}`}

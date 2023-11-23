@@ -115,9 +115,11 @@
   "orderCard": {
     "table": "Table ",
     "orderPlaced": "Your order has been delivered",
-"orderInPreparation": "Your order is being prepared",
-"orderReady": "Your order is ready!",
-"orderDelivered": "Your order is ready!",
-"total": "Total to pay: $"
+    "orderInPreparation": "Your order is being prepared",
+    "orderReady": "Your order is ready!",
+    "orderDelivered": "Your order is ready!",
+    "total": "Total to pay: $",
+    "date": "Date",
+    "time": "Time"
 }
 }
