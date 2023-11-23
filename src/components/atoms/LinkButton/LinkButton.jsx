@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import s from "./LinkButton.module.scss";
 import { useNavigate } from "react-router-dom";
+import s from "./LinkButton.module.scss";
 
 export default function WelcomeButton({ text, path, type, centered, newHeight, newFz,darker }) {
   const navigate = useNavigate();

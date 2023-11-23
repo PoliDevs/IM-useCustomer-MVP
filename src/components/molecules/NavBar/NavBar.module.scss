@@ -32,7 +32,7 @@
     background-color: $color-primary;
     padding: 0 8px;
     margin: 0 auto;
-    top: 30px;
+    top: 25px;
     transform: translateX(-50%) translateY(-50%);
     left: 50%;
   }
@@ -141,7 +141,11 @@
     .icon {
     height: 24px;
     width: 24px;
-  }
+    }
+
+    .ordersButton {
+      top: 30px
+    }
   }
 }
 
