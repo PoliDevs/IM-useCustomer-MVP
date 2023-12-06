@@ -52,7 +52,7 @@ export default function Products({ changeStyle, commercePlan, aditionals }) {
           ))}
         </ScrollContainer>
       ) : (
-        <LoadingPage />
+        <LoadingPage small={true}/>
       )}
 
       {commercePlan !== "m1" && (
