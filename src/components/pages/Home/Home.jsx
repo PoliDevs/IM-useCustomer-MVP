@@ -71,21 +71,22 @@ export default function Home() {
     <main className={s.home}>
       {/* //?agregado setIsLoading a navBar */}
       <Banner ordersButton={pendingOrders.length && true} navarrow={true} path={"/welcome"} setCategory={setCategory} setAditionals={setAditionals} setAll={setAll} setIsLoading={setIsLoading}/>
+      {/* //movi hacia arriba searchBar y Categories */}
+      <SearchBar />
+      <Categories
+        handleCategory={handleCategory}
+        category={category}
+        aditionals={aditionals}
+        setAditionals={setAditionals}
+        setCategory={setCategory}
+        all={all}
+        setAll={setAll}
+        handleAditionals={handleAditionals}
+      />
       {isLoading ? (
-        <LoadingPage />
+        <LoadingPage small={true}/>
       ) : (
         <>
-          <SearchBar />
-          <Categories
-            handleCategory={handleCategory}
-            category={category}
-            aditionals={aditionals}
-            setAditionals={setAditionals}
-            setCategory={setCategory}
-            all={all}
-            setAll={setAll}
-            handleAditionals={handleAditionals}
-          />
           <Products
             changeStyle={changeStyle}
             commercePlan={commerce.plan}
