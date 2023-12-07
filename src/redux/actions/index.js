@@ -118,7 +118,12 @@ export function removeProduct(name) {
 ////////////////////* Order *////////////////////
 
 export async function postOrder(order, methodId, mercadoPago, commerceName) {
-  let date = new Date().toJSON().slice(0, 10);
+  // let date = new Date().toJSON().slice(0, 10);
+   const date = new Date();
+   let month = date.getMonth() + 1;
+   let day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+   let dateCurrent = `${date.getFullYear()}-${month}-${day}`;
+   //!nueva date => dateCurrent
   const hour = new Date().getHours();
   const minute = new Date().getMinutes();
   const formattedHour = hour < 10 ? "0" + hour : hour;
@@ -270,7 +275,7 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
   try {
     const newOrder = {
       name: order.name ? order.name : "sss",
-      date: date,
+      date: dateCurrent,
       hour: time,
       // status: "orderPlaced",
       detail: "",
@@ -899,7 +904,13 @@ export function removerOrderId() {
 }
 
 export async function postMpOrder(order, methodId, mpInfo, commerceName) {
-  let date = new Date().toJSON().slice(0, 10);
+  // let date = new Date().toJSON().slice(0, 10);
+  //!nueva date => dateCurrent
+  const date = new Date();
+  let month = date.getMonth() + 1;
+  let day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+  let dateCurrent = `${date.getFullYear()}-${month}-${day}`;
+  //!nueva date => dateCurrent
   const hour = new Date().getHours();
   const minute = new Date().getMinutes();
   const formattedHour = hour < 10 ? "0" + hour : hour;
@@ -1051,7 +1062,7 @@ export async function postMpOrder(order, methodId, mpInfo, commerceName) {
   try {
     const newOrder = {
       name: order.name ? order.name : "sss",
-      date: date,
+      date: dateCurrent,
       hour: time,
       status: "orderPlaced",
       detail: "",
@@ -1105,11 +1116,11 @@ export async function postMpOrder(order, methodId, mpInfo, commerceName) {
         PaymentType: mpInfo.paymentType,
       },
     };
-  let response = await axios.post("order/new", newOrder);
-  localStorage.setItem("CSMO_ID", response.data.id);
-  localStorage.setItem("CSMO", response.data.order);
-  localStorage.removeItem('mporder');
-  // localStorage.removeItem("cart");
+    let response = await axios.post("order/new", newOrder);
+    localStorage.setItem("CSMO_ID", response.data.id);
+    localStorage.setItem("CSMO", response.data.order);
+    localStorage.removeItem("mporder");
+    // localStorage.removeItem("cart");
   } catch (error) {
     console.error(error);
   }
