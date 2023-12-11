@@ -51,23 +51,26 @@ export default function Products({ changeStyle, commercePlan, aditionals }) {
               productTypeId={i.productType ? i.productType.id : ""}
               supplierId={i.supplier ? i.supplier.id : ""}
               allergenType={i.allergenType ? i.allergenType : ""}
-              careful={i.careful ? i.careful : ''}
+              careful={i.careful ? i.careful : ""}
             />
           ))}
         </ScrollContainer>
       ) : (
         // <LoadingPage small={true}/>
-        <h2 className={s.productNotFound}>{t("products.productNotAvailable")}</h2>
+        <h2 className={s.productNotFound}>
+          {t("products.productNotAvailable")}
+        </h2>
       )}
 
-      {commercePlan !== "m1" && (
-        <Modal
-          isOpen={isOpen}
-          closeModal={closeModal}
-          productData={productData}
-          changeStyle={changeStyle}
-        />
-      )}
+      {/* {commercePlan !== "m1" && ( Update: se puede abrir modal pero solo ver info */}
+      <Modal
+        commercePlan={commercePlan}
+        isOpen={isOpen}
+        closeModal={closeModal}
+        productData={productData}
+        changeStyle={changeStyle}
+      />
+      {/* // )} */}
     </>
   );
 }
