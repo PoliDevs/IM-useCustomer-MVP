@@ -5,8 +5,12 @@ import Product from "../Product/Product";
 import Modal from "../Modal/Modal";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import s from "./Products.module.scss";
+import { useTranslation } from "react-i18next";
 
 export default function Products({ changeStyle, commercePlan, aditionals }) {
+
+  const [t, i18n] = useTranslation(["global"]);
+
   const allproducts = useSelector((state) => {
     const { allProducts, filtroPor, allAditionals, products, search } = state;
     if (search.length) return search;
@@ -52,7 +56,8 @@ export default function Products({ changeStyle, commercePlan, aditionals }) {
           ))}
         </ScrollContainer>
       ) : (
-        <LoadingPage small={true}/>
+        // <LoadingPage small={true}/>
+        <h2 className={s.productNotFound}>{t("products.productNotAvailable")}</h2>
       )}
 
       {commercePlan !== "m1" && (
