@@ -6,7 +6,11 @@
   "title": "Espera mientras preparamos el menu"
 },
 "language": {
-  "button": "Comenzar"
+  "button": "Comenzar",
+  "terms": "Acepto los términos y condiciones de uso",
+  "viewConditions": "Ver condiciones aqui",
+  "acceptButton": "Aceptar",
+  "cancelButton": "Cancelar"
 },
 "login": {
     "firstStep": "Da el primer paso",
@@ -16,9 +20,13 @@
       "slogan": "La velocidad es",
   "sloganBig": "nuestro plato fuerte"
 },
+  "navBar":{
+    "disconnect": "Desconectar"
+  },
   "welcome": {
     "title": "¡Bienvenido!",
     "subtitle": "Estas por pedir en: ",
+    "sector": "Sector",
     "table": "Mesa ",
     "poweredby": "impulsado por",
     "order": "Hacer pedido",
@@ -27,21 +35,27 @@
   },
   "instructions": {
     "title": "Instrucciones",
-    "subtitle": "¿Como hacer tu pedido en i menu?",
+    "subtitle": "¿Como hacer tu pedido en iMenu?",
     "instruction_1": "Selecciona productos del menú, presiona la tarjeta del producto",
     "instruction_2": "Una vez seleccionados tus productos, presiona en 'ver producto' para confirmar tu pedido",
-    "instruction_3": "Realiza el pago de tu pedido en efectivo o a través de Mercadopago",
+    "instruction_3": "Realiza el pago de tu pedido en efectivo",
+    "instruction_3_mp": " o a través de Mercadopago",
     "instruction_4": "¡Tu pedido estará en camino!",
     "poweredby": "impulsado por ",
     "order": "Hacer pedido"
   },
-  "loginModal": {
-    "title": "Ingresa con google, para una mejor experiencia!",
-    "googleButton": "Accede con Google",
-    "omitButton": "Omitir"
+  "closedCommerce": {
+    "closed": "Se encuentra cerrado",
+    "back": "¡Vuelve pronto!",
+    "help": "¿Necesitas ayuda?"
+  },
+  "contactFooter": {
+    "contact": "Contáctanos",
+    "imenu": "Quiero iMenu"
   },
   "banner": {
-    "table": "Mesa "
+    "Sector": "Sector",
+    "Table": "Mesa "
   },
   "searchbar": {
     "placeholder": "¿Que quieres pedir?"
@@ -49,7 +63,11 @@
   "categories": {
     "title": "Categorias"
   },
+    "products": {
+    "productNotAvailable": "No hay productos disponibles"
+  },
   "productModal": {
+    "available": "Producto no disponible",
     "commentLabel" : "Comentarios",
     "commentPlaceholder": "Agrega comentarios y observaciones",
     "addButton": "Agregar"
@@ -59,30 +77,52 @@
     "products": "Productos",
     "total": "Total",
     "payButton": "Pagar",
-    "viewproducts": "Ver productos"
+    "viewproducts": "Ver productos",
+    "observations": "Observaciones"
   },
   "payment": {
     "title": "Pagar",
     "managePayment": "Gestione su pago desde aqui",
     "cash": "Efectivo",
+    "diferred": "Pagar al finalizar",
     "poweredby": "impulsado por",
     "continue": "Continuar"
   },
   "orderInfo": {
     "table": "Mesa",
-    "paymentTotal": "Total a pagar:"
+    "paymentTotal": "Total a pagar: $"
   },
   "mercadoPago": {
     "payButton": "Pagar"
   },
   "rating": {
     "preparingOrder": "está preparando tu pedido",
+    "progressBar_received": "Pedido recibido",
+    "progressBar_preparing": "Preparando pedido",
+    "progressBar_ready": "¡Tu pedido esta listo!",
     "reviewQuestion": "¿Como te fue con la app?",
+    "viewOrders": "Ver mis pedidos",
+    "order": "Pedido: ",
     "thanks": "¡Gracias!",
     "yourOpinion": "Tu opinion nos ayuda a crecer",
     "reviewLabel": "Danos tu opinión",
     "reviewPlaceholder": "¿Te gusta nuestra forma de hacer las cosas?",
     "send": "Enviar",
     "backButton": "Volver a pedir"
+  },
+  "myorders": {
+    "thanks": "Gracias por pedir en: ",
+    "table": "Mesa ",
+    "follow": "Seguimiento de pedidos"
+  },
+  "orderCard": {
+    "table": "Mesa ",
+    "orderPlaced": "Tu pedido fue entregado",
+    "orderInPreparation": "Tu pedido esta siendo preparado",
+    "orderReady": "¡Tu pedido esta listo!",
+    "orderDelivered": "¡Tu pedido esta listo!",
+    "total": "Total a pagar: $",
+    "date": "Fecha",
+    "time": "Hora"
   }
 }

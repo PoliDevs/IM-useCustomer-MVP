@@ -6,27 +6,28 @@ import './scss/semantic-ui/index.scss';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from "react-redux";
 import store from './redux/store/index.js';
+// import { I18nextProvider } from 'react-i18next';
 import { I18nextProvider } from 'react-i18next';
 import i18next from 'i18next';
-import global_Es from './translations/Es/global.json';
-import global_En from './translations/En/global.json';
-import global_Pt from './translations/Por/global.json';
-import global_Pt_bra from './translations/Pt-br/global.json';
+import global_Es from './translations/es/global.json';
+import global_En from './translations/en/global.json';
+import global_Pt from './translations/port/global.json';
+import global_Pt_bra from './translations/pt-br/global.json';
 
 i18next.init({
   interpolation:{escapeValue:false},
-  lng:"Es",
+  lng: localStorage.getItem("Lang") ? localStorage.getItem("Lang") : "en",
   resources:{
-    Es:{
+    es:{
       global:global_Es
     },
-    En:{
+    en:{
       global:global_En
     },
-    Por:{
+    por:{
       global:global_Pt
     },
-    Pt_bra:{
+    bra:{
       global:global_Pt_bra
     }
   }

@@ -10,6 +10,8 @@ import {
   getActiveProducts,
   getAllCategorys,
   getCommerce,
+  getOrdersByUser,
+  removerOrderId,
   setFiltro,
 } from "../../../redux/actions";
 import Banner from "../../molecules/Banner/Banner";
@@ -22,7 +24,9 @@ import { dataDecrypt } from "../../../utils/Functions";
 import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
 export default function Home() {
   const commerce = useSelector((state) => state.commerce);
+  const userEmail = useSelector((state)=> state.user.email)
   const cant = useSelector((state) => state.cart);
+  const pendingOrders = useSelector((state)=> state.ordersByUser);
   const [isLoading, setIsLoading] = useState(true);
   const [category, setCategory] = useState(null);
   const [aditionals, setAditionals] = useState(false);
@@ -57,34 +61,38 @@ export default function Home() {
     dispatch(addCart(cant));
     let id = dataDecrypt(localStorage.getItem("Pos")).commerce;
     dispatch(getActiveMenus(commerce.id, setIsLoading));
-    dispatch(getActiveProducts(commerce.id))
+    // dispatch(getActiveProducts(commerce.id))
     dispatch(getAllCategorys(commerce.id));
+    dispatch(removerOrderId())
+    dispatch(getOrdersByUser(userEmail, commerce.id))
   }, [cant]);
 
   return (
     <main className={s.home}>
-      <Banner setCategory={setCategory} setAditionals={setAditionals} setAll={setAll}/>
+      {/* //?agregado setIsLoading a navBar */}
+      <Banner ordersButton={pendingOrders.length && true} navarrow={true} path={"/welcome"} setCategory={setCategory} setAditionals={setAditionals} setAll={setAll} setIsLoading={setIsLoading}/>
+      {/* //movi hacia arriba searchBar y Categories */}
+      <SearchBar />
+      <Categories
+        handleCategory={handleCategory}
+        category={category}
+        aditionals={aditionals}
+        setAditionals={setAditionals}
+        setCategory={setCategory}
+        all={all}
+        setAll={setAll}
+        handleAditionals={handleAditionals}
+      />
       {isLoading ? (
-        <LoadingPage />
+        <LoadingPage small={true}/>
       ) : (
         <>
-          <SearchBar />
-          <Categories
-            handleCategory={handleCategory}
-            category={category}
-            aditionals={aditionals}
-            setAditionals={setAditionals}
-            setCategory={setCategory}
-            all={all}
-            setAll={setAll}
-            handleAditionals={handleAditionals}
-          />
           <Products
             changeStyle={changeStyle}
             commercePlan={commerce.plan}
             aditionals={aditionals}
           />
-          {commerce.plan !== "m1" && <Footer red={red} />}
+          {!isLoading && commerce.plan !== "m1" && <Footer red={red} />}
         </>
       )}
     </main>

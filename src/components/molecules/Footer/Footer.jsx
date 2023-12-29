@@ -31,9 +31,13 @@ export default function Footer({ red }) {
           <div
             style={{ display: "flex", flexDirection: "column", gap: "15px" }}
           >
-            <SubTitle text={language.footer_yourOrder} alignment={"left"} bold={true}/>
+            <SubTitle
+              text={t("footer.yourOrder")}
+              alignment={"left"}
+              bold={true}
+            />
             <Paragraph
-              text={`${cart.length} ${language.footer_products}`}
+              text={`${cart.length} ${t("footer.products")}`}
               alignment={"left"}
             />
           </div>
@@ -55,28 +59,28 @@ export default function Footer({ red }) {
             <div style={{ marginTop: "10px" }}></div>
           </ScrollContainer>
           <div className={s.bottomContent}>
-          <SubTitle
-            text={`${language.footer_total}: $ ${totalPrice}`}
-            alignment={"left"}
-          />
-          <button
-            disabled={!cart.length}
-            className={`${s.payButton} ${!cart.length && s.disabled}`}
-            onClick={() => navigate("/payment")}
-          >
-            {language.footer_payButton}
-          </button>
+            <SubTitle
+              text={`${t("footer.total")}: $ ${totalPrice}`}
+              alignment={"left"}
+            />
+            <button
+              disabled={!cart.length}
+              className={`${s.payButton} ${!cart.length && s.disabled}`}
+              onClick={() => navigate("/payment")}
+            >
+              {t("footer.payButton")}
+            </button>
           </div>
         </div>
       ) : (
         <>
           <div className={`${s.textContainer} ${red && s.red}`}>
             <Paragraph
-              text={`${cart ? totalProducts : 0} ${language.footer_products}`}
+              text={`${cart ? totalProducts : 0} ${t("footer.products")}`}
               alignment={"left"}
             />
             <SubTitle
-              text={`${language.footer_total}: $ ${totalPrice}`}
+              text={`${t("footer.total")}: $ ${totalPrice}`}
               alignment={"left"}
               bold={true}
             />
@@ -88,7 +92,7 @@ export default function Footer({ red }) {
             disabled={!cart.length}
             className={`${s.products} ${!cart.length ? s.disabled : ""}`}
           >
-            {language.footer_viewproducts}
+            {t("footer.viewproducts")}
           </button>
         </>
       )}

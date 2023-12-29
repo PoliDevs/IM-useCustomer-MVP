@@ -12,7 +12,7 @@ import { useEffect } from "react";
 import { isAvailable } from "../../../redux/actions";
 import { emojiPng } from "../../../utils/Constants";
 
-export default function Modal({ productData,  isOpen, closeModal, changeStyle}) {
+export default function Modal({ commercePlan, productData,  isOpen, closeModal, changeStyle}) {
   const cart = useSelector((state)=> state.cart);
   const allproducts = useSelector((state) => state.allProducts);
   const alladitionals = useSelector((state) => state.allAditionals);
@@ -52,7 +52,10 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
 
   return (
     <article className={`${s.modalContainer} ${isOpen && s.open}`}>
-      <div className={s.modal}>
+      <div
+        className={s.modal}
+        style={{ height: `${commercePlan === "m1" ? "auto" : "467px"}` }}
+      >
         <XIcon
           className={s.closeIcon}
           onClick={() => {
@@ -87,73 +90,80 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
         <div>
           {loading === false && available === false && (
             <p className={`${s.notAvailableProduct} ${s.visible}`}>
-              Producto no disponible
+              {t("productModal.available")}
             </p>
           )}
-          <div className={s.textAreaHeader}>
-            <label className={s.label} htmlFor="comment">
-              {language.productModal_commentLabel}
-            </label>
-            <p className={s.textLimit}>{`${comment.length}/140`}</p>
+          <div
+            style={{ display: `${commercePlan === "m1" ? "none" : "block"}` }}
+          >
+            <div className={s.textAreaHeader}>
+              <label className={s.label} htmlFor="comment">
+                {t("productModal.commentLabel")}
+              </label>
+              <p className={s.textLimit}>{`${comment.length}/140`}</p>
+            </div>
+            <TextArea
+              id="comment"
+              comment={comment}
+              setComment={setComment}
+              maxLength={140}
+              placeholder={t("productModal.commentPlaceholder")}
+            />
           </div>
-          <TextArea
-            id="comment"
-            comment={comment}
-            setComment={setComment}
-            maxLength={140}
-            placeholder={language.productModal_commentPlaceholder}
-          />
         </div>
-        <div className={s.amount}>
+        <div style={{ display: `${commercePlan === "m1" ? "none" : "block"}` }}>
+          <div className={s.amount}>
+            <button
+              className={s.amountButton}
+              onClick={() => setAmount((prevAmount) => prevAmount - 1)}
+              disabled={amount <= 0}
+            >
+              -
+            </button>
+            <p className={s.cant}>{amount}</p>
+            <button
+              className={s.amountButton}
+              onClick={() => setAmount((prevAmount) => prevAmount + 1)}
+            >
+              +
+            </button>
+          </div>
           <button
-            className={s.amountButton}
-            onClick={() => setAmount((prevAmount) => prevAmount - 1)}
-            disabled={amount <= 0}
+            className={`${s.addButton} ${!available && s.unavailable}`}
+            onClick={() => {
+              available &&
+                addToCart(
+                  productData.image,
+                  //productData.photo
+                  productData.name,
+                  productData.description,
+                  productData.price,
+                  amount,
+                  comment,
+                  productData.id,
+                  productData.promotion,
+                  productData.discount,
+                  productData.surcharge,
+                  productData.product,
+                  productData.aditional,
+                  productData.menuTypeId,
+                  productData.categoryId,
+                  productData.unitTypeId,
+                  productData.productTypeId,
+                  productData.supplierId,
+                  productData.allergenType,
+                  productData.careful
+                  // productData.cost,
+                );
+              available && changeStyle();
+              setAmount(0);
+              setComment("");
+              closeModal();
+            }}
           >
-            -
-          </button>
-          <p className={s.cant}>{amount}</p>
-          <button
-            className={s.amountButton}
-            onClick={() => setAmount((prevAmount) => prevAmount + 1)}
-          >
-            +
+            {t("productModal.addButton")}
           </button>
         </div>
-        <button
-          className={`${s.addButton} ${!available && s.unavailable}`}
-          onClick={() => {
-            available &&
-              addToCart(
-                productData.image,
-                //productData.photo
-                productData.name,
-                productData.description,
-                productData.price,
-                amount,
-                comment,
-                productData.id,
-                productData.promotion,
-                productData.discount,
-                productData.surcharge,
-                productData.product,
-                productData.aditional,
-                productData.menuTypeId,
-                productData.categoryId,
-                productData.unitTypeId,
-                productData.productTypeId,
-                productData.supplierId,
-                productData.allergenType,
-                productData.careful
-                // productData.cost,
-              );
-            available && changeStyle();
-            setAmount(0);
-            closeModal();
-          }}
-        >
-          {language.productModal_addButton}
-        </button>
       </div>
     </article>
   );

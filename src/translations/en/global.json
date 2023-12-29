@@ -1,88 +1,128 @@
 {
   "QrScanner": {
     "title": "Scan a QR code"
-},
+  },
 "loader": {
-  "title": "Please wait while we prepare the menu."
+  "title": "Please wait while we prepare the menu"
 },
 "language": {
-  "button": "Start"
+  "button": "Start",
+  "terms": "I accept the terms and conditions of use",
+  "viewConditions": "View conditions here",
+  "acceptButton": "Accept",
+  "cancelButton": "Cancel"
 },
 "login": {
-  "firstStep": "Take the first step",
-  "access": "access using your Google email",
-  "googleButton": "Log in with Google",
-  "noGoogleButton": "Access without registration",
-  "slogan": "Speed is",
-  "sloganBig": "our best dish."
+    "firstStep": "Take the first step",
+    "access": "access using your Google email",
+    "googleButton": "Log in with Google",
+    "noGoogleButton": "Log in without registration",
+      "slogan": "Speed is",
+  "sloganBig": "our best dish"
 },
-"welcome": {
+  "navBar":{
+    "disconnect": "Disconnect"
+  },
+  "welcome": {
     "title": "Welcome!",
     "subtitle": "You are about to order at: ",
+    "sector": "Sector",
     "table": "Table ",
     "poweredby": "powered by",
-    "order": "Place an order",
+    "order": "Place order",
     "viewproducts": "View products",
     "instructions": "Instructions"
-},
-"instructions": {
+  },
+  "instructions": {
     "title": "Instructions",
-    "subtitle": "How to place your order on i menu?",
+    "subtitle": "How to place your order on iMenu?",
     "instruction_1": "Select products from the menu, press the product card",
-    "instruction_2": "Once you've selected your products, press 'view product' to confirm your order",
-    "instruction_3": "Make the payment for your order in cash or through MercadoPago",
+    "instruction_2": "Once you have selected your products, press 'view product' to confirm your order",
+    "instruction_3": "Pay for your order in cash",
+    "instruction_3_mp": " or through Mercadopago",
     "instruction_4": "Your order will be on its way!",
     "poweredby": "powered by ",
-    "order": "Place an order"
-},
-"loginModal": {
-    "title": "Log in with Google for a better experience!",
-    "googleButton": "Log in with Google",
-    "omitButton": "Skip"
-},
-"banner": {
-    "table": "Table "
-},
-"searchbar": {
-    "placeholder": "What would you like to order?"
-},
-"categories": {
+    "order": "Place order"
+  },
+  "closedCommerce": {
+    "closed": "Closed",
+    "back": "Come back soon!",
+    "help": "Need help?"
+  },
+  "contactFooter": {
+    "contact": "Contact us",
+    "imenu": "I want iMenu"
+  },
+  "banner": {
+    "Sector": "Sector",
+    "Table": "Table "
+  },
+  "searchbar": {
+    "placeholder": "What do you want to order?"
+  },
+  "categories": {
     "title": "Categories"
-},
-"productModal": {
+  },
+  "products": {
+    "productNotAvailable": "No products available"
+  },
+  "productModal": {
+    "available": "This product is not available",
     "commentLabel" : "Comments",
     "commentPlaceholder": "Add comments and observations",
     "addButton": "Add"
-},
-"footer": {
+  },
+  "footer": {
     "yourOrder": "Your order",
     "products": "Products",
     "total": "Total",
     "payButton": "Pay",
-    "viewproducts": "View products"
-},
-"payment": {
+    "viewproducts": "View products",
+    "observations": "Observations"
+  },
+  "payment": {
     "title": "Payment",
     "managePayment": "Manage your payment from here",
     "cash": "Cash",
+    "diferred": "Pay at checkout",
     "poweredby": "powered by",
     "continue": "Continue"
-},
-"orderInfo": {
+  },
+  "orderInfo": {
     "table": "Table",
-    "paymentTotal": "Total to pay:"
-},
-"mercadoPago": {
+    "paymentTotal": "Total to pay: $"
+  },
+  "mercadoPago": {
     "payButton": "Pay"
-},
-"rating": {
+  },
+  "rating": {
     "preparingOrder": "is preparing your order",
-    "reviewQuestion": "How was your experience with the app?",
+    "progressBar_received": "Order received",
+    "progressBar_preparing": "Preparing order",
+    "progressBar_ready": "Your order is ready!",
+    "reviewQuestion": "How did you like the app?",
+    "viewOrders": "View my orders",
+    "order": "Order: ",
     "thanks": "Thank you!",
     "yourOpinion": "Your opinion helps us grow",
-    "reviewLabel": "Give us your feedback",
-    "reviewPlaceholder": "Do you like the way we do things?",
+    "reviewLabel": "Give us your opinion",
+    "reviewPlaceholder": "Do you like our way of doing things?",
     "send": "Send",
-    "backButton": "Order again"
+    "backButton": "Back to order"
+  },
+  "myorders": {
+    "thanks": "Thank you for ordering at: ",
+    "table": "Table ",
+    "follow": "Order tracking"
+  },
+  "orderCard": {
+    "table": "Table ",
+    "orderPlaced": "Your order has been delivered",
+    "orderInPreparation": "Your order is being prepared",
+    "orderReady": "Your order is ready!",
+    "orderDelivered": "Your order is ready!",
+    "total": "Total to pay: $",
+    "date": "Date",
+    "time": "Time"
 }
 }

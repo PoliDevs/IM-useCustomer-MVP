@@ -1,9 +1,10 @@
 import { useTranslation } from "react-i18next";
-import Loader from "../../atoms/Loader/Loader";
-import SubTitle from "../../atoms/SubTitle/SubTitle";
-import s from "./LoadingPage.module.scss";
 import { useSelector } from "react-redux";
 import iMenuFull from "../../../assets/logo-imenu-full.png";
+import SubTitle from "../../atoms/SubTitle/SubTitle";
+import Loader from "../../atoms/Loader/Loader";
+import s from "./LoadingPage.module.scss";
+
 export default function LoadingPage({small}) {
   const [t, i18n] = useTranslation(["global"]);
   const language = useSelector((state)=> state.language);
@@ -13,7 +14,7 @@ export default function LoadingPage({small}) {
       <Loader />
       {/* <div className={s.iMenuIcon}></div> */}
       <img src={iMenuFull} className={s.imemuLogo} width={"70px"} style={{margin: "0 auto"}}/>
-      <SubTitle text={language.loader_wait} />
+      <SubTitle text={t("loader.title")} />
     </div>
   );
 }

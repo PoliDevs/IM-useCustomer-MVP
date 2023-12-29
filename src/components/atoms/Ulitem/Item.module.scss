@@ -11,8 +11,8 @@
   background-color: $color-seventh;
   border: $border;
   border-radius: $border-secondary-radius;
-  font-size: $line-text;
-  margin-bottom: 10px;
+  font-size: $paragraph;
+  margin-bottom: 5px;
   gap: 10px;
   
   .childContainer {
@@ -25,11 +25,16 @@
 
   @media screen and (min-width: 430px) {
     font-size: $title;
-    height: 70px;
+    height: auto;
     border-radius: $border-primary-radius;
   }
 
   @media screen and (min-width: 750px) {
     height: 90px;
+  }
+
+  @media screen and (min-height: 690px) {
+    margin-bottom: 10px;
+    font-size: $line-text;
   }
 }

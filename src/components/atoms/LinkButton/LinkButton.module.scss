@@ -2,7 +2,7 @@
 @import "../../../scss/typography.scss";
 
 .button {
-   font-size: $title;
+   font-size: $line-text;
     text-decoration: none;
     text-align: center;
     line-height: 1rem;
@@ -10,7 +10,7 @@
     margin: 4px 0 5px 0;
     border: $border;
     border-radius: $border-primary-radius;
-    height: 61px;
+    height: 41px;
     cursor: pointer;
     &:hover {
       transform: scale(1.02);
@@ -28,6 +28,11 @@
     width: 459px;
     height: 55px;
     border-radius: $border-primary-radius;
+  }
+  
+  @media screen and (min-height: 690px){
+    font-size: $title;
+    height: 61px;
   }
 }
 

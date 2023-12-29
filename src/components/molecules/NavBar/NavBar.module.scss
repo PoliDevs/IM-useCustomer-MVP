@@ -2,26 +2,47 @@
 @import "../../../scss/typography.scss";
 
 .navBar {
+  //? estilos para mostrar navbar en home
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  color: #2b2b2b;
   display: flex;
   justify-content: space-between;
   align-items: center;
   min-width: 100%;
-  height: 60px;
+  height: 50px;
   background-color: $background-desable;
   padding: 0 21px;
+  z-index: 6;
 
   .icon {
-    height: 24px;
-    width: 24px;
+    height: 20px;
+    width: 20px;
   }
-
+  
+  .ordersButton{
+    position: absolute;
+    width: auto;
+    height: 30px;
+    font-size: 12px;
+    border-radius: $border-primary-radius;
+    border: none;
+    background-color: $color-primary;
+    padding: 0 8px;
+    margin: 0 auto;
+    top: 25px;
+    transform: translateX(-50%) translateY(-50%);
+    left: 50%;
+  }
   .infoContainer {
     position: relative;
-    width: 120px;
+    width: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    
     .pfActive,
     .lgActive {
       background-color: $color-primary;
@@ -68,6 +89,7 @@
         display: flex;
         justify-content: space-around;
         padding: 10px;
+        padding-bottom: 0;
 
         .iconDisabled {
           color: $color-nineth;
@@ -90,9 +112,9 @@
 
     .langsContainer {
       position: absolute;
-      bottom: -211px;
+      bottom: -135px;
       width: 96px;
-      height: 200px;
+      height: auto;
       overflow-y: scroll;
       right: 0px;
       background-color: $background-secundary;
@@ -113,4 +135,20 @@
       visibility: visible;
     }
   }
+
+  @media screen and (min-height:690px) {
+    height: 60px;
+    .icon {
+    height: 24px;
+    width: 24px;
+    }
+
+    .ordersButton {
+      top: 30px
+    }
+  }
+}
+
+.spaceBetween {
+  justify-content: space-between;
 }

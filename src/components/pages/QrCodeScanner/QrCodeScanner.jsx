@@ -20,7 +20,7 @@ export default function Qr({scanResult, setScanResult}) {
       },
       fps: 10,
       disableFlip: false,
-      rememberLastUsedCamera: false,
+      rememberLastUsedCamera: true,
       aspectRatio: 1.0,
       supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
       formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
@@ -31,8 +31,18 @@ export default function Qr({scanResult, setScanResult}) {
     //{ facingMode: "environment" } para preferir camara trasera
     function success(result) {
       scanner.clear();
-      //!refactorizar segun url en produccion
-      navigate(result.substring(21));
+      const partesURL = result.split("/");
+
+      const indexLanguage = partesURL.indexOf("language");
+
+      if (indexLanguage !== -1 && indexLanguage < partesURL.length - 1) {
+        const loQueVieneDespués = partesURL
+          .slice(indexLanguage, partesURL.length)
+          .join("/");
+        navigate(loQueVieneDespués)
+      } else {
+        return
+      }
     }
 
     function error(error) {
@@ -43,7 +53,7 @@ export default function Qr({scanResult, setScanResult}) {
   return (
     <div className={s.mainContainer}>
       <div id="reader" className={s.scannerContainer}></div>
-      <SubTitle text={language.QrScanner_title} />
+      <SubTitle text={t("QrScanner.title")} />
     </div>
   );
 }

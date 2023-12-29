@@ -2,14 +2,23 @@
 @import "../../../scss/typography.scss";
 
 .reviewContainer{
+  position:fixed;
   background-color: $color-sixth;
-  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  max-width: 450px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
   .reviewHeader {
    position: relative;
     background-color: $color-quaternary;
-    height: 50vh;
+    height: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,15 +28,21 @@
       position: relative;
       display: flex;
       width: 100%;
-      height: 200px;
+      height: 120px;
       padding: 50px
+    }
+
+    .myOrdersLink {
+      text-decoration: underline;
+      color: #2b2b2b;
+      margin-top: 8px;
     }
   }
 
   .logo {
     border-style: none;
-    height: 108px;
-    width: 108px;
+    height: 90px;
+    width: 90px;
     margin: 0 auto;
     // margin-bottom: 36px;
     // margin-top: 55px;
@@ -38,10 +53,8 @@
     flex-direction: column;
     width: 90%;
     margin: 0 auto;
-    flex: 1 1 auto;
-    gap: 12px;
-    min-height: 50vh;
-    height: 50vh;
+    gap: 5px;
+    height: 50%;
     padding-top: 16px;
     .textAreaHeader {
       display: flex;
@@ -59,7 +72,34 @@
         color: $color-nineth
       }
     }
+
+    .buttonWrapper {
+      margin: auto 0 15px 0;
+      display: flex;
+      justify-content: center;
+    }
   }
 
+  @media screen and (min-height: 690px) {
+    .reviewHeader {
+      .logo {
+        height: 108px;
+        width: 108px;
+      }
 
+      .myOrdersLink {
+        margin-top: 30px;
+      }
+    }
+
+    .article {
+      gap: 12px
+    }
+  }
+
+}
+
+.reviewContainer::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
 }

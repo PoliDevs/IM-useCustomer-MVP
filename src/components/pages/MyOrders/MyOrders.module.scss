@@ -1,0 +1,22 @@
+@import "../../../scss/typography.scss";
+@import "../../../scss/colors.scss";
+
+.myOrdersContainer {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  max-width: 450px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow-y: auto;
+  background-color: $color-quaternary;
+  
+  .mainContent {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+}

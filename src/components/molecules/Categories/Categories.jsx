@@ -20,7 +20,7 @@ export default function Categories({handleCategory, category, setCategory,handle
     <section className={s.categories}>
       <div className={s.sectionTitle}>
         <SmallText
-          text={language.categories_title}
+          text={t("categories.title")}
           secundary={true}
           noMargin={true}
         />

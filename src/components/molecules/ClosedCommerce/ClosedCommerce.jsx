@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { ReactComponent as Closed } from "../../../assets/closedCommerce.svg";
 import { ReactComponent as Help } from "../../../assets/Help.svg";
+import { useTranslation } from "react-i18next";
 import HugeTitle from "../../atoms/HugeTitle/HugeTitle";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
@@ -11,6 +12,7 @@ import { Link } from "react-router-dom";
 export default function ClosedCommerce({fullHeight}) {
   const commerceName = useSelector((state) => state.commerce.name);
   const language = useSelector((state)=> state.language);
+  const [t, i18n] = useTranslation(["global"]);
 
   return (
     <main className={`${s.closedContainer} ${fullHeight && s.fullHeight}`}>
@@ -20,15 +22,15 @@ export default function ClosedCommerce({fullHeight}) {
         </div>
         <div className={s.textContainer}>
           <HugeTitle text={`${commerceName}`} centered={true} />
-          <h2 className={s.isClosed}>{language.closed_isClosed}</h2>
-          <SubTitle text={language.closed_comeBack} />
+          <h2 className={s.isClosed}>{t("closedCommerce.closed")}</h2>
+          <SubTitle text={t("closedCommerce.back")} />
           <hr />
-          <Paragraph text={language.welcome_poweredby} gap={true}>
+          <Paragraph text={t("instructions.poweredby")} gap={true}>
             <span className={s.imenuSpan}> i menu</span>
           </Paragraph>
           <div className={s.helpContainer}>
             <Help className={s.helpIcon} />
-            <Link className={s.link}>{language.closed_needHelp}</Link>
+            <Link className={s.link}>{t("closedCommerce.help")}</Link>
           </div>
         </div>
       </div>

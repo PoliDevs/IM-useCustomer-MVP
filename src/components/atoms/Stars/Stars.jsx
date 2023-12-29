@@ -13,9 +13,8 @@ export default function Stars({ starsArray, stars, handleStars }) {
           <Star
             key={index}
             onClick={() => handleStars(currentRate)}
+            className={s.stars}
             style={{
-              width: "35px",
-              height: "35px",
               fill: currentRate <= stars ? "#FFE143" : "transparent",
               color: currentRate <= stars ? "#FFE143" : "#BABABA",
             }}

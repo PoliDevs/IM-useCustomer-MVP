@@ -4,7 +4,7 @@
 .paragraph {
   display: flex;
   justify-content: center;
-  font-size: $line-text;
+  font-size: $paragraph;
   margin: 4px 0;
   text-align: center;
   overflow-wrap: break-word;
@@ -16,6 +16,9 @@
     font-size: $paragraph;
   }
   @media screen and (min-width: 750px) {
+    font-size: $line-text;
+  }
+  @media screen and (min-height: 690px) {
     font-size: $line-text;
   }
 }
@@ -69,4 +72,8 @@
 
 .noMargin {
   margin: 0;
+}
+
+.underline {
+  text-decoration: underline;
 }

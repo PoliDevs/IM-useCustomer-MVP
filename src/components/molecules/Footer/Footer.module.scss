@@ -2,6 +2,9 @@
 @import "../../../scss/typography.scss";
 
 .footer {
+  position: absolute;
+  bottom: 0;
+  background-color: #fefefe;
   width: 100%;
   padding: 20px;
   height: 100px;
@@ -62,7 +65,7 @@
 .expanded {
   position: absolute;
   bottom: 0;
-  height: 85vh;
+  height: 85%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -107,9 +110,9 @@
   .payButton {
     width: 100%;
     background-color: $background-buttom-primary-active;
-    font-size: $title;
+    font-size: $line-text;
     border-radius: $border-primary-radius;
-    height: 61px;
+    height: 41px;
     color: $text-secondary;
     border: none;
     margin-top: auto;
@@ -117,5 +120,12 @@
 
   .disabled {
     display: none;
+  }
+
+  @media screen and (min-height: 690px) {
+    .payButton {
+      height: 61px;
+      font-size: $title;
+    }
   }
 }
