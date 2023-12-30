@@ -32,7 +32,6 @@ export default function WelcomePage() {
   const [t, i18n] = useTranslation(["global"]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   useEffect(() => {
     dispatch(getOrderPending(commerce.id, sector, table))
     dispatch(getStatus(commerce.id, setIsloading));
@@ -68,9 +67,8 @@ export default function WelcomePage() {
                   <SubTitle text={t("welcome.subtitle")} />
                   <HugeTitle text={commerce.name} />
                   <div className={s.spacing}>
-                    <Logo className={s.logo} />
-
-                    {/* <img src={iMenuFull} className={s.logo}/> */}
+                    {/* {<Logo className={s.logo} />} */}
+                    <img src={imgUrl?imgUrl:<Logo />} className={s.logo}/>
                     <SubTitle
                       text={`${t("welcome.sector")} ${sector} - ${t(
                         "welcome.table"
@@ -82,8 +80,7 @@ export default function WelcomePage() {
                   <Paragraph bold={true} text={t("welcome.poweredby")}>
                     {/* <ImenuLogo className={s.imenuLogo} /> */}
                     <img
-                      src={imgUrl?imgUrl:iMenuFull}
-                      //src={iMenuFull}
+                      src={iMenuFull}
                       className={s.imemuLogo}
                       width={"70px"}
                     />
