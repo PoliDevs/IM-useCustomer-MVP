@@ -57,7 +57,20 @@ export default function useFirebase(setError) {
   return {signInWithGoogle}
 }
 
-export const storage = getStorage(app);
+//?
+
+const storageFirebaseConfig = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY_IMG,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN_IMG,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID_IMG,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET_IMG,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDERID_IMG,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID_IMG,
+};
+
+export const storageApp = initializeApp(storageFirebaseConfig,"storageApp");
+export const storage = getStorage(storageApp);
+
 
 export async function getFileDownloadURL(fileName) {
   const fileRef = ref(storage,fileName);
@@ -71,4 +84,3 @@ export async function getFileDownloadURL(fileName) {
     return null;
   }
 }
-
