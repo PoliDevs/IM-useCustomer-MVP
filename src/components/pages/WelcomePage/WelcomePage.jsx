@@ -17,6 +17,8 @@ import NavBar from "../../molecules/NavBar/NavBar";
 import s from "./WelcomePage.module.scss";
 import ContactFooter from "../../molecules/ContactFooter/ContactFooter";
 import { useNavigate } from "react-router-dom";
+import { getFileDownloadURL } from "../../../Firebase/Firebase";
+
 export default function WelcomePage() {
   const orderStatus = useSelector((state)=> state.orderStatus)
   const orderPending = useSelector((state)=> state.orderId);
@@ -26,6 +28,7 @@ export default function WelcomePage() {
   const table = useSelector((state) => state.table);
   const open = useSelector((state) => state.status);
   const [isLoading, setIsloading] = useState(true);
+  const [imgUrl, setImgUrl] = useState(false);
   const [t, i18n] = useTranslation(["global"]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -39,6 +42,16 @@ export default function WelcomePage() {
     orderPending && orderStatus !== "delivered" && orderStatus !== "" && navigate('/rating');
   }, [orderPending])
   
+  useEffect(() => {
+    // Cuando el componente se monta, obtener la URL de la imagen existente
+    const fetchImageURL = async () => {
+      const fileName = commerce.id.toString(); // Reemplaza con el nombre de tu archivo
+      const url = await getFileDownloadURL(fileName);
+      setImgUrl(url);
+    };
+    fetchImageURL();
+  }, []);
+
 
   return (
     <div className={s.home}>
@@ -69,7 +82,8 @@ export default function WelcomePage() {
                   <Paragraph bold={true} text={t("welcome.poweredby")}>
                     {/* <ImenuLogo className={s.imenuLogo} /> */}
                     <img
-                      src={iMenuFull}
+                      src={imgUrl?imgUrl:iMenuFull}
+                      //src={iMenuFull}
                       className={s.imemuLogo}
                       width={"70px"}
                     />

@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../redux/actions";
 import { useNavigate } from "react-router-dom";
 // import { initialize } from "../utils/Firebase_inicialize";
+import {getStorage,getDownloadURL,ref } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -56,4 +57,18 @@ export default function useFirebase(setError) {
   return {signInWithGoogle}
 }
 
+export const storage = getStorage(app);
+
+export async function getFileDownloadURL(fileName) {
+  const fileRef = ref(storage,fileName);
+  
+  try {
+    const url = await getDownloadURL(fileRef);
+    return url;
+  } catch (error) {
+    // Manejar el error (puede ser que el archivo no exista)
+    console.error('Error al obtener la URL de descarga:', error);
+    return null;
+  }
+}
 
