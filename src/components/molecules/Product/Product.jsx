@@ -87,7 +87,7 @@ export default function Product({
         // setIsClicked(true)
       }}
     >
-      <img src={getPng(bg)} style={{width: "60px", height:"60px"}}/>
+      {/* <img src={getPng(bg)} style={{width: "60px", height:"60px"}}/> */}
       {/* <div style={{backgroundImage: getPng(bg)}} className={s.productIcon}></div> */}
       {/* <span role="img" aria-label="Emoji" className={s.productIcon}>
         {emoji1}

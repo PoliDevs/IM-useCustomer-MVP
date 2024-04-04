@@ -20,7 +20,7 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
   const language = useSelector((state)=> state.language);
   const available = useSelector((state)=> state.productAvailable);
   const [comment, setComment] = useState("");
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(1);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const {addToCart} = useAmountControls();
@@ -42,6 +42,13 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
    useEffect(() => {
      productData.name && dispatch(isAvailable(productData.name, setLoading));
    }, [allproducts, alladitionals, products]);
+
+  //? Establece el valor predeterminado de amount en 1 cada vez que el modal se abre.
+   useEffect(() => {
+    if (!isOpen) {
+      setAmount(1);
+    }
+  }, [isOpen]);
 
     const getPng = (text) => {
       if (text) {
@@ -65,10 +72,10 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
           {/* <span role="img" aria-label="Emoji" className={s.productIcon}>
             {emoji1}
           </span> */}
-          <img
+          {/* <img
             src={getPng(productData.image)}
             style={{ width: "60px", height: "60px" }}
-          />
+          />  */}
           <div className={s.productInfo}>
             <SubTitle
               className={s.productTitle}
@@ -94,13 +101,13 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
             <label className={s.label} htmlFor="comment">
               {t("productModal.commentLabel")}
             </label>
-            <p className={s.textLimit}>{`${comment.length}/140`}</p>
+            <p className={s.textLimit}>{`${comment.length}/280`}</p>
           </div>
           <TextArea
             id="comment"
             comment={comment}
             setComment={setComment}
-            maxLength={140}
+            maxLength={280}
             placeholder={t("productModal.commentPlaceholder")}
           />
         </div>

@@ -112,8 +112,9 @@
       padding: 15px;
       .amountButton {
         border: none;
-        font-size: $title;
+        font-size: $titlebuttons;
         line-height: inherit;
+        margin: 0 5px;
       }
       .cant {
         font-size: $title;

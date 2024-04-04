@@ -18,14 +18,14 @@ export default function Categories({handleCategory, category, setCategory,handle
 
   return (
     <section className={s.categories}>
-      <div className={s.sectionTitle}>
-        <SmallText
+      {/* <div className={s.sectionTitle}>
+         <SmallText
           text={t("categories.title")}
           secundary={true}
           noMargin={true}
         />
-      </div>
-      <div style={{ position: "relative", height: "auto" }}>
+      </div>  */}
+      <div style={{ position: "relative", height: "auto", marginTop: "15px" }}>
         <ScrollContainer className={s.scrollContainer}>
           {/* <AllCategoryIcon
             all={all}
@@ -48,7 +48,7 @@ export default function Categories({handleCategory, category, setCategory,handle
               handleCategory={handleCategory}
               category={category}
             />
-          ))}
+          ))} 
         </ScrollContainer>
       </div>
     </section>
