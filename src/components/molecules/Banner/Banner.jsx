@@ -35,7 +35,7 @@ export default function Banner({ setCategory, ordersButton, arrow, navarrow, pat
       }}
     >
       {/* //? agrego setIsLoading a navbar */}
-      <NavBar ordersButton={ordersButton} path={path} navarrow={navarrow} setIsloading={setIsLoading} />
+      {/* <NavBar ordersButton={ordersButton} path={path} navarrow={navarrow} setIsloading={setIsLoading} /> */}
       <div className={s.content}>
         {arrow && (
           <ArrowBackWhite

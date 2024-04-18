@@ -10,7 +10,7 @@
   z-index: 1;
   margin: 0 auto;
   margin-top: 10px;
-
+  pointer-events: none;
   .content {
     display: flex;
     // flex-direction: column;
@@ -42,17 +42,17 @@
     }
   }
 
-   @media screen and (min-width: 430px) {
+  @media screen and (min-width: 430px) {
     height: 100px;
 
-    .content{
-      &:before{
+    .content {
+      &:before {
         border-radius: $border-primary-radius;
       }
     }
-   }
+  }
 
-   @media screen and (min-width: 750px) {
+  @media screen and (min-width: 750px) {
     height: 130px;
-   }
+  }
 }

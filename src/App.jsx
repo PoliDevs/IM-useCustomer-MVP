@@ -14,24 +14,26 @@ import Language from "./components/pages/Language/Language";
 import ProtectedRoutes from "./components/atoms/ProtectedRoutes/ProtectedRoutes";
 import { useDispatch } from "react-redux";
 import { changeLanguage } from "./redux/actions";
-import axios from 'axios';
+import axios from "axios";
 import MyOrders from "./components/pages/MyOrders/MyOrders";
 // axios.defaults.baseURL = "http://localhost:3001/";
-axios.defaults.baseURL='https://nodejs-production-bbf9.up.railway.app';
-
+// axios.defaults.baseURL = "https://nodejs-production-bbf9.up.railway.app";
+axios.defaults.baseURL = "https://web-production-053a.up.railway.app";
 function App() {
   const [scanResult, setScanResult] = useState();
   const dispatch = useDispatch();
-  const lang = localStorage.getItem("Lang") ? localStorage.getItem("Lang") : 'es';
-  
+  const lang = localStorage.getItem("Lang")
+    ? localStorage.getItem("Lang")
+    : "es";
+  console.log("scanresult", scanResult);
   // useEffect(() => {
-  //   dispatch(changeLanguage(lang))  
+  //   dispatch(changeLanguage(lang))
   // }, [])
-  
+
   return (
     <>
       <Routes>
-        <Route
+        {/* <Route
           index
           element={
             <QrCodeScanner
@@ -39,20 +41,20 @@ function App() {
               setScanResult={setScanResult}
             />
           }
-        />
-        <Route path="/language/*" element={<Language />} />
+        /> */}
+        {/* <Route path="/language/*" element={<Language />} /> */}
         <Route element={<ProtectedRoutes />}>
-          <Route path="/login" element={<Login scanResult={scanResult} />} />
+          {/* <Route path="/" element={<Login scanResult={scanResult} />} />
           <Route
             path="/welcome"
             element={<WelcomePage scanResult={scanResult} />}
-          />
+          /> */}
           <Route path="/instruction" element={<Instruction />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/mercadopago" element={<Mercadopago />} />
           <Route path="/rating/:id?" element={<Review />} />
-          <Route path='/myorders' element={<MyOrders/>} />
+          <Route path="/myorders" element={<MyOrders />} />
         </Route>
       </Routes>
     </>
