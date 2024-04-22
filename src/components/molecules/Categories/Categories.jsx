@@ -19,8 +19,8 @@ export default function Categories({
   setAll,
 }) {
   const activeCategories = useSelector((state) => state.allCategories);
-  // const commerceId = useSelector((state) => state.commerce.id);
-  // const language = useSelector((state) => state.language);
+  const commerceId = useSelector((state) => state.commerce.id);
+  const language = useSelector((state) => state.language);
   const [t, i18n] = useTranslation(["global"]);
   // const dispatch = useDispatch();
   // const activeCategories = categories.categories;

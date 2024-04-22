@@ -42,15 +42,15 @@ function App() {
             />
           }
         />
-        {/* <Route path="/language/*" element={<Language />} /> */}
+        <Route path="/language/*" element={<Language />} />
         <Route element={<ProtectedRoutes />}>
-          {/* <Route path="/" element={<Login scanResult={scanResult} />} />
+          <Route path="/" element={<Login scanResult={scanResult} />} />
           <Route
             path="/welcome"
             element={<WelcomePage scanResult={scanResult} />}
-          /> */}
+          />
           <Route path="/instruction" element={<Instruction />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/mercadopago" element={<Mercadopago />} />
           <Route path="/rating/:id?" element={<Review />} />

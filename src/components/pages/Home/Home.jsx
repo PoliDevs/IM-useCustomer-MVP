@@ -59,7 +59,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(addCart(cant));
-    // let id = dataDecrypt(localStorage.getItem("Pos")).commerce;
+    let id = dataDecrypt(localStorage.getItem("Pos")).commerce;
     dispatch(getActiveMenus(commerce.id, setIsLoading));
     // dispatch(getActiveProducts(commerce.id))
     dispatch(getAllCategorys(commerce.id));
