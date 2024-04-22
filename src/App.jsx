@@ -50,7 +50,7 @@ function App() {
         />  
         <Route element={<ProtectedRoutes />}>
         <Route path="/instruction" element={<Instruction />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/mercadopago" element={<Mercadopago />} />
         <Route path="/rating/:id?" element={<Review />} />
