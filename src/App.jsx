@@ -42,20 +42,20 @@ function App() {
             />
           }
         />
-        {/* <Route path="/language/*" element={<Language />} />
+        <Route path="/language/*" element={<Language />} />
           <Route path="/login" element={<Login scanResult={scanResult} />} />
           <Route
           path="/welcome"
           element={<WelcomePage scanResult={scanResult} />}
-        />  */}
-        {/* <Route element={<ProtectedRoutes />}> */}
+        />  
+        <Route element={<ProtectedRoutes />}>
         <Route path="/instruction" element={<Instruction />} />
         <Route path="/" element={<Home />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/mercadopago" element={<Mercadopago />} />
         <Route path="/rating/:id?" element={<Review />} />
         <Route path="/myorders" element={<MyOrders />} />
-        {/* </Route> */}
+        </Route>
       </Routes>
     </>
   );
