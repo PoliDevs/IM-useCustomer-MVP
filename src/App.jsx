@@ -33,7 +33,7 @@ function App() {
   return (
     <>
       <Routes>
-        {/* <Route
+        <Route
           index
           element={
             <QrCodeScanner
@@ -41,7 +41,7 @@ function App() {
               setScanResult={setScanResult}
             />
           }
-        /> */}
+        />
         {/* <Route path="/language/*" element={<Language />} /> */}
         <Route element={<ProtectedRoutes />}>
           {/* <Route path="/" element={<Login scanResult={scanResult} />} />
