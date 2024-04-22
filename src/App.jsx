@@ -33,7 +33,7 @@ function App() {
   return (
     <>
       <Routes>
-        {/* <Route
+        {/* {/* <Route
           index
           element={
             <QrCodeScanner
@@ -41,21 +41,21 @@ function App() {
               setScanResult={setScanResult}
             />
           }
-        />
-        <Route path="/language/*" element={<Language />} />
-        <Route element={<ProtectedRoutes />}>
+        /> */}
+        {/* <Route path="/language/*" element={<Language />} />
           <Route path="/login" element={<Login scanResult={scanResult} />} />
           <Route
-            path="/welcome"
-            element={<WelcomePage scanResult={scanResult} />}
-          /> */}
+          path="/welcome"
+          element={<WelcomePage scanResult={scanResult} />}
+        />  */}
+        <Route element={<ProtectedRoutes />}>
           <Route path="/instruction" element={<Instruction />} />
           <Route path="/" element={<Home />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/mercadopago" element={<Mercadopago />} />
           <Route path="/rating/:id?" element={<Review />} />
           <Route path="/myorders" element={<MyOrders />} />
-        {/* </Route> */}
+        </Route>
       </Routes>
     </>
   );
