@@ -44,7 +44,7 @@ function App() {
         />
         <Route path="/language/*" element={<Language />} />
         <Route element={<ProtectedRoutes />}>
-          <Route path="/" element={<Login scanResult={scanResult} />} />
+          <Route path="/login" element={<Login scanResult={scanResult} />} />
           <Route
             path="/welcome"
             element={<WelcomePage scanResult={scanResult} />}

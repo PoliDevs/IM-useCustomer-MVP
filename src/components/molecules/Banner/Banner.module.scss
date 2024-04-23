@@ -1,25 +1,20 @@
 @import "../../../scss/colors.scss";
 
 .banner {
-  width: 90%;
-  height: 110px;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: 40%;
-  color: $text-secondary;
-  z-index: 1;
+  width: 100%;
   margin: 0 auto;
-  margin-top: 10px;
+  margin-top: 30px;
   pointer-events: none;
+
   .content {
     display: flex;
-    // flex-direction: column;
-    justify-content: flex-start;
+    // flex-direction: column;  
+    justify-content: space-between;
     //?para mostrar texto debajo de la navbar en home
-    align-items: flex-end;
+    align-items: center;
     position: relative;
     width: auto;
-    color: $text-secondary;
+    color: #000000;
     height: 100%;
     padding: 10px;
     &:before {
@@ -30,20 +25,22 @@
       width: 100%;
       height: 100%;
       border-radius: $border-secondary-radius;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center center;
-      background: linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 1) 4%,
-        rgba(255, 255, 255, 0) 100%
-      );
-      z-index: 2;
     }
   }
 
+  // .conteinerSubtitle {
+  //   margin-right: 120px;
+  // }
+
+  .image {
+    border-radius: 50px;
+  }
+  .imageContainer {
+    display: flex;
+    align-items: center;
+  }
   @media screen and (min-width: 430px) {
-    height: 100px;
+    height: 55px;
 
     .content {
       &:before {
@@ -53,6 +50,33 @@
   }
 
   @media screen and (min-width: 750px) {
-    height: 130px;
+    height: 55px;
+    .conteinerSubtitle {
+      margin-right: 100px;
+    }
+  }
+
+  @media screen and (max-width: 750px) {
+    .conteinerSubtitle {
+      margin-right: 130px;
+    }
+  }
+
+  @media screen and (max-width: 441px) {
+    .conteinerSubtitle {
+      margin-right: 85px;
+    }
+    .imagen2 {
+      width: 120px;
+    }
+  }
+
+  @media screen and (max-width: 375px) {
+    .conteinerSubtitle {
+      margin-right: 50px;
+    }
+    .imagen2 {
+      width: 80px;
+    }
   }
 }

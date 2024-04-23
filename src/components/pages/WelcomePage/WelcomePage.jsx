@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import { useTranslation } from "react-i18next";
 import { ReactComponent as Logo } from "../../../assets/Burgers.svg";
-import iMenuFull from '../../../assets/logo-imenu-full.png';
+import iMenuFull from "../../../assets/logo-imenu-full.png";
 import { ReactComponent as ImenuLogo } from "../../../assets/ImenuHorizontal.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -18,8 +18,8 @@ import s from "./WelcomePage.module.scss";
 import ContactFooter from "../../molecules/ContactFooter/ContactFooter";
 import { useNavigate } from "react-router-dom";
 export default function WelcomePage() {
-  const orderStatus = useSelector((state)=> state.orderStatus)
-  const orderPending = useSelector((state)=> state.orderId);
+  const orderStatus = useSelector((state) => state.orderStatus);
+  const orderPending = useSelector((state) => state.orderId);
   const language = useSelector((state) => state.language);
   const commerce = useSelector((state) => state.commerce);
   const sector = useSelector((state) => state.sector);
@@ -31,21 +31,23 @@ export default function WelcomePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getOrderPending(commerce.id, sector, table))
+    dispatch(getOrderPending(commerce.id, sector, table));
     dispatch(getStatus(commerce.id, setIsloading));
   }, []);
 
   useEffect(() => {
-    orderPending && orderStatus !== "delivered" && orderStatus !== "" && navigate('/rating');
-  }, [orderPending])
-  
+    orderPending &&
+      orderStatus !== "delivered" &&
+      orderStatus !== "" &&
+      navigate("/rating");
+  }, [orderPending]);
 
   return (
     <div className={s.home}>
       <>
         <NavBar navarrow={true} path={"/login"} setIsloading={setIsloading} />
         {isLoading ? (
-          <LoadingPage />
+          <LoadingPage text={t("loader.title")} />
         ) : (
           <>
             {open ? (

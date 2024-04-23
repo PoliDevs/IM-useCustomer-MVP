@@ -146,6 +146,6 @@ export default function Payment() {
       <ClosedCommerce fullHeight={true} />
     )
   ) : (
-    <LoadingPage />
+    <LoadingPage text={t("loader.title")} />
   ); 
 }

@@ -140,7 +140,7 @@ export default function Mercadopago() {
           />{" "}
         </>
       ) : (
-        <LoadingPage />
+        <LoadingPage text={t("loader.title")} />
       )}
       {/*  {preferenceId && <Wallet initialization={createPreference}/>} */}
     </main>

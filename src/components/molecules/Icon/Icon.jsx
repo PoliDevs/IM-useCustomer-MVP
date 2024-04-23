@@ -8,10 +8,11 @@ import s from "./Icon.module.scss";
     name,
     handleCategory,
     category,
+    disabled
   }) {
     return (
       <div
-        className={`${s.iconContainer} ${category === id && s.selected}`}
+        className={`${s.iconContainer} ${category === id && s.selected} ${disabled && s.disabled}`}
         onClick={() => category === id ? handleCategory('') : handleCategory(id)}
       >
         <div className={s.icon}></div>

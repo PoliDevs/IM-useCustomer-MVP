@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import ScrollContainer from "react-indiana-drag-scroll";
-import SmallText from "../../atoms/SmallText/SmallText";
 import Icon from "../Icon/Icon";
 import s from "./Categories.module.scss";
+import { useEffect } from "react";
 // import categories from "../../../categories.json";
 // import { getActiveAditionals } from "../../../redux/actions";
 // import AllCategoryIcon from "../../atoms/AllCategoryIcon/AllCategoryIcon";
@@ -19,19 +19,32 @@ export default function Categories({
   setAll,
 }) {
   const activeCategories = useSelector((state) => state.allCategories);
-  const commerceId = useSelector((state) => state.commerce.id);
-  const language = useSelector((state) => state.language);
-  const [t, i18n] = useTranslation(["global"]);
+  // const commerceId = useSelector((state) => state.commerce.id);
+  const search = useSelector((state) => state.search);
+  const loading = useSelector((state) => state.loading);
+  // const language = useSelector((state) => state.language);
+  // const [t, i18n] = useTranslation(["global"]);
   // const dispatch = useDispatch();
   // const activeCategories = categories.categories;
+  const dispatch = useDispatch();
+  // activeCategories.slice().sort((a, b) => a.category.localeCompare(b.category));
 
-  activeCategories.slice().sort((a, b) => a.category.localeCompare(b.category));
+  // activeCategories.forEach((categoryObject) => {
+  //   categoryObject.category =
+  //     categoryObject.category.charAt(0).toUpperCase() +
+  //     categoryObject.category.slice(1);
+  // });
+  useEffect(() => {
+    activeCategories
+      .slice()
+      .sort((a, b) => a.category.localeCompare(b.category));
 
-  activeCategories.forEach((categoryObject) => {
-    categoryObject.category =
-      categoryObject.category.charAt(0).toUpperCase() +
-      categoryObject.category.slice(1);
-  });
+    activeCategories.forEach((categoryObject) => {
+      categoryObject.category =
+        categoryObject.category.charAt(0).toUpperCase() +
+        categoryObject.category.slice(1);
+    });
+  }, [activeCategories]);
 
   return (
     <section className={s.categories}>
@@ -64,6 +77,7 @@ export default function Categories({
               name={categoryObject.category}
               handleCategory={handleCategory}
               category={category}
+              disabled={search.length > 0 || loading}
             />
           ))}
         </ScrollContainer>
