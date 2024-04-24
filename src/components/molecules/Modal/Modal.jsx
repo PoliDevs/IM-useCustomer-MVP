@@ -27,28 +27,28 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
 
   const [t, i18n] = useTranslation(["global"]);
 
-   let emoji1 = "";
-   if (productData.image) {
-     const unicodeArray = productData.image.split(" ");
-     const formattedCodes = unicodeArray.map((code) => code.replace("U+", ""));
-     const emoji = String.fromCodePoint(
-       parseInt(formattedCodes[0], 16),
-       parseInt(formattedCodes[1], 16)
-     );
-     emoji1 = emoji;
-   }
+  //  let emoji1 = "";
+  //  if (productData.image) {
+  //    const unicodeArray = productData.image.split(" ");
+  //    const formattedCodes = unicodeArray.map((code) => code.replace("U+", ""));
+  //    const emoji = String.fromCodePoint(
+  //      parseInt(formattedCodes[0], 16),
+  //      parseInt(formattedCodes[1], 16)
+  //    );
+  //    emoji1 = emoji;
+  //  }
 
    //? useEffect para consultar si el producto abierto esta activo.
    useEffect(() => {
      productData.name && dispatch(isAvailable(productData.name, setLoading));
    }, [allproducts, alladitionals, products]);
 
-    const getPng = (text) => {
-      if (text) {
-        let png = emojiPng.find((e) => e.name === text);
-        return png.src;
-      }
-    };
+    // const getPng = (text) => {
+    //   if (text) {
+    //     let png = emojiPng.find((e) => e.name === text);
+    //     return png.src;
+    //   }
+    // };
 
   return (
     <article className={`${s.modalContainer} ${isOpen && s.open}`}>
@@ -65,10 +65,10 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
           {/* <span role="img" aria-label="Emoji" className={s.productIcon}>
             {emoji1}
           </span> */}
-          <img
+          {/* <img
             src={getPng(productData.image)}
             style={{ width: "60px", height: "60px" }}
-          />
+          /> */}
           <div className={s.productInfo}>
             <SubTitle
               className={s.productTitle}

@@ -9,8 +9,8 @@ import {
   getActiveProducts,
   isAvailable,
 } from "../../../redux/actions";
-import { useEffect, useState } from "react";
-import { emojiPng } from "../../../utils/Constants";
+// import { useEffect, useState } from "react";
+// import { emojiPng } from "../../../utils/Constants";
 
 export default function Product({
   name,
@@ -35,28 +35,28 @@ export default function Product({
   const commerceId = useSelector((state) => state.commerce.id);
   const dispatch = useDispatch();
 
-  let emoji1 = "";
-  if (bg) {
-    const unicodeArray = bg.split(" ");
+  // let emoji1 = "";
+  // if (bg) {
+  //   const unicodeArray = bg.split(" ");
 
-    // const unicodeCodes = ["U+D83C", "U+DF70"];
-    // Convierte los códigos Unicode al formato correcto (sin el "U+")
-    const formattedCodes = unicodeArray.map((code) => code.replace("U+", ""));
+  //   // const unicodeCodes = ["U+D83C", "U+DF70"];
+  //   // Convierte los códigos Unicode al formato correcto (sin el "U+")
+  //   const formattedCodes = unicodeArray.map((code) => code.replace("U+", ""));
 
-    // Obtén el emoji a partir de los códigos Unicode formateados
-    const emoji = String.fromCodePoint(
-      parseInt(formattedCodes[0], 16),
-      parseInt(formattedCodes[1], 16)
-    );
-    emoji1 = emoji;
-  }
+  //   // Obtén el emoji a partir de los códigos Unicode formateados
+  //   const emoji = String.fromCodePoint(
+  //     parseInt(formattedCodes[0], 16),
+  //     parseInt(formattedCodes[1], 16)
+  //   );
+  //   emoji1 = emoji;
+  // }
 
-  const getPng = (text) =>{
-    if (text){
-    let png = emojiPng.find((e)=> e.name === text)
-    return png.src
-  }
-  }
+  // const getPng = (text) => {
+  //   if (text) {
+  //     let png = emojiPng.find((e) => e.name === text);
+  //     return png.src;
+  //   }
+  // };
 
   return (
     <div
@@ -87,7 +87,7 @@ export default function Product({
         // setIsClicked(true)
       }}
     >
-      <img src={getPng(bg)} style={{width: "60px", height:"60px"}}/>
+      {/* <img src={getPng(bg)} style={{width: "60px", height:"60px"}}/> */}
       {/* <div style={{backgroundImage: getPng(bg)}} className={s.productIcon}></div> */}
       {/* <span role="img" aria-label="Emoji" className={s.productIcon}>
         {emoji1}

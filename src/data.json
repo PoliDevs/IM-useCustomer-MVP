@@ -1,0 +1,186 @@
+{
+  "Products": {
+    "allproducts": [
+      {
+        "name": "Hamburguesa",
+        "description": "Hamburguesa de carne",
+        "cost": 10.99,
+        "photo": "https://example.com/hamburguesa.jpg",
+        "id": "1",
+        "promotion": false,
+        "discount": 0,
+        "surcharge": 0,
+        "product": true,
+        "aditional": false,
+        "menuType": {
+          "id": "1"
+        },
+        "category": {
+          "id": "1",
+          "name": "Carne"
+        },
+        "unitType": {
+          "id": "1"
+        },
+        "productType": {
+          "id": "1"
+        },
+        "supplier": {
+          "id": "1"
+        },
+        "allergenType": "None",
+        "careful": false
+      },
+      {
+        "name": "Lasaña",
+        "description": "Lasaña de carne y verduras",
+        "cost": 15.99,
+        "photo": "https://example.com/lasana.jpg",
+        "id": "2",
+        "promotion": false,
+        "discount": 0,
+        "surcharge": 0,
+        "product": true,
+        "aditional": false,
+        "menuType": {
+          "id": "2"
+        },
+        "category": {
+          "id": "2",
+          "name": "Pastas"
+        },
+        "unitType": {
+          "id": "2"
+        },
+        "productType": {
+          "id": "2"
+        },
+        "supplier": {
+          "id": "2"
+        },
+        "allergenType": "None",
+        "careful": false
+      },
+      {
+        "name": "Ensalada",
+        "description": "Ensalada de verduras",
+        "cost": 8.99,
+        "photo": "https://example.com/ensalada.jpg",
+        "id": "3",
+        "promotion": false,
+        "discount": 0,
+        "surcharge": 0,
+        "product": true,
+        "aditional": false,
+        "menuType": {
+          "id": "3"
+        },
+        "category": {
+          "id": "3",
+          "name": "Vegetales"
+        },
+        "unitType": {
+          "id": "3"
+        },
+        "productType": {
+          "id": "3"
+        },
+        "supplier": {
+          "id": "3"
+        },
+        "allergenType": "None",
+        "careful": false
+      },
+      {
+        "name": "Hamburguesa",
+        "description": "Hamburguesa de carne",
+        "cost": 10.99,
+        "photo": "https://example.com/hamburguesa.jpg",
+        "id": "1",
+        "promotion": false,
+        "discount": 0,
+        "surcharge": 0,
+        "product": true,
+        "aditional": false,
+        "menuType": {
+          "id": "1"
+        },
+        "category": {
+          "id": "1",
+          "name": "Carne"
+        },
+        "unitType": {
+          "id": "1"
+        },
+        "productType": {
+          "id": "1"
+        },
+        "supplier": {
+          "id": "1"
+        },
+        "allergenType": "None",
+        "careful": false
+      },
+      {
+        "name": "Hamburguesa",
+        "description": "Hamburguesa de carne",
+        "cost": 10.99,
+        "photo": "https://example.com/hamburguesa.jpg",
+        "id": "1",
+        "promotion": false,
+        "discount": 0,
+        "surcharge": 0,
+        "product": true,
+        "aditional": false,
+        "menuType": {
+          "id": "1"
+        },
+        "category": {
+          "id": "5",
+          "name": "Asado"
+        },
+        "unitType": {
+          "id": "1"
+        },
+        "productType": {
+          "id": "1"
+        },
+        "supplier": {
+          "id": "1"
+        },
+        "allergenType": "None",
+        "careful": false
+      },
+      {
+        "name": "Hamburguesa",
+        "description": "Hamburguesa de carne",
+        "cost": 10.99,
+        "photo": "https://example.com/hamburguesa.jpg",
+        "id": "1",
+        "promotion": false,
+        "discount": 0,
+        "surcharge": 0,
+        "product": true,
+        "aditional": false,
+        "menuType": {
+          "id": "1"
+        },
+        "category": {
+          "id": "5",
+          "name": "Asado"
+        },
+        "unitType": {
+          "id": "1"
+        },
+        "productType": {
+          "id": "1"
+        },
+        "supplier": {
+          "id": "1"
+        },
+        "allergenType": "None",
+        "careful": false
+      }
+    ]
+  }
+}

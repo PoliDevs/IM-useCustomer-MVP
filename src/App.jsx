@@ -15,8 +15,11 @@ import ProtectedRoutes from "./components/atoms/ProtectedRoutes/ProtectedRoutes"
 import { useDispatch } from "react-redux";
 import { changeLanguage } from "./redux/actions";
 import axios from "axios";
+
 import MyOrders from "./components/pages/MyOrders/MyOrders";
 // axios.defaults.baseURL = "http://localhost:3001/";
+// axios.defaults.baseURL = "https://nodejs-production-bbf9.up.railway.app";
+axios.defaults.baseURL = "https://web-production-053a.up.railway.app";
 // axios.defaults.baseURL = "https://nodejs-production-bbf9.up.railway.app";
 axios.defaults.baseURL = "https://web-production-053a.up.railway.app";
 function App() {
@@ -28,7 +31,9 @@ function App() {
 
   // useEffect(() => {
   //   dispatch(changeLanguage(lang))
+  //   dispatch(changeLanguage(lang))
   // }, [])
+
 
   return (
     <>
