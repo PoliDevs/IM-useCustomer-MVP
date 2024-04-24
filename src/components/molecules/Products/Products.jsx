@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useSelector } from "react-redux";
 import useModal from "../../../utils/Functions";
 import ScrollContainer from "react-indiana-drag-scroll";
@@ -8,8 +9,15 @@ import s from "./Products.module.scss";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import { capitalizeFirstLetter } from "../../../utils/Functions";
 import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
-export default function Products({ changeStyle, commercePlan, aditionals }) {
+export default function Products({
+  changeStyle,
+  commercePlan,
+  aditionals,
+  scrollToCategory,
+  categoryRefs,
+}) {
   const [t] = useTranslation(["global"]);
   const allproducts = useSelector((state) => {
     const { allProducts, filtroPor, allAditionals, products, search } = state;
@@ -23,7 +31,6 @@ export default function Products({ changeStyle, commercePlan, aditionals }) {
     if (!filtroPor && aditionals) return allAditionals;
     return allProducts;
   });
-  console.log(allproducts);
   const filtroPro = useSelector((state) => state.filtroPor);
   const search = useSelector((state) => state.search);
   const loading = useSelector((state) => state.loading);
@@ -38,18 +45,25 @@ export default function Products({ changeStyle, commercePlan, aditionals }) {
     return acc;
   }, {});
 
-  const reorderedProductsByCategory = {};
+  // const reorderedProductsByCategory = {};
 
-  if (filtroPro && productsByCategory[filtroPro]) {
-    reorderedProductsByCategory[filtroPro] = productsByCategory[filtroPro];
-    delete productsByCategory[filtroPro];
-  }
+  // if (filtroPro && productsByCategory[filtroPro]) {
+  //   reorderedProductsByCategory[filtroPro] = productsByCategory[filtroPro];
+  //   delete productsByCategory[filtroPro];
+  // }
 
-  const reorderedEntries = Object.entries(reorderedProductsByCategory);
-  const productsEntries = Object.entries(productsByCategory);
+  // const reorderedEntries = Object.entries(reorderedProductsByCategory);
+  // const productsEntries = Object.entries(productsByCategory);
 
-  const sortedEntries = reorderedEntries.concat(productsEntries);
-  console.log(sortedEntries);
+  // const sortedEntries = reorderedEntries.concat(productsEntries);
+  const sortedEntries = Object.entries(productsByCategory);
+
+  useEffect(() => {
+    if (filtroPro) {
+      scrollToCategory(filtroPro);
+    }
+  }, [filtroPro, scrollToCategory,]);
+
   const { isOpen, openModal, closeModal, productData } = useModal(false);
 
   return (
@@ -63,7 +77,13 @@ export default function Products({ changeStyle, commercePlan, aditionals }) {
         <ScrollContainer className={s.productsContainer}>
           {Array.isArray(sortedEntries[0])
             ? sortedEntries.map(([categoryId, products]) => (
-                <div key={categoryId} className={s.titleConteiner}>
+                <div
+                  key={categoryId}
+                  className={s.titleConteiner}
+                  ref={(el) => {
+                    categoryRefs.current[categoryId] = el;
+                  }}
+                >
                   <SubTitle alignment={"left"}>
                     {capitalizeFirstLetter(products[0]?.category?.category)}
                   </SubTitle>

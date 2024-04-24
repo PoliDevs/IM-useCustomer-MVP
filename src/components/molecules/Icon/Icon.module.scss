@@ -13,6 +13,12 @@
   padding: 12px;
   background-color: $background-secundary;
   border-radius: 15px;
+   color: $text-desable;
+  &.selected {
+    border: 2px solid #ff4747;
+    color: #ff4747;
+  }
+
   .icon {
     // display: inline-block;
     display: none;
@@ -23,13 +29,11 @@
   .name {
     font-size: $caption;
     text-wrap: nowrap;
+   
   }
 }
 
-.selected {
-  border: 2px solid #ff4747;
-  color: #ff4747;
-}
+
 
 .disabled {
   pointer-events: none;

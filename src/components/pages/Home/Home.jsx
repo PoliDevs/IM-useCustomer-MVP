@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { batch, useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import {
@@ -29,6 +29,7 @@ export default function Home() {
   const pendingOrders = useSelector((state) => state.ordersByUser);
   const [isLoading, setIsLoading] = useState(true);
   const [category, setCategory] = useState(null);
+  const [currentCategory, setCurrentCategory] = useState(null);
   const [aditionals, setAditionals] = useState(false);
   const [all, setAll] = useState(category || aditionals ? false : true);
   const [red, setRed] = useState(false);
@@ -55,6 +56,17 @@ export default function Home() {
     setCategory(null);
     dispatch(getActiveAditionals(commerce.id));
     setAll(false);
+  };
+
+  const categoryRefs = useRef({});
+  const scrollToCategory = (categoryId) => {
+    const firstCategoryRef = Object.values(categoryRefs.current)[0];
+    if (!categoryId) {
+      // Si categoryId es nulo o falso, desplazamos al inicio
+      firstCategoryRef.scrollIntoView({ behavior: "smooth" });
+    } else if (categoryRefs.current[categoryId]) {
+      categoryRefs.current[categoryId].scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   useEffect(() => {
@@ -89,6 +101,7 @@ export default function Home() {
         all={all}
         setAll={setAll}
         handleAditionals={handleAditionals}
+        scrollToCategory={scrollToCategory}
       />
       {/* {isLoading ? (
         <LoadingPage small={true}/>
@@ -98,6 +111,8 @@ export default function Home() {
           changeStyle={changeStyle}
           commercePlan={commerce.plan}
           aditionals={aditionals}
+          scrollToCategory={scrollToCategory}
+          categoryRefs={categoryRefs}
         />
         {!isLoading && commerce.plan !== "m1" && <Footer red={red} />}
       </>
