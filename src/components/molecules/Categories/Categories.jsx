@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import ScrollContainer from "react-indiana-drag-scroll";
-import SmallText from "../../atoms/SmallText/SmallText";
 import Icon from "../Icon/Icon";
 import s from "./Categories.module.scss";
+import { useState } from "react";
 // import categories from "../../../categories.json";
 // import { getActiveAditionals } from "../../../redux/actions";
 // import AllCategoryIcon from "../../atoms/AllCategoryIcon/AllCategoryIcon";
@@ -17,17 +17,29 @@ export default function Categories({
   setAditionals,
   all,
   setAll,
+  scrollToCategory,
 }) {
   const activeCategories = useSelector((state) => state.allCategories);
-  // const commerceId = useSelector((state) => state.commerce.id);
-  // const language = useSelector((state) => state.language);
-  const [t, i18n] = useTranslation(["global"]);
-  // const dispatch = useDispatch();
-  // const activeCategories = categories.categories;
+  const allProducts = useSelector((state) => state.allProducts);
+  console.log(allProducts);
+  const search = useSelector((state) => state.search);
+  const loading = useSelector((state) => state.loading);
+  const dispatch = useDispatch();
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const handleCategoryClick = (categoryId) => {
+    if (selectedCategory === categoryId) {
+      setSelectedCategory(null);
+      scrollToCategory(null);
+    } else {
+      setSelectedCategory(categoryId);
+      scrollToCategory(categoryId);
+    }
+  };
+  const filteredActiveCategories = activeCategories.filter((category) => {
+    return allProducts.some((product) => product.category.id === category.id);
+  });
 
-  activeCategories.slice().sort((a, b) => a.category.localeCompare(b.category));
-
-  activeCategories.forEach((categoryObject) => {
+  filteredActiveCategories.forEach((categoryObject) => {
     categoryObject.category =
       categoryObject.category.charAt(0).toUpperCase() +
       categoryObject.category.slice(1);
@@ -57,13 +69,15 @@ export default function Categories({
             handleCategory={handleCategory}
             text={language.categories_aditionals}
           /> */}
-          {activeCategories?.map((categoryObject, index) => (
+          {filteredActiveCategories?.map((categoryObject, index) => (
             <Icon
               key={index}
               id={categoryObject.id}
               name={categoryObject.category}
-              handleCategory={handleCategory}
+              handleCategory={handleCategoryClick}
               category={category}
+              selected={selectedCategory === categoryObject.id}
+              disabled={search.length > 0 || loading}
             />
           ))}
         </ScrollContainer>

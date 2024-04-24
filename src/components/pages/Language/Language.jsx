@@ -135,7 +135,7 @@ export default function Language() {
         // ) : (
         //   ""
         // )
-        <LoadingPage />
+        <LoadingPage text={t("loader.title")} />
       )}
     </main>
   );

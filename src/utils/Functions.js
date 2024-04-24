@@ -1,21 +1,21 @@
-import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
-import { all_app_texts } from "./language";
-import { all_app_default } from "./defaultLanguage";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addProduct, removeProduct } from "../redux/actions";
-import { categoryIcons } from "./Constants";
-import CryptoJS from "crypto-js";
-import dotenv from "dotenv";
+import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
+import { all_app_texts } from './language';
+import { all_app_default } from './defaultLanguage';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addProduct, removeProduct } from '../redux/actions';
+import { categoryIcons } from './Constants';
+import CryptoJS from 'crypto-js';
+import dotenv from 'dotenv';
 
 export default function useModal(initialValue = false) {
   const [isOpen, setIsOpen] = useState(initialValue);
   const [productData, setProductData] = useState({
-    name: "",
+    name: '',
     price: 0,
-    image: "",
-    description: "",
+    image: '',
+    description: '',
   });
 
   const openModal = (
@@ -150,7 +150,7 @@ export const randomIcon = () => {
 export const dataDecrypt = (data) => {
   const password = import.meta.env.VITE_REACT_APP_KEY;
   const result = CryptoJS.AES.decrypt(data, password);
-  const originalText = result.toString(CryptoJS.enc.Utf8).split("/");
+  const originalText = result.toString(CryptoJS.enc.Utf8).split('/');
   const urlInfo = {
     commerce: originalText[0],
     sector: originalText[1],
@@ -159,40 +159,37 @@ export const dataDecrypt = (data) => {
   return urlInfo;
 };
 
-
 //* Funcion para obtener nombres y descripciones del menu
-export function menuTranslate (array) {
+export function menuTranslate(array) {
   const menuData = {
     nombres: [],
-    descripciones: []
-  }
-  array.map((m)=>{
-    menuData.nombres.push({name: m.name});
-    if (m.description) menuData.descripciones.push({description: m.description});
-  })
+    descripciones: [],
+  };
+  array.map((m) => {
+    menuData.nombres.push({ name: m.name });
+    if (m.description)
+      menuData.descripciones.push({ description: m.description });
+  });
 
-  return menuData
+  return menuData;
 }
 //* Funcion para obtener nombres y descripciones del menu
 
 //* Funcion para obtener nombres de las categorias
 export function categoryTranslate(array) {
-
-  const nombres= [];
+  const nombres = [];
 
   array.map((c) => {
-    nombres.push({ name: c.category })
+    nombres.push({ name: c.category });
   });
 
   return nombres;
 }
 //* Funcion para obtener nombres de las categorias
 
-
 //! funcionando -- falta pasar como variable from y to
-export async function translateText(lang = "en", all_app_texts, menu=false) {
+export async function translateText(lang = 'en', all_app_texts, menu = false) {
   try {
-    
     //! obtengo todos los valores de un array con objetos
     const arrayTexts = all_app_texts.map((obj) => {
       const clave = Object.keys(obj)[0];
@@ -205,40 +202,45 @@ export async function translateText(lang = "en", all_app_texts, menu=false) {
     //! hago la traduccion
     return await axios({
       baseURL: import.meta.env.VITE_MICROSOFT_TRANSLATE_ENDPOINT,
-      url: "/translate",
-      method: "post",
+      url: '/translate',
+      method: 'post',
       headers: {
-        "Ocp-Apim-Subscription-Key": import.meta.env.VITE_MICROSOFT_TRANSLATE_KEY,
-        "Ocp-Apim-Subscription-Region": import.meta.env.VITE_MICROSOFT_LOCATION,
-        "Content-type": "application/json",
-        "X-ClientTraceId": uuidv4().toString(),
+        'Ocp-Apim-Subscription-Key': import.meta.env
+          .VITE_MICROSOFT_TRANSLATE_KEY,
+        'Ocp-Apim-Subscription-Region': import.meta.env.VITE_MICROSOFT_LOCATION,
+        'Content-type': 'application/json',
+        'X-ClientTraceId': uuidv4().toString(),
       },
       params: {
-        "api-version": "3.0",
-        from: "es",
+        'api-version': '3.0',
+        from: 'es',
         to: lang,
       },
       data: formattedTextArray,
-      responseType: "json",
+      responseType: 'json',
     }).then(function (response) {
       // console.log(JSON.stringify(response.data, null, 4));
       const all_app_texts_translated = all_app_texts.map((o, index) => {
         const key = Object.keys(o)[0];
         return { [key]: response.data[index].translations[0].text };
       });
-  
-      if(!menu){
+
+      if (!menu) {
         for (const obj of all_app_texts_translated) {
-        Object.assign(objetoResultado, obj);
+          Object.assign(objetoResultado, obj);
+        }
+        //! resultado en forma de objeto
+        return objetoResultado;
+      } else {
+        return all_app_texts_translated;
       }
-      //! resultado en forma de objeto
-      return objetoResultado;
-    } else {
-      return all_app_texts_translated
-    }
     });
   } catch (error) {
-  if (!menu) {return all_app_default}else{return menu}  
+    if (!menu) {
+      return all_app_default;
+    } else {
+      return menu;
+    }
   }
 }
 
@@ -294,7 +296,7 @@ export const formattedOrder = (
   // precioMenu =
   //   tablePrice.tablePromotion ? precioMenu -
   //   (precioMenu * tablePrice.tablePromotion) / 100 : precioMenu;
-  // precioMenu = 
+  // precioMenu =
   // tablePrice.tableDiscount ? precioMenu -
   // (precioMenu * tablePrice.tableDiscount) / 100
   //   : precioMenu;
@@ -336,22 +338,21 @@ export const formattedOrder = (
   // return order;
 };
 
-
 export const detectLanguage = async (textSample = 'How are you') => {
   try {
     return await axios({
       baseURL: import.meta.env.VITE_MICROSOFT_TRANSLATE_ENDPOINT,
-      url: "/detect",
-      method: "post",
+      url: '/detect',
+      method: 'post',
       headers: {
-        "Ocp-Apim-Subscription-Key": import.meta.env
+        'Ocp-Apim-Subscription-Key': import.meta.env
           .VITE_MICROSOFT_TRANSLATE_KEY,
-        "Ocp-Apim-Subscription-Region": import.meta.env.VITE_MICROSOFT_LOCATION,
-        "Content-type": "application/json",
-        "X-ClientTraceId": uuidv4().toString(),
+        'Ocp-Apim-Subscription-Region': import.meta.env.VITE_MICROSOFT_LOCATION,
+        'Content-type': 'application/json',
+        'X-ClientTraceId': uuidv4().toString(),
       },
       params: {
-        "api-version": "3.0",
+        'api-version': '3.0',
         // from: "en",
         // to: ["fr", "zu"],
       },
@@ -360,7 +361,7 @@ export const detectLanguage = async (textSample = 'How are you') => {
           text: textSample,
         },
       ],
-      responseType: "json",
+      responseType: 'json',
     }).then(function (response) {
       console.log(response.data[0].language);
       return response.data[0].language;
@@ -368,4 +369,10 @@ export const detectLanguage = async (textSample = 'How are you') => {
   } catch (error) {
     console.error(error);
   }
+};
+
+export const capitalizeFirstLetter = (string) => {
+  if (!string) return '';
+
+  return string.charAt(0).toUpperCase() + string.slice(1);
 };

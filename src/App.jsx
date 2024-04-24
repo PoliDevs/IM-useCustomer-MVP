@@ -48,18 +48,33 @@ function App() {
           }
         />
         <Route path="/language/*" element={<Language />} />
+<<<<<<< HEAD
+         <Route element={<ProtectedRoutes />}>
+         <Route path="/login" element={<Login scanResult={scanResult} />} />
+         <Route
+           path="/welcome"
+           element={<WelcomePage scanResult={scanResult} />}
+         />
+         <Route path="/instruction" element={<Instruction />} />
+         <Route path="/home" element={<Home />} />
+         <Route path="/payment" element={<Payment />} />
+         <Route path="/mercadopago" element={<Mercadopago />} />
+         <Route path="/rating/:id?" element={<Review />} />
+         <Route path="/myorders" element={<MyOrders />} />
+=======
+        <Route element={<ProtectedRoutes />}>
           <Route path="/login" element={<Login scanResult={scanResult} />} />
           <Route
-          path="/welcome"
-          element={<WelcomePage scanResult={scanResult} />}
-        />  
-        <Route element={<ProtectedRoutes />}>
-        <Route path="/instruction" element={<Instruction />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/payment" element={<Payment />} />
-        <Route path="/mercadopago" element={<Mercadopago />} />
-        <Route path="/rating/:id?" element={<Review />} />
-        <Route path="/myorders" element={<MyOrders />} />
+            path="/welcome"
+            element={<WelcomePage scanResult={scanResult} />}
+          />
+          <Route path="/instruction" element={<Instruction />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/mercadopago" element={<Mercadopago />} />
+          <Route path="/rating/:id?" element={<Review />} />
+          <Route path="/myorders" element={<MyOrders />} />
+>>>>>>> origin/IM-LG-LucasRama
         </Route>
       </Routes>
     </>

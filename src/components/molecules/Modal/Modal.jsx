@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { ReactComponent as XIcon } from "../../../assets/xIcon.svg";
-import { useAmountControls} from "../../../utils/Functions";
+import { useAmountControls } from "../../../utils/Functions";
 import { useTranslation } from "react-i18next";
 import TextArea from "../../atoms/TextArea/TextArea";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
@@ -12,18 +12,23 @@ import { useEffect } from "react";
 import { isAvailable } from "../../../redux/actions";
 import { emojiPng } from "../../../utils/Constants";
 
-export default function Modal({ productData,  isOpen, closeModal, changeStyle}) {
-  const cart = useSelector((state)=> state.cart);
+export default function Modal({
+  productData,
+  isOpen,
+  closeModal,
+  changeStyle,
+}) {
+  const cart = useSelector((state) => state.cart);
   const allproducts = useSelector((state) => state.allProducts);
   const alladitionals = useSelector((state) => state.allAditionals);
   const products = useSelector((state) => state.products);
-  const language = useSelector((state)=> state.language);
-  const available = useSelector((state)=> state.productAvailable);
+  const language = useSelector((state) => state.language);
+  const available = useSelector((state) => state.productAvailable);
   const [comment, setComment] = useState("");
   const [amount, setAmount] = useState(0);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  const {addToCart} = useAmountControls();
+  const { addToCart } = useAmountControls();
 
   const [t, i18n] = useTranslation(["global"]);
 
@@ -38,17 +43,17 @@ export default function Modal({ productData,  isOpen, closeModal, changeStyle}) 
   //    emoji1 = emoji;
   //  }
 
-   //? useEffect para consultar si el producto abierto esta activo.
-   useEffect(() => {
-     productData.name && dispatch(isAvailable(productData.name, setLoading));
-   }, [allproducts, alladitionals, products]);
+  //? useEffect para consultar si el producto abierto esta activo.
+  useEffect(() => {
+    productData.name && dispatch(isAvailable(productData.name, setLoading));
+  }, [allproducts, alladitionals, products, dispatch]);
 
-    // const getPng = (text) => {
-    //   if (text) {
-    //     let png = emojiPng.find((e) => e.name === text);
-    //     return png.src;
-    //   }
-    // };
+  // const getPng = (text) => {
+  //   if (text) {
+  //     let png = emojiPng.find((e) => e.name === text);
+  //     return png.src;
+  //   }
+  // };
 
   return (
     <article className={`${s.modalContainer} ${isOpen && s.open}`}>

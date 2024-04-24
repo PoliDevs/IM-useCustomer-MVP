@@ -31,6 +31,7 @@ export default function Product({
   supplierId,
   allergenType,
   careful,
+  active,
 }) {
   const commerceId = useSelector((state) => state.commerce.id);
   const dispatch = useDispatch();
@@ -79,7 +80,8 @@ export default function Product({
           productTypeId,
           supplierId,
           allergenType,
-          careful
+          careful,
+          active
         );
         dispatch(getActiveMenus(commerceId));
         dispatch(getActiveProducts(commerceId));
@@ -99,16 +101,23 @@ export default function Product({
             text={name}
             bold={true}
             noMargin={true}
+            disabled={!active}
           />
           <SmallText
             alignment={"left"}
             text={description}
             smaller={true}
             noMargin={true}
+            disabled={!active}
           />
         </div>
         {/* <Paragraph alignment={"left"} text={`$ ${cost}`} bold={true} /> */}
-        <Paragraph alignment={"left"} text={`$ ${price}`} bold={true} />
+        <Paragraph
+          alignment={"left"}
+          text={`$ ${price}`}
+          bold={true}
+          disabled={!active}
+        />
       </div>
     </div>
   );
