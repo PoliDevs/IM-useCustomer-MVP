@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as ArrowBackWhite } from "../../../assets/ArrowBackWhite.svg";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import burger from "../../../assets/Burgers.svg";
 import menu from "../../../assets/logo-imenu-full.png";
 import s from "./Banner.module.scss";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
+import { getFileDownloadURL } from "../../../Firebase/Firebase";
 
 //? agrego setIsLoading a navbar
 export default function Banner({
@@ -27,7 +28,16 @@ export default function Banner({
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [t, i18n] = useTranslation(["global"]);
+  const [imgURL, setImgURL] = useState(false);
 
+  useEffect(() => {
+    const fetchImageURL = async () => {
+      const fileName = commerce.id.toString(); // Reemplaza con el nombre de tu archivo
+      const url = await getFileDownloadURL(fileName);
+      setImgURL(url);
+    };
+    fetchImageURL();
+  }, []);
   return (
     <section
       className={s.banner}
@@ -50,12 +60,10 @@ export default function Banner({
           />
         )}
         <div className={s.imageContainer}>
-          <img
-            src={burger}
-            width={"100%"}
-            height={"100px"}
-            className={s.image}
-          />
+        <img
+         src={imgURL}
+         className={s.image}
+                    />
         </div>
         <div
           className={s.conteinerSubtitle}
