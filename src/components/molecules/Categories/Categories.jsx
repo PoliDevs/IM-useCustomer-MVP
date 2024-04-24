@@ -21,7 +21,6 @@ export default function Categories({
 }) {
   const activeCategories = useSelector((state) => state.allCategories);
   const allProducts = useSelector((state) => state.allProducts);
-  console.log(allProducts);
   const search = useSelector((state) => state.search);
   const loading = useSelector((state) => state.loading);
   const dispatch = useDispatch();
