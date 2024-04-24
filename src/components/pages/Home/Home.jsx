@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { batch, useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+
 import {
   addCart,
   filterCategory,
@@ -22,10 +23,12 @@ import Footer from "../../molecules/Footer/Footer";
 import s from "./Home.module.scss";
 import { dataDecrypt } from "../../../utils/Functions";
 import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
+import Toast from "../../atoms/Toast/Toast";
 export default function Home() {
   const commerce = useSelector((state) => state.commerce);
   const userEmail = useSelector((state) => state.user.email);
   const cant = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart);
   const pendingOrders = useSelector((state) => state.ordersByUser);
   const [isLoading, setIsLoading] = useState(true);
   const [category, setCategory] = useState(null);
@@ -34,7 +37,7 @@ export default function Home() {
   const [all, setAll] = useState(category || aditionals ? false : true);
   const [red, setRed] = useState(false);
   const dispatch = useDispatch();
-
+  console.log(cart);
   const [t, i18n] = useTranslation(["global"]);
 
   const changeStyle = () => {
@@ -68,6 +71,12 @@ export default function Home() {
       categoryRefs.current[categoryId].scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  // useEffect(() => {
+  //   if (cart.length > 0) {
+
+  //   }
+  // }, [cart]);
 
   useEffect(() => {
     dispatch(addCart(cant));
@@ -114,6 +123,13 @@ export default function Home() {
           scrollToCategory={scrollToCategory}
           categoryRefs={categoryRefs}
         />
+        {!isLoading && cart.length > 0 ? (
+          <Toast
+            text={`Tienes ${cart.length} productos pendientes, click para ir a ver tu pedido`}
+            link={"payment"}
+          />
+        ) : null}
+
         {!isLoading && commerce.plan !== "m1" && <Footer red={red} />}
       </>
     </main>
