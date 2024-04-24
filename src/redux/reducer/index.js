@@ -94,46 +94,7 @@ export const rootReducer = (state = initalState, action) => {
       return { ...state, table: action.payload };
     case SET_SECTOR:
       return { ...state, sector: action.payload };
-    // case GET_SEARCHED_PRODUCT: {
-    //   const copy = [
-    //     ...state.allProducts,
-    //     ...state.products,
-    //     ...state.allAditionals,
-    //   ];
-    //   const results = copy.filter((p) =>
-    //     p.name.toLowerCase().includes(action.payload.toLowerCase())
-    //   );
-    //   if (results.length) {
-    //     return (state = { ...state, search: results });
-    //   } else {
-    //     return state;
-    //   }
-    // }
-    // case GET_SEARCHED_PRODUCT: {
-    //   const copy = [
-    //     ...state.allProducts,
-    //     ...state.products,
-    //     ...state.allAditionals,
-    //   ];
 
-    //   const searchTerm = action.payload.toLowerCase();
-    //   console.log('searchterm', searchTerm);
-    //   const matchingResults = copy.filter((p) =>
-    //     p.name.toLowerCase().includes(searchTerm)
-    //   );
-
-    //   const otherResults = copy.filter(
-    //     (p) => !p.name.toLowerCase().includes(searchTerm)
-    //   );
-
-    //   const sortedResults = [...matchingResults, ...otherResults];
-    //   console.log('sortedresults', sortedResults);
-    //   if (sortedResults.length) {
-    //     return (state = { ...state, search: sortedResults });
-    //   } else {
-    //     return state;
-    //   }
-    // }
     case GET_SEARCHED_PRODUCT: {
       const allProducts = [
         ...state.allProducts,

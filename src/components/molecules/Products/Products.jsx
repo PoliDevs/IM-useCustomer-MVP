@@ -10,7 +10,6 @@ import SubTitle from "../../atoms/SubTitle/SubTitle";
 import { capitalizeFirstLetter } from "../../../utils/Functions";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
-
 export default function Products({
   changeStyle,
   commercePlan,
@@ -31,6 +30,7 @@ export default function Products({
     if (!filtroPor && aditionals) return allAditionals;
     return allProducts;
   });
+
   const filtroPro = useSelector((state) => state.filtroPor);
   const search = useSelector((state) => state.search);
   const loading = useSelector((state) => state.loading);
@@ -62,7 +62,7 @@ export default function Products({
     if (filtroPro) {
       scrollToCategory(filtroPro);
     }
-  }, [filtroPro, scrollToCategory,]);
+  }, [filtroPro, scrollToCategory]);
 
   const { isOpen, openModal, closeModal, productData } = useModal(false);
 
