@@ -1,7 +1,7 @@
 @import "../../../scss/colors.scss";
 @import "../../../scss/typography.scss";
 
-.iconContainer{
+.iconContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,20 +13,30 @@
   padding: 12px;
   background-color: $background-secundary;
   border-radius: 15px;
-.icon {
-  // display: inline-block;
-  display: none;
-  width: 30px;
-  height: 35px;
-  margin: 0 auto
-}
-.name {
-  font-size: $caption;
-  text-wrap:nowrap
-}
+   color: $text-desable;
+  &.selected {
+    border: 2px solid #ff4747;
+    color: #ff4747;
+  }
+
+  .icon {
+    // display: inline-block;
+    display: none;
+    width: 30px;
+    height: 35px;
+    margin: 0 auto;
+  }
+  .name {
+    font-size: $caption;
+    text-wrap: nowrap;
+   
+  }
 }
 
-.selected {
-  background-color: $background-tertiary;
-  color: $text-secondary
+
+
+.disabled {
+  pointer-events: none;
+  background-color: transparent;
+  color: #f0f0f0;
 }

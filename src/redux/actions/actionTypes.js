@@ -23,7 +23,7 @@ export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 export const SET_TABLE_PRICE = "SET_TABLE_PRICE";
 export const SET_SECTOR_PRICE = "SET_SECTOR_PRICE";
 export const IS_PRODUCT_AVAILABLE = "IS_PRODUCT_AVAILABLE";
-
+export const CATEGORY_ID = "CATEGORY_ID";
 ////////////////////* SearchBar Action type *////////////////////
 
 export const GET_SEARCHED_PRODUCT = "GET_SEARCHED_PRODUCT";

@@ -8,6 +8,7 @@ export default function SubTitle({
   secundary,
   review,
   noLineheight,
+  selected
 }) {
   return (
     <h2
@@ -15,7 +16,7 @@ export default function SubTitle({
         alignment === "right" ? s.right : ""
       } ${bold ? s.bold : ""} ${secundary && s.secundary} ${
         review && s.review
-      } ${noLineheight && s.noLineheight}`}
+      } ${noLineheight && s.noLineheight} ${selected ? s.selected : ""}`}
     >
       {children}
       {text}

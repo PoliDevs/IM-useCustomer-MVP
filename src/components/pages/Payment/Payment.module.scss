@@ -21,7 +21,7 @@
     margin: 10px auto 0 auto;
     overflow-y: auto;
     scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
 
     .cashIcon {
       width: 20px;
@@ -56,10 +56,11 @@
     }
   }
 
-  .paymentContent::-webkit-scrollbar { /* WebKit */
+  .paymentContent::-webkit-scrollbar {
+    /* WebKit */
     width: 0;
     height: 0;
-}
+  }
 
   @media screen and (min-height: 590px) {
     .paymentContent {
@@ -71,6 +72,4 @@
       }
     }
   }
-
-
 }

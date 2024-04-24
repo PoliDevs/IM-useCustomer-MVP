@@ -3,7 +3,8 @@
     "title": "Escanea un código Qr"
   },
 "loader": {
-  "title": "Espera mientras preparamos el menu"
+  "title": "Espera mientras preparamos el menu",
+  "title2": "No se pudo encontrar el producto o categoria ingresada"
 },
 "language": {
   "button": "Comenzar",
