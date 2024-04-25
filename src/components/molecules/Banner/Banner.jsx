@@ -20,7 +20,7 @@ export default function Banner({
   setAditionals,
   setAll,
   setIsLoading,
-  containerSubtitleMargin
+  containerSubtitleMargin,
 }) {
   const language = useSelector((state) => state.language);
   const table = useSelector((state) => state.table);
@@ -60,10 +60,11 @@ export default function Banner({
           />
         )}
         <div className={s.imageContainer}>
-        <img
-         src={imgURL}
-         className={s.image}
-                    />
+          <img
+            src={imgURL ? imgURL : menu}
+            className={s.image}
+            width={menu ? "100px" : "54px"}
+          />
         </div>
         <div
           className={s.conteinerSubtitle}
@@ -81,7 +82,12 @@ export default function Banner({
           />
         </div>
         <div>
-          <img src={menu} width={"130px"} height={"100px"} className={s.imagen2} />
+          <img
+            src={menu}
+            width={"150px"}
+            height={"100px"}
+            className={s.imagen2}
+          />
         </div>
       </div>
     </section>
