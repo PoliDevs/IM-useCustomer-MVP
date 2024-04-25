@@ -37,7 +37,6 @@ export default function Home() {
   const [all, setAll] = useState(category || aditionals ? false : true);
   const [red, setRed] = useState(false);
   const dispatch = useDispatch();
-  console.log(cart);
   const [t, i18n] = useTranslation(["global"]);
 
   const changeStyle = () => {

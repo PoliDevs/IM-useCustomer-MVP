@@ -62,6 +62,7 @@ export default function Product({
   return (
     <div
       className={s.productContainer}
+      id="productContainer"
       onClick={() => {
         openModal(
           name,
