@@ -41,7 +41,7 @@
     align-items: center;
   }
   @media screen and (min-width: 430px) {
-    height: 55px;
+    height: 80px;
 
     .content {
       &:before {
@@ -51,7 +51,7 @@
   }
 
   @media screen and (min-width: 750px) {
-    height: 55px;
+    height: 80px;
     .conteinerSubtitle {
       margin-right: 100px;
     }
@@ -64,6 +64,7 @@
   }
 
   @media screen and (max-width: 441px) {
+    height: 80px;
     .conteinerSubtitle {
       margin-right: 85px;
     }
@@ -73,6 +74,7 @@
   }
 
   @media screen and (max-width: 375px) {
+    height: 80px;
     .conteinerSubtitle {
       margin-right: 50px;
     }
