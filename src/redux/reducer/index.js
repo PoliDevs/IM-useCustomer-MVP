@@ -1,5 +1,9 @@
-import { dataDecrypt, menuTranslate, translateText } from "../../utils/Functions";
-import CryptoJS from "crypto-js";
+import {
+  dataDecrypt,
+  menuTranslate,
+  translateText,
+} from '../../utils/Functions';
+import CryptoJS from 'crypto-js';
 import {
   ADD_PRODUCT,
   REMOVE_PRODUCT,
@@ -31,57 +35,55 @@ import {
   REMOVE_ORDER_ID,
   GET_ORDERS_BY_USER,
   CLEAR_ORDER_STATUS,
-} from "../actions/actionTypes";
-import dotenv from "dotenv";
-import { all_app_texts } from "../../utils/language";
+} from '../actions/actionTypes';
+import dotenv from 'dotenv';
+import { all_app_texts } from '../../utils/language';
 
-
-const getEncriptedItem = (item)=> {
+const getEncriptedItem = (item) => {
   const clave = import.meta.env.VITE_REACT_APP_KEY;
   const objetoCifradoRecuperado = localStorage.getItem(item);
-  if (objetoCifradoRecuperado){const bytes = CryptoJS.AES.decrypt(
-    objetoCifradoRecuperado,
-    clave
-    );
-    const objetoOriginal = JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
-  return objetoOriginal
-}else return
-}
+  if (objetoCifradoRecuperado) {
+    const bytes = CryptoJS.AES.decrypt(objetoCifradoRecuperado, clave);
+    const objetoOriginal = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    return objetoOriginal;
+  } else return;
+};
 
 const translation = async () => {
-  await translateText(localStorage.getItem("Lang"), all_app_texts);
-}
+  await translateText(localStorage.getItem('Lang'), all_app_texts);
+};
 
 const initalState = {
-  table: localStorage.getItem("Pos")
-    ? dataDecrypt(localStorage.getItem("Pos")).table
+  table: localStorage.getItem('Pos')
+    ? dataDecrypt(localStorage.getItem('Pos')).table
     : 0,
-  sector: localStorage.getItem("Pos")
-    ? dataDecrypt(localStorage.getItem("Pos")).sector
+  sector: localStorage.getItem('Pos')
+    ? dataDecrypt(localStorage.getItem('Pos')).sector
     : 0,
   allProducts: [],
   allDishes: [],
   products: [],
   allAditionals: [],
   allCategories: [],
-  filtroPor: "",
+  filtroPor: '',
   search: [],
   paymentMethods: [],
   productAvailable: true,
-  cart: localStorage.getItem("cart") ? getEncriptedItem("cart") : [],
-  user: localStorage.getItem("user") ? getEncriptedItem("user") : {},
-  commerce: localStorage.getItem("CM") ? getEncriptedItem("CM") : {},
+  cart: localStorage.getItem('cart') ? getEncriptedItem('cart') : [],
+  user: localStorage.getItem('user') ? getEncriptedItem('user') : {},
+  commerce: localStorage.getItem('CM') ? getEncriptedItem('CM') : {},
   status: false,
+  loading: false,
   // language: localStorage.getItem("Lang")
   //   ? // ? await translateText(localStorage.getItem("Lang"), all_app_texts)
   //     translation()
   //   : "es",
   tablePrice: {},
   sectorPrice: {},
-  orderId: localStorage.getItem("CSMO_ID")
-    ? localStorage.getItem("CSMO_ID")
-    : "",
-  orderStatus: "",
+  orderId: localStorage.getItem('CSMO_ID')
+    ? localStorage.getItem('CSMO_ID')
+    : '',
+  orderStatus: '',
   ordersByUser: [],
 };
 
@@ -92,19 +94,50 @@ export const rootReducer = (state = initalState, action) => {
       return { ...state, table: action.payload };
     case SET_SECTOR:
       return { ...state, sector: action.payload };
+
     case GET_SEARCHED_PRODUCT: {
-      const copy = [...state.allProducts, ...state.products, ...state.allAditionals];
-      const results = copy.filter((p)=>
-        p.name.toLowerCase().includes(action.payload.toLowerCase())
-      );
-      if (results.length) {
-        return (state = {...state, search: results})
-      } else {
-        return state;
+      const allProducts = [
+        ...state.allProducts,
+        ...state.products,
+        ...state.allAditionals,
+      ];
+
+      const searchTerm = action.payload.toLowerCase();
+      const matchingResults = allProducts.filter((p) => {
+        const productName = p.name.toLowerCase();
+        const categoryName = p.category.category.toLowerCase();
+
+        return (
+          productName.includes(searchTerm) || categoryName.includes(searchTerm)
+        );
+      });
+
+      if (matchingResults.length === 0) {
+        return { ...state, search: [], loading: true };
       }
+
+      const groupedResults = matchingResults.reduce((acc, product) => {
+        const categoryId = product.category.id;
+        if (!acc[categoryId]) {
+          acc[categoryId] = {
+            id: `category-${categoryId}`,
+            category: product.category.category,
+            isCategoryHeader: true,
+            products: [],
+          };
+        }
+        acc[categoryId].products.push(product);
+        return acc;
+      }, {});
+
+      return {
+        ...state,
+        search: Object.values(groupedResults),
+        loading: false,
+      };
     }
     case CLEAR_SEARCH_PRODUCT:
-      return {...state, search: []}
+      return { ...state, search: [], loading: false };
     case ADD_CART:
       {
         const clave = import.meta.env.VITE_REACT_APP_KEY;
@@ -113,7 +146,7 @@ export const rootReducer = (state = initalState, action) => {
           clave
         ).toString();
 
-        localStorage.setItem("cart", objetoCifrado);
+        localStorage.setItem('cart', objetoCifrado);
       }
       return state;
     case ADD_PRODUCT: {
@@ -164,7 +197,7 @@ export const rootReducer = (state = initalState, action) => {
         clave
       ).toString();
 
-      localStorage.setItem("user", objetoCifrado);
+      localStorage.setItem('user', objetoCifrado);
 
       return { ...state, user: action.payload };
     }
@@ -176,22 +209,24 @@ export const rootReducer = (state = initalState, action) => {
         plan: action.payload.commercialPlan.plan,
         schedule: action.payload.workSchedule,
       };
+      console.log("CM", CM)
       const clave = import.meta.env.VITE_REACT_APP_KEY;
+      console.log("clave", clave)
       const objetoCifrado = CryptoJS.AES.encrypt(
         JSON.stringify(CM),
         clave
       ).toString();
 
-      localStorage.setItem("CM", objetoCifrado);
+      localStorage.setItem('CM', objetoCifrado);
       return { ...state, commerce: CM };
     }
     case GET_STATUS:
       return { ...state, status: action.payload };
     case GET_PAYMENT_METHODS:
-      return {...state, paymentMethods: action.payload}
+      return { ...state, paymentMethods: action.payload };
     case GET_ACTIVE_MENUS:
       {
-        const allActive = action.payload.filter((m)=> m.active === true);
+        const allActive = action.payload.filter((m) => m.active === true);
         state = { ...state, allProducts: allActive };
       }
       return state;
@@ -210,7 +245,7 @@ export const rootReducer = (state = initalState, action) => {
       return state;
     case GET_ALL_CATEGORIES:
       return { ...state, allCategories: action.payload };
-    case GET_ALL_ADITIONALS:{
+    case GET_ALL_ADITIONALS: {
       return { ...state, allAditionals: action.payload };
     }
     case FILTER_CATEGORY: {
@@ -222,69 +257,79 @@ export const rootReducer = (state = initalState, action) => {
     }
     case FILTER_BY_CATEGORY:
       return { ...state, filtroPor: action.payload };
-    case IS_PRODUCT_AVAILABLE:
-      {
-        const allItemsAvailable = [...state.allProducts, ...state.allAditionals, state.products];
-        let available = allItemsAvailable.findIndex((i)=> i.name === action.payload.name);
-        if (available !== -1){
-          action.payload.setLoading(false)
-          return {...state, productAvailable: true}
-        }else {
-          action.payload.setLoading(false);
-          return {...state, productAvailable: false}
-        }
+    case IS_PRODUCT_AVAILABLE: {
+      const allItemsAvailable = [
+        ...state.allProducts,
+        ...state.allAditionals,
+        state.products,
+      ];
+      let available = allItemsAvailable.findIndex(
+        (i) => i.name === action.payload.name
+      );
+      if (available !== -1) {
+        action.payload.setLoading(false);
+        return { ...state, productAvailable: true };
+      } else {
+        action.payload.setLoading(false);
+        return { ...state, productAvailable: false };
       }
+    }
     case REMOVE_USER:
       {
-        localStorage.removeItem("user");
-        state = { ...state, user: "" };
+        localStorage.removeItem('user');
+        state = { ...state, user: '' };
       }
       return state;
     case CHANGE_LANGUAGE:
       {
-        localStorage.setItem("Lang", action.payload.lang);
+        localStorage.setItem('Lang', action.payload.lang);
         // state = { ...state, language: action.payload };
         //!descomentar - probando loader en cambio de idioma - home
         // state = { ...state, language: action.payload.language, allProducts: [], allAditionals: [], products: [], allCategories: [] };
-        state = { ...state, language: action.payload.language}
+        state = { ...state, language: action.payload.language };
       }
       return state;
     case SET_TABLE_PRICE:
       return { ...state, tablePrice: action.payload };
     case SET_SECTOR_PRICE:
       return { ...state, sectorPrice: action.payload };
-    case GET_ORDER_STATUS:
-      { 
-        let orderId = action.payload.allOrders.find(
-          (o) => o.id == action.payload.orderId
-        );
-        let status = orderId ? orderId.status : '';
-        return {...state, orderStatus: status}
-      }
+    case GET_ORDER_STATUS: {
+      let orderId = action.payload.allOrders.find(
+        (o) => o.id == action.payload.orderId
+      );
+      let status = orderId ? orderId.status : '';
+      return { ...state, orderStatus: status };
+    }
     case PUT_ORDER_DATA:
       return { ...state, orderId: action.payload.CSMO_ID };
-    case GET_ORDER_PENDING:
-      {
-        let pendingOrder = action.payload.allOrders.filter((o)=> {
-          let pending = (o.status !== 'delivered') && (o.sector.id == action.payload.sectorID) && (o.po.id == action.payload.tableID)
-          return pending
-        })
-        if (pendingOrder.length ){
-          localStorage.setItem("CSMO_ID", pendingOrder[0].id);
-          return {...state, orderId: pendingOrder && pendingOrder[0].id, orderStatus: pendingOrder[0].status}
-        }else{
-          localStorage.removeItem("CSMO_ID")
-          return state
-        }
+    case GET_ORDER_PENDING: {
+      let pendingOrder = action.payload.allOrders.filter((o) => {
+        let pending =
+          o.status !== 'delivered' &&
+          o.sector.id == action.payload.sectorID &&
+          o.po.id == action.payload.tableID;
+        return pending;
+      });
+      if (pendingOrder.length) {
+        localStorage.setItem('CSMO_ID', pendingOrder[0].id);
+        return {
+          ...state,
+          orderId: pendingOrder && pendingOrder[0].id,
+          orderStatus: pendingOrder[0].status,
+        };
+      } else {
+        localStorage.removeItem('CSMO_ID');
+        return state;
       }
+    }
     case GET_ORDERS_BY_USER:
-      return {...state, ordersByUser: action.payload}
-    case REMOVE_CART: 
-    return {...state, cart: []}
+      return { ...state, ordersByUser: action.payload };
+    case REMOVE_CART:
+      return { ...state, cart: [] };
     case REMOVE_ORDER_ID:
-      return {...state, orderId: ''}
+      return { ...state, orderId: '' };
     case CLEAR_ORDER_STATUS:
-      return {...state, orderStatus: ''}
+      return { ...state, orderStatus: '' };
     default:
       return state;
   }

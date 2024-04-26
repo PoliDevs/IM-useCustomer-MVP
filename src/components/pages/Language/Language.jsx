@@ -16,6 +16,7 @@ import s from "./Language.module.scss";
 export default function Language() {
   const language = useSelector((state)=> state.language);
   const commerce = useSelector((state) => state.commerce);
+  console.log("commerce", commerce)
   const [accepted, setAccepted] = useState(false);
   const [checked, setChecked] = useState("");
   const [modal, setModal] = useState(false);
@@ -26,12 +27,28 @@ export default function Language() {
   useEffect(() => {
     localStorage.setItem("Pos", params['*']);
     const decripted = dataDecrypt(params["*"]);
+    console.log("decripted commerce", decripted.commerce)
     if (localStorage.getItem('cart')) localStorage.removeItem('cart');
     dispatch(getCommerce(decripted.commerce));
     dispatch(setSector(decripted.sector));
-    dispatch(setTable(decripted.table))
-    // dispatch(changeLanguage("es"))
+    dispatch(setTable(decripted.table));
+    
+   
+    const storedLanguage = localStorage.getItem("language");
+    if (storedLanguage) {
+      i18n.changeLanguage(storedLanguage);
+    } else {
+      // Si no hay idioma almacenado, establecer el idioma por defecto como "es"
+      i18n.changeLanguage("es");
+    }
   }, []);
+
+  // Función para cambiar el idioma
+  const handleLanguageChange = (lang) => {
+    i18n.changeLanguage(lang);
+    localStorage.setItem("language", lang); // Almacenar el idioma seleccionado en el almacenamiento local
+  };
+
 
   return (
     <main className={s.mainContainer}>
@@ -59,6 +76,7 @@ export default function Language() {
               accepted={accepted}
               checked={checked}
               setChecked={setChecked}
+              onChange={handleLanguageChange}
             />
             <LanguageOption
               text={"Welcome"}
@@ -68,6 +86,7 @@ export default function Language() {
               accepted={accepted}
               checked={checked}
               setChecked={setChecked}
+              onChange={handleLanguageChange}
             />
             <LanguageOption
               text={"Bem-vindo"}
@@ -77,6 +96,7 @@ export default function Language() {
               accepted={accepted}
               checked={checked}
               setChecked={setChecked}
+              onChange={handleLanguageChange}
             />
             <LanguageOption
               text={"Bem-vindo (Br)"}
@@ -86,6 +106,7 @@ export default function Language() {
               accepted={accepted}
               checked={checked}
               setChecked={setChecked}
+              onChange={handleLanguageChange}
             />
           </ScrollContainer>
           <div className={s.buttonWrapper}>
@@ -135,7 +156,7 @@ export default function Language() {
         // ) : (
         //   ""
         // )
-        <LoadingPage />
+        <LoadingPage text={t("loader.title")} />
       )}
     </main>
   );

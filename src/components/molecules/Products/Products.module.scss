@@ -1,11 +1,19 @@
-
 .productsContainer {
   height: 30%;
   width: 90%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
+  // align-items: center;
+  margin: 10px auto;
   flex: 1 1 auto;
   padding-bottom: 110px;
+}
+
+.titleConteiner {
+  > h2 {
+    color: #a6a6a6;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+  }
 }

@@ -25,7 +25,6 @@ function App() {
   const lang = localStorage.getItem("Lang")
     ? localStorage.getItem("Lang")
     : "es";
-
   // useEffect(() => {
   //   dispatch(changeLanguage(lang))
   // }, [])
@@ -43,18 +42,18 @@ function App() {
           }
         />
         <Route path="/language/*" element={<Language />} />
+        <Route element={<ProtectedRoutes />}>
           <Route path="/login" element={<Login scanResult={scanResult} />} />
           <Route
-          path="/welcome"
-          element={<WelcomePage scanResult={scanResult} />}
-        />  
-        <Route element={<ProtectedRoutes />}>
-        <Route path="/instruction" element={<Instruction />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/payment" element={<Payment />} />
-        <Route path="/mercadopago" element={<Mercadopago />} />
-        <Route path="/rating/:id?" element={<Review />} />
-        <Route path="/myorders" element={<MyOrders />} />
+            path="/welcome"
+            element={<WelcomePage scanResult={scanResult} />}
+          />
+          <Route path="/instruction" element={<Instruction />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/mercadopago" element={<Mercadopago />} />
+          <Route path="/rating/:id?" element={<Review />} />
+          <Route path="/myorders" element={<MyOrders />} />
         </Route>
       </Routes>
     </>

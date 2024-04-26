@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import { useTranslation } from "react-i18next";
 import { ReactComponent as Logo } from "../../../assets/Burgers.svg";
-import iMenuFull from '../../../assets/logo-imenu-full.png';
+import iMenuFull from "../../../assets/logo-imenu-full.png";
 import { ReactComponent as ImenuLogo } from "../../../assets/ImenuHorizontal.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -17,35 +17,45 @@ import NavBar from "../../molecules/NavBar/NavBar";
 import s from "./WelcomePage.module.scss";
 import ContactFooter from "../../molecules/ContactFooter/ContactFooter";
 import { useNavigate } from "react-router-dom";
+import { getFileDownloadURL } from "../../../Firebase/Firebase";
 export default function WelcomePage() {
-  const orderStatus = useSelector((state)=> state.orderStatus)
-  const orderPending = useSelector((state)=> state.orderId);
+  const orderStatus = useSelector((state) => state.orderStatus);
+  const orderPending = useSelector((state) => state.orderId);
   const language = useSelector((state) => state.language);
   const commerce = useSelector((state) => state.commerce);
   const sector = useSelector((state) => state.sector);
   const table = useSelector((state) => state.table);
   const open = useSelector((state) => state.status);
   const [isLoading, setIsloading] = useState(true);
+  const [imgURL, setImgURL] = useState(false);
   const [t, i18n] = useTranslation(["global"]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getOrderPending(commerce.id, sector, table))
+    dispatch(getOrderPending(commerce.id, sector, table));
     dispatch(getStatus(commerce.id, setIsloading));
+    const fetchImageURL = async () => {
+      const fileName = commerce.id.toString();
+      const url = await getFileDownloadURL(fileName);
+      setImgURL(url);
+    };
+    fetchImageURL();
   }, []);
 
   useEffect(() => {
-    orderPending && orderStatus !== "delivered" && orderStatus !== "" && navigate('/rating');
-  }, [orderPending])
-  
+    orderPending &&
+      orderStatus !== "delivered" &&
+      orderStatus !== "" &&
+      navigate("/rating");
+  }, [orderPending]);
 
   return (
     <div className={s.home}>
       <>
-        <NavBar navarrow={true} path={"/login"} setIsloading={setIsloading} />
+        {/* <NavBar navarrow={true} path={"/login"} setIsloading={setIsloading} /> */}
         {isLoading ? (
-          <LoadingPage />
+          <LoadingPage text={t("loader.title")} />
         ) : (
           <>
             {open ? (
@@ -55,8 +65,9 @@ export default function WelcomePage() {
                   <SubTitle text={t("welcome.subtitle")} />
                   <HugeTitle text={commerce.name} />
                   <div className={s.spacing}>
-                    <Logo className={s.logo} />
+                    {/*<Logo className={s.logo} />*/}
 
+                    <img src={imgURL} className={s.logo} />
                     {/* <img src={iMenuFull} className={s.logo}/> */}
                     <SubTitle
                       text={`${t("welcome.sector")} ${sector} - ${t(
