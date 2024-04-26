@@ -25,7 +25,6 @@ function App() {
   const lang = localStorage.getItem("Lang")
     ? localStorage.getItem("Lang")
     : "es";
-  console.log("scanresult", scanResult);
   // useEffect(() => {
   //   dispatch(changeLanguage(lang))
   // }, [])

@@ -111,7 +111,6 @@ export const rootReducer = (state = initalState, action) => {
           productName.includes(searchTerm) || categoryName.includes(searchTerm)
         );
       });
-      console.log(matchingResults);
 
       if (matchingResults.length === 0) {
         return { ...state, search: [], loading: true };
@@ -210,7 +209,9 @@ export const rootReducer = (state = initalState, action) => {
         plan: action.payload.commercialPlan.plan,
         schedule: action.payload.workSchedule,
       };
+      console.log("CM", CM)
       const clave = import.meta.env.VITE_REACT_APP_KEY;
+      console.log("clave", clave)
       const objetoCifrado = CryptoJS.AES.encrypt(
         JSON.stringify(CM),
         clave

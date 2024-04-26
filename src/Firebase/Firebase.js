@@ -62,7 +62,6 @@ export const storage = getStorage(app);
 
 export async function uploadFile(file, name) {
   const storageRef = ref(storage, name);
-  console.log(storageRef)
   return await uploadBytes(storageRef, file);
 }
 

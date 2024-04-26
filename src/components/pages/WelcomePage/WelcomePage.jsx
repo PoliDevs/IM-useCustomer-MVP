@@ -33,7 +33,7 @@ export default function WelcomePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getOrderPending(commerce.id, sector, table))
+    dispatch(getOrderPending(commerce.id, sector, table));
     dispatch(getStatus(commerce.id, setIsloading));
     const fetchImageURL = async () => {
       const fileName = commerce.id.toString();
@@ -53,7 +53,7 @@ export default function WelcomePage() {
   return (
     <div className={s.home}>
       <>
-        <NavBar navarrow={true} path={"/login"} setIsloading={setIsloading} />
+        {/* <NavBar navarrow={true} path={"/login"} setIsloading={setIsloading} /> */}
         {isLoading ? (
           <LoadingPage text={t("loader.title")} />
         ) : (
@@ -65,12 +65,9 @@ export default function WelcomePage() {
                   <SubTitle text={t("welcome.subtitle")} />
                   <HugeTitle text={commerce.name} />
                   <div className={s.spacing}>
-                     {/*<Logo className={s.logo} />*/}
+                    {/*<Logo className={s.logo} />*/}
 
-                     <img
-                     src={imgURL}
-                     className={s.logo}
-                    />
+                    <img src={imgURL} className={s.logo} />
                     {/* <img src={iMenuFull} className={s.logo}/> */}
                     <SubTitle
                       text={`${t("welcome.sector")} ${sector} - ${t(

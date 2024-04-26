@@ -16,6 +16,7 @@ import s from "./Language.module.scss";
 export default function Language() {
   const language = useSelector((state)=> state.language);
   const commerce = useSelector((state) => state.commerce);
+  console.log("commerce", commerce)
   const [accepted, setAccepted] = useState(false);
   const [checked, setChecked] = useState("");
   const [modal, setModal] = useState(false);
@@ -26,6 +27,7 @@ export default function Language() {
   useEffect(() => {
     localStorage.setItem("Pos", params['*']);
     const decripted = dataDecrypt(params["*"]);
+    console.log("decripted commerce", decripted.commerce)
     if (localStorage.getItem('cart')) localStorage.removeItem('cart');
     dispatch(getCommerce(decripted.commerce));
     dispatch(setSector(decripted.sector));
