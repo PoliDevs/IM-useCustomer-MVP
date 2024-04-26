@@ -399,6 +399,7 @@ export function getCommerce(id) {
       let commerceInfo = await axios.get(
         `commerce/detail/${id}`
       );
+      console.log("comerceinfo", commerceInfo)
       return dispatch({
         type: GET_COMMERCE,
         payload: commerceInfo.data[0],
