@@ -63,6 +63,7 @@ export default function Home() {
       dispatch(hideBanner(false));
       categoryRefs.current[categoryId].scrollIntoView({ behavior: "smooth" });
     } else if (categoryRefs.current[categoryId]) {
+      dispatch(hideBanner(true));
       categoryRefs.current[categoryId].scrollIntoView({ behavior: "smooth" });
     }
   };
