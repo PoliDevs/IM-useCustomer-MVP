@@ -5,40 +5,40 @@
   margin: 0 auto;
   margin-top: 30px;
   pointer-events: none;
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   .content {
     display: flex;
-    // flex-direction: column;
     justify-content: space-between;
     //?para mostrar texto debajo de la navbar en home
     align-items: center;
+    width: 100%;
     position: relative;
-    width: auto;
+    // width: auto;
     color: #000000;
     height: 100%;
     padding: 10px;
-    &:before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: $border-secondary-radius;
-    }
+    // &:before {
+    //   content: "";
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   width: 100%;
+    //   height: 100%;
+    //   border-radius: $border-secondary-radius;
+    // }
   }
 
-  // .conteinerSubtitle {
-  //   margin-right: 120px;
-  // }
-
-  .image {
-    border-radius: 50px;
-    height: 54px;
-  }
   .imageContainer {
     display: flex;
     align-items: center;
+  }
+
+  .image {
+    border-radius: 50px;
+    margin-right: 0.5rem;
+    height: 54px;
   }
   @media screen and (min-width: 430px) {
     height: 80px;
@@ -77,9 +77,6 @@
     height: 80px;
     .conteinerSubtitle {
       margin-right: 50px;
-    }
-    .imagen2 {
-      width: 80px;
     }
   }
 }
