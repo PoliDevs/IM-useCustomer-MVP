@@ -31,9 +31,24 @@ export default function Language() {
     if (localStorage.getItem('cart')) localStorage.removeItem('cart');
     dispatch(getCommerce(decripted.commerce));
     dispatch(setSector(decripted.sector));
-    dispatch(setTable(decripted.table))
-    // dispatch(changeLanguage("es"))
+    dispatch(setTable(decripted.table));
+    
+   
+    const storedLanguage = localStorage.getItem("language");
+    if (storedLanguage) {
+      i18n.changeLanguage(storedLanguage);
+    } else {
+      // Si no hay idioma almacenado, establecer el idioma por defecto como "es"
+      i18n.changeLanguage("es");
+    }
   }, []);
+
+  // Función para cambiar el idioma
+  const handleLanguageChange = (lang) => {
+    i18n.changeLanguage(lang);
+    localStorage.setItem("language", lang); // Almacenar el idioma seleccionado en el almacenamiento local
+  };
+
 
   return (
     <main className={s.mainContainer}>
@@ -61,6 +76,7 @@ export default function Language() {
               accepted={accepted}
               checked={checked}
               setChecked={setChecked}
+              onChange={handleLanguageChange}
             />
             <LanguageOption
               text={"Welcome"}
@@ -70,6 +86,7 @@ export default function Language() {
               accepted={accepted}
               checked={checked}
               setChecked={setChecked}
+              onChange={handleLanguageChange}
             />
             <LanguageOption
               text={"Bem-vindo"}
@@ -79,6 +96,7 @@ export default function Language() {
               accepted={accepted}
               checked={checked}
               setChecked={setChecked}
+              onChange={handleLanguageChange}
             />
             <LanguageOption
               text={"Bem-vindo (Br)"}
@@ -88,6 +106,7 @@ export default function Language() {
               accepted={accepted}
               checked={checked}
               setChecked={setChecked}
+              onChange={handleLanguageChange}
             />
           </ScrollContainer>
           <div className={s.buttonWrapper}>
