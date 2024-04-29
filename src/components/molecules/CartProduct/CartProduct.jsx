@@ -8,37 +8,44 @@ import Paragraph from "../../atoms/Paragraph/Paragraph";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import SmallText from "../../atoms/SmallText/SmallText";
 import s from "./CartProduct.module.scss";
-import { emojiPng } from "../../../utils/Constants";
+// import { emojiPng } from "../../../utils/Constants";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-export default function CartProduct({image, name, description, comment, price, amount}) {
+export default function CartProduct({
+  image,
+  name,
+  description,
+  comment,
+  price,
+  amount,
+}) {
   const { addToCart, removeFromCart } = useAmountControls();
-  const language = useSelector((state)=> state.language);
+  const language = useSelector((state) => state.language);
   const [t, i18n] = useTranslation(["global"]);
-  
-  let emoji1 = "";
-  if (image) {
-    const unicodeArray = image.split(" ");
 
-    // const unicodeCodes = ["U+D83C", "U+DF70"];
-    // Convierte los códigos Unicode al formato correcto (sin el "U+")
-    const formattedCodes = unicodeArray.map((code) => code.replace("U+", ""));
+  // let emoji1 = "";
+  // if (image) {
+  //   const unicodeArray = image.split(" ");
 
-    // Obtén el emoji a partir de los códigos Unicode formateados
-    const emoji = String.fromCodePoint(
-      parseInt(formattedCodes[0], 16),
-      parseInt(formattedCodes[1], 16)
-    );
-    emoji1 = emoji;
-  }
+  //   // const unicodeCodes = ["U+D83C", "U+DF70"];
+  //   // Convierte los códigos Unicode al formato correcto (sin el "U+")
+  //   const formattedCodes = unicodeArray.map((code) => code.replace("U+", ""));
 
-    const getPng = (text) => {
-      if (text) {
-        let png = emojiPng.find((e) => e.name === text);
-        return png.src;
-      }
-    };
+  //   // Obtén el emoji a partir de los códigos Unicode formateados
+  //   const emoji = String.fromCodePoint(
+  //     parseInt(formattedCodes[0], 16),
+  //     parseInt(formattedCodes[1], 16)
+  //   );
+  //   emoji1 = emoji;
+  // }
+
+  //   const getPng = (text) => {
+  //     if (text) {
+  //       let png = emojiPng.find((e) => e.name === text);
+  //       return png.src;
+  //     }
+  //   };
 
   return (
     <div className={s.cartProduct}>

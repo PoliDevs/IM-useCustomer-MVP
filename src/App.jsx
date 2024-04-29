@@ -13,7 +13,6 @@ import Login from "./components/pages/Login/Login";
 import Language from "./components/pages/Language/Language";
 import ProtectedRoutes from "./components/atoms/ProtectedRoutes/ProtectedRoutes";
 import { useDispatch } from "react-redux";
-import { changeLanguage } from "./redux/actions";
 import axios from "axios";
 import MyOrders from "./components/pages/MyOrders/MyOrders";
 // axios.defaults.baseURL = "http://localhost:3001/";
@@ -50,10 +49,10 @@ function App() {
           />
           <Route path="/instruction" element={<Instruction />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/payment" element={<Payment />} />
+          {/* <Route path="/payment" element={<Payment />} />
           <Route path="/mercadopago" element={<Mercadopago />} />
           <Route path="/rating/:id?" element={<Review />} />
-          <Route path="/myorders" element={<MyOrders />} />
+          <Route path="/myorders" element={<MyOrders />} /> */}
         </Route>
       </Routes>
     </>

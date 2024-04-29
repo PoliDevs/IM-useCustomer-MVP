@@ -1,7 +1,7 @@
 import {
   dataDecrypt,
-  menuTranslate,
-  translateText,
+  // menuTranslate,
+  // translateText,
 } from '../../utils/Functions';
 import CryptoJS from 'crypto-js';
 import {
@@ -35,9 +35,9 @@ import {
   REMOVE_ORDER_ID,
   GET_ORDERS_BY_USER,
   CLEAR_ORDER_STATUS,
+  HIDE_BANNER,
 } from '../actions/actionTypes';
-import dotenv from 'dotenv';
-import { all_app_texts } from '../../utils/language';
+// import { all_app_texts } from '../../utils/language';
 
 const getEncriptedItem = (item) => {
   const clave = import.meta.env.VITE_REACT_APP_KEY;
@@ -49,9 +49,9 @@ const getEncriptedItem = (item) => {
   } else return;
 };
 
-const translation = async () => {
-  await translateText(localStorage.getItem('Lang'), all_app_texts);
-};
+// const translation = async () => {
+//   await translateText(localStorage.getItem('Lang'), all_app_texts);
+// };
 
 const initalState = {
   table: localStorage.getItem('Pos')
@@ -69,6 +69,7 @@ const initalState = {
   search: [],
   paymentMethods: [],
   productAvailable: true,
+  statusBanner: false,
   cart: localStorage.getItem('cart') ? getEncriptedItem('cart') : [],
   user: localStorage.getItem('user') ? getEncriptedItem('user') : {},
   commerce: localStorage.getItem('CM') ? getEncriptedItem('CM') : {},
@@ -209,9 +210,7 @@ export const rootReducer = (state = initalState, action) => {
         plan: action.payload.commercialPlan.plan,
         schedule: action.payload.workSchedule,
       };
-      console.log("CM", CM)
       const clave = import.meta.env.VITE_REACT_APP_KEY;
-      console.log("clave", clave)
       const objetoCifrado = CryptoJS.AES.encrypt(
         JSON.stringify(CM),
         clave
@@ -330,6 +329,8 @@ export const rootReducer = (state = initalState, action) => {
       return { ...state, orderId: '' };
     case CLEAR_ORDER_STATUS:
       return { ...state, orderStatus: '' };
+    case HIDE_BANNER:
+      return { ...state, statusBanner: action.payload };
     default:
       return state;
   }

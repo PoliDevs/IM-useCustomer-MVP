@@ -1,16 +1,16 @@
 /* eslint-disable react/prop-types */
 import { useState, useRef } from "react";
 import { ReactComponent as XIcon } from "../../../assets/xIcon.svg";
-import { useAmountControls } from "../../../utils/Functions";
-import { useTranslation } from "react-i18next";
-import TextArea from "../../atoms/TextArea/TextArea";
+// import { useAmountControls } from "../../../utils/Functions";
+// import { useTranslation } from "react-i18next";
+// import TextArea from "../../atoms/TextArea/TextArea";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import s from "./Modal.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { isAvailable } from "../../../redux/actions";
-import { emojiPng } from "../../../utils/Constants";
+// import { useDispatch, useSelector } from "react-redux";
+// import { useEffect } from "react";
+// import { isAvailable } from "../../../redux/actions";
+// import { emojiPng } from "../../../utils/Constants";
 import { useOnClickOutside } from "../../../hooks/useOnClickOutside";
 export default function Modal({
   productData,

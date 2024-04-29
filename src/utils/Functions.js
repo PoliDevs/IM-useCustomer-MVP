@@ -5,7 +5,7 @@ import { all_app_default } from './defaultLanguage';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addProduct, removeProduct } from '../redux/actions';
-import { categoryIcons } from './Constants';
+// import { categoryIcons } from './Constants';
 import CryptoJS from 'crypto-js';
 import dotenv from 'dotenv';
 
@@ -143,10 +143,10 @@ export function useTermsAndConditions() {
   return { loginModal, openLoginModal, closeLoginModal };
 }
 
-export const randomIcon = () => {
-  let icon = categoryIcons[Math.floor(Math.random() * categoryIcons.length)];
-  return icon;
-};
+// export const randomIcon = () => {
+//   let icon = categoryIcons[Math.floor(Math.random() * categoryIcons.length)];
+//   return icon;
+// };
 export const dataDecrypt = (data) => {
   const password = import.meta.env.VITE_REACT_APP_KEY;
   const result = CryptoJS.AES.decrypt(data, password);
@@ -188,61 +188,61 @@ export function categoryTranslate(array) {
 //* Funcion para obtener nombres de las categorias
 
 //! funcionando -- falta pasar como variable from y to
-export async function translateText(lang = 'en', all_app_texts, menu = false) {
-  try {
-    //! obtengo todos los valores de un array con objetos
-    const arrayTexts = all_app_texts.map((obj) => {
-      const clave = Object.keys(obj)[0];
-      const valor = obj[clave];
-      return valor;
-    });
-    //! les doy la forma que requiere microsoft translator
-    const formattedTextArray = arrayTexts.map((text) => ({ text }));
-    const objetoResultado = {};
-    //! hago la traduccion
-    return await axios({
-      baseURL: import.meta.env.VITE_MICROSOFT_TRANSLATE_ENDPOINT,
-      url: '/translate',
-      method: 'post',
-      headers: {
-        'Ocp-Apim-Subscription-Key': import.meta.env
-          .VITE_MICROSOFT_TRANSLATE_KEY,
-        'Ocp-Apim-Subscription-Region': import.meta.env.VITE_MICROSOFT_LOCATION,
-        'Content-type': 'application/json',
-        'X-ClientTraceId': uuidv4().toString(),
-      },
-      params: {
-        'api-version': '3.0',
-        from: 'es',
-        to: lang,
-      },
-      data: formattedTextArray,
-      responseType: 'json',
-    }).then(function (response) {
-      // console.log(JSON.stringify(response.data, null, 4));
-      const all_app_texts_translated = all_app_texts.map((o, index) => {
-        const key = Object.keys(o)[0];
-        return { [key]: response.data[index].translations[0].text };
-      });
+// export async function translateText(lang = 'en', all_app_texts, menu = false) {
+//   try {
+//     //! obtengo todos los valores de un array con objetos
+//     const arrayTexts = all_app_texts.map((obj) => {
+//       const clave = Object.keys(obj)[0];
+//       const valor = obj[clave];
+//       return valor;
+//     });
+//     //! les doy la forma que requiere microsoft translator
+//     const formattedTextArray = arrayTexts.map((text) => ({ text }));
+//     const objetoResultado = {};
+//     //! hago la traduccion
+//     return await axios({
+//       baseURL: import.meta.env.VITE_MICROSOFT_TRANSLATE_ENDPOINT,
+//       url: '/translate',
+//       method: 'post',
+//       headers: {
+//         'Ocp-Apim-Subscription-Key': import.meta.env
+//           .VITE_MICROSOFT_TRANSLATE_KEY,
+//         'Ocp-Apim-Subscription-Region': import.meta.env.VITE_MICROSOFT_LOCATION,
+//         'Content-type': 'application/json',
+//         'X-ClientTraceId': uuidv4().toString(),
+//       },
+//       params: {
+//         'api-version': '3.0',
+//         from: 'es',
+//         to: lang,
+//       },
+//       data: formattedTextArray,
+//       responseType: 'json',
+//     }).then(function (response) {
+//       // console.log(JSON.stringify(response.data, null, 4));
+//       const all_app_texts_translated = all_app_texts.map((o, index) => {
+//         const key = Object.keys(o)[0];
+//         return { [key]: response.data[index].translations[0].text };
+//       });
 
-      if (!menu) {
-        for (const obj of all_app_texts_translated) {
-          Object.assign(objetoResultado, obj);
-        }
-        //! resultado en forma de objeto
-        return objetoResultado;
-      } else {
-        return all_app_texts_translated;
-      }
-    });
-  } catch (error) {
-    if (!menu) {
-      return all_app_default;
-    } else {
-      return menu;
-    }
-  }
-}
+//       if (!menu) {
+//         for (const obj of all_app_texts_translated) {
+//           Object.assign(objetoResultado, obj);
+//         }
+//         //! resultado en forma de objeto
+//         return objetoResultado;
+//       } else {
+//         return all_app_texts_translated;
+//       }
+//     });
+//   } catch (error) {
+//     if (!menu) {
+//       return all_app_default;
+//     } else {
+//       return menu;
+//     }
+//   }
+// }
 
 export const formattedOrder = (
   user,
