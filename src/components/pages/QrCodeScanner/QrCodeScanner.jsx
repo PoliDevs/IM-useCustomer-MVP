@@ -31,7 +31,7 @@ export default function Qr({ scanResult, setScanResult }) {
       showTorchButtonIfSupported: true,
     });
 
-    scanner.render(success, error);
+    scanner.render(success);
     //{ facingMode: "environment" } para preferir camara trasera
     function success(result) {
       scanner.clear();
@@ -50,9 +50,9 @@ export default function Qr({ scanResult, setScanResult }) {
       }
     }
 
-    function error(error) {
-      console.warn(error);
-    }
+    // function error(error) {
+    //   console.warn(error);
+    // }
   }, []);
 
   return (

@@ -20,7 +20,6 @@ export default function Categories({
   scrollToCategory,
 }) {
   const activeCategories = useSelector((state) => state.allCategories);
-  console.log(activeCategories);
   const allProducts = useSelector((state) => state.allProducts);
   const search = useSelector((state) => state.search);
   const loading = useSelector((state) => state.loading);

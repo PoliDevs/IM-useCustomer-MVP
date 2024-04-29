@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { changeLanguage, getCommerce, setSector, setTable} from "../../../redux/actions";
+import { getCommerce, setSector, setTable} from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { dataDecrypt } from "../../../utils/Functions";
 import { ReactComponent as ArrowRight } from "../../../assets/ArrowLongRight.svg";
-import { idiomas } from "../../../utils/Constants";
 import ScrollContainer from "react-indiana-drag-scroll";
 import LanguageOption from "../../molecules/LanguageOption/LanguageOption";
 import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
@@ -35,6 +34,7 @@ export default function Language() {
     
    
     const storedLanguage = localStorage.getItem("language");
+    console.log("storedlenguage", storedLanguage)
     if (storedLanguage) {
       i18n.changeLanguage(storedLanguage);
     } else {

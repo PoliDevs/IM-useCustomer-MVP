@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 /* eslint-disable react/prop-types */
 import { useSelector } from "react-redux";
 import useModal from "../../../utils/Functions";
@@ -11,6 +11,8 @@ import SubTitle from "../../atoms/SubTitle/SubTitle";
 import { capitalizeFirstLetter, formatNumber } from "../../../utils/Functions";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { hideBanner } from "../../../redux/actions";
 export default function Products({
   changeStyle,
   commercePlan,
@@ -20,6 +22,7 @@ export default function Products({
 }) {
   const [t] = useTranslation(["global"]);
   const divRef = useRef(null);
+  const dispatch = useDispatch();
   const allproducts = useSelector((state) => {
     const { allProducts, filtroPor, allAditionals, products, search } = state;
 
@@ -47,17 +50,6 @@ export default function Products({
     return acc;
   }, {});
 
-  // const reorderedProductsByCategory = {};
-
-  // if (filtroPro && productsByCategory[filtroPro]) {
-  //   reorderedProductsByCategory[filtroPro] = productsByCategory[filtroPro];
-  //   delete productsByCategory[filtroPro];
-  // }
-
-  // const reorderedEntries = Object.entries(reorderedProductsByCategory);
-  // const productsEntries = Object.entries(productsByCategory);
-
-  // const sortedEntries = reorderedEntries.concat(productsEntries);
   const sortedEntries = Object.entries(productsByCategory);
 
   useEffect(() => {
@@ -66,15 +58,14 @@ export default function Products({
     }
   }, [filtroPro, scrollToCategory]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const div = divRef.current;
-      console.log(div);
-      return div;
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const handleScrollChange = (id) => {
+    const scrollTop = id;
+    if (scrollTop < 230) {
+      dispatch(hideBanner(false));
+    } else {
+      dispatch(hideBanner(true));
+    }
+  };
 
   const { isOpen, openModal, closeModal, productData } = useModal(false);
 
@@ -86,7 +77,11 @@ export default function Products({
           text={t("No se pudo encontrar el producto o categoria ingresado")}
         />
       ) : sortedEntries.length > 0 ? (
-        <ScrollContainer className={s.productsContainer}>
+        <ScrollContainer
+          className={s.productsContainer}
+          ref={divRef}
+          onScroll={() => handleScrollChange(divRef.current.scrollTop)}
+        >
           {Array.isArray(sortedEntries[0])
             ? sortedEntries.map(([categoryId, products]) => (
                 <div
@@ -94,7 +89,6 @@ export default function Products({
                   className={s.titleConteiner}
                   ref={(el) => {
                     categoryRefs.current[categoryId] = el;
-                    divRef;
                   }}
                   id={categoryId}
                 >

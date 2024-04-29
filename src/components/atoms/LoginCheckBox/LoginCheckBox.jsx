@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { changeLanguage } from "../../../redux/actions";
 import s from "./LoginCheckBox.module.scss";
 import { useDispatch } from "react-redux";
 
