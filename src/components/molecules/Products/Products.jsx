@@ -1,3 +1,4 @@
+import { useRef } from "react";
 /* eslint-disable react/prop-types */
 import { useSelector } from "react-redux";
 import useModal from "../../../utils/Functions";
@@ -7,7 +8,7 @@ import Modal from "../Modal/Modal";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import s from "./Products.module.scss";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
-import { capitalizeFirstLetter } from "../../../utils/Functions";
+import { capitalizeFirstLetter, formatNumber } from "../../../utils/Functions";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 export default function Products({
@@ -18,6 +19,7 @@ export default function Products({
   categoryRefs,
 }) {
   const [t] = useTranslation(["global"]);
+  const divRef = useRef(null);
   const allproducts = useSelector((state) => {
     const { allProducts, filtroPor, allAditionals, products, search } = state;
 
@@ -64,6 +66,16 @@ export default function Products({
     }
   }, [filtroPro, scrollToCategory]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const div = divRef.current;
+      console.log(div);
+      return div;
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const { isOpen, openModal, closeModal, productData } = useModal(false);
 
   return (
@@ -82,7 +94,9 @@ export default function Products({
                   className={s.titleConteiner}
                   ref={(el) => {
                     categoryRefs.current[categoryId] = el;
+                    divRef;
                   }}
+                  id={categoryId}
                 >
                   <SubTitle alignment={"left"}>
                     {capitalizeFirstLetter(products[0]?.category?.category)}
@@ -94,7 +108,7 @@ export default function Products({
                       description={
                         capitalizeFirstLetter(product.description) || ""
                       }
-                      price={product.cost || 0}
+                      price={formatNumber(product.cost) || 0}
                       bg={product.photo || ""}
                       id={product.id || ""}
                       active={product.active || false}

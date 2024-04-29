@@ -48,7 +48,7 @@ export default function Banner({
       // }}
     >
       <div className={s.content}>
-        {arrow && (
+        {/* {arrow && (
           <ArrowBackWhite
             style={{
               width: "21px",
@@ -58,28 +58,34 @@ export default function Banner({
             }}
             onClick={() => navigate(-1)}
           />
-        )}
+        )} */}
         <div className={s.imageContainer}>
           <img
             src={imgURL ? imgURL : menu}
             className={s.image}
             width={menu ? "100px" : "54px"}
           />
-        </div>
-        <div
-          className={s.conteinerSubtitle}
-          style={{
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <SubTitle text={commerce.name} alignment={"left"} bold={true} />
-          <Paragraph
-            alignment={"left"}
-            text={` ${t("banner.Table")} ${table && table}`}
-            secundary={true}
-            color={"#000000"}
-          />
+
+          <div
+            className={s.conteinerSubtitle}
+            // style={{
+            //   display: "flex",
+            //   flexDirection: "column",
+            // }}
+          >
+            <SubTitle
+              text={commerce.name}
+              alignment={"left"}
+              bold={true}
+              size={3}
+            />
+            <Paragraph
+              alignment={"left"}
+              text={` ${t("banner.Table")} ${table && table}`}
+              secundary={true}
+              color={"#000000"}
+            />
+          </div>
         </div>
         <div>
           <img

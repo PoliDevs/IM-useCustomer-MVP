@@ -13,7 +13,14 @@
   padding: 12px;
   background-color: $background-secundary;
   border-radius: 15px;
-   color: $text-desable;
+  color: $text-desable;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+    color: $text-desable;
+  }
+
   &.selected {
     border: 2px solid #ff4747;
     color: #ff4747;
@@ -29,11 +36,9 @@
   .name {
     font-size: $caption;
     text-wrap: nowrap;
-   
+    font-family: "Arial", sans-serif;
   }
 }
-
-
 
 .disabled {
   pointer-events: none;

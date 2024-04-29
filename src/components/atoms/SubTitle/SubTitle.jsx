@@ -1,4 +1,4 @@
-import s from "./SubTitle.module.scss"
+import s from "./SubTitle.module.scss";
 
 export default function SubTitle({
   text,
@@ -8,7 +8,8 @@ export default function SubTitle({
   secundary,
   review,
   noLineheight,
-  selected
+  selected,
+  size,
 }) {
   return (
     <h2
@@ -16,7 +17,9 @@ export default function SubTitle({
         alignment === "right" ? s.right : ""
       } ${bold ? s.bold : ""} ${secundary && s.secundary} ${
         review && s.review
-      } ${noLineheight && s.noLineheight} ${selected ? s.selected : ""}`}
+      } ${noLineheight && s.noLineheight} ${selected ? s.selected : ""} ${
+        size ? s[`size-${size}`] : ""
+      }`}
     >
       {children}
       {text}

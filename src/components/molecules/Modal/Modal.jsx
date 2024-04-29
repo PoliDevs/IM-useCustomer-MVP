@@ -18,20 +18,20 @@ export default function Modal({
   closeModal,
   changeStyle,
 }) {
-  const cart = useSelector((state) => state.cart);
-  const allproducts = useSelector((state) => state.allProducts);
-  const alladitionals = useSelector((state) => state.allAditionals);
-  const products = useSelector((state) => state.products);
-  const language = useSelector((state) => state.language);
-  const available = useSelector((state) => state.productAvailable);
-  const [comment, setComment] = useState("");
-  const [amount, setAmount] = useState(0);
-  const [loading, setLoading] = useState(true);
+  // const cart = useSelector((state) => state.cart);
+  // const allproducts = useSelector((state) => state.allProducts);
+  // const alladitionals = useSelector((state) => state.allAditionals);
+  // const products = useSelector((state) => state.products);
+  // const language = useSelector((state) => state.language);
+  // const available = useSelector((state) => state.productAvailable);
+  // const [comment, setComment] = useState("");
+  // const [amount, setAmount] = useState(0);
+  // const [loading, setLoading] = useState(true);
   const dropdownRef = useRef(null);
-  const dispatch = useDispatch();
-  const { addToCart } = useAmountControls();
+  // const dispatch = useDispatch();
+  // const { addToCart } = useAmountControls();
 
-  const [t, i18n] = useTranslation(["global"]);
+  // const [t, i18n] = useTranslation(["global"]);
   //  let emoji1 = "";
   //  if (productData.image) {
   //    const unicodeArray = productData.image.split(" ");
@@ -89,12 +89,14 @@ export default function Modal({
                 className={s.productTitle}
                 alignment={"left"}
                 text={productData.name}
+                bold={true}
               />
               <Paragraph
                 className={s.productDescription}
                 text={productData.description}
                 alignment={"left"}
-                scrollable={true}
+                scrollable={false}
+                maxHeight={2}
               />
               <h3 className={s.productPrice}>{`$ ${productData.price}`}</h3>
             </div>
