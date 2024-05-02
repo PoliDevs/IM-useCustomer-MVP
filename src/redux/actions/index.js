@@ -29,6 +29,7 @@ import {
   // GET_ORDERS_BY_USER,
   CLEAR_ORDER_STATUS,
   HIDE_BANNER,
+  GET_ID_CATEGORY,
 } from './actionTypes';
 // import { TRANSLATE_TEXT } from "./actionTypes";
 import { v4 as uuidv4 } from 'uuid';
@@ -330,7 +331,6 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
     };
     if (mercadoPago) {
       let orderMp = { commerce: { commerce: commerceName }, order: newOrder };
-      /* console.log(orderMp) */
       let response = await axios.post('mp/create-order', orderMp);
       //!mercadoPago retorna una url a la que hay que redirigir
       localStorage.setItem('CSMO_ID', response.data.id);
@@ -393,7 +393,6 @@ export function getCommerce(id) {
   return async function (dispatch) {
     try {
       let commerceInfo = await axios.get(`commerce/detail/${id}`);
-      console.log('comerceinfo', commerceInfo);
       return dispatch({
         type: GET_COMMERCE,
         payload: commerceInfo.data[0],
@@ -1213,5 +1212,12 @@ export const hideBanner = (scroll) => {
   return {
     type: HIDE_BANNER,
     payload: scroll,
+  };
+};
+
+export const getIdCategory = (id) => {
+  return {
+    type: GET_ID_CATEGORY,
+    payload: id,
   };
 };

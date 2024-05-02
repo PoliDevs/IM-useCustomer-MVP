@@ -36,6 +36,7 @@ import {
   GET_ORDERS_BY_USER,
   CLEAR_ORDER_STATUS,
   HIDE_BANNER,
+  GET_ID_CATEGORY,
 } from '../actions/actionTypes';
 // import { all_app_texts } from '../../utils/language';
 
@@ -70,6 +71,7 @@ const initalState = {
   paymentMethods: [],
   productAvailable: true,
   statusBanner: false,
+  idCategoy: 0,
   cart: localStorage.getItem('cart') ? getEncriptedItem('cart') : [],
   user: localStorage.getItem('user') ? getEncriptedItem('user') : {},
   commerce: localStorage.getItem('CM') ? getEncriptedItem('CM') : {},
@@ -331,6 +333,8 @@ export const rootReducer = (state = initalState, action) => {
       return { ...state, orderStatus: '' };
     case HIDE_BANNER:
       return { ...state, statusBanner: action.payload };
+    case GET_ID_CATEGORY:
+      return { ...state, idCategory: action.payload };
     default:
       return state;
   }

@@ -56,15 +56,15 @@ export default function Home() {
     setAll(false);
   };
 
-  const categoryRefs = useRef({});
+  const categoryTitleRefs = useRef({});
   const scrollToCategory = (categoryId) => {
-    const firstCategoryId = parseInt(Object.values(categoryRefs.current)[0].id);
+    const firstCategoryId = parseInt(Object.values(categoryTitleRefs.current)[0].id);
     if (categoryId === firstCategoryId) {
       dispatch(hideBanner(false));
-      categoryRefs.current[categoryId].scrollIntoView({ behavior: "smooth" });
-    } else if (categoryRefs.current[categoryId]) {
+      categoryTitleRefs.current[categoryId].scrollIntoView({ behavior: "smooth" });
+    } else if (categoryTitleRefs.current[categoryId]) {
       dispatch(hideBanner(true));
-      categoryRefs.current[categoryId].scrollIntoView({ behavior: "smooth" });
+      categoryTitleRefs.current[categoryId].scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -114,7 +114,7 @@ export default function Home() {
           commercePlan={commerce.plan}
           aditionals={aditionals}
           scrollToCategory={scrollToCategory}
-          categoryRefs={categoryRefs}
+          categoryRefs={categoryTitleRefs}
         />
         {!isLoading && cart.length > 0 ? (
           <Toast

@@ -17,13 +17,8 @@ export default function Paragraph({
   underline,
   maxHeight,
 }) {
-  const [expanded, setExpanded] = useState(false);
-  const truncatedText =
-    text && text.length > 110 ? `${text.substring(0, 110)}...` : text;
-
-  const handleClick = () => {
-    setExpanded(!expanded);
-  };
+  // const truncatedText =
+  //   text && text.length > 110 ? `${text.substring(0, 110)}...` : text;
 
   return (
     <p
@@ -35,14 +30,12 @@ export default function Paragraph({
         disabled && s.disabled
       } ${gap && s.gap} ${noMargin && s.noMargin} ${
         underline && s.underline
-      }   ${expanded ? s.maxHeight-1  : s.maxHeight-2}`}
+      }   `}
       style={{
         color: color && color,
-        cursor: maxHeight ? "pointer" : "inherit",
       }}
-      onClick={maxHeight ? handleClick : undefined}
     >
-      {expanded ? text : truncatedText}
+      {text}
       {children}
     </p>
   );

@@ -14,7 +14,7 @@ export default function Icon({
   return (
     <a
       style={{ textDecoration: "none" }}
-      id={`category-${id}`}
+      id={id}
       className={`${s.iconContainer} ${selected ? s.selected : ""} ${
         disabled && s.disabled
       }`}

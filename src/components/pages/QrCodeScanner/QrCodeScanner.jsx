@@ -36,14 +36,11 @@ export default function Qr({ scanResult, setScanResult }) {
     function success(result) {
       scanner.clear();
       const partesURL = result.split("/");
-      console.log("partesurl", partesURL);
       const indexLanguage = partesURL.indexOf("language");
-      console.log("indexLanguage", indexLanguage);
       if (indexLanguage !== -1 && indexLanguage < partesURL.length - 1) {
         const loQueVieneDespués = partesURL
           .slice(indexLanguage, partesURL.length)
           .join("/");
-        console.log("loquevienedespues", loQueVieneDespués);
         navigate(loQueVieneDespués);
       } else {
         return;
