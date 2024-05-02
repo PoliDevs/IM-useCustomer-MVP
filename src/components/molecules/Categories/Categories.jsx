@@ -46,7 +46,7 @@ export default function Categories({
     });
 
     if (categoryElement) {
-      categoryElement.scrollIntoView({ behavior: "smooth", inline: "center" });
+      categoryElement.scrollIntoView({ behavior: "smooth"});
       setIsCategoryClickSelected(false)
     }
   }, [categoryProductString]);
