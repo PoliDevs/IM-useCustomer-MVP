@@ -101,7 +101,7 @@ export default function Products({
 
   const handleScrollChange = (scrollCords) => {
     const scrollTop = scrollCords;
-    if (scrollTop >= 250) {
+    if (scrollTop >= 247) {
       dispatch(hideBanner(false));
     } else {
       dispatch(hideBanner(true));

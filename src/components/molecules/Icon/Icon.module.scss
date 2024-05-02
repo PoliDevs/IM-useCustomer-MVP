@@ -11,14 +11,16 @@
   height: auto;
   margin: 0 5px;
   padding: 12px;
+  padding-left: 15px;
+  padding-right: 15px;
   background-color: $background-secundary;
-  border-radius: 15px;
-  color: $text-desable;
+  border-radius: 28px;
+  color: $text-figma;
   text-decoration: none;
 
   &:hover {
     text-decoration: none;
-    color: $text-desable;
+    color: $text-figma;
   }
 
   &.selected {

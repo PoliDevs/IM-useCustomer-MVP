@@ -87,16 +87,15 @@ export default function Home() {
   return (
     <main className={s.home}>
       {/* //?agregado setIsLoading a navBar */}
-      {showBanner ? (
-        <Banner
-          ordersButton={pendingOrders.length && true}
-          navarrow={true}
-          setCategory={setCategory}
-          setAditionals={setAditionals}
-          setAll={setAll}
-          setIsLoading={setIsLoading}
-        />
-      ) : null}
+
+      <Banner
+        ordersButton={pendingOrders.length && true}
+        navarrow={true}
+        setCategory={setCategory}
+        setAditionals={setAditionals}
+        setAll={setAll}
+        setIsLoading={setIsLoading}
+      />
 
       {/* //movi hacia arriba searchBar y Categories */}
       <SearchBar />

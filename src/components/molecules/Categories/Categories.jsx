@@ -31,7 +31,7 @@ export default function Categories({
   const [isCategoryClickSelected, setIsCategoryClickSelected] = useState(false);
   const scrollContainerRef = useRef(null);
 
-  
+
   const handleCategoryClick = (categoryId) => {
     setSelectedCategory(categoryId);
     setIsCategoryClickSelected(true);
@@ -71,7 +71,7 @@ export default function Categories({
         />
       </div> */}
       <div style={{ position: "relative", height: "auto" }}>
-        <ScrollContainer className={s.scrollContainer} ref={scrollContainerRef}>
+        <ScrollContainer className={s.scrollContainer} ref={scrollContainerRef} nativeMobileScroll={false}>
           {/* <AllCategoryIcon
             all={all}
             setAll={setAll}

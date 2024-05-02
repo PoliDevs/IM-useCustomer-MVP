@@ -41,7 +41,7 @@ export default function Banner({
   }, []);
   return (
     <section
-      className={`${s.banner} ${showBanner ? "" : s.fadeOut}`}
+      className={`${s.banner} ${showBanner ? s.fadeIn : s.fadeOut}`}
       //!cambiar url segun el comercio
       // style={{ backgroundImage: `url(${burger})` }}
       // onClick={() => {
@@ -64,7 +64,8 @@ export default function Banner({
           <img
             src={imgURL ? imgURL : menu}
             className={s.image}
-            width={menu ? "100px" : "54px"}
+            width={menu ? "53.8px" : "53.8px"}
+            height={"53.8"}
           />
 
           <div
@@ -75,7 +76,7 @@ export default function Banner({
             // }}
           >
             <SubTitle
-              text={commerce.name}
+              text={"CAFE MARTINEZ"}
               alignment={"left"}
               bold={true}
               size={3}
@@ -88,10 +89,11 @@ export default function Banner({
             />
           </div>
         </div>
+
         <div>
           <img
             src={menu}
-            width={"150px"}
+            width={"100px"}
             height={"100px"}
             className={s.imagen2}
           />

@@ -70,7 +70,7 @@ const initalState = {
   search: [],
   paymentMethods: [],
   productAvailable: true,
-  statusBanner: false,
+  statusBanner: true,
   idCategoy: 0,
   cart: localStorage.getItem('cart') ? getEncriptedItem('cart') : [],
   user: localStorage.getItem('user') ? getEncriptedItem('user') : {},
