@@ -23,6 +23,7 @@ export default function Banner({
   containerSubtitleMargin,
 }) {
   const language = useSelector((state) => state.language);
+  const showBanner = useSelector((state) => state.statusBanner);
   const table = useSelector((state) => state.table);
   const commerce = useSelector((state) => state.commerce);
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ export default function Banner({
   }, []);
   return (
     <section
-      className={s.banner}
+      className={`${s.banner} ${showBanner ? "" : s.fadeOut}`}
       //!cambiar url segun el comercio
       // style={{ backgroundImage: `url(${burger})` }}
       // onClick={() => {

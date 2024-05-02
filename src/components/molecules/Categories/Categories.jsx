@@ -27,17 +27,15 @@ export default function Categories({
   const categoryProductsId = useSelector((state) => parseInt(state.idCategory));
   const categoryProductString = useSelector((state) => state.idCategory);
   const dispatch = useDispatch();
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(0);
+  const [isCategoryClickSelected, setIsCategoryClickSelected] = useState(false);
   const scrollContainerRef = useRef(null);
 
+  
   const handleCategoryClick = (categoryId) => {
-    if (selectedCategory === categoryId) {
-      setSelectedCategory(null);
-      scrollToCategory(null);
-    } else {
-      setSelectedCategory(categoryId);
-      scrollToCategory(categoryId);
-    }
+    setSelectedCategory(categoryId);
+    setIsCategoryClickSelected(true);
+    scrollToCategory(categoryId);
   };
 
   useEffect(() => {
@@ -49,6 +47,7 @@ export default function Categories({
 
     if (categoryElement) {
       categoryElement.scrollIntoView({ behavior: "smooth", inline: "center" });
+      setIsCategoryClickSelected(false)
     }
   }, [categoryProductString]);
 
@@ -93,7 +92,10 @@ export default function Categories({
               name={categoryObject.category}
               handleCategory={handleCategoryClick}
               category={category}
-              selected={categoryObject.id === categoryProductsId}
+              selected={
+                (isCategoryClickSelected && categoryObject.id === selectedCategory) ||
+                (!isCategoryClickSelected && categoryObject.id === categoryProductsId)
+              }
               disabled={search.length > 0 || loading}
             />
           ))}

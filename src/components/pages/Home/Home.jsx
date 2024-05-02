@@ -58,13 +58,19 @@ export default function Home() {
 
   const categoryTitleRefs = useRef({});
   const scrollToCategory = (categoryId) => {
-    const firstCategoryId = parseInt(Object.values(categoryTitleRefs.current)[0].id);
+    const firstCategoryId = parseInt(
+      Object.values(categoryTitleRefs.current)[0].id
+    );
     if (categoryId === firstCategoryId) {
-      dispatch(hideBanner(false));
-      categoryTitleRefs.current[categoryId].scrollIntoView({ behavior: "smooth" });
-    } else if (categoryTitleRefs.current[categoryId]) {
       dispatch(hideBanner(true));
-      categoryTitleRefs.current[categoryId].scrollIntoView({ behavior: "smooth" });
+      categoryTitleRefs.current[categoryId].scrollIntoView({
+        behavior: "smooth",
+      });
+    } else if (categoryTitleRefs.current[categoryId]) {
+      dispatch(hideBanner(false));
+      categoryTitleRefs.current[categoryId].scrollIntoView({
+        behavior: "smooth",
+      });
     }
   };
 
@@ -81,7 +87,7 @@ export default function Home() {
   return (
     <main className={s.home}>
       {/* //?agregado setIsLoading a navBar */}
-      {!showBanner ? (
+      {showBanner ? (
         <Banner
           ordersButton={pendingOrders.length && true}
           navarrow={true}

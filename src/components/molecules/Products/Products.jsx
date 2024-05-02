@@ -59,49 +59,7 @@ export default function Products({
     }
   }, [filtroPro, scrollToCategory]);
 
-  // const getCurrentCategoryId = (scrollPosition) => {
-  //   for (const categoryId in categoryRefs.current) {
-  //     const categoryElement = categoryRefs.current[categoryId];
-  //     // const categoryPosition = categoryElement.offsetTop;
-  //     const categoryHeight = categoryElement.offsetHeight;
-  //     // console.log(
-  //     //   "categoryPosition, categoryHeight, scrollPosition",
-  //     //   categoryPosition,
-  //     //   categoryHeight,
-  //     //   scrollPosition
-  //     // );
-  //     // Ajusta el rango según tus necesidades
-  //     if (scrollPosition >= categoryHeight) {
-  //       console.log(categoryId);
-  //       return categoryId;
-  //     }
-  //   }
-
-  //   return null; // Si no se encuentra una categoría actual
-  // };
-  // const getCurrentCategoryId = (scrollPosition) => {
-  //   let lastCategoryId = null;
-  //   let accumulatedHeight = 0;
-
-  //   for (const categoryId in categoryRefs.current) {
-  //     const categoryElement = categoryRefs.current[categoryId];
-  //     const categoryHeight = categoryElement.offsetHeight;
-
-  //     // Compara el scrollPosition con el rango de la categoría actual
-  //     if (
-  //       scrollPosition >= accumulatedHeight &&
-  //       scrollPosition < accumulatedHeight + categoryHeight
-  //     ) {
-  //       lastCategoryId = categoryId;
-  //       break; // Salimos del bucle una vez que encontramos la categoría actual
-  //     }
-
-  //     // Añade la altura de la categoría actual al total acumulado
-  //     accumulatedHeight += categoryHeight;
-  //   }
-  //   console.log(lastCategoryId);
-  //   return lastCategoryId;
-  // };
+  
 
   const getCurrentCategoryId = (scrollPosition) => {
     let lastCategoryId = null;
@@ -143,7 +101,7 @@ export default function Products({
 
   const handleScrollChange = (scrollCords) => {
     const scrollTop = scrollCords;
-    if (scrollTop < 230) {
+    if (scrollTop >= 250) {
       dispatch(hideBanner(false));
     } else {
       dispatch(hideBanner(true));
