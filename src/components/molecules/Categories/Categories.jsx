@@ -74,7 +74,7 @@ export default function Categories({
         />
       </div> */}
       <div style={{ position: "relative", height: "auto" }}>
-        <ScrollContainer className={s.scrollContainer} ref={scrollContainerRef}>
+        <ScrollContainer className={s.scrollContainer} ref={scrollContainerRef} vertical={false} horizontal={true}>
           {/* <AllCategoryIcon
             all={all}
             setAll={setAll}
