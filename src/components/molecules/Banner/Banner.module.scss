@@ -33,6 +33,7 @@
   .imageContainer {
     display: flex;
     align-items: center;
+    margin-left: 10px;
   }
 
   .image {
@@ -100,8 +101,9 @@
     opacity: 1;
   }
   100% {
-    display: none;
+    visibility: hidden;
     opacity: 0;
+    height: 0;
   }
 }
 

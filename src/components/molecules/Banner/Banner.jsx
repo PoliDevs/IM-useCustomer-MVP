@@ -76,7 +76,7 @@ export default function Banner({
             // }}
           >
             <SubTitle
-              text={"CAFE MARTINEZ"}
+              text={commerce.name}
               alignment={"left"}
               bold={true}
               size={3}
