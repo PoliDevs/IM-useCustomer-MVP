@@ -16,6 +16,7 @@ export default function SearchBar() {
   const [inputValue, setInputValue] = useState("");
   const dispatch = useDispatch();
   const commerceId = useSelector((state) => state.commerce.id);
+  const comerce = useSelector((state) => state.commerce.name);
   const language = useSelector((state) => state.language);
   const [t, i18n] = useTranslation(["global"]);
 
@@ -52,7 +53,7 @@ export default function SearchBar() {
     <div className={`${s.searchBar} ${inputValue ? s.border : ""}`}>
       <SearchIcon className={`${s.searchIcon} ${inputValue ? s.strong : ""}`} />
       <SearchField
-        placeholder={t("searchbar.placeholder")}
+        placeholder={`Buscar en ${comerce}`}
         inputValue={inputValue}
         handleChange={handleChange}
       />

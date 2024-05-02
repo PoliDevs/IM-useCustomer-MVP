@@ -30,7 +30,6 @@ export default function Categories({
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [isCategoryClickSelected, setIsCategoryClickSelected] = useState(false);
   const scrollContainerRef = useRef(null);
-
   const handleCategoryClick = (categoryId) => {
     setSelectedCategory(categoryId);
     setIsCategoryClickSelected(true);
@@ -39,11 +38,10 @@ export default function Categories({
 
   useEffect(() => {
     const categoryElement = Array.from(
-      scrollContainerRef.current.container.current.childNodes
+      scrollContainerRef.current.container.current.children
     ).find((node) => {
       return node.id === categoryProductString;
     });
-
     if (categoryElement) {
       categoryElement.scrollIntoView({
         behavior: "smooth",
