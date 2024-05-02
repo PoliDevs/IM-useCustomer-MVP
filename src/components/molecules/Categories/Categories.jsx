@@ -38,7 +38,7 @@ export default function Categories({
 
   useEffect(() => {
     const categoryElement = Array.from(
-      scrollContainerRef.current.container.current.children
+      scrollContainerRef.current.container.current.childNodes
     ).find((node) => {
       return node.id === categoryProductString;
     });
