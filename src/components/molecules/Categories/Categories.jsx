@@ -31,7 +31,6 @@ export default function Categories({
   const [isCategoryClickSelected, setIsCategoryClickSelected] = useState(false);
   const scrollContainerRef = useRef(null);
 
-
   const handleCategoryClick = (categoryId) => {
     setSelectedCategory(categoryId);
     setIsCategoryClickSelected(true);
@@ -46,8 +45,12 @@ export default function Categories({
     });
 
     if (categoryElement) {
-      categoryElement.scrollIntoView({ behavior: "smooth"});
-      setIsCategoryClickSelected(false)
+      categoryElement.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      });
+      setIsCategoryClickSelected(false);
     }
   }, [categoryProductString]);
 
@@ -93,8 +96,10 @@ export default function Categories({
               handleCategory={handleCategoryClick}
               category={category}
               selected={
-                (isCategoryClickSelected && categoryObject.id === selectedCategory) ||
-                (!isCategoryClickSelected && categoryObject.id === categoryProductsId)
+                (isCategoryClickSelected &&
+                  categoryObject.id === selectedCategory) ||
+                (!isCategoryClickSelected &&
+                  categoryObject.id === categoryProductsId)
               }
               disabled={search.length > 0 || loading}
             />
