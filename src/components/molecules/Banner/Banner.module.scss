@@ -56,12 +56,18 @@
     // .conteinerSubtitle {
     //   margin-right: 100px;
     // }
+    .imagen2 {
+      width: 150px;
+    }
   }
 
   @media screen and (max-width: 750px) {
     // .conteinerSubtitle {
     //   margin-right: 130px;
     // }
+    .imagen2 {
+      width: 150px;
+    }
   }
 
   @media screen and (max-width: 441px) {
@@ -76,7 +82,7 @@
     height: 40px;
 
     .imagen2 {
-      width: 75px;
+      width: 120px;
     }
   }
 }
