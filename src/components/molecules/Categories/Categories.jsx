@@ -47,8 +47,8 @@ export default function Categories({
     if (categoryElement) {
       categoryElement.scrollIntoView({
         behavior: "smooth",
-        block: "nearest",
-        inline: "start",
+        block: "end",
+        inline: "center",
       });
       setIsCategoryClickSelected(false);
     }
@@ -74,7 +74,12 @@ export default function Categories({
         />
       </div> */}
       <div style={{ position: "relative", height: "auto" }}>
-        <ScrollContainer className={s.scrollContainer} ref={scrollContainerRef} vertical={false} horizontal={true}>
+        <ScrollContainer
+          className={s.scrollContainer}
+          ref={scrollContainerRef}
+          vertical={false}
+          horizontal={true}
+        >
           {/* <AllCategoryIcon
             all={all}
             setAll={setAll}
