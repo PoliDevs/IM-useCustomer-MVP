@@ -23,6 +23,7 @@ export default function Categories({
   const activeCategories = useSelector((state) => state.allCategories);
   const allProducts = useSelector((state) => state.allProducts);
   const search = useSelector((state) => state.search);
+  const showSearchbar = useSelector((state) => state.showSearchbar);
   const loading = useSelector((state) => state.loading);
   const categoryProductsId = useSelector((state) => parseInt(state.idCategory));
   const categoryProductString = useSelector((state) => state.idCategory);
@@ -30,6 +31,7 @@ export default function Categories({
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [isCategoryClickSelected, setIsCategoryClickSelected] = useState(false);
   const scrollContainerRef = useRef(null);
+
   const handleCategoryClick = (categoryId) => {
     setSelectedCategory(categoryId);
     setIsCategoryClickSelected(true);
@@ -63,7 +65,9 @@ export default function Categories({
   });
 
   return (
-    <section className={s.categories}>
+    <section
+      className={`${s.categories} ${showSearchbar ? s.fadeIn : s.fadeOut}}`}
+    >
       {/* <div className={s.sectionTitle}>
         <SmallText
           text={t("categories.title")}

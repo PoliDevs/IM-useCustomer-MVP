@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
 import s from "./Paragraph.module.scss";
 
 export default function Paragraph({
@@ -15,10 +14,10 @@ export default function Paragraph({
   gap,
   color,
   underline,
-  maxHeight,
+  truncate = false,
 }) {
-  // const truncatedText =
-  //   text && text.length > 110 ? `${text.substring(0, 110)}...` : text;
+  const truncatedText =
+    text && text.length > 110 ? `${text.substring(0, 110)}...` : text;
 
   return (
     <p
@@ -35,7 +34,7 @@ export default function Paragraph({
         color: color && color,
       }}
     >
-      {text}
+      {truncate ? truncatedText : text}
       {children}
     </p>
   );

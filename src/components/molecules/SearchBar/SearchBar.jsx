@@ -6,7 +6,9 @@ import {
   clearSearchProduct,
   getActiveMenus,
   getAllProducts,
+  hideBanner,
   searchProduct,
+  showSearchbar,
 } from "../../../redux/actions";
 import { useTranslation } from "react-i18next";
 import SearchField from "../../atoms/SearchField/SearchField";
@@ -36,6 +38,10 @@ export default function SearchBar() {
   //     dispatch(clearSearchProduct());
   //   }
   // };
+  const handleClick = () => {
+    dispatch(showSearchbar(true));
+    dispatch(hideBanner(false));
+  };
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -43,14 +49,20 @@ export default function SearchBar() {
 
     if (value.length > 0) {
       dispatch(searchProduct(value));
+      dispatch(hideBanner(false));
+      dispatch(showSearchbar(true));
     } else {
+      dispatch(hideBanner(true));
       dispatch(getActiveMenus(commerceId));
       dispatch(clearSearchProduct());
     }
   };
 
   return (
-    <div className={`${s.searchBar} ${inputValue ? s.border : ""}`}>
+    <div
+      className={`${s.searchBar} ${inputValue ? s.border : ""}`}
+      onClick={handleClick}
+    >
       <SearchIcon className={`${s.searchIcon} ${inputValue ? s.strong : ""}`} />
       <SearchField
         placeholder={`Buscar en ${comerce}`}

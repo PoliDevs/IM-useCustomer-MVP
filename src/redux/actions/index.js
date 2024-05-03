@@ -30,6 +30,7 @@ import {
   CLEAR_ORDER_STATUS,
   HIDE_BANNER,
   GET_ID_CATEGORY,
+  SHOW_SEARCHBAR,
 } from './actionTypes';
 // import { TRANSLATE_TEXT } from "./actionTypes";
 import { v4 as uuidv4 } from 'uuid';
@@ -1219,5 +1220,12 @@ export const getIdCategory = (id) => {
   return {
     type: GET_ID_CATEGORY,
     payload: id,
+  };
+};
+
+export const showSearchbar = (boolean) => {
+  return {
+    type: SHOW_SEARCHBAR,
+    payload: boolean,
   };
 };

@@ -27,6 +27,9 @@
   &:-moz-placeholder {
     text-align: center;
   }
+  &input:focus {
+    font-size: $line-text;
+  }
 
   @media screen and (min-width: 430px) {
     font-size: $paragraph;
@@ -36,5 +39,11 @@
   @media screen and (min-width: 750px) {
     font-size: $line-text;
     height: 35px;
+  }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  input:focus {
+    font-size: $line-text;
   }
 }
