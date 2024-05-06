@@ -164,6 +164,7 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
     careful: [],
     detail: [],
   };
+  
   let menu = {
     id: [],
     name: [],

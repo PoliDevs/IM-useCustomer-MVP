@@ -37,7 +37,6 @@ import {
   CLEAR_ORDER_STATUS,
   HIDE_BANNER,
   GET_ID_CATEGORY,
-  SHOW_SEARCHBAR,
 } from '../actions/actionTypes';
 // import { all_app_texts } from '../../utils/language';
 
@@ -72,8 +71,7 @@ const initalState = {
   paymentMethods: [],
   productAvailable: true,
   statusBanner: true,
-  idCategoy: 0,
-  showSearchbar: false,
+  idCategory: 0,
   cart: localStorage.getItem('cart') ? getEncriptedItem('cart') : [],
   user: localStorage.getItem('user') ? getEncriptedItem('user') : {},
   commerce: localStorage.getItem('CM') ? getEncriptedItem('CM') : {},
@@ -134,7 +132,6 @@ export const rootReducer = (state = initalState, action) => {
         acc[categoryId].products.push(product);
         return acc;
       }, {});
-
       return {
         ...state,
         search: Object.values(groupedResults),
@@ -337,8 +334,6 @@ export const rootReducer = (state = initalState, action) => {
       return { ...state, statusBanner: action.payload };
     case GET_ID_CATEGORY:
       return { ...state, idCategory: action.payload };
-    case SHOW_SEARCHBAR:
-      return { ...state, showSearchbar: action.payload };
     default:
       return state;
   }

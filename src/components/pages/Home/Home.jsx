@@ -29,7 +29,6 @@ export default function Home() {
   const pendingOrders = useSelector((state) => state.ordersByUser);
   const [isLoading, setIsLoading] = useState(true);
   const [category, setCategory] = useState(null);
-  const showBanner = useSelector((state) => state.statusBanner);
   const [aditionals, setAditionals] = useState(false);
   const [all, setAll] = useState(category || aditionals ? false : true);
   const [red, setRed] = useState(false);
