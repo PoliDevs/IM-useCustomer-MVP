@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useLayoutEffect, useRef } from "react";
 /* eslint-disable react/prop-types */
 import { useSelector } from "react-redux";
 import useModal from "../../../utils/Functions";
@@ -47,6 +47,33 @@ export default function Products({
 
     return acc;
   }, new Map());
+
+  useLayoutEffect(() => {
+    const categoryRefsSnapshot = categoryRefs.current;
+    if (productsByCategory.size) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const categoryId = entry.target.id;
+            dispatch(getIdCategory(categoryId));
+          }
+        });
+      });
+
+      Object.entries(categoryRefsSnapshot).forEach(([categoryId, ref]) => {
+        observer.observe(ref);
+      });
+
+      return () => {
+        Object.values(categoryRefsSnapshot).forEach((ref) => {
+          if (ref && ref.current) {
+            observer.unobserve(ref.current);
+          }
+        });
+      };
+    }
+  }, [categoryRefs, dispatch, productsByCategory.size]);
+
   const handleScrollChange = (scrollCords) => {
     const scrollTop = scrollCords;
     if (scrollTop >= 247) {
@@ -55,26 +82,6 @@ export default function Products({
       dispatch(hideBanner(true));
     }
   };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const categoryId = entry.target.id;
-          dispatch(getIdCategory(categoryId));
-        }
-      });
-    });
-    const categoryRefsSnapshot = categoryRefs.current;
-    Object.entries(categoryRefsSnapshot).forEach(([categoryId, ref]) => {
-      observer.observe(ref);
-    });
-    return () => {
-      Object.values(categoryRefsSnapshot).forEach((ref) =>
-        observer.unobserve(ref)
-      );
-    };
-  }, [categoryRefs, dispatch]);
 
   const { isOpen, openModal, closeModal, productData } = useModal(false);
   return (
