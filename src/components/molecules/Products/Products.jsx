@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from "react";
+import { useRef, useEffect, useLayoutEffect, useMemo } from "react";
 /* eslint-disable react/prop-types */
 import { useSelector } from "react-redux";
 import useModal from "../../../utils/Functions";
@@ -10,7 +10,6 @@ import s from "./Products.module.scss";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import { capitalizeFirstLetter, formatNumber } from "../../../utils/Functions";
 import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { hideBanner, getIdCategory } from "../../../redux/actions";
 export default function Products({
@@ -36,21 +35,23 @@ export default function Products({
 
   const search = useSelector((state) => state.search);
   const loading = useSelector((state) => state.loading);
-  const productsByCategory = allproducts.reduce((acc, product) => {
-    const categoryId = product.category.id;
+  const productsByCategory = useMemo(() => {
+    return allproducts.reduce((acc, product) => {
+      const categoryId = product.category.id;
 
-    if (!acc.has(categoryId)) {
-      acc.set(categoryId, []);
-    }
+      if (!acc.has(categoryId)) {
+        acc.set(categoryId, []);
+      }
 
-    acc.get(categoryId).push({ ...product });
+      acc.get(categoryId).push({ ...product });
 
-    return acc;
-  }, new Map());
+      return acc;
+    }, new Map());
+  }, [allproducts]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const categoryRefsSnapshot = categoryRefs.current;
-    if (productsByCategory.size) {
+    if (productsByCategory.size || search.length === 0) {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -61,7 +62,9 @@ export default function Products({
       });
 
       Object.entries(categoryRefsSnapshot).forEach(([categoryId, ref]) => {
-        observer.observe(ref);
+        if (ref) {
+          observer.observe(ref);
+        }
       });
 
       return () => {
@@ -72,11 +75,10 @@ export default function Products({
         });
       };
     }
-  }, [categoryRefs, dispatch, productsByCategory.size]);
+  }, [categoryRefs, dispatch, productsByCategory.size, search.length]);
 
   const handleScrollChange = (scrollCords) => {
-    const scrollTop = scrollCords;
-    if (scrollTop >= 247) {
+    if (scrollCords >= 247) {
       dispatch(hideBanner(false));
     } else {
       dispatch(hideBanner(true));
@@ -134,11 +136,7 @@ export default function Products({
                 </div>
               ))
             : Array.from(productsByCategory).map(([categoryId, products]) => (
-                <div
-                  key={categoryId}
-                  id={categoryId}
-                  className={s.titleConteiner}
-                >
+                <div key={categoryId} className={s.titleConteiner}>
                   <h2
                     id={categoryId}
                     ref={(e) => (categoryRefs.current[categoryId] = e)}

@@ -110,6 +110,7 @@ export default function Product({
             smaller={true}
             noMargin={true}
             disabled={!active}
+            truncate={true}
           />
         </div>
         {/* <Paragraph alignment={"left"} text={`$ ${cost}`} bold={true} /> */}
