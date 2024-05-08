@@ -36,7 +36,7 @@ export default function Qr({ scanResult, setScanResult }) {
     function success(result) {
       scanner.clear();
       const partesURL = result.split("/");
-      const indexLanguage = partesURL.indexOf("language");
+      const indexLanguage = partesURL.indexOf("welcome");
       if (indexLanguage !== -1 && indexLanguage < partesURL.length - 1) {
         const loQueVieneDespués = partesURL
           .slice(indexLanguage, partesURL.length)

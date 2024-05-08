@@ -31,7 +31,7 @@ export default function Categories({
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [isCategoryClickSelected, setIsCategoryClickSelected] = useState(false);
   const scrollContainerRef = useRef(null);
-
+  
   const handleCategoryClick = (categoryId) => {
     setSelectedCategory(categoryId);
     setIsCategoryClickSelected(true);

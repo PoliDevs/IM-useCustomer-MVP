@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
-import {useState } from "react";
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import QrCodeScanner from "./components/pages/QrCodeScanner/QrCodeScanner";
 import WelcomePage from "./components/pages/WelcomePage/WelcomePage";
@@ -24,7 +24,7 @@ function App() {
   const lang = localStorage.getItem("Lang")
     ? localStorage.getItem("Lang")
     : "es";
- 
+
   return (
     <>
       <Routes>
@@ -37,10 +37,7 @@ function App() {
             />
           }
         />
-         <Route
-            path="/welcome/*"
-            element={<WelcomePage scanResult={scanResult} />}
-          />
+        <Route path="/welcome/*" element={<WelcomePage />} />
         <Route element={<ProtectedRoutes />}>
           {/* <Route path="/login" element={<Login scanResult={scanResult} />} /> */}
           {/* <Route
