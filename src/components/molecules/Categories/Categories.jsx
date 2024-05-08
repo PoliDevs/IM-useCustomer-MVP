@@ -44,11 +44,10 @@ export default function Categories({
     ).find((node) => {
       return node.id === categoryProductString;
     });
-
     if (categoryElement) {
       categoryElement.scrollIntoView({
-        // block: "end",
-        // inline: "center",
+        block: "end",
+        inline: "center",
       });
       setIsCategoryClickSelected(false);
     }
