@@ -17,6 +17,7 @@
     // height: 90px; comentado hasta que tenga imagenes
     height: auto;
     cursor: pointer;
+    scroll-behavior: smooth;
     &:before {
       content: "";
       position: absolute;

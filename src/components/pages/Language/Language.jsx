@@ -21,7 +21,7 @@ export default function Language() {
   const [t, i18n] = useTranslation(["global"]);
   const dispatch = useDispatch();
   const params = useParams();
-
+  
   useEffect(() => {
     localStorage.setItem("Pos", params["*"]);
     const decripted = dataDecrypt(params["*"]);

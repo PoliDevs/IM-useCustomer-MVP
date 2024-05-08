@@ -6,7 +6,13 @@ import iMenuFull from "../../../assets/logo-imenu-full.png";
 import { ReactComponent as ImenuLogo } from "../../../assets/ImenuHorizontal.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getOrderPending, getStatus } from "../../../redux/actions";
+import {
+  getCommerce,
+  getOrderPending,
+  getStatus,
+  setSector,
+  setTable,
+} from "../../../redux/actions";
 import ClosedCommerce from "../../molecules/ClosedCommerce/ClosedCommerce";
 import HugeTitle from "../../atoms/HugeTitle/HugeTitle";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
@@ -16,8 +22,10 @@ import SubTitle from "../../atoms/SubTitle/SubTitle";
 import NavBar from "../../molecules/NavBar/NavBar";
 import s from "./WelcomePage.module.scss";
 import ContactFooter from "../../molecules/ContactFooter/ContactFooter";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate, useParams } from "react-router-dom";
 import { getFileDownloadURL } from "../../../Firebase/Firebase";
+import useFetchImageUrl from "../../../hooks/useFetchImageURL";
+import { dataDecrypt } from "../../../utils/Functions";
 export default function WelcomePage() {
   const orderStatus = useSelector((state) => state.orderStatus);
   const orderPending = useSelector((state) => state.orderId);
@@ -27,34 +35,43 @@ export default function WelcomePage() {
   const table = useSelector((state) => state.table);
   const open = useSelector((state) => state.status);
   const [isLoading, setIsloading] = useState(true);
-  const [imgURL, setImgURL] = useState(false);
   const [t, i18n] = useTranslation(["global"]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const params = useParams();
+
+  const imgURL = useFetchImageUrl(commerce);
 
   useEffect(() => {
-    dispatch(getOrderPending(commerce.id, sector, table));
+    localStorage.setItem("Pos", params["*"]);
+    const decripted = dataDecrypt(params["*"]);
+    if (localStorage.getItem("cart")) localStorage.removeItem("cart");
+    dispatch(getCommerce(decripted.commerce));
+    dispatch(setSector(decripted.sector));
+    dispatch(setTable(decripted.table));
+    i18n.changeLanguage("es");
+    if (commerce && sector && table && open) {
+      navigate("/home");
+    }
+  }, [commerce, dispatch, i18n, navigate, open, params, sector, table]);
+
+  useEffect(() => {
+    // dispatch(getOrderPending(commerce.id, sector, table));
     dispatch(getStatus(commerce.id, setIsloading));
-    const fetchImageURL = async () => {
-      const fileName = commerce.id.toString();
-      const url = await getFileDownloadURL(fileName);
-      setImgURL(url);
-    };
-    fetchImageURL();
   }, []);
 
-  useEffect(() => {
-    orderPending &&
-      orderStatus !== "delivered" &&
-      orderStatus !== "" &&
-      navigate("/rating");
-  }, [orderPending]);
+  // useEffect(() => {
+  //   orderPending &&
+  //     orderStatus !== "delivered" &&
+  //     orderStatus !== "" &&
+  //     navigate("/rating");
+  // }, [orderPending]);
 
   return (
     <div className={s.home}>
       <>
         {/* <NavBar navarrow={true} path={"/login"} setIsloading={setIsloading} /> */}
-        {isLoading ? (
+        {isLoading && Object.keys(commerce).length ? (
           <LoadingPage text={t("loader.title")} />
         ) : (
           <>
