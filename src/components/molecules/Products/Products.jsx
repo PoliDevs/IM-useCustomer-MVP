@@ -56,11 +56,6 @@ export default function Products({
     if (productsByCategory.size || search.length === 0) {
       const observer = new IntersectionObserver(
         (entries) => {
-          if (entries[0].isIntersecting === false) {
-            dispatch(hideBanner(false));
-          } else {
-            dispatch(hideBanner(true));
-          }
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               const categoryId = entry.target.id;
