@@ -26,6 +26,7 @@ export default function Home() {
   // const userEmail = useSelector((state) => state.user.email);
   const cant = useSelector((state) => state.cart);
   const cart = useSelector((state) => state.cart);
+  const categoryScroll = useSelector((state) => parseInt(state.idCategory));
   const pendingOrders = useSelector((state) => state.ordersByUser);
   const [isLoading, setIsLoading] = useState(true);
   const [category, setCategory] = useState(null);
@@ -56,6 +57,17 @@ export default function Home() {
   };
 
   const categoryTitleRefs = useRef({});
+  useEffect(() => {
+    const firstCategoryId = parseInt(
+      Object.values(categoryTitleRefs.current)[0].id
+    );
+    if (categoryScroll != firstCategoryId) {
+      dispatch(hideBanner(false));
+    } else {
+      dispatch(hideBanner(true));
+    }
+  }, [dispatch, categoryScroll]);
+
   const scrollToCategory = (categoryId) => {
     const firstCategoryId = parseInt(
       Object.values(categoryTitleRefs.current)[0].id
