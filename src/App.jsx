@@ -31,15 +31,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route
-          index
-          element={
-            <QrCodeScanner
-              scanResult={scanResult}
-              setScanResult={setScanResult}
-            />
-          }
-        />
+        <Route index element={<QrCodeScanner scanResult={scanResult} setScanResult={setScanResult}/>}/>
         <Route path="/language/*" element={<Language />} />
         <Route element={<ProtectedRoutes />}>
           <Route path="/login" element={<Login scanResult={scanResult} />} />
