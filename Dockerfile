@@ -18,7 +18,6 @@ COPY certificates/cloudflare.pem /etc/ssl/certs/
 
 COPY certificates/cloudflare.key /etc/ssl/private/
 
-
 COPY default-ssl.conf /etc/nginx/conf.d/default-ssl.conf
 
 EXPOSE 80
