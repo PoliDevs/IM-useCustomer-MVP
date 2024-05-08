@@ -102,7 +102,7 @@ export default function WelcomePage() {
                       width={"70px"}
                     />
                   </Paragraph>
-                  <LinkButton
+                  {/* <LinkButton
                     path="/home"
                     text={
                       commerce.plan !== "m1"
@@ -114,7 +114,7 @@ export default function WelcomePage() {
                     path="/instruction"
                     text={t("welcome.instructions")}
                     type="secundary"
-                  />
+                  /> */}
                   <ContactFooter />
                 </div>
               </div>
