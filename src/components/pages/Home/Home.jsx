@@ -58,16 +58,18 @@ export default function Home() {
 
   const categoryTitleRefs = useRef({});
   useEffect(() => {
-    const firstCategoryId = parseInt(
-      Object.values(categoryTitleRefs.current)[0].id
-    );
-    if (categoryScroll != firstCategoryId) {
+    const categoryTitleRefsSnapshot = categoryTitleRefs.current;
+    const firstCategoryId =
+      Object.values(categoryTitleRefsSnapshot).length > 0
+        ? parseInt(Object.values(categoryTitleRefsSnapshot)[0].id)
+        : null;
+
+    if (categoryScroll !== firstCategoryId) {
       dispatch(hideBanner(false));
     } else {
       dispatch(hideBanner(true));
     }
   }, [dispatch, categoryScroll]);
-
   const scrollToCategory = (categoryId) => {
     const firstCategoryId = parseInt(
       Object.values(categoryTitleRefs.current)[0].id
