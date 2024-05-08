@@ -56,6 +56,11 @@ export default function Products({
     if (productsByCategory.size || search.length === 0) {
       const observer = new IntersectionObserver(
         (entries) => {
+          if (entries[0].isIntersecting === false) {
+            dispatch(hideBanner(false));
+          } else {
+            dispatch(hideBanner(true));
+          }
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               const categoryId = entry.target.id;
@@ -91,13 +96,13 @@ export default function Products({
     observerEnabled,
   ]);
 
-  const handleScrollChange = (scrollCords) => {
-    if (scrollCords >= 247) {
-      dispatch(hideBanner(false));
-    } else {
-      dispatch(hideBanner(true));
-    }
-  };
+  // const handleScrollChange = (scrollCords) => {
+  //   if (scrollCords >= 247) {
+  //     dispatch(hideBanner(false));
+  //   } else {
+  //     dispatch(hideBanner(true));
+  //   }
+  // };
 
   const { isOpen, openModal, closeModal, productData } = useModal(false);
   return (
@@ -111,7 +116,7 @@ export default function Products({
         <ScrollContainer
           className={s.productsContainer}
           ref={divRef}
-          onScroll={() => handleScrollChange(divRef.current.scrollTop)}
+          // onScroll={() => handleScrollChange(divRef.current.scrollTop)}
         >
           {search.length > 0
             ? search.map((category, index) => (
