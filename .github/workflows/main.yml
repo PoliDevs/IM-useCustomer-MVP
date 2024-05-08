@@ -2,8 +2,9 @@
 name: IMenu-front-customer-push
 on:
   workflow_dispatch:
-  #push: 
-    #branches: [ "dockerize" ]
+  push: 
+    branches: 
+      - dockerize
   
 jobs:
   build:
