@@ -66,48 +66,43 @@ export default function Categories({
       className={`${s.categories} ${showSearchbar ? s.fadeIn : s.fadeOut}}`}
     >
       {/* <div className={s.sectionTitle}>
-        <SmallText
-          text={t("categories.title")}
-          secundary={true}
-          noMargin={true}
-        />
-      </div> */}
-      <div style={{ position: "relative", height: "auto" }}>
-        <ScrollContainer
-          className={s.scrollContainer}
-          ref={scrollContainerRef}
-          vertical={false}
-          horizontal={true}
-        >
-          {/* <AllCategoryIcon
-            all={all}
-            setAll={setAll}
-            commerceId={commerceId}
-            handleCategory={handleCategory}
-            text={language.categories_all}
+          <SmallText
+            text={t("categories.title")}
+            secundary={true}
+            noMargin={true}
           />
-          <AditionalsCategoryIcon
-            aditionals={aditionals}
-            handleAditionals={handleAditionals}
-            handleCategory={handleCategory}
-            text={language.categories_aditionals}
-          /> */}
-          {/* {filteredActiveCategories?.map((categoryObject, index) => (
-            <Icon
-              key={index}
-              id={categoryObject.id}
-              name={categoryObject.category}
-              handleCategory={handleCategoryClick}
-              category={category}
-              selected={
-                (isCategoryClickSelected &&
-                  categoryObject.id === selectedCategory) ||
-                (!isCategoryClickSelected &&
-                  categoryObject.id === categoryProductsId)
-              }
-              disabled={search.length > 0 || loading}
+        </div> */}
+      <div style={{ position: "relative", height: "auto" }}>
+        <ScrollContainer className={s.scrollContainer} ref={scrollContainerRef}>
+          {/* <AllCategoryIcon
+              all={all}
+              setAll={setAll}
+              commerceId={commerceId}
+              handleCategory={handleCategory}
+              text={language.categories_all}
             />
-          ))} */}
+            <AditionalsCategoryIcon
+              aditionals={aditionals}
+              handleAditionals={handleAditionals}
+              handleCategory={handleCategory}
+              text={language.categories_aditionals}
+            /> */}
+          {/* {filteredActiveCategories?.map((categoryObject, index) => (
+              <Icon
+                key={index}
+                id={categoryObject.id}
+                name={categoryObject.category}
+                handleCategory={handleCategoryClick}
+                category={category}
+                selected={
+                  (isCategoryClickSelected &&
+                    categoryObject.id === selectedCategory) ||
+                  (!isCategoryClickSelected &&
+                    categoryObject.id === categoryProductsId)
+                }
+                disabled={search.length > 0 || loading}
+              />
+            ))} */}
           {uniqueCategoryIds.map((categoryId) => {
             const product = allProducts.find(
               (product) => product.category.id === categoryId
