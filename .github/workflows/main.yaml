@@ -30,8 +30,8 @@ jobs:
 
         - name: Create certificate files
           run: |
-            echo $CERTIFICATE_PEM > $GITHUB_WORKSPACE/certificates/cloudflare.pem
-            echo $CERTIFICATE_KEY > $GITHUB_WORKSPACE/certificates/cloudflare.key
+            echo "$CERTIFICATE_PEM" > $GITHUB_WORKSPACE/certificates/cloudflare.pem
+            echo "$CERTIFICATE_KEY" > $GITHUB_WORKSPACE/certificates/cloudflare.key
             ls -R
           shell: bash
           env:
