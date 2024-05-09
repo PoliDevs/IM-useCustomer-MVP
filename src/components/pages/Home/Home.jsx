@@ -77,12 +77,12 @@ export default function Home() {
     if (categoryId === firstCategoryId) {
       dispatch(hideBanner(true));
       categoryTitleRefs.current[categoryId].scrollIntoView({
-        behavior: "smooth",
+        behavior: "auto",
       });
     } else if (categoryTitleRefs.current[categoryId]) {
       dispatch(hideBanner(false));
       categoryTitleRefs.current[categoryId].scrollIntoView({
-        behavior: "smooth",
+        behavior: "auto",
       });
     }
   };

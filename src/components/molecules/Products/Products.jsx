@@ -54,6 +54,7 @@ export default function Products({
   useEffect(() => {
     const titleRefsSnapshot = h2TitleRef.current;
     if (productsByCategory.size || search.length === 0) {
+      console.log("Entra al useEffect del observer")
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
