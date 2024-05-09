@@ -43,14 +43,14 @@ export default function Categories({
     ).find((node) => {
       return node.id === categoryProductString;
     });
-    if (categoryElement && isCategoryClickSelected === false) {
+    if (categoryElement) {
       categoryElement.scrollIntoView({
         block: "end",
         inline: "center",
         behavior: "smooth",
       });
+      setIsCategoryClickSelected(false);
     }
-    setIsCategoryClickSelected(false);
   }, [categoryProductString, isCategoryClickSelected]);
 
   const uniqueCategoryIds = [
