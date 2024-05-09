@@ -31,7 +31,6 @@ export default function Categories({
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [isCategoryClickSelected, setIsCategoryClickSelected] = useState(false);
   const scrollContainerRef = useRef(null);
-
   const handleCategoryClick = (categoryId) => {
     setSelectedCategory(categoryId);
     setIsCategoryClickSelected(true);
@@ -44,14 +43,15 @@ export default function Categories({
     ).find((node) => {
       return node.id === categoryProductString;
     });
-    if (categoryElement) {
+    if (categoryElement && isCategoryClickSelected === false) {
       categoryElement.scrollIntoView({
         block: "end",
         inline: "center",
+        behavior: "smooth",
       });
-      setIsCategoryClickSelected(false);
     }
-  }, [categoryProductString]);
+    setIsCategoryClickSelected(false);
+  }, [categoryProductString, isCategoryClickSelected]);
 
   const uniqueCategoryIds = [
     ...allProducts.reduce((uniqueCategories, product) => {
@@ -73,7 +73,11 @@ export default function Categories({
           />
         </div> */}
       <div style={{ position: "relative", height: "auto" }}>
-        <ScrollContainer className={s.scrollContainer} ref={scrollContainerRef}>
+        <ScrollContainer
+          className={s.scrollContainer}
+          ref={scrollContainerRef}
+          horizontal={true}
+        >
           {/* <AllCategoryIcon
               all={all}
               setAll={setAll}
