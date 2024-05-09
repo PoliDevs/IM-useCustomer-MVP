@@ -40,7 +40,7 @@ jobs:
 
         - name: Print ECR_REGISTRY
           run: |
-            echo "ECR_REGISTRY: ${{ steps.login-pf-aws-ecr.outputs.registry }}
+            echo "ECR_REGISTRY: ${{ steps.login-pf-aws-ecr.outputs.registry }}"
             
         - name: Build and push the tagged docker image to Amazon ECR
           env:
@@ -49,6 +49,6 @@ jobs:
             IMAGE_TAG: latest
           run: |
             docker build -t imenu .
-            docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-            docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+            docker tag imenu:latest 381491886621.dkr.ecr.us-east-2.amazonaws.com/imenu:latest
+            docker push 381491886621.dkr.ecr.us-east-2.amazonaws.com/imenu:latest
        
