@@ -46,8 +46,7 @@ export default function Categories({
     });
     if (categoryElement) {
       categoryElement.scrollIntoView({
-        block: "end",
-        inline: "center",
+        inline: "nearest",
         behavior: "auto",
       });
       setIsCategoryClickSelected(false);
