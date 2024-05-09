@@ -33,6 +33,7 @@ export default function Home() {
   const [aditionals, setAditionals] = useState(false);
   const [all, setAll] = useState(category || aditionals ? false : true);
   const [red, setRed] = useState(false);
+  const [isCategoryScrollOn, setIsCategoryScrollOn] = useState(false)
   const dispatch = useDispatch();
 
   const changeStyle = () => {
@@ -70,21 +71,25 @@ export default function Home() {
       dispatch(hideBanner(true));
     }
   }, [dispatch, categoryScroll]);
+
   const scrollToCategory = (categoryId) => {
     const firstCategoryId = parseInt(
       Object.values(categoryTitleRefs.current)[0].id
     );
     if (categoryId === firstCategoryId) {
+      setIsCategoryScrollOn(true)
       dispatch(hideBanner(true));
       categoryTitleRefs.current[categoryId].scrollIntoView({
         behavior: "smooth",
       });
     } else if (categoryTitleRefs.current[categoryId]) {
+      setIsCategoryScrollOn(true)
       dispatch(hideBanner(false));
       categoryTitleRefs.current[categoryId].scrollIntoView({
         behavior: "smooth",
       });
     }
+    setIsCategoryScrollOn(false)
   };
 
   useEffect(() => {
@@ -133,6 +138,7 @@ export default function Home() {
           aditionals={aditionals}
           scrollToCategory={scrollToCategory}
           categoryRefs={categoryTitleRefs}
+          isCategoryScrollOn={isCategoryScrollOn}
         />
         {!isLoading && cart.length > 0 ? (
           <Toast

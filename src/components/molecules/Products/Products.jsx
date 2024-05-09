@@ -11,13 +11,14 @@ import SubTitle from "../../atoms/SubTitle/SubTitle";
 import { capitalizeFirstLetter, formatNumber } from "../../../utils/Functions";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { hideBanner, getIdCategory } from "../../../redux/actions";
+import { getIdCategory } from "../../../redux/actions";
 export default function Products({
   changeStyle,
   commercePlan,
   aditionals,
   categoryRefs,
   observerEnabled,
+  isCategoryScrollOn,
 }) {
   const [t] = useTranslation(["global"]);
   const divRef = useRef(null);
@@ -53,7 +54,7 @@ export default function Products({
 
   useEffect(() => {
     const titleRefsSnapshot = h2TitleRef.current;
-    if (productsByCategory.size || search.length === 0) {
+    if (isCategoryScrollOn === false && (productsByCategory.size || search.length === 0)) {
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
