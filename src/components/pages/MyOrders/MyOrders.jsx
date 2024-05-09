@@ -1,4 +1,4 @@
-import { getOrdersByUser } from "../../../redux/actions";
+// import { getOrdersByUser } from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -10,24 +10,23 @@ import ScrollContainer from "react-indiana-drag-scroll";
 import s from "./MyOrders.module.scss";
 
 export default function MyOrders() {
-  const userEmail = useSelector((state)=> state.user.email);
-  const orders = useSelector((state)=> state.ordersByUser)
-  const commerce = useSelector((state)=> state.commerce);
-  const table = useSelector((state)=> state.table)
+  const userEmail = useSelector((state) => state.user.email);
+  const orders = useSelector((state) => state.ordersByUser);
+  const commerce = useSelector((state) => state.commerce);
+  const table = useSelector((state) => state.table);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [t, i18n] = useTranslation(["global"]);
 
   useEffect(() => {
-    if (!userEmail) navigate('/home');
-  }, [])
-  
+    if (!userEmail) navigate("/home");
+  }, []);
 
-  useEffect(() => {
-    userEmail && dispatch(getOrdersByUser(userEmail, commerce.id));
-  }, [commerce, userEmail])
-  
+  // useEffect(() => {
+  //   userEmail && dispatch(getOrdersByUser(userEmail, commerce.id));
+  // }, [commerce, userEmail])
+
   return (
     <div className={s.myOrdersContainer}>
       {orders && (

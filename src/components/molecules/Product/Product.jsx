@@ -4,10 +4,10 @@ import Paragraph from "../../atoms/Paragraph/Paragraph";
 import SmallText from "../../atoms/SmallText/SmallText";
 import s from "./Product.module.scss";
 import {
-  getActiveAditionals,
+  // getActiveAditionals,
   getActiveMenus,
-  getActiveProducts,
-  isAvailable,
+  // getActiveProducts,
+  // isAvailable,
 } from "../../../redux/actions";
 // import { useEffect, useState } from "react";
 // import { emojiPng } from "../../../utils/Constants";
@@ -85,8 +85,8 @@ export default function Product({
           active
         );
         dispatch(getActiveMenus(commerceId));
-        dispatch(getActiveProducts(commerceId));
-        dispatch(getActiveAditionals(commerceId));
+        // dispatch(getActiveProducts(commerceId));
+        // dispatch(getActiveAditionals(commerceId));
         // setIsClicked(true)
       }}
     >
@@ -110,6 +110,7 @@ export default function Product({
             smaller={true}
             noMargin={true}
             disabled={!active}
+            truncate={true}
           />
         </div>
         {/* <Paragraph alignment={"left"} text={`$ ${cost}`} bold={true} /> */}

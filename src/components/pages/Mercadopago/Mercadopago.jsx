@@ -6,7 +6,7 @@ import s from "./Mercadopago.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
-  getActiveProducts,
+  // getActiveProducts,
   getPaymentMethods,
   getPosValue,
   getSectorValue,
@@ -62,10 +62,10 @@ export default function Mercadopago() {
         order: order,
         methodId: methodId,
         mercadoPago: mercadoPago,
-        commerceName: commerce.name
-      }
-      localStorage.setItem('mporder', JSON.stringify(mpOrder))
-/*       const { preferenceId } = response.data;
+        commerceName: commerce.name,
+      };
+      localStorage.setItem("mporder", JSON.stringify(mpOrder));
+      /*       const { preferenceId } = response.data;
       console.log(preferenceId)
       return preferenceId;  */
 
@@ -104,7 +104,7 @@ export default function Mercadopago() {
   }, [tablePrice, sectorPrice, productsList]);
 
   const handleMp = async () => {
-    setIsloading(true)
+    setIsloading(true);
     const methodId = paymentMethods.filter((m) => m.type === "mercadopago")[0]
       .id;
     let mercadoPago = true;
@@ -112,13 +112,12 @@ export default function Mercadopago() {
     dispatch(removerCart());
     //!
     const url = await createPreference();
-    console.log(url,"id 105")
+    console.log(url, "id 105");
     if (url) {
       window.location.href = url;
     }
     //!
-  }
-  
+  };
 
   return (
     <main className={s.mainContainer}>
@@ -145,4 +144,4 @@ export default function Mercadopago() {
       {/*  {preferenceId && <Wallet initialization={createPreference}/>} */}
     </main>
   );
-};
+}

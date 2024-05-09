@@ -73,7 +73,7 @@ export async function getFileDownloadURL(fileName) {
     return url;
   } catch (error) {
     // Manejar el error (puede ser que el archivo no exista)
-    console.error('Error al obtener la URL de descarga:', error);
+    console.error('Error al obtener una imagen');
     return Logo;
   }
 }

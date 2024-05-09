@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   ADD_PRODUCT,
   REMOVE_PRODUCT,
@@ -26,13 +26,21 @@ import {
   GET_ORDER_PENDING,
   REMOVE_CART,
   REMOVE_ORDER_ID,
-  GET_ORDERS_BY_USER,
+  // GET_ORDERS_BY_USER,
   CLEAR_ORDER_STATUS,
-} from "./actionTypes";
-import { TRANSLATE_TEXT } from "./actionTypes";
-import { v4 as uuidv4 } from "uuid";
-import { all_app_texts } from "../../utils/language";
-import { categoryTranslate, detectLanguage, menuTranslate, translateText } from "../../utils/Functions";
+  HIDE_BANNER,
+  GET_ID_CATEGORY,
+  SHOW_SEARCHBAR,
+} from './actionTypes';
+// import { TRANSLATE_TEXT } from "./actionTypes";
+import { v4 as uuidv4 } from 'uuid';
+import { all_app_texts } from '../../utils/language';
+// import {
+//   categoryTranslate,
+//   detectLanguage,
+//   menuTranslate,
+//   translateText,
+// } from '../../utils/Functions';
 
 ////////////////////* SearchBar Action Creator *////////////////////
 
@@ -119,17 +127,17 @@ export function removeProduct(name) {
 
 export async function postOrder(order, methodId, mercadoPago, commerceName) {
   // let date = new Date().toJSON().slice(0, 10);
-   const date = new Date();
-   let month = date.getMonth() + 1;
-   let day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
-   let dateCurrent = `${date.getFullYear()}-${month}-${day}`;
-   //!nueva date => dateCurrent
+  const date = new Date();
+  let month = date.getMonth() + 1;
+  let day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+  let dateCurrent = `${date.getFullYear()}-${month}-${day}`;
+  //!nueva date => dateCurrent
   const hour = new Date().getHours();
   const minute = new Date().getMinutes();
-  const formattedHour = hour < 10 ? "0" + hour : hour;
-  const formattedMinute = minute < 10 ? "0" + minute : minute;
+  const formattedHour = hour < 10 ? '0' + hour : hour;
+  const formattedMinute = minute < 10 ? '0' + minute : minute;
 
-  const time = formattedHour + ":" + formattedMinute;
+  const time = formattedHour + ':' + formattedMinute;
   let additionals = {
     id: [],
     name: [],
@@ -156,6 +164,7 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
     careful: [],
     detail: [],
   };
+  
   let menu = {
     id: [],
     name: [],
@@ -187,15 +196,15 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
     });
   } else {
     additionals = {
-      id: [""],
-      name: [""],
-      cost: [""],
-      promotion: [""],
-      discount: [""],
-      surcharge: [""],
-      amount: [""],
-      unitTypeId: [""],
-      detail: [""],
+      id: [''],
+      name: [''],
+      cost: [''],
+      promotion: [''],
+      discount: [''],
+      surcharge: [''],
+      amount: [''],
+      unitTypeId: [''],
+      detail: [''],
     };
   }
   //!armo todos los productos
@@ -217,19 +226,19 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
     });
   } else {
     products = {
-      id: [""],
-      name: [""],
-      cost: [""],
-      unitTypeId: [""],
-      productTypeId: [""],
-      supplierId: [""],
-      promotion: [""],
-      discount: [""],
-      surcharge: [""],
-      amount: [""],
-      allergenType: [""],
-      careful: [""],
-      detail: [""],
+      id: [''],
+      name: [''],
+      cost: [''],
+      unitTypeId: [''],
+      productTypeId: [''],
+      supplierId: [''],
+      promotion: [''],
+      discount: [''],
+      surcharge: [''],
+      amount: [''],
+      allergenType: [''],
+      careful: [''],
+      detail: [''],
     };
   }
   //!armo todos los menus
@@ -241,13 +250,13 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
       menu.cost.push(`${m.price}`);
       menu.menuTypeId.push(`${m.menuTypeId}`);
       menu.categoryId.push(`${m.categoryId}`);
-      m.dishes ? menu.dishes.push(`${m.dishes}`) : menu.dishes.push("");
+      m.dishes ? menu.dishes.push(`${m.dishes}`) : menu.dishes.push('');
       m.product !== undefined && m.product !== null
         ? menu.product.push(`${m.product}`)
-        : menu.product.push("");
+        : menu.product.push('');
       m.additionalId !== undefined
         ? menu.additionalId.push(`${m.additional}`)
-        : menu.additionalId.push("");
+        : menu.additionalId.push('');
       menu.promotion.push(`${m.promotion}`);
       menu.discount.push(`${m.discount}`);
       menu.surcharge.push(`${m.surcharge}`);
@@ -256,29 +265,29 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
     });
   } else {
     menu = {
-      id: [""],
-      name: [""],
-      description: [""],
-      cost: [""],
-      menuTypeId: [""],
-      categoryId: [""],
-      dishes: [""],
-      product: [""],
-      additionalId: [""],
-      promotion: [""],
-      discount: [""],
-      surcharge: [""],
-      amount: [""],
-      detail: [""],
+      id: [''],
+      name: [''],
+      description: [''],
+      cost: [''],
+      menuTypeId: [''],
+      categoryId: [''],
+      dishes: [''],
+      product: [''],
+      additionalId: [''],
+      promotion: [''],
+      discount: [''],
+      surcharge: [''],
+      amount: [''],
+      detail: [''],
     };
   }
   try {
     const newOrder = {
-      name: order.name ? order.name : "sss",
+      name: order.name ? order.name : 'sss',
       date: dateCurrent,
       hour: time,
       // status: "orderPlaced",
-      detail: "",
+      detail: '',
       validity: date,
       promotion: 0,
       discount: 0,
@@ -293,70 +302,59 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
       courierId: null,
       costDelivery: 0,
       sectorId: parseInt(order.sectorId),
-      accountemail: order.user.email ? order.user.email : "",
-      accountname: order.user.name ? order.user.name : "",
-      accountphone: order.user.phone ? order.user.phone : "",
-      accountbirthDate: order.user.birthDate ? order.user.birthDate : "",
-      accountaddress: order.user.address ? order.user.address : "",
-      googleEmail: order.user.email ? order.user.email : "",
+      accountemail: order.user.email ? order.user.email : '',
+      accountname: order.user.name ? order.user.name : '',
+      accountphone: order.user.phone ? order.user.phone : '',
+      accountbirthDate: order.user.birthDate ? order.user.birthDate : '',
+      accountaddress: order.user.address ? order.user.address : '',
+      googleEmail: order.user.email ? order.user.email : '',
       additionals,
       products,
       dishes: {
-        id: [""],
-        name: [""],
-        description: [""],
-        photo: [""],
-        cost: [""],
-        estimatedTime: [""],
-        additionalId: [""],
-        amountAdditional: [""],
-        supplyId: [""],
-        amountSupplies: [""],
-        recipeId: [""],
-        dishTypeId: [""],
-        promotion: [""],
-        discount: [""],
-        surcharge: [""],
-        amount: [""],
-        detail: [""],
+        id: [''],
+        name: [''],
+        description: [''],
+        photo: [''],
+        cost: [''],
+        estimatedTime: [''],
+        additionalId: [''],
+        amountAdditional: [''],
+        supplyId: [''],
+        amountSupplies: [''],
+        recipeId: [''],
+        dishTypeId: [''],
+        promotion: [''],
+        discount: [''],
+        surcharge: [''],
+        amount: [''],
+        detail: [''],
       },
       menu,
     };
-    if (mercadoPago){
-    let orderMp = { commerce: { commerce: commerceName }, order: newOrder };
-    /* console.log(orderMp) */
-    let response = await axios.post(
-      "mp/create-order",
-      orderMp
-    );
-    //!mercadoPago retorna una url a la que hay que redirigir
-    localStorage.setItem("CSMO_ID", response.data.id);
-    localStorage.setItem("CSMO", response.data.order);
-    // localStorage.removeItem("cart");
-    return response;
-    }else{
-    let response = await axios.post(
-      "order/new",
-      newOrder
-    );
-    localStorage.setItem('CSMO_ID',(response.data.id));
-    localStorage.setItem("CSMO", response.data.order);
-    localStorage.removeItem('cart');
-    return response;
-  }
+    if (mercadoPago) {
+      let orderMp = { commerce: { commerce: commerceName }, order: newOrder };
+      let response = await axios.post('mp/create-order', orderMp);
+      //!mercadoPago retorna una url a la que hay que redirigir
+      localStorage.setItem('CSMO_ID', response.data.id);
+      localStorage.setItem('CSMO', response.data.order);
+      // localStorage.removeItem("cart");
+      return response;
+    } else {
+      let response = await axios.post('order/new', newOrder);
+      localStorage.setItem('CSMO_ID', response.data.id);
+      localStorage.setItem('CSMO', response.data.order);
+      localStorage.removeItem('cart');
+      return response;
+    }
   } catch (error) {
     console.error(error);
   }
 }
 
-
 export const sendReview = (review, commerceId) => {
   try {
-    let orderName = localStorage.getItem("CSMO");
-    let response = axios.put(
-      `order/rating/${orderName}/${commerceId}`,
-      review
-    );
+    let orderName = localStorage.getItem('CSMO');
+    let response = axios.put(`order/rating/${orderName}/${commerceId}`, review);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -396,10 +394,7 @@ export function setSector(sector) {
 export function getCommerce(id) {
   return async function (dispatch) {
     try {
-      let commerceInfo = await axios.get(
-        `commerce/detail/${id}`
-      );
-      console.log("comerceinfo", commerceInfo)
+      let commerceInfo = await axios.get(`commerce/detail/${id}`);
       return dispatch({
         type: GET_COMMERCE,
         payload: commerceInfo.data[0],
@@ -413,9 +408,7 @@ export function getCommerce(id) {
 export function getStatus(id, setIsLoading) {
   return async function (dispatch) {
     try {
-      let status = await axios.get(
-        `commerce/openCommerce/${id}`
-      );
+      let status = await axios.get(`commerce/openCommerce/${id}`);
       if (setIsLoading) setIsLoading(false);
       return dispatch({
         type: GET_STATUS,
@@ -430,9 +423,7 @@ export function getStatus(id, setIsLoading) {
 export function getPaymentMethods(id) {
   return async function (dispatch) {
     try {
-      let payments = await axios.get(
-        `payment/all_active/${id}`
-      );
+      let payments = await axios.get(`payment/all_active/${id}`);
       return dispatch({
         type: GET_PAYMENT_METHODS,
         payload: payments.data,
@@ -443,63 +434,78 @@ export function getPaymentMethods(id) {
   };
 }
 
-export function getActiveMenus(id, setIsLoading) {
-  return async function (dispatch, getState) {
+// export function getActiveMenus(id, setIsLoading) {
+//   return async function (dispatch, getState) {
+//     try {
+//       let allActiveMenus = await axios.get(
+//         // `http://localhost:3001/menu/all_active/${id}`
+//         `menu/lastMenu/${id}`
+//       );
+//       let equals = false;
+//       if (getState().allProducts.length) {
+//         let allProducts = getState().allProducts;
+
+//         // Convertimos los arrays a objetos con las propiedades que queremos comparar
+//         const objects1 = allActiveMenus.data.map((obj) => ({
+//           ...obj,
+//           ...{ name: undefined, description: undefined },
+//         }));
+//         const objects2 = allProducts.map((obj) => ({
+//           ...obj,
+//           ...{ name: undefined, description: undefined },
+//         }));
+
+//         // Comparamos los objetos
+//         equals = JSON.stringify(objects1) === JSON.stringify(objects2);
+//       }
+//       //si los menus cargados son los mismos, no los vuelve a cargar
+//       if (equals === true) {if (setIsLoading) setIsLoading(false);return}
+//       const traduccion = async () => {
+//         try {
+//           //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
+//           let results = menuTranslate(allActiveMenus.data);
+//           //* Traduzco todos los nombres y las descripciones
+//           let translatedNames = await translateText(
+//             localStorage.getItem("Lang"),
+//             results.nombres,
+//             true
+//           );
+//           let translatedDescriptions = await translateText(
+//             localStorage.getItem("Lang"),
+//             results.descripciones,
+//             true
+//           );
+//           //* Reemplazo los nombres originales por los nombres traducidos
+//           const translatedMenus = allActiveMenus.data.map((a, index) => {
+//             a.name = translatedNames[index].name;
+//             if (a.description)
+//               a.description = translatedDescriptions[index].description;
+//             return a;
+//           });
+//           return translatedMenus;
+//         } catch (error) {
+//           return allActiveMenus.data
+//         }}
+//       if (setIsLoading) setIsLoading(false);
+//       return dispatch({
+//         type: GET_ACTIVE_MENUS,
+//         // payload: { menus: allActiveMenus.data, id: id },
+//         payload: await traduccion(),
+//       });
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+// }
+export function getActiveMenus(id) {
+  return async function (dispatch) {
     try {
-      let allActiveMenus = await axios.get(
-        // `http://localhost:3001/menu/all_active/${id}`
-        `menu/lastMenu/${id}`
-      );
-      let equals = false;
-      if (getState().allProducts.length) {
-        let allProducts = getState().allProducts;
+      const response = await axios.get(`menu/lastMenu/${id}`);
+      const allActiveMenus = response.data;
 
-        // Convertimos los arrays a objetos con las propiedades que queremos comparar
-        const objects1 = allActiveMenus.data.map((obj) => ({
-          ...obj,
-          ...{ name: undefined, description: undefined },
-        }));
-        const objects2 = allProducts.map((obj) => ({
-          ...obj,
-          ...{ name: undefined, description: undefined },
-        }));
-
-        // Comparamos los objetos
-        equals = JSON.stringify(objects1) === JSON.stringify(objects2);
-      }
-      //si los menus cargados son los mismos, no los vuelve a cargar
-      if (equals === true) {if (setIsLoading) setIsLoading(false);return}
-      const traduccion = async () => {
-        try {
-          //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
-          let results = menuTranslate(allActiveMenus.data);
-          //* Traduzco todos los nombres y las descripciones
-          let translatedNames = await translateText(
-            localStorage.getItem("Lang"),
-            results.nombres,
-            true
-          );
-          let translatedDescriptions = await translateText(
-            localStorage.getItem("Lang"),
-            results.descripciones,
-            true
-          );
-          //* Reemplazo los nombres originales por los nombres traducidos
-          const translatedMenus = allActiveMenus.data.map((a, index) => {
-            a.name = translatedNames[index].name;
-            if (a.description)
-              a.description = translatedDescriptions[index].description;
-            return a;
-          });
-          return translatedMenus;        
-        } catch (error) {
-          return allActiveMenus.data
-        }}
-      if (setIsLoading) setIsLoading(false);
-      return dispatch({
+      dispatch({
         type: GET_ACTIVE_MENUS,
-        // payload: { menus: allActiveMenus.data, id: id },
-        payload: await traduccion(),
+        payload: allActiveMenus,
       });
     } catch (error) {
       console.error(error);
@@ -532,9 +538,7 @@ export function getActiveMenus(id, setIsLoading) {
 export function getActiveDishes(id) {
   return async function (dispatch) {
     try {
-      let allActiveDishes = await axios.get(
-        "dish/all_active"
-      );
+      let allActiveDishes = await axios.get('dish/all_active');
       return dispatch({
         type: GET_ACTIVE_DISHES,
         payload: { dishes: allActiveDishes.data, id: id },
@@ -545,116 +549,150 @@ export function getActiveDishes(id) {
   };
 }
 
-export function getActiveProducts(id) {
-  return async function (dispatch, getState) {
-    let allActiveProducts = []
-    try {
-      allActiveProducts = await axios.get(
-        `product/all_active/${id}`
-      );
-      if(allActiveProducts == null || allActiveProducts == undefined) console.log('respuesta undefined');
-      let equals = false;
-      if (getState().products.length) {
-        let products = getState().products;
-        // Convertimos los arrays a objetos con las propiedades que queremos comparar
-        const objects1 = allActiveProducts.data.map((obj) => ({
-          ...obj,
-          ...{ name: undefined },
-        }));
-        const objects2 = products.map((obj) => ({
-          ...obj,
-          ...{ name: undefined },
-        }));
+// export function getActiveProducts(id) {
+//   return async function (dispatch, getState) {
+//     let allActiveProducts = [];
+//     try {
+//       allActiveProducts = await axios.get(`product/all_active/${id}`);
+//       if (allActiveProducts == null || allActiveProducts == undefined)
+//         console.log('respuesta undefined');
+//       let equals = false;
+//       if (getState().products.length) {
+//         let products = getState().products;
+//         // Convertimos los arrays a objetos con las propiedades que queremos comparar
+//         const objects1 = allActiveProducts.data.map((obj) => ({
+//           ...obj,
+//           ...{ name: undefined },
+//         }));
+//         const objects2 = products.map((obj) => ({
+//           ...obj,
+//           ...{ name: undefined },
+//         }));
 
-        // Comparamos los objetos
-        equals = JSON.stringify(objects1) === JSON.stringify(objects2);
-      }
-      //si las categorias cargadas son las mismas, no las vuelve a cargar
-      if (equals === true) return;
-      const traduccion = async () => {
-        try {
-          //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
-          let results = menuTranslate(allActiveProducts.data);
-          //* Traduzco todos los nombres
-          let translatedNames = await translateText(
-            localStorage.getItem("Lang"),
-            results.nombres,
-            true
-          );
-          //* Reemplazo los nombres originales por los nombres traducidos
-          const translatedProducts = allActiveProducts.data.map((a, index) => {
-            a.name = translatedNames[index].name;
-            return a;
-          });
-          return translatedProducts;
-        } catch (error) {
-          return allActiveProducts.data  
-        }
-      }
-      return dispatch({
-        type: GET_ACTIVE_PRODUCTS,
-        payload: await traduccion(),
-      });
-    } catch (error) {
-    }
-    if( !allActiveProducts.length ){
-      return dispatch({
-        type: GET_ACTIVE_PRODUCTS,
-        payload: [],
-      });
-    }
-  };
-}
+//         // Comparamos los objetos
+//         equals = JSON.stringify(objects1) === JSON.stringify(objects2);
+//       }
+//       //si las categorias cargadas son las mismas, no las vuelve a cargar
+//       if (equals === true) return;
+//       const traduccion = async () => {
+//         try {
+//           //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
+//           let results = menuTranslate(allActiveProducts.data);
+//           //* Traduzco todos los nombres
+//           let translatedNames = await translateText(
+//             localStorage.getItem('Lang'),
+//             results.nombres,
+//             true
+//           );
+//           //* Reemplazo los nombres originales por los nombres traducidos
+//           const translatedProducts = allActiveProducts.data.map((a, index) => {
+//             a.name = translatedNames[index].name;
+//             return a;
+//           });
+//           return translatedProducts;
+//         } catch (error) {
+//           return allActiveProducts.data;
+//         }
+//       };
+//       return dispatch({
+//         type: GET_ACTIVE_PRODUCTS,
+//         payload: await traduccion(),
+//       });
+//     } catch (error) {}
+//     if (!allActiveProducts.length) {
+//       return dispatch({
+//         type: GET_ACTIVE_PRODUCTS,
+//         payload: [],
+//       });
+//     }
+//   };
+// }
+// export function getActiveProducts(id) {
+//   return async function (dispatch) {
+//     try {
+//       const response = await axios.get(`product/all_active/${id}`);
+//       const allActiveProducts = response.data;
 
+//       if (allActiveProducts && allActiveProducts.length > 0) {
+//         dispatch({
+//           type: GET_ACTIVE_PRODUCTS,
+//           payload: allActiveProducts,
+//         });
+//       } else {
+//         dispatch({
+//           type: GET_ACTIVE_PRODUCTS,
+//           payload: [],
+//         });
+//       }
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+// }
+
+// export function getActiveAditionals(id) {
+//   return async function (dispatch, getState) {
+//     try {
+//       let allActiveAditionals = await axios.get(`additional/all_active/${id}`);
+//       let equals = false;
+//       if (getState().allAditionals.length) {
+//         let aditionals = getState().allAditionals;
+//         // Convertimos los arrays a objetos con las propiedades que queremos comparar
+//         const objects1 = allActiveAditionals.data.map((obj) => ({
+//           ...obj,
+//           ...{ name: undefined },
+//         }));
+//         const objects2 = aditionals.map((obj) => ({
+//           ...obj,
+//           ...{ name: undefined },
+//         }));
+
+//         // Comparamos los objetos
+//         equals = JSON.stringify(objects1) === JSON.stringify(objects2);
+//       }
+//       //si las categorias cargadas son las mismas, no las vuelve a cargar
+//       if (equals === true) return;
+//       const traduccion = async () => {
+//         try {
+//           //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
+//           let results = menuTranslate(allActiveAditionals.data);
+//           //* Traduzco todos los nombres
+//           let translatedNames = await translateText(
+//             localStorage.getItem('Lang'),
+//             results.nombres,
+//             true
+//           );
+//           //* Reemplazo los nombres originales por los nombres traducidos
+//           const translatedAdittionals = allActiveAditionals.data.map(
+//             (a, index) => {
+//               a.name = translatedNames[index].name;
+//               return a;
+//             }
+//           );
+//           return translatedAdittionals;
+//         } catch (error) {
+//           return allActiveAditionals.data;
+//         }
+//       };
+
+//       return dispatch({
+//         type: GET_ALL_ADITIONALS,
+//         payload: await traduccion(),
+//       });
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+// }
 export function getActiveAditionals(id) {
-  return async function (dispatch, getState) {
+  return async function (dispatch) {
     try {
-      let allActiveAditionals = await axios.get(
-        `additional/all_active/${id}`
-      );
-      let equals = false;
-      if (getState().allAditionals.length) {
-        let aditionals = getState().allAditionals;
-        // Convertimos los arrays a objetos con las propiedades que queremos comparar
-        const objects1 = allActiveAditionals.data.map((obj) => ({
-          ...obj,
-          ...{ name: undefined },
-        }));
-        const objects2 = aditionals.map((obj) => ({
-          ...obj,
-          ...{ name: undefined },
-        }));
+      const response = await axios.get(`additional/all_active/${id}`);
+      const allActiveAditionals = response.data;
 
-        // Comparamos los objetos
-        equals = JSON.stringify(objects1) === JSON.stringify(objects2);
-      }
-      //si las categorias cargadas son las mismas, no las vuelve a cargar
-      if (equals === true) return;
-      const traduccion = async () => {
-        try {
-          //* Obtengo todos los nombres y descripciones (en este caso no tienen desc.)
-          let results = menuTranslate(allActiveAditionals.data);
-          //* Traduzco todos los nombres
-          let translatedNames = await translateText(
-            localStorage.getItem("Lang"),
-            results.nombres,
-            true
-          );
-          //* Reemplazo los nombres originales por los nombres traducidos
-          const translatedAdittionals = allActiveAditionals.data.map(
-            (a, index) => {
-              a.name = translatedNames[index].name;
-              return a;
-            }
-          );
-          return translatedAdittionals;          
-        } catch (error) {
-          return allActiveAditionals.data
-        }}
-
-      return dispatch({
+      dispatch({
         type: GET_ALL_ADITIONALS,
-        payload: await traduccion(),
+        payload: allActiveAditionals,
       });
     } catch (error) {
       console.error(error);
@@ -662,55 +700,69 @@ export function getActiveAditionals(id) {
   };
 }
 
-export function getAllCategorys(id) {
-  return async function (dispatch, getState) {
-    try {
-      let allActiveCategories = await axios.get(
-        `category/all_active/${id}`
-      );
-      let equals = false;
-      if (getState().allCategories.length) {
-        let categorias = getState().allCategories;
-        // Convertimos los arrays a objetos con las propiedades que queremos comparar
-        const objects1 = allActiveCategories.data.map((obj) => ({
-          ...obj,
-          ...{ category: undefined },
-        }));
-        const objects2 = categorias.map((obj) => ({
-          ...obj,
-          ...{ category: undefined },
-        }));
+// export function getAllCategorys(id) {
+//   return async function (dispatch, getState) {
+//     try {
+//       let allActiveCategories = await axios.get(`category/all_active/${id}`);
+//       let equals = false;
+//       if (getState().allCategories.length) {
+//         let categorias = getState().allCategories;
+//         // Convertimos los arrays a objetos con las propiedades que queremos comparar
+//         const objects1 = allActiveCategories.data.map((obj) => ({
+//           ...obj,
+//           ...{ category: undefined },
+//         }));
+//         const objects2 = categorias.map((obj) => ({
+//           ...obj,
+//           ...{ category: undefined },
+//         }));
 
-        // Comparamos los objetos
-        equals = JSON.stringify(objects1) === JSON.stringify(objects2);
-      }
-      //si las categorias cargadas son las mismas, no las vuelve a cargar
-      if (equals === true) return;
-      const traduccion = async () => {
-        try {
-          //* Obtengo todos los nombres de las categorias
-          let results = categoryTranslate(allActiveCategories.data);
-          //* Traduzco todos los nombres
-          let translatedNames = await translateText(
-            localStorage.getItem("Lang"),
-            results,
-            true
-          );
-          //* Reemplazo los nombres originales por los nombres traducidos
-          const translatedCategories = allActiveCategories.data.map(
-            (a, index) => {
-              a.category = translatedNames[index].name;
-              return a;
-            }
-          );
-          return translatedCategories;
-        } catch (error) {
-          return allActiveCategories.data;
-        }
-      }
-      return dispatch({
+//         // Comparamos los objetos
+//         equals = JSON.stringify(objects1) === JSON.stringify(objects2);
+//       }
+//       //si las categorias cargadas son las mismas, no las vuelve a cargar
+//       if (equals === true) return;
+//       const traduccion = async () => {
+//         try {
+//           //* Obtengo todos los nombres de las categorias
+//           let results = categoryTranslate(allActiveCategories.data);
+//           //* Traduzco todos los nombres
+//           let translatedNames = await translateText(
+//             localStorage.getItem('Lang'),
+//             results,
+//             true
+//           );
+//           //* Reemplazo los nombres originales por los nombres traducidos
+//           const translatedCategories = allActiveCategories.data.map(
+//             (a, index) => {
+//               a.category = translatedNames[index].name;
+//               return a;
+//             }
+//           );
+//           return translatedCategories;
+//         } catch (error) {
+//           return allActiveCategories.data;
+//         }
+//       };
+//       return dispatch({
+//         type: GET_ALL_CATEGORIES,
+//         payload: await traduccion(),
+//       });
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+// }
+
+export function getAllCategorys(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`category/all_active/${id}`);
+      const allActiveCategories = response.data;
+
+      dispatch({
         type: GET_ALL_CATEGORIES,
-        payload: await traduccion(),
+        payload: allActiveCategories,
       });
     } catch (error) {
       console.error(error);
@@ -733,34 +785,34 @@ export function filterCategory(id) {
 
 export const setFiltro = (filtroPor) => {
   return {
-    type: "FILTER_BY_CATEGORY",
+    type: 'FILTER_BY_CATEGORY',
     payload: filtroPor,
   };
 };
 
-export const isAvailable = (name, setLoading)=> {
+export const isAvailable = (name, setLoading) => {
   return {
     type: IS_PRODUCT_AVAILABLE,
     payload: { name: name, setLoading: setLoading },
   };
- }
+};
 
 export function getPosValue(id) {
   return async function (dispatch) {
     try {
       let response = await axios.get(`pos/detail/${id}`);
-      let tableSurcharge = response.data[0].surcharge
-      let tableDiscount = response.data[0].discount
-      let tablePromotion = response.data[0].promotion
+      let tableSurcharge = response.data[0].surcharge;
+      let tableDiscount = response.data[0].discount;
+      let tablePromotion = response.data[0].promotion;
       let tablePrice = {
         tableSurcharge,
         tablePromotion,
-        tableDiscount
-      }
+        tableDiscount,
+      };
       return dispatch({
         type: SET_TABLE_PRICE,
-        payload: tablePrice
-      })
+        payload: tablePrice,
+      });
       // return {tableSurcharge, tableDiscount, tablePromotion}
     } catch (error) {
       console.error(error);
@@ -778,12 +830,12 @@ export function getSectorValue(id) {
       let sectorPrice = {
         sectorSurcharge,
         sectorPromotion,
-        sectorDiscount
-      }
+        sectorDiscount,
+      };
       return dispatch({
         type: SET_SECTOR_PRICE,
-        payload: sectorPrice
-      })
+        payload: sectorPrice,
+      });
       // return { sectorSurcharge, sectorDiscount, sectorPromotion };
     } catch (error) {
       console.error(error);
@@ -818,32 +870,32 @@ export function removeUser() {
 
 ////////////////////* Language Action type *////////////////////
 
-export function changeLanguage(lang, setIsloading) {
-  return async function (dispatch) {
-    try {
-      if (setIsloading) setIsloading(true);
-      const result = dispatch({
-        type: CHANGE_LANGUAGE,
-        payload: {
-          lang: lang,
-          language: await translateText(lang, all_app_texts),
-        },
-      });
-      if (setIsloading) setIsloading(false);
-      return result;
-    } catch (error) {
-      if (setIsloading) setIsloading(false);
-      console.error(error);
-    }
-  };
-}
+// export function changeLanguage(lang, setIsloading) {
+//   return async function (dispatch) {
+//     try {
+//       if (setIsloading) setIsloading(true);
+//       const result = dispatch({
+//         type: CHANGE_LANGUAGE,
+//         payload: {
+//           lang: lang,
+//           language: await translateText(lang, all_app_texts),
+//         },
+//       });
+//       if (setIsloading) setIsloading(false);
+//       return result;
+//     } catch (error) {
+//       if (setIsloading) setIsloading(false);
+//       console.error(error);
+//     }
+//   };
+// }
 
 ////////////////////* Order Action type *////////////////////
 
-export function getOrderStatus (orderId, commerceId) {
+export function getOrderStatus(orderId, commerceId) {
   return async function (dispatch) {
     try {
-      const date = new Date
+      const date = new Date();
       let month = date.getMonth() + 1;
       let day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
       let fecha = `${date.getFullYear()}-${month}-${day}`;
@@ -852,16 +904,16 @@ export function getOrderStatus (orderId, commerceId) {
       );
       return dispatch({
         type: GET_ORDER_STATUS,
-        payload: {orderId: orderId, allOrders: response.data}
-      })
+        payload: { orderId: orderId, allOrders: response.data },
+      });
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 }
 
-export function getOrderPending (commerceId, sectorID, tableID){
-  return async function (dispatch){
+export function getOrderPending(commerceId, sectorID, tableID) {
+  return async function (dispatch) {
     try {
       const date = new Date();
       let month = date.getMonth() + 1;
@@ -869,27 +921,31 @@ export function getOrderPending (commerceId, sectorID, tableID){
       let fecha = `${date.getFullYear()}-${month}-${day}`;
       let response = await axios.get(
         `order/dates/${commerceId}?startDate=${fecha}&endDate=${fecha}`
-      );     
-      return dispatch ({
+      );
+      return dispatch({
         type: GET_ORDER_PENDING,
-        payload: {allOrders: response.data, sectorID: sectorID, tableID: tableID}
-      })
+        payload: {
+          allOrders: response.data,
+          sectorID: sectorID,
+          tableID: tableID,
+        },
+      });
     } catch (error) {
-      return(error)
+      return error;
     }
-  }
+  };
 }
 
-export function removerCart(){
-  return function(dispatch){
+export function removerCart() {
+  return function (dispatch) {
     try {
       return dispatch({
         type: REMOVE_CART,
-      })
+      });
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
 }
 
 export function removerOrderId() {
@@ -914,10 +970,10 @@ export async function postMpOrder(order, methodId, mpInfo, commerceName) {
   //!nueva date => dateCurrent
   const hour = new Date().getHours();
   const minute = new Date().getMinutes();
-  const formattedHour = hour < 10 ? "0" + hour : hour;
-  const formattedMinute = minute < 10 ? "0" + minute : minute;
+  const formattedHour = hour < 10 ? '0' + hour : hour;
+  const formattedMinute = minute < 10 ? '0' + minute : minute;
 
-  const time = formattedHour + ":" + formattedMinute;
+  const time = formattedHour + ':' + formattedMinute;
   let additionals = {
     id: [],
     name: [],
@@ -975,15 +1031,15 @@ export async function postMpOrder(order, methodId, mpInfo, commerceName) {
     });
   } else {
     additionals = {
-      id: [""],
-      name: [""],
-      cost: [""],
-      promotion: [""],
-      discount: [""],
-      surcharge: [""],
-      amount: [""],
-      unitTypeId: [""],
-      detail: [""],
+      id: [''],
+      name: [''],
+      cost: [''],
+      promotion: [''],
+      discount: [''],
+      surcharge: [''],
+      amount: [''],
+      unitTypeId: [''],
+      detail: [''],
     };
   }
   //!armo todos los productos
@@ -1005,19 +1061,19 @@ export async function postMpOrder(order, methodId, mpInfo, commerceName) {
     });
   } else {
     products = {
-      id: [""],
-      name: [""],
-      cost: [""],
-      unitTypeId: [""],
-      productTypeId: [""],
-      supplierId: [""],
-      promotion: [""],
-      discount: [""],
-      surcharge: [""],
-      amount: [""],
-      allergenType: [""],
-      careful: [""],
-      detail: [""],
+      id: [''],
+      name: [''],
+      cost: [''],
+      unitTypeId: [''],
+      productTypeId: [''],
+      supplierId: [''],
+      promotion: [''],
+      discount: [''],
+      surcharge: [''],
+      amount: [''],
+      allergenType: [''],
+      careful: [''],
+      detail: [''],
     };
   }
   //!armo todos los menus
@@ -1029,13 +1085,13 @@ export async function postMpOrder(order, methodId, mpInfo, commerceName) {
       menu.cost.push(`${m.price}`);
       menu.menuTypeId.push(`${m.menuTypeId}`);
       menu.categoryId.push(`${m.categoryId}`);
-      m.dishes ? menu.dishes.push(`${m.dishes}`) : menu.dishes.push("");
+      m.dishes ? menu.dishes.push(`${m.dishes}`) : menu.dishes.push('');
       m.product !== undefined
         ? menu.product.push(`${m.product}`)
-        : menu.product.push("");
+        : menu.product.push('');
       m.additionalId !== undefined
         ? menu.additionalId.push(`${m.additional}`)
-        : menu.additionalId.push("");
+        : menu.additionalId.push('');
       menu.promotion.push(`${m.promotion}`);
       menu.discount.push(`${m.discount}`);
       menu.surcharge.push(`${m.surcharge}`);
@@ -1044,29 +1100,29 @@ export async function postMpOrder(order, methodId, mpInfo, commerceName) {
     });
   } else {
     menu = {
-      id: [""],
-      name: [""],
-      description: [""],
-      cost: [""],
-      menuTypeId: [""],
-      categoryId: [""],
-      dishes: [""],
-      product: [""],
-      additionalId: [""],
-      promotion: [""],
-      discount: [""],
-      surcharge: [""],
-      amount: [""],
-      detail: [""],
+      id: [''],
+      name: [''],
+      description: [''],
+      cost: [''],
+      menuTypeId: [''],
+      categoryId: [''],
+      dishes: [''],
+      product: [''],
+      additionalId: [''],
+      promotion: [''],
+      discount: [''],
+      surcharge: [''],
+      amount: [''],
+      detail: [''],
     };
   }
   try {
     const newOrder = {
-      name: order.name ? order.name : "sss",
+      name: order.name ? order.name : 'sss',
       date: dateCurrent,
       hour: time,
-      status: "orderPlaced",
-      detail: "",
+      status: 'orderPlaced',
+      detail: '',
       validity: date,
       promotion: 0,
       discount: 0,
@@ -1081,75 +1137,96 @@ export async function postMpOrder(order, methodId, mpInfo, commerceName) {
       courierId: null,
       costDelivery: 0,
       sectorId: parseInt(order.sectorId),
-      accountemail: order.user.email ? order.user.email : "",
-      accountname: order.user.name ? order.user.name : "",
-      accountphone: order.user.phone ? order.user.phone : "",
-      accountbirthDate: order.user.birthDate ? order.user.birthDate : "",
-      accountaddress: order.user.address ? order.user.address : "",
-      googleEmail: order.user.email ? order.user.email : "",
+      accountemail: order.user.email ? order.user.email : '',
+      accountname: order.user.name ? order.user.name : '',
+      accountphone: order.user.phone ? order.user.phone : '',
+      accountbirthDate: order.user.birthDate ? order.user.birthDate : '',
+      accountaddress: order.user.address ? order.user.address : '',
+      googleEmail: order.user.email ? order.user.email : '',
       additionals,
       products,
       dishes: {
-        id: [""],
-        name: [""],
-        description: [""],
-        photo: [""],
-        cost: [""],
-        estimatedTime: [""],
-        additionalId: [""],
-        amountAdditional: [""],
-        supplyId: [""],
-        amountSupplies: [""],
-        recipeId: [""],
-        dishTypeId: [""],
-        promotion: [""],
-        discount: [""],
-        surcharge: [""],
-        amount: [""],
-        detail: [""],
+        id: [''],
+        name: [''],
+        description: [''],
+        photo: [''],
+        cost: [''],
+        estimatedTime: [''],
+        additionalId: [''],
+        amountAdditional: [''],
+        supplyId: [''],
+        amountSupplies: [''],
+        recipeId: [''],
+        dishTypeId: [''],
+        promotion: [''],
+        discount: [''],
+        surcharge: [''],
+        amount: [''],
+        detail: [''],
       },
       menu,
       mpPayment: {
         Payment: mpInfo.payment,
-        Status: "approved",
+        Status: 'approved',
         MerchantOrder: mpInfo.merchantOrder,
         ExternalReference: mpInfo.externalReference,
         PaymentType: mpInfo.paymentType,
       },
     };
-    let response = await axios.post("order/new", newOrder);
-    localStorage.setItem("CSMO_ID", response.data.id);
-    localStorage.setItem("CSMO", response.data.order);
-    localStorage.removeItem("mporder");
+    let response = await axios.post('order/new', newOrder);
+    localStorage.setItem('CSMO_ID', response.data.id);
+    localStorage.setItem('CSMO', response.data.order);
+    localStorage.removeItem('mporder');
     // localStorage.removeItem("cart");
   } catch (error) {
     console.error(error);
   }
 }
 
-export const getOrdersByUser = (email, commerceId) => {
-  return async function (dispatch) {
-    try {
-      let result = await axios.get(`/order/orderes/${commerceId}`);
-      let orders = result.data.filter((o) => o.googleEmail === email);
-      return dispatch({
-        type: GET_ORDERS_BY_USER,
-        payload: orders
-      })
-    } catch (error) {
-      console.error(error)
-    }
-  }
-}
+// export const getOrdersByUser = (email, commerceId) => {
+//   return async function (dispatch) {
+//     try {
+//       let result = await axios.get(`/order/orderes/${commerceId}`);
+//       let orders = result.data.filter((o) => o.googleEmail === email);
+//       return dispatch({
+//         type: GET_ORDERS_BY_USER,
+//         payload: orders
+//       })
+//     } catch (error) {
+//       console.error(error)
+//     }
+//   }
+// }
 
 export const clearStatus = () => {
-  return function (dispatch){
+  return function (dispatch) {
     try {
       return dispatch({
         type: CLEAR_ORDER_STATUS,
-      })
+      });
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
-}
+  };
+};
+
+export const hideBanner = (scroll) => {
+  return {
+    type: HIDE_BANNER,
+    payload: scroll,
+  };
+};
+
+export const getIdCategory = (id) => {
+  return {
+    type: GET_ID_CATEGORY,
+    payload: id,
+  };
+};
+
+export const showSearchbar = (boolean) => {
+  return {
+    type: SHOW_SEARCHBAR,
+    payload: boolean,
+  };
+};

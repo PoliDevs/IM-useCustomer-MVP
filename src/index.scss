@@ -1,5 +1,5 @@
 @import "./scss/colors.scss";
-@import url("https://db.onlinewebfonts.com/c/e4397c6cf12af9f58d46e124d18d6d93?family=MabryPro-Regular");
+// @import url("https://db.onlinewebfonts.com/c/e4397c6cf12af9f58d46e124d18d6d93?family=MabryPro-Regular");
 
 * {
   margin: 0;
@@ -16,9 +16,10 @@ body {
   width: 100%;;
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
   color: $text-primary;
   background-color: $background-primary;
-  font-family: "MabryPro-Regular", sans-serif;
+  font-family: "Arial", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -46,9 +47,9 @@ h3,
 h4,
 h5 {
   margin: 0;
-  font-family: "MabryPro-Regular", sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 button {
-   font-family: "Mabry Pro", sans-serif;
+   font-family: "Arial", sans-serif;
 }

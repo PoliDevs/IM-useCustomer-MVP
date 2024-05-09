@@ -23,6 +23,7 @@ export default function Banner({
   containerSubtitleMargin,
 }) {
   const language = useSelector((state) => state.language);
+  const showBanner = useSelector((state) => state.statusBanner);
   const table = useSelector((state) => state.table);
   const commerce = useSelector((state) => state.commerce);
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ export default function Banner({
   }, []);
   return (
     <section
-      className={s.banner}
+      className={`${s.banner} ${showBanner ? s.fadeIn : s.fadeOut}`}
       //!cambiar url segun el comercio
       // style={{ backgroundImage: `url(${burger})` }}
       // onClick={() => {
@@ -48,7 +49,7 @@ export default function Banner({
       // }}
     >
       <div className={s.content}>
-        {arrow && (
+        {/* {arrow && (
           <ArrowBackWhite
             style={{
               width: "21px",
@@ -58,33 +59,41 @@ export default function Banner({
             }}
             onClick={() => navigate(-1)}
           />
-        )}
+        )} */}
         <div className={s.imageContainer}>
           <img
             src={imgURL ? imgURL : menu}
             className={s.image}
-            width={menu ? "100px" : "54px"}
+            width={menu ? "53.8px" : "53.8px"}
+            height={"53.8"}
           />
+
+          <div
+            className={s.conteinerSubtitle}
+            // style={{
+            //   display: "flex",
+            //   flexDirection: "column",
+            // }}
+          >
+            <SubTitle
+              text={commerce.name}
+              alignment={"left"}
+              bold={true}
+              size={3}
+            />
+            <Paragraph
+              alignment={"left"}
+              text={` ${t("banner.Table")} ${table && table}`}
+              secundary={true}
+              color={"#000000"}
+            />
+          </div>
         </div>
-        <div
-          className={s.conteinerSubtitle}
-          style={{
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <SubTitle text={commerce.name} alignment={"left"} bold={true} />
-          <Paragraph
-            alignment={"left"}
-            text={` ${t("banner.Table")} ${table && table}`}
-            secundary={true}
-            color={"#000000"}
-          />
-        </div>
+
         <div>
           <img
             src={menu}
-            width={"150px"}
+            width={"100px"}
             height={"100px"}
             className={s.imagen2}
           />

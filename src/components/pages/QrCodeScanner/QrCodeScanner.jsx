@@ -31,29 +31,26 @@ export default function Qr({ scanResult, setScanResult }) {
       showTorchButtonIfSupported: true,
     });
 
-    scanner.render(success, error);
+    scanner.render(success);
     //{ facingMode: "environment" } para preferir camara trasera
     function success(result) {
       scanner.clear();
       const partesURL = result.split("/");
-      console.log("partesurl", partesURL);
-      const indexLanguage = partesURL.indexOf("language");
-      console.log("indexLanguage", indexLanguage);
+      const indexLanguage = partesURL.indexOf("welcome");
       if (indexLanguage !== -1 && indexLanguage < partesURL.length - 1) {
         const loQueVieneDespués = partesURL
           .slice(indexLanguage, partesURL.length)
           .join("/");
-        console.log("loquevienedespues", loQueVieneDespués);
         navigate(loQueVieneDespués);
       } else {
         return;
       }
     }
 
-    function error(error) {
-      console.warn(error);
-    }
-  }, []);
+    // function error(error) {
+    //   console.warn(error);
+    // }
+  }, [navigate]);
 
   return (
     <div className={s.mainContainer}>

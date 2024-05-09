@@ -3,10 +3,18 @@ import s from "./Icon.module.scss";
 
 //? Comentado para mostrar categorias del comercio
 // export default function Icon({icon, handleCategory, category}) {
-export default function Icon({ id, name, handleCategory, category, disabled, selected }) {
+export default function Icon({
+  id,
+  name,
+  handleCategory,
+  category,
+  disabled,
+  selected,
+}) {
   return (
     <a
-      id={`category-${id}`}
+      style={{ textDecoration: "none" }}
+      id={id}
       className={`${s.iconContainer} ${selected ? s.selected : ""} ${
         disabled && s.disabled
       }`}

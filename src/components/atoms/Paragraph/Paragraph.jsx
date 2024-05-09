@@ -14,6 +14,7 @@ export default function Paragraph({
   gap,
   color,
   underline,
+  truncate = false,
 }) {
   const truncatedText =
     text && text.length > 110 ? `${text.substring(0, 110)}...` : text;
@@ -26,15 +27,14 @@ export default function Paragraph({
         scrollable && s.scrollable
       } ${children && s.align} ${alignment === "right" && s.right} ${
         disabled && s.disabled
-      } ${gap && s.gap} ${noMargin && s.noMargin} ${underline && s.underline}`}
-      style={{ color: color && color }}
+      } ${gap && s.gap} ${noMargin && s.noMargin} ${
+        underline && s.underline
+      }   `}
+      style={{
+        color: color && color,
+      }}
     >
-      {/* {scrollable
-        ? text
-        : text.length > 110
-        ? `${text.substring(0, 110)}...`
-        : text} */}
-      {text && scrollable ? text : truncatedText}
+      {truncate ? truncatedText : text}
       {children}
     </p>
   );

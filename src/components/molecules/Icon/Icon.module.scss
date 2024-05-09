@@ -11,9 +11,18 @@
   height: auto;
   margin: 0 5px;
   padding: 12px;
+  padding-left: 15px;
+  padding-right: 15px;
   background-color: $background-secundary;
-  border-radius: 15px;
-   color: $text-desable;
+  border-radius: 28px;
+  color: $text-figma;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+    color: $text-figma;
+  }
+
   &.selected {
     border: 2px solid #ff4747;
     color: #ff4747;
@@ -29,14 +38,18 @@
   .name {
     font-size: $caption;
     text-wrap: nowrap;
-   
+    font-family: "Arial", sans-serif;
   }
 }
-
-
 
 .disabled {
   pointer-events: none;
   background-color: transparent;
   color: #f0f0f0;
+  visibility: hidden;
+  margin-bottom: 0;
+  margin: 0;
+  height: 0;
+  display: none;
+  padding: 0;
 }

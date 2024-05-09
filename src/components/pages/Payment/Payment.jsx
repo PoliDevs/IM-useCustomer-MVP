@@ -1,4 +1,13 @@
-import { getActiveProducts, getCommerce, getPaymentMethods, getPosValue, getSectorValue, getStatus, postOrder, removerCart } from "../../../redux/actions";
+import {
+  // getActiveProducts,
+  getCommerce,
+  getPaymentMethods,
+  getPosValue,
+  getSectorValue,
+  getStatus,
+  postOrder,
+  removerCart,
+} from "../../../redux/actions";
 import { ReactComponent as IMenu } from "../../../assets/ImenuHorizontal.svg";
 import { dataDecrypt, formattedOrder } from "../../../utils/Functions";
 import { ReactComponent as CashIcon } from "../../../assets/CashIcon.svg";
@@ -19,48 +28,46 @@ import Banner from "../../molecules/Banner/Banner";
 import s from "./Payment.module.scss";
 
 export default function Payment() {
-  const [method, setMethod] = useState('');
+  const [method, setMethod] = useState("");
   const [price, setPrice] = useState({});
   const [order, setOrder] = useState({});
   const [mp, setMp] = useState([]);
   const [cash, setCash] = useState([]);
-  const paymentMethods = useSelector((state)=> state.paymentMethods);
-  const sectorPrice = useSelector((state)=> state.sectorPrice);
-  const commerceID = useSelector((state)=> state.commerce.id);
-  const productsList = useSelector((state)=> state.products);
-  const tablePrice = useSelector((state)=> state.tablePrice);
-  const language = useSelector((state)=> state.language);
+  const paymentMethods = useSelector((state) => state.paymentMethods);
+  const sectorPrice = useSelector((state) => state.sectorPrice);
+  const commerceID = useSelector((state) => state.commerce.id);
+  const productsList = useSelector((state) => state.products);
+  const tablePrice = useSelector((state) => state.tablePrice);
+  const language = useSelector((state) => state.language);
   const user = useSelector((state) => state.user);
   const sectorID = useSelector((state) => state.sector);
   const open = useSelector((state) => state.status);
-  const tableID = useSelector((state)=> state.table);
-  const cart = useSelector((state)=> state.cart);
+  const tableID = useSelector((state) => state.table);
+  const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const totalPrice = cart.reduce((count, p) => count + p.price * p.amount, 0);
   // let mercadopago = null;
   const [t, i18n] = useTranslation(["global"]);
   const [isLoading, setIsloading] = useState(true);
   const navigate = useNavigate();
-  const handleChange = (option)=> {
-    setMethod(option)
-  }
+  const handleChange = (option) => {
+    setMethod(option);
+  };
 
   useEffect(() => {
-    setMp(paymentMethods.filter((p)=> p.type === "mercadopago"));
-    setCash(paymentMethods.filter((p)=> p.type === "efectivo"));
-  }, [paymentMethods])
-  
-
+    setMp(paymentMethods.filter((p) => p.type === "mercadopago"));
+    setCash(paymentMethods.filter((p) => p.type === "efectivo"));
+  }, [paymentMethods]);
 
   useEffect(() => {
-    !cart.length && navigate('/home');
-      localStorage.removeItem("CSMO");
-      dispatch(getPosValue(tableID));
-      dispatch(getSectorValue(sectorID));
-      dispatch(getActiveProducts(commerceID))
-      dispatch(getStatus(commerceID, setIsloading));
-      dispatch(getPaymentMethods(commerceID));
-  }, [])
+    !cart.length && navigate("/home");
+    localStorage.removeItem("CSMO");
+    dispatch(getPosValue(tableID));
+    dispatch(getSectorValue(sectorID));
+    dispatch(getActiveProducts(commerceID));
+    dispatch(getStatus(commerceID, setIsloading));
+    dispatch(getPaymentMethods(commerceID));
+  }, []);
 
   useEffect(() => {
     formattedOrder(
@@ -77,20 +84,26 @@ export default function Payment() {
       setOrder
     );
   }, [tablePrice, sectorPrice, productsList]);
-  
-  const handleCash = ()=> {
+
+  const handleCash = () => {
     if (method === 2) {
-      const methodId = paymentMethods.filter((m)=> m.type === "efectivo")[0].id
+      const methodId = paymentMethods.filter((m) => m.type === "efectivo")[0]
+        .id;
       postOrder(order, methodId);
       localStorage.removeItem("cart");
-      dispatch(removerCart())
+      dispatch(removerCart());
     }
-     return;
-  }
+    return;
+  };
   return !isLoading ? (
     open ? (
       <main className={s.paymentContainer}>
-        <Banner ordersButton={false} navarrow={false} path={"/home"} arrow={true} />
+        <Banner
+          ordersButton={false}
+          navarrow={false}
+          path={"/home"}
+          arrow={true}
+        />
         <section className={s.paymentContent}>
           <SubTitle text={t("payment.title")} alignment={"left"} bold={true}>
             <CashIcon className={s.cashIcon} />
@@ -105,18 +118,26 @@ export default function Payment() {
             tablePrice={tablePrice}
             sectorPrice={sectorPrice}
           />
-          {cash.length ? <PaymentOptionButton
-            text={t("payment.cash")}
-            option={2}
-            setMethod={setMethod}
-            handleChange={handleChange}
-          /> : ""}
-          {mp.length? <PaymentOptionButton
-            text={"Mercadopago"}
-            option={1}
-            setMethod={setMethod}
-            handleChange={handleChange}
-          /> : ""}
+          {cash.length ? (
+            <PaymentOptionButton
+              text={t("payment.cash")}
+              option={2}
+              setMethod={setMethod}
+              handleChange={handleChange}
+            />
+          ) : (
+            ""
+          )}
+          {mp.length ? (
+            <PaymentOptionButton
+              text={"Mercadopago"}
+              option={1}
+              setMethod={setMethod}
+              handleChange={handleChange}
+            />
+          ) : (
+            ""
+          )}
           {/* <PaymentOptionButton
             text={language.payment_deferred}
             option={3}
@@ -147,5 +168,5 @@ export default function Payment() {
     )
   ) : (
     <LoadingPage text={t("loader.title")} />
-  ); 
+  );
 }

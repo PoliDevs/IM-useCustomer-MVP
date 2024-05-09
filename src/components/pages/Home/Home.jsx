@@ -1,17 +1,14 @@
 import { useEffect, useState, useRef } from "react";
-import { batch, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import {
   addCart,
-  filterCategory,
   getActiveAditionals,
-  getActiveDishes,
   getActiveMenus,
-  getActiveProducts,
   getAllCategorys,
-  getCommerce,
-  getOrdersByUser,
+  hideBanner,
+  // getOrdersByUser,
   removerOrderId,
   setFiltro,
 } from "../../../redux/actions";
@@ -22,22 +19,21 @@ import Products from "../../molecules/Products/Products";
 import Footer from "../../molecules/Footer/Footer";
 import s from "./Home.module.scss";
 import { dataDecrypt } from "../../../utils/Functions";
-import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
+// import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
 import Toast from "../../atoms/Toast/Toast";
 export default function Home() {
   const commerce = useSelector((state) => state.commerce);
-  const userEmail = useSelector((state) => state.user.email);
+  // const userEmail = useSelector((state) => state.user.email);
   const cant = useSelector((state) => state.cart);
   const cart = useSelector((state) => state.cart);
+  const categoryScroll = useSelector((state) => parseInt(state.idCategory));
   const pendingOrders = useSelector((state) => state.ordersByUser);
   const [isLoading, setIsLoading] = useState(true);
   const [category, setCategory] = useState(null);
-  const [currentCategory, setCurrentCategory] = useState(null);
   const [aditionals, setAditionals] = useState(false);
   const [all, setAll] = useState(category || aditionals ? false : true);
   const [red, setRed] = useState(false);
   const dispatch = useDispatch();
-  const [t, i18n] = useTranslation(["global"]);
 
   const changeStyle = () => {
     setRed(true);
@@ -60,22 +56,36 @@ export default function Home() {
     setAll(false);
   };
 
-  const categoryRefs = useRef({});
+  const categoryTitleRefs = useRef({});
+  useEffect(() => {
+    const categoryTitleRefsSnapshot = categoryTitleRefs.current;
+    const firstCategoryId =
+      Object.values(categoryTitleRefsSnapshot).length > 0
+        ? parseInt(Object.values(categoryTitleRefsSnapshot)[0].id)
+        : null;
+
+    if (categoryScroll !== firstCategoryId) {
+      dispatch(hideBanner(false));
+    } else {
+      dispatch(hideBanner(true));
+    }
+  }, [dispatch, categoryScroll]);
   const scrollToCategory = (categoryId) => {
-    const firstCategoryRef = Object.values(categoryRefs.current)[0];
-    if (!categoryId) {
-      // Si categoryId es nulo o falso, desplazamos al inicio
-      firstCategoryRef.scrollIntoView({ behavior: "smooth" });
-    } else if (categoryRefs.current[categoryId]) {
-      categoryRefs.current[categoryId].scrollIntoView({ behavior: "smooth" });
+    const firstCategoryId = parseInt(
+      Object.values(categoryTitleRefs.current)[0].id
+    );
+    if (categoryId === firstCategoryId) {
+      dispatch(hideBanner(true));
+      categoryTitleRefs.current[categoryId].scrollIntoView({
+        behavior: "auto",
+      });
+    } else if (categoryTitleRefs.current[categoryId]) {
+      dispatch(hideBanner(false));
+      categoryTitleRefs.current[categoryId].scrollIntoView({
+        behavior: "auto",
+      });
     }
   };
-
-  // useEffect(() => {
-  //   if (cart.length > 0) {
-
-  //   }
-  // }, [cart]);
 
   useEffect(() => {
     dispatch(addCart(cant));
@@ -84,12 +94,13 @@ export default function Home() {
     // dispatch(getActiveProducts(commerce.id))
     dispatch(getAllCategorys(commerce.id));
     dispatch(removerOrderId());
-    dispatch(getOrdersByUser(userEmail, commerce.id));
-  }, [cant]);
+    // dispatch(getOrdersByUser(userEmail, commerce.id));
+  }, [cant, commerce.id, dispatch]);
 
   return (
     <main className={s.home}>
       {/* //?agregado setIsLoading a navBar */}
+
       <Banner
         ordersButton={pendingOrders.length && true}
         navarrow={true}
@@ -98,6 +109,7 @@ export default function Home() {
         setAll={setAll}
         setIsLoading={setIsLoading}
       />
+
       {/* //movi hacia arriba searchBar y Categories */}
       <SearchBar />
       <Categories
@@ -120,7 +132,7 @@ export default function Home() {
           commercePlan={commerce.plan}
           aditionals={aditionals}
           scrollToCategory={scrollToCategory}
-          categoryRefs={categoryRefs}
+          categoryRefs={categoryTitleRefs}
         />
         {!isLoading && cart.length > 0 ? (
           <Toast
