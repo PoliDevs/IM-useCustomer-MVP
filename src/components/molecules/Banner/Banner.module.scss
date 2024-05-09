@@ -43,7 +43,6 @@
   }
   @media screen and (min-width: 430px) {
     height: 40px;
-
     .content {
       &:before {
         border-radius: $border-primary-radius;
@@ -52,6 +51,7 @@
   }
 
   @media screen and (min-width: 750px) {
+
     height: 40px;
     // .conteinerSubtitle {
     //   margin-right: 100px;
@@ -72,7 +72,6 @@
 
   @media screen and (max-width: 441px) {
     height: 40px;
-
     .imagen2 {
       width: 120px;
     }
@@ -80,7 +79,6 @@
 
   @media screen and (max-width: 375px) {
     height: 40px;
-
     .imagen2 {
       width: 120px;
     }
