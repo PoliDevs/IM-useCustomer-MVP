@@ -31,6 +31,7 @@ export default function Categories({
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [isCategoryClickSelected, setIsCategoryClickSelected] = useState(false);
   const scrollContainerRef = useRef(null);
+
   const handleCategoryClick = (categoryId) => {
     setSelectedCategory(categoryId);
     setIsCategoryClickSelected(true);
@@ -47,11 +48,10 @@ export default function Categories({
       categoryElement.scrollIntoView({
         block: "end",
         inline: "center",
-        behavior: "smooth",
       });
       setIsCategoryClickSelected(false);
     }
-  }, [categoryProductString, isCategoryClickSelected]);
+  }, [categoryProductString]);
 
   const uniqueCategoryIds = [
     ...allProducts.reduce((uniqueCategories, product) => {
@@ -73,11 +73,7 @@ export default function Categories({
           />
         </div> */}
       <div style={{ position: "relative", height: "auto" }}>
-        <ScrollContainer
-          className={s.scrollContainer}
-          ref={scrollContainerRef}
-          horizontal={true}
-        >
+        <ScrollContainer className={s.scrollContainer} ref={scrollContainerRef}>
           {/* <AllCategoryIcon
               all={all}
               setAll={setAll}
