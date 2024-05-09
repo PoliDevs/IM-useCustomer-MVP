@@ -95,7 +95,7 @@ export default function Home() {
     dispatch(getAllCategorys(commerce.id));
     dispatch(removerOrderId());
     // dispatch(getOrdersByUser(userEmail, commerce.id));
-  }, [cant]);
+  }, [cant, commerce.id, dispatch]);
 
   return (
     <main className={s.home}>

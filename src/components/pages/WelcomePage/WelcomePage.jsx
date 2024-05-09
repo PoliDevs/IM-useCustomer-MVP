@@ -58,7 +58,7 @@ export default function WelcomePage() {
   useEffect(() => {
     // dispatch(getOrderPending(commerce.id, sector, table));
     dispatch(getStatus(commerce.id, setIsloading));
-  }, []);
+  }, [commerce.id, dispatch]);
 
   // useEffect(() => {
   //   orderPending &&

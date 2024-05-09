@@ -50,7 +50,7 @@ export default function Qr({ scanResult, setScanResult }) {
     // function error(error) {
     //   console.warn(error);
     // }
-  }, []);
+  }, [navigate]);
 
   return (
     <div className={s.mainContainer}>

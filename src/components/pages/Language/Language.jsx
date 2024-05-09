@@ -22,22 +22,22 @@ export default function Language() {
   const dispatch = useDispatch();
   const params = useParams();
   
-  useEffect(() => {
-    localStorage.setItem("Pos", params["*"]);
-    const decripted = dataDecrypt(params["*"]);
-    if (localStorage.getItem("cart")) localStorage.removeItem("cart");
-    dispatch(getCommerce(decripted.commerce));
-    dispatch(setSector(decripted.sector));
-    dispatch(setTable(decripted.table));
+  // useEffect(() => {
+  //   localStorage.setItem("Pos", params["*"]);
+  //   const decripted = dataDecrypt(params["*"]);
+  //   if (localStorage.getItem("cart")) localStorage.removeItem("cart");
+  //   dispatch(getCommerce(decripted.commerce));
+  //   dispatch(setSector(decripted.sector));
+  //   dispatch(setTable(decripted.table));
 
-    const storedLanguage = localStorage.getItem("language");
-    if (storedLanguage) {
-      i18n.changeLanguage(storedLanguage);
-    } else {
-      // Si no hay idioma almacenado, establecer el idioma por defecto como "es"
-      i18n.changeLanguage("es");
-    }
-  }, []);
+  //   const storedLanguage = localStorage.getItem("language");
+  //   if (storedLanguage) {
+  //     i18n.changeLanguage(storedLanguage);
+  //   } else {
+  //     // Si no hay idioma almacenado, establecer el idioma por defecto como "es"
+  //     i18n.changeLanguage("es");
+  //   }
+  // }, []);
 
   // Función para cambiar el idioma
   const handleLanguageChange = (lang) => {
