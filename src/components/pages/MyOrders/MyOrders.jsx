@@ -1,4 +1,4 @@
-// import { getOrdersByUser } from "../../../redux/actions";
+import { getOrdersByUser } from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -21,11 +21,11 @@ export default function MyOrders() {
 
   useEffect(() => {
     if (!userEmail) navigate("/home");
-  }, []);
+  }, [navigate, userEmail]);
 
-  // useEffect(() => {
-  //   userEmail && dispatch(getOrdersByUser(userEmail, commerce.id));
-  // }, [commerce, userEmail])
+  useEffect(() => {
+    userEmail && dispatch(getOrdersByUser(userEmail, commerce.id));
+  }, [commerce, userEmail, dispatch])
 
   return (
     <div className={s.myOrdersContainer}>

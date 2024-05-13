@@ -134,7 +134,7 @@ export default function Home() {
           scrollToCategory={scrollToCategory}
           categoryRefs={categoryTitleRefs}
         />
-        {!isLoading && cart.length > 0 ? (
+        {isLoading && cart.length > 0 ? (
           <Toast
             text={`Tienes ${cart.length} productos pendientes, click para ir a ver tu pedido`}
             link={"payment"}

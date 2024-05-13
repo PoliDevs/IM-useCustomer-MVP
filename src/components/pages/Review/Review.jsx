@@ -1,5 +1,10 @@
-import { clearStatus, getOrderStatus, removerCart, sendReview } from "../../../redux/actions";
-import { ReactComponent as ArrowRight } from '../../../assets/ArrowLongRight.svg'
+import {
+  clearStatus,
+  getOrderStatus,
+  removerCart,
+  sendReview,
+} from "../../../redux/actions";
+import { ReactComponent as ArrowRight } from "../../../assets/ArrowLongRight.svg";
 import { ReactComponent as ImenuLogo } from "../../../assets/ImenuHorizontal.svg";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,14 +31,14 @@ import s from "./Review.module.scss";
 export default function Review() {
   const [comment, setComment] = useState("");
   const [sent, setSent] = useState(false);
-  const [duration, setDuration] =useState(true);
+  const [duration, setDuration] = useState(true);
   // const [loading, setLoading] = useState(true);
-  const userEmail = useSelector((state)=> state.user.email)
-  const language = useSelector((state)=> state.language);
-  const commerceInfo = useSelector((state)=> state.commerce);
-  const orderStatus = useSelector((state)=> state.orderStatus);
-  const orderId = useSelector((state)=> state.orderId);
-  const {width, height} = useWindowSize();
+  const userEmail = useSelector((state) => state.user.email);
+  const language = useSelector((state) => state.language);
+  const commerceInfo = useSelector((state) => state.commerce);
+  const orderStatus = useSelector((state) => state.orderStatus);
+  const orderId = useSelector((state) => state.orderId);
+  const { width, height } = useWindowSize();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -50,39 +55,41 @@ export default function Review() {
     merchantOrder,
     externalReference,
     paymentType,
-  }
-  if (id) localStorage.setItem('CSMO_ID', id)
+  };
+  if (id) localStorage.setItem("CSMO_ID", id);
   const [t, i18n] = useTranslation(["global"]);
 
   const { starsArray, stars, handleStars } = useRating();
 
-  const handleSent = ()=> {
+  const handleSent = () => {
     const review = {
       rating: stars,
-      feedback: comment
-    }
+      feedback: comment,
+    };
     sendReview(review, commerceInfo.id);
     setSent(true);
-  }
+  };
 
-    setTimeout(() => {
-     setDuration(false)
-    }, 6000);
+  setTimeout(() => {
+    setDuration(false);
+  }, 6000);
 
-    useEffect(() => {
-      if (status && status === "rejected") {navigate('/home'); localStorage.removeItem('mporder')}
-      if (status && status === 'approved'){
-        localStorage.getItem("mporder")
-          ? postMpOrder(
-              JSON.parse(localStorage.getItem("mporder")).order,
-              JSON.parse(localStorage.getItem("mporder")).methodId, mpInfo
-            )
-          : "";
+  useEffect(() => {
+    if (status && status === "rejected") {
+      navigate("/home");
+      localStorage.removeItem("mporder");
+    }
+    if (status && status === "approved") {
+      localStorage.getItem("mporder")
+        ? postMpOrder(
+            JSON.parse(localStorage.getItem("mporder")).order,
+            JSON.parse(localStorage.getItem("mporder")).methodId,
+            mpInfo
+          )
+        : "";
       dispatch(removerCart());
-
-      }
-    }, [])
-    
+    }
+  }, [dispatch, mpInfo, navigate, status]);
 
   useEffect(() => {
     dispatch(clearStatus());
@@ -90,8 +97,7 @@ export default function Review() {
       orderId && (await dispatch(getOrderStatus(orderId, commerceInfo.id)));
     };
     updateStatus();
-  }, [orderId, commerceInfo.id]);
-  
+  }, [orderId, commerceInfo.id, dispatch]);
 
   return (
     <section className={s.reviewContainer}>

@@ -1,5 +1,5 @@
 import {
-  // getActiveProducts,
+  getActiveProducts,
   getCommerce,
   getPaymentMethods,
   getPosValue,
@@ -67,7 +67,7 @@ export default function Payment() {
     dispatch(getActiveProducts(commerceID));
     dispatch(getStatus(commerceID, setIsloading));
     dispatch(getPaymentMethods(commerceID));
-  }, []);
+  }, [cart.length, commerceID, sectorID, dispatch, tableID, navigate]);
 
   useEffect(() => {
     formattedOrder(
@@ -83,7 +83,17 @@ export default function Payment() {
       setPrice,
       setOrder
     );
-  }, [tablePrice, sectorPrice, productsList]);
+  }, [
+    tablePrice,
+    sectorPrice,
+    productsList,
+    cart,
+    commerceID,
+    sectorID,
+    tableID,
+    totalPrice,
+    user,
+  ]);
 
   const handleCash = () => {
     if (method === 2) {

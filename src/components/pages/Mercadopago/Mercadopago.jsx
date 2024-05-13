@@ -6,7 +6,7 @@ import s from "./Mercadopago.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
-  // getActiveProducts,
+  getActiveProducts,
   getPaymentMethods,
   getPosValue,
   getSectorValue,
@@ -85,7 +85,7 @@ export default function Mercadopago() {
     dispatch(getActiveProducts(commerceID));
     dispatch(getStatus(commerceID, setIsloading));
     dispatch(getPaymentMethods(commerceID));
-  }, []);
+  }, [commerceID, dispatch, sectorID, tableID]);
 
   useEffect(() => {
     formattedOrder(
@@ -101,7 +101,17 @@ export default function Mercadopago() {
       setPrice,
       setOrder
     );
-  }, [tablePrice, sectorPrice, productsList]);
+  }, [
+    tablePrice,
+    sectorPrice,
+    productsList,
+    cart,
+    commerceID,
+    sectorID,
+    tableID,
+    totalPrice,
+    user,
+  ]);
 
   const handleMp = async () => {
     setIsloading(true);

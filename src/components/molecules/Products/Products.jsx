@@ -54,7 +54,6 @@ export default function Products({
   useEffect(() => {
     const titleRefsSnapshot = h2TitleRef.current;
     if (productsByCategory.size || search.length === 0) {
-      console.log("Entra al useEffect del observer")
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -90,14 +89,6 @@ export default function Products({
     search.length,
     observerEnabled,
   ]);
-
-  // const handleScrollChange = (scrollCords) => {
-  //   if (scrollCords >= 247) {
-  //     dispatch(hideBanner(false));
-  //   } else {
-  //     dispatch(hideBanner(true));
-  //   }
-  // };
 
   const { isOpen, openModal, closeModal, productData } = useModal(false);
   return (

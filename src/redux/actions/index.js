@@ -607,28 +607,28 @@ export function getActiveDishes(id) {
 //     }
 //   };
 // }
-// export function getActiveProducts(id) {
-//   return async function (dispatch) {
-//     try {
-//       const response = await axios.get(`product/all_active/${id}`);
-//       const allActiveProducts = response.data;
+export function getActiveProducts(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`product/all_active/${id}`);
+      const allActiveProducts = response.data;
 
-//       if (allActiveProducts && allActiveProducts.length > 0) {
-//         dispatch({
-//           type: GET_ACTIVE_PRODUCTS,
-//           payload: allActiveProducts,
-//         });
-//       } else {
-//         dispatch({
-//           type: GET_ACTIVE_PRODUCTS,
-//           payload: [],
-//         });
-//       }
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-// }
+      if (allActiveProducts && allActiveProducts.length > 0) {
+        dispatch({
+          type: GET_ACTIVE_PRODUCTS,
+          payload: allActiveProducts,
+        });
+      } else {
+        dispatch({
+          type: GET_ACTIVE_PRODUCTS,
+          payload: [],
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+}
 
 // export function getActiveAditionals(id) {
 //   return async function (dispatch, getState) {
@@ -1183,20 +1183,20 @@ export async function postMpOrder(order, methodId, mpInfo, commerceName) {
   }
 }
 
-// export const getOrdersByUser = (email, commerceId) => {
-//   return async function (dispatch) {
-//     try {
-//       let result = await axios.get(`/order/orderes/${commerceId}`);
-//       let orders = result.data.filter((o) => o.googleEmail === email);
-//       return dispatch({
-//         type: GET_ORDERS_BY_USER,
-//         payload: orders
-//       })
-//     } catch (error) {
-//       console.error(error)
-//     }
-//   }
-// }
+export const getOrdersByUser = (email, commerceId) => {
+  return async function (dispatch) {
+    try {
+      let result = await axios.get(`/order/orderes/${commerceId}`);
+      let orders = result.data.filter((o) => o.googleEmail === email);
+      return dispatch({
+        type: GET_ORDERS_BY_USER,
+        payload: orders
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
 
 export const clearStatus = () => {
   return function (dispatch) {
