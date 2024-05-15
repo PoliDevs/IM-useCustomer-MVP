@@ -11,17 +11,7 @@ import { getFileDownloadURL } from "../../../Firebase/Firebase";
 import { capitalizeFirstLetter } from "../../../utils/Functions";
 
 //? agrego setIsLoading a navbar
-export default function Banner({
-  setCategory,
-  ordersButton,
-  arrow,
-  navarrow,
-  path,
-  setAditionals,
-  setAll,
-  setIsLoading,
-  containerSubtitleMargin,
-}) {
+export default function Banner() {
   const showBanner = useSelector((state) => state.statusBanner);
   const table = useSelector((state) => state.table);
   const commerce = useSelector((state) => state.commerce);
