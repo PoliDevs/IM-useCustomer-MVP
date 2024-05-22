@@ -34,7 +34,6 @@ export default function Products({
     if (!filtroPor && aditionals) return allAditionals;
     return allProducts;
   });
-
   const search = useSelector((state) => state.search);
   const loading = useSelector((state) => state.loading);
   const productsByCategory = useMemo(() => {
@@ -118,6 +117,7 @@ export default function Products({
                         capitalizeFirstLetter(product.description) || ""
                       }
                       price={formatNumber(product.cost) || 0}
+                      cost={product.cost}
                       bg={product.photo || ""}
                       id={product.id || ""}
                       active={product.active || false}
@@ -161,6 +161,7 @@ export default function Products({
                         capitalizeFirstLetter(product.description) || ""
                       }
                       price={formatNumber(product.cost) || 0}
+                      cost={product.cost}
                       bg={product.photo || ""}
                       id={product.id || ""}
                       active={product.active || false}

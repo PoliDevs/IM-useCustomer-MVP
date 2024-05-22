@@ -32,6 +32,7 @@ export default function Product({
   allergenType,
   careful,
   active,
+  cost,
 }) {
   const commerceId = useSelector((state) => state.commerce.id);
   const dispatch = useDispatch();
@@ -67,6 +68,7 @@ export default function Product({
         openModal(
           name,
           price,
+          cost,
           bg,
           description,
           id,

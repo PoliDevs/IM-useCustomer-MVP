@@ -18,6 +18,7 @@ export default function Modal({
   closeModal,
   changeStyle,
 }) {
+  console.log(productData.cost);
   const cart = useSelector((state) => state.cart);
   const allproducts = useSelector((state) => state.allProducts);
   const alladitionals = useSelector((state) => state.allAditionals);
@@ -147,6 +148,7 @@ export default function Modal({
                   productData.name,
                   productData.description,
                   productData.price,
+                  productData.cost,
                   amount,
                   comment,
                   productData.id,
@@ -162,7 +164,6 @@ export default function Modal({
                   productData.supplierId,
                   productData.allergenType,
                   productData.careful
-                  // productData.cost,
                 );
               available && changeStyle();
               setAmount(0);
