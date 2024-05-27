@@ -87,7 +87,7 @@
   },
   "orderInfo": {
     "table": "Table",
-    "paymentTotal": "Total to pay: $"
+    "paymentTotal": "Total to pay: "
   },
   "mercadoPago": {
     "payButton": "Pay"

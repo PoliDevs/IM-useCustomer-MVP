@@ -30,7 +30,7 @@ import s from "./Payment.module.scss";
 export default function Payment() {
   const [method, setMethod] = useState("");
   const [price, setPrice] = useState({});
-  console.log(price)
+  console.log(price);
   const [order, setOrder] = useState({});
   const [mp, setMp] = useState([]);
   const [cash, setCash] = useState([]);
@@ -45,7 +45,7 @@ export default function Payment() {
   const open = useSelector((state) => state.status);
   const tableID = useSelector((state) => state.table);
   const cart = useSelector((state) => state.cart);
-  console.log(cart)
+  console.log(cart);
   const dispatch = useDispatch();
   const totalPrice = cart.reduce((count, p) => count + p.cost * p.amount, 0);
   // let mercadopago = null;
@@ -117,39 +117,53 @@ export default function Payment() {
           arrow={true}
         />
         <section className={s.paymentContent}>
-          <SubTitle text={t("payment.title")} alignment={"left"} bold={true}>
-            <CashIcon className={s.cashIcon} />
-          </SubTitle>
-          <SmallText
+          <SubTitle text={"Tu pedido"} alignment={"left"} bold={true} />
+          {/* <SmallText
             text={t("payment.managePayment")}
             alignment={"left"}
             standarSpacing={true}
-          />
+          /> */}
           <OrderInfo
             price={price}
             tablePrice={tablePrice}
             sectorPrice={sectorPrice}
           />
-          {cash.length ? (
-            <PaymentOptionButton
-              text={t("payment.cash")}
-              option={2}
-              setMethod={setMethod}
-              handleChange={handleChange}
+          <div className={s.totalContainer}>
+            <Paragraph
+              text={`${t("orderInfo.paymentTotal")}`}
+              alignment={"left"}
+              bold={true}
             />
-          ) : (
-            ""
-          )}
-          {mp.length ? (
-            <PaymentOptionButton
-              text={"Mercadopago"}
-              option={1}
-              setMethod={setMethod}
-              handleChange={handleChange}
+            <Paragraph
+              text={`$ ${totalPrice}`}
+              alignment={"right"}
+              bold={true}
             />
-          ) : (
-            ""
-          )}
+          </div>
+          <div style={{ marginTop: "20px" }}>
+            <SubTitle text={"Pago"} bold={true} alignment={"left"} size={2} />
+
+            {cash.length ? (
+              <PaymentOptionButton
+                text={"Pagar al Mozo"}
+                option={2}
+                setMethod={setMethod}
+                handleChange={handleChange}
+              />
+            ) : (
+              ""
+            )}
+            {mp.length ? (
+              <PaymentOptionButton
+                text={"Mercadopago"}
+                option={1}
+                setMethod={setMethod}
+                handleChange={handleChange}
+              />
+            ) : (
+              ""
+            )}
+          </div>
           {/* <PaymentOptionButton
             text={language.payment_deferred}
             option={3}
@@ -170,7 +184,7 @@ export default function Payment() {
               to={paymentUrl[method]}
               onClick={handleCash}
             >
-              {t("payment.continue")}
+              {"Hacer Pedido"}
             </Link>
           </div>
         </section>

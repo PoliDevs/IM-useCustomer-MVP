@@ -46,11 +46,11 @@
         line-height: 1rem;
         width: 100%;
         margin: 4px 0 5px 0;
-        border: $border;
-        border-radius: $border-primary-radius;
-        height: 41px;
+        // border: $border;
+        border-radius: 25.51px;
+        height: 51px;
         cursor: pointer;
-        background-color: $background-buttom-primary-active;
+        background-color: #FF4747;
         color: $text-secondary;
       }
     }
@@ -67,9 +67,14 @@
       .bottomContent {
         .linkButton {
           font-size: $title;
-          height: 61px;
+          height: 51px;
         }
       }
     }
   }
+}
+
+.totalContainer{
+  display: flex;
+  justify-content: space-between;
 }
