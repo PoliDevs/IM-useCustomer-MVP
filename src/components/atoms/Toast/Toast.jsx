@@ -4,9 +4,8 @@ function Toast({ text, link }) {
   return (
     <Link to={`/${link}`} className={s.link}>
       <div className={s.container}>
-        <div className={s.iconContainer}></div>
         <p className={s.title}>{text}</p>
-        <span className={s.close}>&times;</span>
+        {/* <span className={s.close}>&times;</span> */}
       </div>
     </Link>
   );

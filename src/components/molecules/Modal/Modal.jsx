@@ -9,7 +9,7 @@ import SubTitle from "../../atoms/SubTitle/SubTitle";
 import s from "./Modal.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { isAvailable } from "../../../redux/actions";
+import { hideBanner, isAvailable } from "../../../redux/actions";
 // import { emojiPng } from "../../../utils/Constants";
 import { useOnClickOutside } from "../../../hooks/useOnClickOutside";
 export default function Modal({
@@ -26,7 +26,8 @@ export default function Modal({
   const language = useSelector((state) => state.language);
   const available = useSelector((state) => state.productAvailable);
   const [comment, setComment] = useState("");
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(1);
+  console.log(amount);
   const [loading, setLoading] = useState(true);
   const dropdownRef = useRef(null);
   const dispatch = useDispatch();
@@ -99,7 +100,6 @@ export default function Modal({
                 scrollable={false}
                 maxHeight={2}
               />
-              <h3 className={s.productPrice}>{`$ ${productData.price}`}</h3>
             </div>
           </div>
           <div>
@@ -120,59 +120,74 @@ export default function Modal({
               setComment={setComment}
               maxLength={140}
               placeholder={t("productModal.commentPlaceholder")}
+              disabled={amount > 1}
             />
           </div>
           <div className={s.amount}>
             <button
               className={s.amountButton}
-              onClick={() => setAmount((prevAmount) => prevAmount - 1)}
-              disabled={amount <= 0}
+              onClick={() => {
+                if (comment.length === 0 || amount === 1) {
+                  setAmount((prevAmount) => prevAmount - 1);
+                }
+              }}
+              disabled={(comment.length > 0 && amount > 1) || amount <= 1}
             >
               -
             </button>
             <p className={s.cant}>{amount}</p>
             <button
               className={s.amountButton}
-              onClick={() => setAmount((prevAmount) => prevAmount + 1)}
+              onClick={() => {
+                if (comment.length === 0) {
+                  setAmount((prevAmount) => prevAmount + 1);
+                }
+              }}
+              disabled={comment.length > 0}
             >
               +
             </button>
           </div>
-          <button
-            className={`${s.addButton} ${!available && s.unavailable}`}
-            onClick={() => {
-              available &&
-                addToCart(
-                  productData.image,
-                  //productData.photo
-                  productData.name,
-                  productData.description,
-                  productData.price,
-                  productData.cost,
-                  amount,
-                  comment,
-                  productData.id,
-                  productData.promotion,
-                  productData.discount,
-                  productData.surcharge,
-                  productData.product,
-                  productData.aditional,
-                  productData.menuTypeId,
-                  productData.categoryId,
-                  productData.unitTypeId,
-                  productData.productTypeId,
-                  productData.supplierId,
-                  productData.allergenType,
-                  productData.careful
-                );
-              available && changeStyle();
-              setAmount(0);
-              setComment("");
-              closeModal();
-            }}
-          >
-            {t("productModal.addButton")}
-          </button>
+          <div className={s.buttonContainer}>
+            <h3 className={s.productPrice}>{`$ ${
+              productData.cost * amount
+            }`}</h3>
+            <button
+              className={`${s.addButton} ${!available && s.unavailable}`}
+              onClick={() => {
+                available &&
+                  addToCart(
+                    productData.image,
+                    //productData.photo
+                    productData.name,
+                    productData.description,
+                    productData.price,
+                    productData.cost,
+                    amount,
+                    comment,
+                    productData.id,
+                    productData.promotion,
+                    productData.discount,
+                    productData.surcharge,
+                    productData.product,
+                    productData.aditional,
+                    productData.menuTypeId,
+                    productData.categoryId,
+                    productData.unitTypeId,
+                    productData.productTypeId,
+                    productData.supplierId,
+                    productData.allergenType,
+                    productData.careful
+                  );
+                available && changeStyle();
+                setAmount(1);
+                setComment("");
+                closeModal();
+              }}
+            >
+              {t("productModal.addButton")}
+            </button>
+          </div>
         </div>
       </article>
     </div>

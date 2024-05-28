@@ -136,7 +136,7 @@ export default function Home() {
         />
         {isLoading && cart.length > 0 ? (
           <Toast
-            text={`Tienes ${cart.length} productos pendientes, click para ir a ver tu pedido`}
+            text={`VER PEDIDO  ${cart.length}`}
             link={"payment"}
           />
         ) : null}

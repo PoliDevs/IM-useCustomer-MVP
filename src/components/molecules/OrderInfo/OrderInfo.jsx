@@ -5,7 +5,6 @@ import SubTitle from "../../atoms/SubTitle/SubTitle";
 import PaymentProduct from "../PaymentProduct/PaymentProduct";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import s from "./OrderInfo.module.scss";
-import ScrollContainer from "react-indiana-drag-scroll";
 export default function OrderInfo({ border, price, tablePrice, sectorPrice }) {
   const language = useSelector((state) => state.language);
   const cart = useSelector((state) => state.cart);
@@ -29,7 +28,6 @@ export default function OrderInfo({ border, price, tablePrice, sectorPrice }) {
         <SubTitle text={commerceInfo.name} bold={true} />
         <SubTitle text={`${t("orderInfo.table")} ${table}`} />
       </div> */}
-      <ScrollContainer>
         <div className={s.productsContainer}>
           {cart.map((p, index) => (
             <PaymentProduct
@@ -43,7 +41,6 @@ export default function OrderInfo({ border, price, tablePrice, sectorPrice }) {
             />
           ))}
         </div>
-      </ScrollContainer>
     </div>
   );
 }

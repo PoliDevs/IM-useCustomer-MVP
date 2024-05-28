@@ -15,15 +15,21 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 5px;
-  height: 70px;
+  height: 58px;
   border-radius: 15px;
   padding-inline: 5px;
-  background-color: #212121;
+  background-color: #FF4747;
   animation: slideIn 0.5s forwards; // Animación de entrada
   z-index: 10000;
 
   > p {
     margin: 0;
+    font-weight: 700;
+    color: #FFFFFF;
+  }
+
+  .title{
+    font-size: 1.25rem;
     font-weight: 700;
     color: #FFFFFF;
   }

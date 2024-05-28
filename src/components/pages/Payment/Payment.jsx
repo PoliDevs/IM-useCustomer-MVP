@@ -26,11 +26,11 @@ import Paragraph from "../../atoms/Paragraph/Paragraph";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import Banner from "../../molecules/Banner/Banner";
 import s from "./Payment.module.scss";
+import ScrollContainer from "react-indiana-drag-scroll";
 
 export default function Payment() {
   const [method, setMethod] = useState("");
   const [price, setPrice] = useState({});
-  console.log(price);
   const [order, setOrder] = useState({});
   const [mp, setMp] = useState([]);
   const [cash, setCash] = useState([]);
@@ -123,11 +123,14 @@ export default function Payment() {
             alignment={"left"}
             standarSpacing={true}
           /> */}
-          <OrderInfo
-            price={price}
-            tablePrice={tablePrice}
-            sectorPrice={sectorPrice}
-          />
+          <ScrollContainer>
+            <OrderInfo
+              price={price}
+              tablePrice={tablePrice}
+              sectorPrice={sectorPrice}
+            />
+          </ScrollContainer>
+
           <div className={s.totalContainer}>
             <Paragraph
               text={`${t("orderInfo.paymentTotal")}`}
@@ -140,6 +143,7 @@ export default function Payment() {
               bold={true}
             />
           </div>
+
           <div style={{ marginTop: "20px" }}>
             <SubTitle text={"Pago"} bold={true} alignment={"left"} size={2} />
 
