@@ -10,13 +10,13 @@
   left: 50%; // Centrar horizontalmente
   transform: translateX(-50%); // Centrar horizontalmente
   display: flex;
-  width: 100%;
+  width: 55%;
   max-width: 300px;
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 5px;
   height: 58px;
-  border-radius: 15px;
+  border-radius: 32.13px;
   padding-inline: 5px;
   background-color: #FF4747;
   animation: slideIn 0.5s forwards; // Animación de entrada
@@ -29,9 +29,23 @@
   }
 
   .title{
-    font-size: 1.25rem;
+    font-size: 20.16px;
     font-weight: 700;
     color: #FFFFFF;
+  }
+
+  .numero{
+    font-size: 20.16px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-left: 10px;
+    border: 2px solid #FFFFFF;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .iconContainer {

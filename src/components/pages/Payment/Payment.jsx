@@ -30,6 +30,7 @@ import ScrollContainer from "react-indiana-drag-scroll";
 
 export default function Payment() {
   const [method, setMethod] = useState("");
+  console.log(method)
   const [price, setPrice] = useState({});
   const [order, setOrder] = useState({});
   const [mp, setMp] = useState([]);
@@ -144,7 +145,7 @@ export default function Payment() {
             />
           </div>
 
-          <div style={{ marginTop: "20px" }}>
+          <div style={{ marginTop: "20px" }} className={s.paymentOption}>
             <SubTitle text={"Pago"} bold={true} alignment={"left"} size={2} />
 
             {cash.length ? (
@@ -175,18 +176,19 @@ export default function Payment() {
             handleChange={handleChange}
           /> */}
           <div className={s.bottomContent}>
-            <Paragraph
+            {/* <Paragraph
               text={t("payment.poweredby")}
               bold={true}
               centered={true}
-            >
+            > */}
               {/* <IMenu className={s.imenuLogo} /> */}
-              <img src={iMenuFull} className={s.imemuLogo} width={"70px"} />
-            </Paragraph>
+              {/* <img src={iMenuFull} className={s.imemuLogo} width={"70px"} />
+            </Paragraph> */}
             <Link
-              className={s.linkButton}
+              className={`${s.linkButton} ${method === "" ? s.disabled : ""}`}
               to={paymentUrl[method]}
               onClick={handleCash}
+              disabled={method === ""}
             >
               {"Hacer Pedido"}
             </Link>

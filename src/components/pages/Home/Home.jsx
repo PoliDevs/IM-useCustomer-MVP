@@ -136,7 +136,8 @@ export default function Home() {
         />
         {isLoading && cart.length > 0 ? (
           <Toast
-            text={`VER PEDIDO  ${cart.length}`}
+            text={`VER PEDIDO`}
+            numerocount={cart.length}
             link={"payment"}
           />
         ) : null}

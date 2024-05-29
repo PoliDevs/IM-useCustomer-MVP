@@ -24,6 +24,7 @@ import Paragraph from "../../atoms/Paragraph/Paragraph";
 import useWindowSize from "react-use/lib/useWindowSize";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import logo from "../../../assets/ReviewIcon.png";
+import check from "../../../assets/check.svg";
 import Stars from "../../atoms/Stars/Stars";
 import Confetti from "react-confetti";
 import s from "./Review.module.scss";
@@ -103,7 +104,13 @@ export default function Review() {
     <section className={s.reviewContainer}>
       <>
         <header className={s.reviewHeader}>
-          {duration && (
+          <div className={s.reviewBox}>
+            <img src={check} alt="check" width={72} height={72} />
+            <SubTitle text={"¡Pedido confirmado!"} bold={true} size={2} />
+            <Paragraph text={"Tu pedido es el numero: "} />
+            <SubTitle text={localStorage.getItem("CSMO_ID")} size={4} bold={true} />
+          </div>
+          {/* {duration && (
             <Confetti numberOfPieces={200} height={height / 2} width={width} />
           )}
           <img src={logo} className={s.logo} />
@@ -112,7 +119,7 @@ export default function Review() {
             <SubTitle text={t("rating.preparingOrder")} review={true} />
           </div>
           {/* <div className={s.progressBar}> */}
-          <StepProgressBar status={orderStatus} />
+          {/* <StepProgressBar status={orderStatus} /> */}
           {userEmail ? (
             <Link
               to="/myorders"
@@ -128,9 +135,11 @@ export default function Review() {
               </Paragraph>
             </Link>
           ) : (
-            <div style={{ marginTop: "15px" }}>
-              {localStorage.getItem("CSMO") && (
-                <Paragraph text={t("rating.order")} underline={true}>
+            <div style={{ marginTop: "20px" }} className={s.myOrdersLink}>
+              <Paragraph text={"Lo recibirás en la mesa 👍"} bold={true}/>
+              {/* {localStorage.getItem("CSMO") && (
+              )} */}
+                {/* <Paragraph text={t("rating.order")} underline={true}>
                   <span
                     className="copyText"
                     style={{
@@ -139,11 +148,22 @@ export default function Review() {
                       textDecoration: "underline",
                     }}
                   >
-                    {localStorage.getItem("CSMO")}
-                  </span>
-                  <CopyOrderCode />
-                </Paragraph>
-              )}
+                    {"Lo recibirás en la mesa 👍"}
+                  </span> */}
+                  {/* <CopyOrderCode /> */}
+                {/* </Paragraph> */}
+                <Link
+                    className="copyText"
+                    to={"/home"}
+                    style={{
+                      fontWeight: "bold",
+                      margin: "0 4px",
+                      marginTop: "60px",
+                      textDecoration: "underline",
+                    }}
+                  >
+                    {"Volver a pedir"}
+                  </Link>
             </div>
           )}
           {/* </div> */}
