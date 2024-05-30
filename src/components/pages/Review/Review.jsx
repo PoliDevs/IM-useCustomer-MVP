@@ -24,10 +24,12 @@ import Paragraph from "../../atoms/Paragraph/Paragraph";
 import useWindowSize from "react-use/lib/useWindowSize";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import logo from "../../../assets/ReviewIcon.png";
+import imenu from "../../../assets/imenu.svg"
 import check from "../../../assets/check.svg";
 import Stars from "../../atoms/Stars/Stars";
 import Confetti from "react-confetti";
 import s from "./Review.module.scss";
+import SmallText from "../../atoms/SmallText/SmallText";
 
 export default function Review() {
   const [comment, setComment] = useState("");
@@ -73,7 +75,7 @@ export default function Review() {
     sendReview(review, commerceInfo.id);
     setSent(true);
   };
-
+//#01a925
   setTimeout(() => {
     setDuration(false);
   }, 1500);
@@ -168,13 +170,14 @@ export default function Review() {
         </header>
         <article className={s.article}>
           {/* <ImenuLogo style={{ margin: "0 auto", height: "36px" }} /> */}
+          <SmallText text={"Este pedido fue realizado a travéz de"} smaller={true}/>
           <img
-            src={iMenuFull}
+            src={imenu}
             className={s.imemuLogo}
-            width={"70px"}
-            style={{ margin: "0 auto" }}
+            width={"72.39px"}
+            style={{ margin: "0 auto", width: "72.39px" }}
           />
-          <SubTitle text={t("rating.reviewQuestion")} />
+          <SubTitle text={"¿Cómo fue tu experiencia?"} />
           <Stars
             stars={stars}
             starsArray={starsArray}
@@ -189,7 +192,7 @@ export default function Review() {
             <>
               <div className={s.textAreaHeader}>
                 <label className={s.label} htmlFor="comment">
-                  {t("rating.reviewLabel")}
+                  ¡Agradecemos tu opinión!
                 </label>
                 <Paragraph text={`${comment.length}/240`} />
               </div>
@@ -198,12 +201,12 @@ export default function Review() {
                 comment={comment}
                 setComment={setComment}
                 maxLength={240}
-                placeholder={t("rating.reviewPlaceholder")}
+                placeholder={"Escribe Aqui"}
               />
-              <FeedbackButton text={t("rating.send")} handleSent={handleSent} />
+              <FeedbackButton text={"Enviar"} handleSent={handleSent} />
             </>
           )}
-          <div className={s.buttonWrapper}>
+          {/* <div className={s.buttonWrapper}>
             <LinkButton
               text={t("rating.backButton")}
               path={"/home"}
@@ -214,7 +217,7 @@ export default function Review() {
               // newHeight={"61px"}
               // newFz={"21px"}
             />
-          </div>
+          </div> */}
         </article>
       </>
     </section>

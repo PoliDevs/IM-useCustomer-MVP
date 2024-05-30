@@ -5,6 +5,7 @@ import {
   getPosValue,
   getSectorValue,
   getStatus,
+  hideBanner,
   postOrder,
   removerCart,
 } from "../../../redux/actions";
@@ -71,6 +72,7 @@ export default function Payment() {
   }, [cart.length, commerceID, sectorID, dispatch, tableID, navigate]);
 
   useEffect(() => {
+    dispatch(hideBanner(true))
     formattedOrder(
       user,
       cart,
@@ -133,7 +135,7 @@ export default function Payment() {
 
           <div className={s.totalContainer}>
             <Paragraph
-              text={`${t("orderInfo.paymentTotal")}`}
+              text={`Total: `}
               alignment={"left"}
               bold={true}
             />

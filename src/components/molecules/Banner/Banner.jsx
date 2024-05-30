@@ -86,7 +86,7 @@ export default function Banner({
             />
             <Paragraph
               alignment={"left"}
-              text={` ${t("banner.Table")} ${table && table}`}
+              text={` Mesa ${table && table}`}
               secundary={true}
               color={"#000000"}
             />
