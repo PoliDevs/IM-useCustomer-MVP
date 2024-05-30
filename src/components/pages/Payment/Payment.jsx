@@ -30,7 +30,6 @@ import ScrollContainer from "react-indiana-drag-scroll";
 
 export default function Payment() {
   const [method, setMethod] = useState("");
-  console.log(method)
   const [price, setPrice] = useState({});
   const [order, setOrder] = useState({});
   const [mp, setMp] = useState([]);
@@ -46,7 +45,6 @@ export default function Payment() {
   const open = useSelector((state) => state.status);
   const tableID = useSelector((state) => state.table);
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
   const dispatch = useDispatch();
   const totalPrice = cart.reduce((count, p) => count + p.cost * p.amount, 0);
   // let mercadopago = null;
@@ -104,6 +102,7 @@ export default function Payment() {
         .id;
       postOrder(order, methodId);
       localStorage.removeItem("cart");
+      localStorage.removeItem("CSMO_ID")
       dispatch(removerCart());
     }
     return;

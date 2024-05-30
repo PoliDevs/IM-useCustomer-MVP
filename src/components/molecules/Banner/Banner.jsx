@@ -6,8 +6,10 @@ import { useNavigate } from "react-router-dom";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import burger from "../../../assets/Burgers.svg";
 import menu from "../../../assets/logo-imenu-full.png";
+import imenu from "../../../assets/imenu.svg"
 import s from "./Banner.module.scss";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
+import { capitalizeFirstLetter } from "../../../utils/Functions";
 import { getFileDownloadURL } from "../../../Firebase/Firebase";
 
 //? agrego setIsLoading a navbar
@@ -75,8 +77,9 @@ export default function Banner({
             //   flexDirection: "column",
             // }}
           >
+            
             <SubTitle
-              text={commerce.name}
+              text={capitalizeFirstLetter(commerce.name)}
               alignment={"left"}
               bold={true}
               size={3}
@@ -92,9 +95,9 @@ export default function Banner({
 
         <div>
           <img
-            src={menu}
-            width={"100px"}
-            height={"100px"}
+            src={imenu}
+            width={"50px"}
+            height={"50px"}
             className={s.imagen2}
           />
         </div>

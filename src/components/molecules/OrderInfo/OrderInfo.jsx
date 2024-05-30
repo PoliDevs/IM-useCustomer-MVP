@@ -23,6 +23,7 @@ export default function OrderInfo({ border, price, tablePrice, sectorPrice }) {
         {cart.map((p, index) => (
           <PaymentProduct
             key={index}
+            id={p.id}
             amount={p.amount}
             text={p.name}
             price={p.cost * p.amount}

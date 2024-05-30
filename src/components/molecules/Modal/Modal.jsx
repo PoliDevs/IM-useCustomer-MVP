@@ -18,7 +18,6 @@ export default function Modal({
   closeModal,
   changeStyle,
 }) {
-  console.log(productData.cost);
   const cart = useSelector((state) => state.cart);
   const allproducts = useSelector((state) => state.allProducts);
   const alladitionals = useSelector((state) => state.allAditionals);
@@ -27,7 +26,6 @@ export default function Modal({
   const available = useSelector((state) => state.productAvailable);
   const [comment, setComment] = useState("");
   const [amount, setAmount] = useState(1);
-  console.log(amount);
   const [loading, setLoading] = useState(true);
   const dropdownRef = useRef(null);
   const dispatch = useDispatch();

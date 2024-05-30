@@ -37,6 +37,7 @@ import {
   CLEAR_ORDER_STATUS,
   HIDE_BANNER,
   GET_ID_CATEGORY,
+  REMOVE_PRODUCT_FROM_CART,
 } from '../actions/actionTypes';
 // import { all_app_texts } from '../../utils/language';
 
@@ -68,6 +69,7 @@ const initalState = {
   allCategories: [],
   filtroPor: '',
   search: [],
+  productCart: [],
   paymentMethods: [],
   productAvailable: true,
   statusBanner: true,
@@ -334,6 +336,11 @@ export const rootReducer = (state = initalState, action) => {
       return { ...state, statusBanner: action.payload };
     case GET_ID_CATEGORY:
       return { ...state, idCategory: action.payload };
+      case REMOVE_PRODUCT_FROM_CART: 
+      return {
+        ...state,
+        cart: state.cart.filter((p) => p.id !== action.payload),
+      }
     default:
       return state;
   }

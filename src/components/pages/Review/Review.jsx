@@ -34,6 +34,7 @@ export default function Review() {
   const [sent, setSent] = useState(false);
   const [duration, setDuration] = useState(true);
   // const [loading, setLoading] = useState(true);
+  const [cmd_id, setCmd_id] = useState(localStorage.getItem("CSMO_ID"));
   const userEmail = useSelector((state) => state.user.email);
   const language = useSelector((state) => state.language);
   const commerceInfo = useSelector((state) => state.commerce);
@@ -58,6 +59,8 @@ export default function Review() {
     paymentType,
   };
   if (id) localStorage.setItem("CSMO_ID", id);
+  // const cmd_id = localStorage.getItem("CSMO_ID");
+
   const [t, i18n] = useTranslation(["global"]);
 
   const { starsArray, stars, handleStars } = useRating();
@@ -73,7 +76,7 @@ export default function Review() {
 
   setTimeout(() => {
     setDuration(false);
-  }, 6000);
+  }, 1500);
 
   useEffect(() => {
     if (status && status === "rejected") {
@@ -100,6 +103,8 @@ export default function Review() {
     updateStatus();
   }, [orderId, commerceInfo.id, dispatch]);
 
+
+
   return (
     <section className={s.reviewContainer}>
       <>
@@ -110,16 +115,6 @@ export default function Review() {
             <Paragraph text={"Tu pedido es el numero: "} />
             <SubTitle text={localStorage.getItem("CSMO_ID")} size={4} bold={true} />
           </div>
-          {/* {duration && (
-            <Confetti numberOfPieces={200} height={height / 2} width={width} />
-          )}
-          <img src={logo} className={s.logo} />
-          <div>
-            <HugeTitle text={commerceInfo.name} centered={true} review={true} />
-            <SubTitle text={t("rating.preparingOrder")} review={true} />
-          </div>
-          {/* <div className={s.progressBar}> */}
-          {/* <StepProgressBar status={orderStatus} /> */}
           {userEmail ? (
             <Link
               to="/myorders"
@@ -135,11 +130,14 @@ export default function Review() {
               </Paragraph>
             </Link>
           ) : (
-            <div style={{ marginTop: "20px" }} className={s.myOrdersLink}>
-              <Paragraph text={"Lo recibirás en la mesa 👍"} bold={true}/>
+            <div
+              style={{ marginTop: "20px", textDecoration: "none" }}
+              className={s.myOrdersLink}
+            >
+              <Paragraph text={"Lo recibirás en la mesa 👍"} bold={true} />
               {/* {localStorage.getItem("CSMO") && (
               )} */}
-                {/* <Paragraph text={t("rating.order")} underline={true}>
+              {/* <Paragraph text={t("rating.order")} underline={true}>
                   <span
                     className="copyText"
                     style={{
@@ -150,20 +148,20 @@ export default function Review() {
                   >
                     {"Lo recibirás en la mesa 👍"}
                   </span> */}
-                  {/* <CopyOrderCode /> */}
-                {/* </Paragraph> */}
-                <Link
-                    className="copyText"
-                    to={"/home"}
-                    style={{
-                      fontWeight: "bold",
-                      margin: "0 4px",
-                      marginTop: "60px",
-                      textDecoration: "underline",
-                    }}
-                  >
-                    {"Volver a pedir"}
-                  </Link>
+              {/* <CopyOrderCode /> */}
+              {/* </Paragraph> */}
+              <Link
+                className="copyText"
+                to={"/home"}
+                style={{
+                  fontWeight: "bold",
+                  margin: "0 4px",
+                  marginTop: "60px",
+                  textDecoration: "underline",
+                }}
+              >
+                {"Volver a pedir"}
+              </Link>
             </div>
           )}
           {/* </div> */}
