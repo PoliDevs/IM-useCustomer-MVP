@@ -5,6 +5,7 @@ import SubTitle from "../../atoms/SubTitle/SubTitle";
 import PaymentProduct from "../PaymentProduct/PaymentProduct";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import s from "./OrderInfo.module.scss";
+
 export default function OrderInfo({ border, price, tablePrice, sectorPrice }) {
   const language = useSelector((state) => state.language);
   const cart = useSelector((state) => state.cart);

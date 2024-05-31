@@ -9,7 +9,7 @@ import SubTitle from "../../atoms/SubTitle/SubTitle";
 import s from "./Modal.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { hideBanner, isAvailable } from "../../../redux/actions";
+import { isAvailable } from "../../../redux/actions";
 // import { emojiPng } from "../../../utils/Constants";
 import { useOnClickOutside } from "../../../hooks/useOnClickOutside";
 export default function Modal({
@@ -18,11 +18,7 @@ export default function Modal({
   closeModal,
   changeStyle,
 }) {
-  const cart = useSelector((state) => state.cart);
-  const allproducts = useSelector((state) => state.allProducts);
-  const alladitionals = useSelector((state) => state.allAditionals);
-  const products = useSelector((state) => state.products);
-  const language = useSelector((state) => state.language);
+ 
   const available = useSelector((state) => state.productAvailable);
   const [comment, setComment] = useState("");
   const [amount, setAmount] = useState(1);
@@ -53,9 +49,9 @@ export default function Modal({
   );
 
   //? useEffect para consultar si el producto abierto esta activo.
-  useEffect(() => {
-    productData.name && dispatch(isAvailable(productData.name, setLoading));
-  }, [allproducts, alladitionals, products, dispatch, productData.name]);
+  // useEffect(() => {
+  //   productData.name && dispatch(isAvailable(productData.name, setLoading));
+  // }, [allproducts, alladitionals, products, dispatch, productData.name]);
 
   // const getPng = (text) => {
   //   if (text) {
@@ -72,7 +68,7 @@ export default function Modal({
             className={s.closeIcon}
             onClick={() => {
               closeModal();
-              setAmount(0);
+              setAmount(1);
               setComment("");
             }}
           />
@@ -101,14 +97,14 @@ export default function Modal({
             </div>
           </div>
           <div>
-            {loading === false && available === false && (
+            {/* {loading === false && available === false && (
               <p className={`${s.notAvailableProduct} ${s.visible}`}>
                 {t("productModal.available")}
               </p>
-            )}
+            )} */}
             <div className={s.textAreaHeader}>
               <label className={s.label} htmlFor="comment">
-                {t("productModal.commentLabel")}
+                {"Agrega un comentario"}
               </label>
               <p className={s.textLimit}>{`${comment.length}/140`}</p>
             </div>
@@ -117,7 +113,7 @@ export default function Modal({
               comment={comment}
               setComment={setComment}
               maxLength={140}
-              placeholder={t("productModal.commentPlaceholder")}
+              placeholder={"Escribe Aqui..."}
               disabled={amount > 1}
             />
           </div>
@@ -183,7 +179,7 @@ export default function Modal({
                 closeModal();
               }}
             >
-              {t("productModal.addButton")}
+              {"Agregar"}
             </button>
           </div>
         </div>

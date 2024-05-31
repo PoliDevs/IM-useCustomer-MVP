@@ -10,33 +10,36 @@ export default function PaymentProduct({
   price,
   description,
   comment,
-  id
+  id,
 }) {
-  const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
   const handleDeleteProduct = () => {
-    dispatch(removeProductFromCart(id))
-  }
+    dispatch(removeProductFromCart(id));
+    // removeFromCart(text);
+  };
 
   return (
     <>
       <div className={s.paymentProduct}>
-        <div className={s.productContainer}>
-          {/* <span className={s.titleAmount}>{amount}</span> */}
-          <SubTitle
-            text={`${amount} ${text}`}
-            alignment={"left"}
-            size={2}
-            bold={true}
-          />
-          <SmallText text={description} alignment={"left"} smaller={true} />
-          {comment && (
-            <SmallText
-              text={`Obs: ${comment}`}
+        <div className={s.amountContainer}>
+          <span className={s.titleAmount}>{amount}</span>
+          <div className={s.productContainer}>
+            <SubTitle
+              text={`${text}`}
               alignment={"left"}
-              smaller={true}
+              size={2}
+              bold={true}
             />
-          )}
+            <SmallText text={description} alignment={"left"} smaller={true} />
+            {comment && (
+              <SmallText
+                text={`Obs: ${comment}`}
+                alignment={"left"}
+                smaller={true}
+              />
+            )}
+          
+          </div>
         </div>
         <div className={s.price}>
           <SmallText text={`$${price}`} alignment={"right"} />
@@ -45,7 +48,7 @@ export default function PaymentProduct({
           </button>
         </div>
       </div>
-      <a className={s.line} />
+      <hr className={s.line} />
     </>
   );
 }

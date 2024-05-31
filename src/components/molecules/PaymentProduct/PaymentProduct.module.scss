@@ -5,8 +5,10 @@
   align-items: center;
 }
 .line {
-  margin-top: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   width: 100%;
+  color: #f0f0f0;
   &:last-of-type {
     display: none;
   }
@@ -41,3 +43,17 @@
   background-color: transparent;
   border-color: transparent;
 }
+
+.amountContainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.titleAmount {
+  margin-right: 10px;
+  font-weight: 400;
+  font-size: 16.63px;
+}
+
+

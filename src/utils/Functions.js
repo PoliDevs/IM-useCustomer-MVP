@@ -391,3 +391,9 @@ export function calculatePrice(price, amount) {
   const priceNumber = parseFloat(numericPrice);
   return priceNumber * amount;
 }
+
+let lastId = 0;
+export const generateUniqueId = () => {
+  lastId += 1;
+  return `unique_id_${lastId}`;
+};
