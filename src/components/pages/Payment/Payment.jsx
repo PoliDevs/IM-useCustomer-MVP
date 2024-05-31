@@ -200,6 +200,6 @@ export default function Payment() {
       <ClosedCommerce fullHeight={true} />
     )
   ) : (
-    <LoadingPage text={t("loader.title")} />
+    <LoadingPage text={"Espera mientras preparamos el menu"} />
   );
 }

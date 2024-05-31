@@ -149,7 +149,7 @@ export default function Mercadopago() {
           />{" "}
         </>
       ) : (
-        <LoadingPage text={t("loader.title")} />
+        <LoadingPage text={"Te estamos redirigiendo a Mercado Pago"} />
       )}
       {/*  {preferenceId && <Wallet initialization={createPreference}/>} */}
     </main>
