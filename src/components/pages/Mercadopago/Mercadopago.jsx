@@ -33,7 +33,7 @@ export default function Mercadopago() {
   const tableID = useSelector((state) => state.table);
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const totalPrice = cart.reduce((count, p) => count + p.price * p.amount, 0);
+  const totalPrice = cart.reduce((count, p) => count + p.cost * p.amount, 0);
   const [price, setPrice] = useState({});
   const [order, setOrder] = useState({});
   const [isLoading, setIsloading] = useState(true);
@@ -122,7 +122,6 @@ export default function Mercadopago() {
     dispatch(removerCart());
     //!
     const url = await createPreference();
-    console.log(url, "id 105");
     if (url) {
       window.location.href = url;
     }

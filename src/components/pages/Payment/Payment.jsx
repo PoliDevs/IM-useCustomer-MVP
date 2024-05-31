@@ -72,7 +72,7 @@ export default function Payment() {
   }, [cart.length, commerceID, sectorID, dispatch, tableID, navigate]);
 
   useEffect(() => {
-    dispatch(hideBanner(true))
+    dispatch(hideBanner(true));
     formattedOrder(
       user,
       cart,
@@ -104,7 +104,7 @@ export default function Payment() {
         .id;
       postOrder(order, methodId);
       localStorage.removeItem("cart");
-      localStorage.removeItem("CSMO_ID")
+      localStorage.removeItem("CSMO_ID");
       dispatch(removerCart());
     }
     return;
@@ -125,7 +125,7 @@ export default function Payment() {
             alignment={"left"}
             standarSpacing={true}
           /> */}
-          <ScrollContainer>
+          <ScrollContainer horizontal={true} vertical={false}>
             <OrderInfo
               price={price}
               tablePrice={tablePrice}
@@ -134,11 +134,7 @@ export default function Payment() {
           </ScrollContainer>
 
           <div className={s.totalContainer}>
-            <Paragraph
-              text={`Total: `}
-              alignment={"left"}
-              bold={true}
-            />
+            <Paragraph text={`Total: `} alignment={"left"} bold={true} />
             <Paragraph
               text={`$ ${totalPrice}`}
               alignment={"right"}
@@ -182,8 +178,8 @@ export default function Payment() {
               bold={true}
               centered={true}
             > */}
-              {/* <IMenu className={s.imenuLogo} /> */}
-              {/* <img src={iMenuFull} className={s.imemuLogo} width={"70px"} />
+            {/* <IMenu className={s.imenuLogo} /> */}
+            {/* <img src={iMenuFull} className={s.imemuLogo} width={"70px"} />
             </Paragraph> */}
             <Link
               className={`${s.linkButton} ${method === "" ? s.disabled : ""}`}

@@ -24,7 +24,7 @@ import Paragraph from "../../atoms/Paragraph/Paragraph";
 import useWindowSize from "react-use/lib/useWindowSize";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import logo from "../../../assets/ReviewIcon.png";
-import imenu from "../../../assets/imenu.svg"
+import imenu from "../../../assets/imenu.svg";
 import check from "../../../assets/check.svg";
 import Stars from "../../atoms/Stars/Stars";
 import Confetti from "react-confetti";
@@ -75,7 +75,7 @@ export default function Review() {
     sendReview(review, commerceInfo.id);
     setSent(true);
   };
-//#01a925
+  //#01a925
   setTimeout(() => {
     setDuration(false);
   }, 1500);
@@ -105,8 +105,6 @@ export default function Review() {
     updateStatus();
   }, [orderId, commerceInfo.id, dispatch]);
 
-
-
   return (
     <section className={s.reviewContainer}>
       <>
@@ -115,7 +113,11 @@ export default function Review() {
             <img src={check} alt="check" width={72} height={72} />
             <SubTitle text={"¡Pedido confirmado!"} bold={true} size={2} />
             <Paragraph text={"Tu pedido es el numero: "} />
-            <SubTitle text={localStorage.getItem("CSMO_ID")} size={4} bold={true} />
+            <SubTitle
+              text={localStorage.getItem("CSMO_ID")}
+              size={4}
+              bold={true}
+            />
           </div>
           {userEmail ? (
             <Link
@@ -137,21 +139,6 @@ export default function Review() {
               className={s.myOrdersLink}
             >
               <Paragraph text={"Lo recibirás en la mesa 👍"} bold={true} />
-              {/* {localStorage.getItem("CSMO") && (
-              )} */}
-              {/* <Paragraph text={t("rating.order")} underline={true}>
-                  <span
-                    className="copyText"
-                    style={{
-                      fontWeight: "bold",
-                      margin: "0 4px",
-                      textDecoration: "underline",
-                    }}
-                  >
-                    {"Lo recibirás en la mesa 👍"}
-                  </span> */}
-              {/* <CopyOrderCode /> */}
-              {/* </Paragraph> */}
               <Link
                 className="copyText"
                 to={"/home"}
@@ -170,7 +157,10 @@ export default function Review() {
         </header>
         <article className={s.article}>
           {/* <ImenuLogo style={{ margin: "0 auto", height: "36px" }} /> */}
-          <SmallText text={"Este pedido fue realizado a travéz de"} smaller={true}/>
+          <SmallText
+            text={"Este pedido fue realizado a travéz de"}
+            smaller={true}
+          />
           <img
             src={imenu}
             className={s.imemuLogo}

@@ -9,7 +9,6 @@ import s from "./OrderInfo.module.scss";
 export default function OrderInfo({ border, price, tablePrice, sectorPrice }) {
   const language = useSelector((state) => state.language);
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
   const commerceInfo = useSelector((state) => state.commerce);
   const table = useSelector((state) => state.table);
   const totalPrice = cart.reduce((count, p) => count + p.cost * p.amount, 0);
