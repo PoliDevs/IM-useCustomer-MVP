@@ -70,7 +70,6 @@ export default function Mercadopago() {
       return preferenceId;  */
 
       const { paymentURL } = response.data;
-      console.log(paymentURL);
       return paymentURL;
     } catch (error) {
       console.log(error);
