@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getCommerce, setSector, setTable} from "../../../redux/actions";
+import { getCommerce, setSector, setTable } from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { dataDecrypt } from "../../../utils/Functions";
@@ -13,42 +13,37 @@ import SmallText from "../../atoms/SmallText/SmallText";
 import s from "./Language.module.scss";
 
 export default function Language() {
-  const language = useSelector((state)=> state.language);
+  const language = useSelector((state) => state.language);
   const commerce = useSelector((state) => state.commerce);
-  console.log("commerce", commerce)
   const [accepted, setAccepted] = useState(false);
   const [checked, setChecked] = useState("");
   const [modal, setModal] = useState(false);
   const [t, i18n] = useTranslation(["global"]);
   const dispatch = useDispatch();
-  const  params  = useParams();
+  const params = useParams();
+  
+  // useEffect(() => {
+  //   localStorage.setItem("Pos", params["*"]);
+  //   const decripted = dataDecrypt(params["*"]);
+  //   if (localStorage.getItem("cart")) localStorage.removeItem("cart");
+  //   dispatch(getCommerce(decripted.commerce));
+  //   dispatch(setSector(decripted.sector));
+  //   dispatch(setTable(decripted.table));
 
-  useEffect(() => {
-    localStorage.setItem("Pos", params['*']);
-    const decripted = dataDecrypt(params["*"]);
-    console.log("decripted commerce", decripted.commerce)
-    if (localStorage.getItem('cart')) localStorage.removeItem('cart');
-    dispatch(getCommerce(decripted.commerce));
-    dispatch(setSector(decripted.sector));
-    dispatch(setTable(decripted.table));
-    
-   
-    const storedLanguage = localStorage.getItem("language");
-    console.log("storedlenguage", storedLanguage)
-    if (storedLanguage) {
-      i18n.changeLanguage(storedLanguage);
-    } else {
-      // Si no hay idioma almacenado, establecer el idioma por defecto como "es"
-      i18n.changeLanguage("es");
-    }
-  }, []);
+  //   const storedLanguage = localStorage.getItem("language");
+  //   if (storedLanguage) {
+  //     i18n.changeLanguage(storedLanguage);
+  //   } else {
+  //     // Si no hay idioma almacenado, establecer el idioma por defecto como "es"
+  //     i18n.changeLanguage("es");
+  //   }
+  // }, []);
 
   // Función para cambiar el idioma
   const handleLanguageChange = (lang) => {
     i18n.changeLanguage(lang);
     localStorage.setItem("language", lang); // Almacenar el idioma seleccionado en el almacenamiento local
   };
-
 
   return (
     <main className={s.mainContainer}>

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useEffect, useLayoutEffect, useMemo, useState } from "react";
 /* eslint-disable react/prop-types */
 import { useSelector } from "react-redux";
 import useModal from "../../../utils/Functions";
@@ -10,22 +10,21 @@ import s from "./Products.module.scss";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import { capitalizeFirstLetter, formatNumber } from "../../../utils/Functions";
 import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { hideBanner } from "../../../redux/actions";
+import { hideBanner, getIdCategory } from "../../../redux/actions";
 export default function Products({
   changeStyle,
   commercePlan,
   aditionals,
-  scrollToCategory,
   categoryRefs,
+  observerEnabled,
 }) {
   const [t] = useTranslation(["global"]);
   const divRef = useRef(null);
+  const h2TitleRef = useRef({});
   const dispatch = useDispatch();
   const allproducts = useSelector((state) => {
     const { allProducts, filtroPor, allAditionals, products, search } = state;
-
     if (search.length) {
       return search.flatMap((category) => category.products);
     }
@@ -35,40 +34,62 @@ export default function Products({
     if (!filtroPor && aditionals) return allAditionals;
     return allProducts;
   });
-
-  const filtroPro = useSelector((state) => state.filtroPor);
   const search = useSelector((state) => state.search);
   const loading = useSelector((state) => state.loading);
+  const productsByCategory = useMemo(() => {
+    return allproducts.reduce((acc, product) => {
+      const categoryId = product.category.id;
 
-  const productsByCategory = allproducts.reduce((acc, product) => {
-    const categoryId = product.category.id;
-    if (!acc[categoryId]) {
-      acc[categoryId] = [];
-    }
+      if (!acc.has(categoryId)) {
+        acc.set(categoryId, []);
+      }
 
-    acc[categoryId].push({ ...product });
-    return acc;
-  }, {});
+      acc.get(categoryId).push({ ...product });
 
-  const sortedEntries = Object.entries(productsByCategory);
+      return acc;
+    }, new Map());
+  }, [allproducts]);
 
   useEffect(() => {
-    if (filtroPro) {
-      scrollToCategory(filtroPro);
-    }
-  }, [filtroPro, scrollToCategory]);
+    const titleRefsSnapshot = h2TitleRef.current;
+    if (productsByCategory.size || search.length === 0) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const categoryId = entry.target.id;
+              dispatch(getIdCategory(categoryId));
+            }
+          });
+        },
+        {
+          threshold: 0.8,
+          rootMargin: "0px 0px -50% 0px",
+        }
+      );
+      Object.entries(titleRefsSnapshot).forEach(([categoryId, ref]) => {
+        if (ref) {
+          observer.observe(ref);
+        }
+      });
 
-  const handleScrollChange = (id) => {
-    const scrollTop = id;
-    if (scrollTop < 230) {
-      dispatch(hideBanner(false));
-    } else {
-      dispatch(hideBanner(true));
+      return () => {
+        Object.values(titleRefsSnapshot).forEach((ref) => {
+          if (ref && ref.current) {
+            observer.unobserve(ref.current);
+          }
+        });
+      };
     }
-  };
+  }, [
+    h2TitleRef,
+    dispatch,
+    productsByCategory.size,
+    search.length,
+    observerEnabled,
+  ]);
 
   const { isOpen, openModal, closeModal, productData } = useModal(false);
-
   return (
     <>
       {loading && search.length === 0 ? (
@@ -76,26 +97,19 @@ export default function Products({
           small={true}
           text={t("No se pudo encontrar el producto o categoria ingresado")}
         />
-      ) : sortedEntries.length > 0 ? (
+      ) : (
         <ScrollContainer
           className={s.productsContainer}
           ref={divRef}
-          onScroll={() => handleScrollChange(divRef.current.scrollTop)}
+          // onScroll={() => handleScrollChange(divRef.current.scrollTop)}
         >
-          {Array.isArray(sortedEntries[0])
-            ? sortedEntries.map(([categoryId, products]) => (
-                <div
-                  key={categoryId}
-                  className={s.titleConteiner}
-                  ref={(el) => {
-                    categoryRefs.current[categoryId] = el;
-                  }}
-                  id={categoryId}
-                >
-                  <SubTitle alignment={"left"}>
-                    {capitalizeFirstLetter(products[0]?.category?.category)}
+          {search.length > 0
+            ? search.map((category, index) => (
+                <div key={index} className={s.titleConteiner}>
+                  <SubTitle alignment={"left"} id={`category-${category.id}`}>
+                    {capitalizeFirstLetter(category.category)}
                   </SubTitle>
-                  {products.map((product, index) => (
+                  {category.products.map((product, index) => (
                     <Product
                       key={`${product.id}-${index}`}
                       name={capitalizeFirstLetter(product.name) || ""}
@@ -103,6 +117,7 @@ export default function Products({
                         capitalizeFirstLetter(product.description) || ""
                       }
                       price={formatNumber(product.cost) || 0}
+                      cost={product.cost}
                       bg={product.photo || ""}
                       id={product.id || ""}
                       active={product.active || false}
@@ -125,21 +140,31 @@ export default function Products({
                   ))}
                 </div>
               ))
-            : search.map((category) => (
-                <div key={category.id} className={s.titleConteiner}>
-                  <SubTitle alignment={"left"}>
-                    {capitalizeFirstLetter(category.category)}
-                  </SubTitle>
-                  {category.products.map((product, index) => (
+            : Array.from(productsByCategory).map(([categoryId, products]) => (
+                <div
+                  key={categoryId}
+                  id={categoryId}
+                  className={s.titleConteiner}
+                  ref={(e) => (categoryRefs.current[categoryId] = e)}
+                >
+                  <h2
+                    id={categoryId}
+                    ref={(e) => (h2TitleRef.current[categoryId] = e)}
+                  >
+                    {capitalizeFirstLetter(products[0]?.category?.category)}
+                  </h2>
+                  {products.map((product, index) => (
                     <Product
                       key={`${product.id}-${index}`}
                       name={capitalizeFirstLetter(product.name) || ""}
                       description={
                         capitalizeFirstLetter(product.description) || ""
                       }
-                      price={product.cost || 0}
+                      price={formatNumber(product.cost) || 0}
+                      cost={product.cost}
                       bg={product.photo || ""}
                       id={product.id || ""}
+                      active={product.active || false}
                       promotion={product.promotion || false}
                       discount={product.discount || 0}
                       surcharge={product.surcharge || 0}
@@ -160,7 +185,8 @@ export default function Products({
                 </div>
               ))}
         </ScrollContainer>
-      ) : (
+      )}
+      {!loading && !productsByCategory.size && search.length === 0 && (
         <LoadingPage small={true} text={t("loader.title")} />
       )}
 

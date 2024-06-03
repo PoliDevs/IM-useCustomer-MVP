@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import {
   ADD_PRODUCT,
   REMOVE_PRODUCT,
@@ -29,10 +29,13 @@ import {
   // GET_ORDERS_BY_USER,
   CLEAR_ORDER_STATUS,
   HIDE_BANNER,
-} from './actionTypes';
+  GET_ID_CATEGORY,
+  SHOW_SEARCHBAR,
+  REMOVE_PRODUCT_FROM_CART,
+} from "./actionTypes";
 // import { TRANSLATE_TEXT } from "./actionTypes";
-import { v4 as uuidv4 } from 'uuid';
-import { all_app_texts } from '../../utils/language';
+import { v4 as uuidv4 } from "uuid";
+import { all_app_texts } from "../../utils/language";
 // import {
 //   categoryTranslate,
 //   detectLanguage,
@@ -132,10 +135,10 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
   //!nueva date => dateCurrent
   const hour = new Date().getHours();
   const minute = new Date().getMinutes();
-  const formattedHour = hour < 10 ? '0' + hour : hour;
-  const formattedMinute = minute < 10 ? '0' + minute : minute;
+  const formattedHour = hour < 10 ? "0" + hour : hour;
+  const formattedMinute = minute < 10 ? "0" + minute : minute;
 
-  const time = formattedHour + ':' + formattedMinute;
+  const time = formattedHour + ":" + formattedMinute;
   let additionals = {
     id: [],
     name: [],
@@ -162,6 +165,7 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
     careful: [],
     detail: [],
   };
+
   let menu = {
     id: [],
     name: [],
@@ -193,15 +197,15 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
     });
   } else {
     additionals = {
-      id: [''],
-      name: [''],
-      cost: [''],
-      promotion: [''],
-      discount: [''],
-      surcharge: [''],
-      amount: [''],
-      unitTypeId: [''],
-      detail: [''],
+      id: [""],
+      name: [""],
+      cost: [""],
+      promotion: [""],
+      discount: [""],
+      surcharge: [""],
+      amount: [""],
+      unitTypeId: [""],
+      detail: [""],
     };
   }
   //!armo todos los productos
@@ -223,19 +227,19 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
     });
   } else {
     products = {
-      id: [''],
-      name: [''],
-      cost: [''],
-      unitTypeId: [''],
-      productTypeId: [''],
-      supplierId: [''],
-      promotion: [''],
-      discount: [''],
-      surcharge: [''],
-      amount: [''],
-      allergenType: [''],
-      careful: [''],
-      detail: [''],
+      id: [""],
+      name: [""],
+      cost: [""],
+      unitTypeId: [""],
+      productTypeId: [""],
+      supplierId: [""],
+      promotion: [""],
+      discount: [""],
+      surcharge: [""],
+      amount: [""],
+      allergenType: [""],
+      careful: [""],
+      detail: [""],
     };
   }
   //!armo todos los menus
@@ -247,13 +251,13 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
       menu.cost.push(`${m.price}`);
       menu.menuTypeId.push(`${m.menuTypeId}`);
       menu.categoryId.push(`${m.categoryId}`);
-      m.dishes ? menu.dishes.push(`${m.dishes}`) : menu.dishes.push('');
+      m.dishes ? menu.dishes.push(`${m.dishes}`) : menu.dishes.push("");
       m.product !== undefined && m.product !== null
         ? menu.product.push(`${m.product}`)
-        : menu.product.push('');
+        : menu.product.push("");
       m.additionalId !== undefined
         ? menu.additionalId.push(`${m.additional}`)
-        : menu.additionalId.push('');
+        : menu.additionalId.push("");
       menu.promotion.push(`${m.promotion}`);
       menu.discount.push(`${m.discount}`);
       menu.surcharge.push(`${m.surcharge}`);
@@ -262,29 +266,29 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
     });
   } else {
     menu = {
-      id: [''],
-      name: [''],
-      description: [''],
-      cost: [''],
-      menuTypeId: [''],
-      categoryId: [''],
-      dishes: [''],
-      product: [''],
-      additionalId: [''],
-      promotion: [''],
-      discount: [''],
-      surcharge: [''],
-      amount: [''],
-      detail: [''],
+      id: [""],
+      name: [""],
+      description: [""],
+      cost: [""],
+      menuTypeId: [""],
+      categoryId: [""],
+      dishes: [""],
+      product: [""],
+      additionalId: [""],
+      promotion: [""],
+      discount: [""],
+      surcharge: [""],
+      amount: [""],
+      detail: [""],
     };
   }
   try {
     const newOrder = {
-      name: order.name ? order.name : 'sss',
+      name: order.name ? order.name : "sss",
       date: dateCurrent,
       hour: time,
       // status: "orderPlaced",
-      detail: '',
+      detail: "",
       validity: date,
       promotion: 0,
       discount: 0,
@@ -299,49 +303,48 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
       courierId: null,
       costDelivery: 0,
       sectorId: parseInt(order.sectorId),
-      accountemail: order.user.email ? order.user.email : '',
-      accountname: order.user.name ? order.user.name : '',
-      accountphone: order.user.phone ? order.user.phone : '',
-      accountbirthDate: order.user.birthDate ? order.user.birthDate : '',
-      accountaddress: order.user.address ? order.user.address : '',
-      googleEmail: order.user.email ? order.user.email : '',
+      accountemail: order.user.email ? order.user.email : "",
+      accountname: order.user.name ? order.user.name : "",
+      accountphone: order.user.phone ? order.user.phone : "",
+      accountbirthDate: order.user.birthDate ? order.user.birthDate : "",
+      accountaddress: order.user.address ? order.user.address : "",
+      googleEmail: order.user.email ? order.user.email : "",
       additionals,
       products,
       dishes: {
-        id: [''],
-        name: [''],
-        description: [''],
-        photo: [''],
-        cost: [''],
-        estimatedTime: [''],
-        additionalId: [''],
-        amountAdditional: [''],
-        supplyId: [''],
-        amountSupplies: [''],
-        recipeId: [''],
-        dishTypeId: [''],
-        promotion: [''],
-        discount: [''],
-        surcharge: [''],
-        amount: [''],
-        detail: [''],
+        id: [""],
+        name: [""],
+        description: [""],
+        photo: [""],
+        cost: [""],
+        estimatedTime: [""],
+        additionalId: [""],
+        amountAdditional: [""],
+        supplyId: [""],
+        amountSupplies: [""],
+        recipeId: [""],
+        dishTypeId: [""],
+        promotion: [""],
+        discount: [""],
+        surcharge: [""],
+        amount: [""],
+        detail: [""],
       },
       menu,
     };
     if (mercadoPago) {
       let orderMp = { commerce: { commerce: commerceName }, order: newOrder };
-      /* console.log(orderMp) */
-      let response = await axios.post('mp/create-order', orderMp);
+      let response = await axios.post("mp/create-order", orderMp);
       //!mercadoPago retorna una url a la que hay que redirigir
-      localStorage.setItem('CSMO_ID', response.data.id);
-      localStorage.setItem('CSMO', response.data.order);
+      localStorage.setItem("CSMO_ID", response.data.id);
+      localStorage.setItem("CSMO", response.data.order);
       // localStorage.removeItem("cart");
       return response;
     } else {
-      let response = await axios.post('order/new', newOrder);
-      localStorage.setItem('CSMO_ID', response.data.id);
-      localStorage.setItem('CSMO', response.data.order);
-      localStorage.removeItem('cart');
+      let response = await axios.post("order/new", newOrder);
+      localStorage.setItem("CSMO_ID", response.data.id);
+      localStorage.setItem("CSMO", response.data.order);
+      localStorage.removeItem("cart");
       return response;
     }
   } catch (error) {
@@ -351,7 +354,7 @@ export async function postOrder(order, methodId, mercadoPago, commerceName) {
 
 export const sendReview = (review, commerceId) => {
   try {
-    let orderName = localStorage.getItem('CSMO');
+    let orderName = localStorage.getItem("CSMO");
     let response = axios.put(`order/rating/${orderName}/${commerceId}`, review);
     return response.data;
   } catch (error) {
@@ -393,7 +396,6 @@ export function getCommerce(id) {
   return async function (dispatch) {
     try {
       let commerceInfo = await axios.get(`commerce/detail/${id}`);
-      console.log('comerceinfo', commerceInfo);
       return dispatch({
         type: GET_COMMERCE,
         payload: commerceInfo.data[0],
@@ -537,7 +539,7 @@ export function getActiveMenus(id) {
 export function getActiveDishes(id) {
   return async function (dispatch) {
     try {
-      let allActiveDishes = await axios.get('dish/all_active');
+      let allActiveDishes = await axios.get("dish/all_active");
       return dispatch({
         type: GET_ACTIVE_DISHES,
         payload: { dishes: allActiveDishes.data, id: id },
@@ -606,28 +608,28 @@ export function getActiveDishes(id) {
 //     }
 //   };
 // }
-// export function getActiveProducts(id) {
-//   return async function (dispatch) {
-//     try {
-//       const response = await axios.get(`product/all_active/${id}`);
-//       const allActiveProducts = response.data;
+export function getActiveProducts(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`product/all_active/${id}`);
+      const allActiveProducts = response.data;
 
-//       if (allActiveProducts && allActiveProducts.length > 0) {
-//         dispatch({
-//           type: GET_ACTIVE_PRODUCTS,
-//           payload: allActiveProducts,
-//         });
-//       } else {
-//         dispatch({
-//           type: GET_ACTIVE_PRODUCTS,
-//           payload: [],
-//         });
-//       }
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-// }
+      if (allActiveProducts && allActiveProducts.length > 0) {
+        dispatch({
+          type: GET_ACTIVE_PRODUCTS,
+          payload: allActiveProducts,
+        });
+      } else {
+        dispatch({
+          type: GET_ACTIVE_PRODUCTS,
+          payload: [],
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+}
 
 // export function getActiveAditionals(id) {
 //   return async function (dispatch, getState) {
@@ -784,7 +786,7 @@ export function filterCategory(id) {
 
 export const setFiltro = (filtroPor) => {
   return {
-    type: 'FILTER_BY_CATEGORY',
+    type: "FILTER_BY_CATEGORY",
     payload: filtroPor,
   };
 };
@@ -969,10 +971,10 @@ export async function postMpOrder(order, methodId, mpInfo, commerceName) {
   //!nueva date => dateCurrent
   const hour = new Date().getHours();
   const minute = new Date().getMinutes();
-  const formattedHour = hour < 10 ? '0' + hour : hour;
-  const formattedMinute = minute < 10 ? '0' + minute : minute;
+  const formattedHour = hour < 10 ? "0" + hour : hour;
+  const formattedMinute = minute < 10 ? "0" + minute : minute;
 
-  const time = formattedHour + ':' + formattedMinute;
+  const time = formattedHour + ":" + formattedMinute;
   let additionals = {
     id: [],
     name: [],
@@ -1030,15 +1032,15 @@ export async function postMpOrder(order, methodId, mpInfo, commerceName) {
     });
   } else {
     additionals = {
-      id: [''],
-      name: [''],
-      cost: [''],
-      promotion: [''],
-      discount: [''],
-      surcharge: [''],
-      amount: [''],
-      unitTypeId: [''],
-      detail: [''],
+      id: [""],
+      name: [""],
+      cost: [""],
+      promotion: [""],
+      discount: [""],
+      surcharge: [""],
+      amount: [""],
+      unitTypeId: [""],
+      detail: [""],
     };
   }
   //!armo todos los productos
@@ -1060,19 +1062,19 @@ export async function postMpOrder(order, methodId, mpInfo, commerceName) {
     });
   } else {
     products = {
-      id: [''],
-      name: [''],
-      cost: [''],
-      unitTypeId: [''],
-      productTypeId: [''],
-      supplierId: [''],
-      promotion: [''],
-      discount: [''],
-      surcharge: [''],
-      amount: [''],
-      allergenType: [''],
-      careful: [''],
-      detail: [''],
+      id: [""],
+      name: [""],
+      cost: [""],
+      unitTypeId: [""],
+      productTypeId: [""],
+      supplierId: [""],
+      promotion: [""],
+      discount: [""],
+      surcharge: [""],
+      amount: [""],
+      allergenType: [""],
+      careful: [""],
+      detail: [""],
     };
   }
   //!armo todos los menus
@@ -1084,13 +1086,13 @@ export async function postMpOrder(order, methodId, mpInfo, commerceName) {
       menu.cost.push(`${m.price}`);
       menu.menuTypeId.push(`${m.menuTypeId}`);
       menu.categoryId.push(`${m.categoryId}`);
-      m.dishes ? menu.dishes.push(`${m.dishes}`) : menu.dishes.push('');
+      m.dishes ? menu.dishes.push(`${m.dishes}`) : menu.dishes.push("");
       m.product !== undefined
         ? menu.product.push(`${m.product}`)
-        : menu.product.push('');
+        : menu.product.push("");
       m.additionalId !== undefined
         ? menu.additionalId.push(`${m.additional}`)
-        : menu.additionalId.push('');
+        : menu.additionalId.push("");
       menu.promotion.push(`${m.promotion}`);
       menu.discount.push(`${m.discount}`);
       menu.surcharge.push(`${m.surcharge}`);
@@ -1099,29 +1101,29 @@ export async function postMpOrder(order, methodId, mpInfo, commerceName) {
     });
   } else {
     menu = {
-      id: [''],
-      name: [''],
-      description: [''],
-      cost: [''],
-      menuTypeId: [''],
-      categoryId: [''],
-      dishes: [''],
-      product: [''],
-      additionalId: [''],
-      promotion: [''],
-      discount: [''],
-      surcharge: [''],
-      amount: [''],
-      detail: [''],
+      id: [""],
+      name: [""],
+      description: [""],
+      cost: [""],
+      menuTypeId: [""],
+      categoryId: [""],
+      dishes: [""],
+      product: [""],
+      additionalId: [""],
+      promotion: [""],
+      discount: [""],
+      surcharge: [""],
+      amount: [""],
+      detail: [""],
     };
   }
   try {
     const newOrder = {
-      name: order.name ? order.name : 'sss',
+      name: order.name ? order.name : "sss",
       date: dateCurrent,
       hour: time,
-      status: 'orderPlaced',
-      detail: '',
+      status: "orderPlaced",
+      detail: "",
       validity: date,
       promotion: 0,
       discount: 0,
@@ -1136,66 +1138,66 @@ export async function postMpOrder(order, methodId, mpInfo, commerceName) {
       courierId: null,
       costDelivery: 0,
       sectorId: parseInt(order.sectorId),
-      accountemail: order.user.email ? order.user.email : '',
-      accountname: order.user.name ? order.user.name : '',
-      accountphone: order.user.phone ? order.user.phone : '',
-      accountbirthDate: order.user.birthDate ? order.user.birthDate : '',
-      accountaddress: order.user.address ? order.user.address : '',
-      googleEmail: order.user.email ? order.user.email : '',
+      accountemail: order.user.email ? order.user.email : "",
+      accountname: order.user.name ? order.user.name : "",
+      accountphone: order.user.phone ? order.user.phone : "",
+      accountbirthDate: order.user.birthDate ? order.user.birthDate : "",
+      accountaddress: order.user.address ? order.user.address : "",
+      googleEmail: order.user.email ? order.user.email : "",
       additionals,
       products,
       dishes: {
-        id: [''],
-        name: [''],
-        description: [''],
-        photo: [''],
-        cost: [''],
-        estimatedTime: [''],
-        additionalId: [''],
-        amountAdditional: [''],
-        supplyId: [''],
-        amountSupplies: [''],
-        recipeId: [''],
-        dishTypeId: [''],
-        promotion: [''],
-        discount: [''],
-        surcharge: [''],
-        amount: [''],
-        detail: [''],
+        id: [""],
+        name: [""],
+        description: [""],
+        photo: [""],
+        cost: [""],
+        estimatedTime: [""],
+        additionalId: [""],
+        amountAdditional: [""],
+        supplyId: [""],
+        amountSupplies: [""],
+        recipeId: [""],
+        dishTypeId: [""],
+        promotion: [""],
+        discount: [""],
+        surcharge: [""],
+        amount: [""],
+        detail: [""],
       },
       menu,
       mpPayment: {
         Payment: mpInfo.payment,
-        Status: 'approved',
+        Status: "approved",
         MerchantOrder: mpInfo.merchantOrder,
         ExternalReference: mpInfo.externalReference,
         PaymentType: mpInfo.paymentType,
       },
     };
-    let response = await axios.post('order/new', newOrder);
-    localStorage.setItem('CSMO_ID', response.data.id);
-    localStorage.setItem('CSMO', response.data.order);
-    localStorage.removeItem('mporder');
+    let response = await axios.post("order/new", newOrder);
+    localStorage.setItem("CSMO_ID", response.data.id);
+    localStorage.setItem("CSMO", response.data.order);
+    localStorage.removeItem("mporder");
     // localStorage.removeItem("cart");
   } catch (error) {
     console.error(error);
   }
 }
 
-// export const getOrdersByUser = (email, commerceId) => {
-//   return async function (dispatch) {
-//     try {
-//       let result = await axios.get(`/order/orderes/${commerceId}`);
-//       let orders = result.data.filter((o) => o.googleEmail === email);
-//       return dispatch({
-//         type: GET_ORDERS_BY_USER,
-//         payload: orders
-//       })
-//     } catch (error) {
-//       console.error(error)
-//     }
-//   }
-// }
+export const getOrdersByUser = (email, commerceId) => {
+  return async function (dispatch) {
+    try {
+      let result = await axios.get(`/order/orderes/${commerceId}`);
+      let orders = result.data.filter((o) => o.googleEmail === email);
+      return dispatch({
+        type: GET_ORDERS_BY_USER,
+        payload: orders,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
 
 export const clearStatus = () => {
   return function (dispatch) {
@@ -1213,5 +1215,26 @@ export const hideBanner = (scroll) => {
   return {
     type: HIDE_BANNER,
     payload: scroll,
+  };
+};
+
+export const getIdCategory = (id) => {
+  return {
+    type: GET_ID_CATEGORY,
+    payload: id,
+  };
+};
+
+export const showSearchbar = (boolean) => {
+  return {
+    type: SHOW_SEARCHBAR,
+    payload: boolean,
+  };
+};
+
+export const removeProductFromCart = (productId) => {
+  return {
+    type: REMOVE_PRODUCT_FROM_CART,
+    payload: productId,
   };
 };

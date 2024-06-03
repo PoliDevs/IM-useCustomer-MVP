@@ -32,6 +32,7 @@ export default function Product({
   allergenType,
   careful,
   active,
+  cost,
 }) {
   const commerceId = useSelector((state) => state.commerce.id);
   const dispatch = useDispatch();
@@ -67,6 +68,7 @@ export default function Product({
         openModal(
           name,
           price,
+          cost,
           bg,
           description,
           id,
@@ -110,6 +112,7 @@ export default function Product({
             smaller={true}
             noMargin={true}
             disabled={!active}
+            truncate={true}
           />
         </div>
         {/* <Paragraph alignment={"left"} text={`$ ${cost}`} bold={true} /> */}

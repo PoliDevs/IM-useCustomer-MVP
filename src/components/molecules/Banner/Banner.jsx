@@ -6,8 +6,10 @@ import { useNavigate } from "react-router-dom";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import burger from "../../../assets/Burgers.svg";
 import menu from "../../../assets/logo-imenu-full.png";
+import imenu from "../../../assets/imenu.svg"
 import s from "./Banner.module.scss";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
+import { capitalizeFirstLetter } from "../../../utils/Functions";
 import { getFileDownloadURL } from "../../../Firebase/Firebase";
 
 //? agrego setIsLoading a navbar
@@ -23,6 +25,7 @@ export default function Banner({
   containerSubtitleMargin,
 }) {
   const language = useSelector((state) => state.language);
+  const showBanner = useSelector((state) => state.statusBanner);
   const table = useSelector((state) => state.table);
   const commerce = useSelector((state) => state.commerce);
   const dispatch = useDispatch();
@@ -40,7 +43,7 @@ export default function Banner({
   }, []);
   return (
     <section
-      className={s.banner}
+      className={`${s.banner} ${showBanner ? s.fadeIn : s.fadeOut}`}
       //!cambiar url segun el comercio
       // style={{ backgroundImage: `url(${burger})` }}
       // onClick={() => {
@@ -63,7 +66,8 @@ export default function Banner({
           <img
             src={imgURL ? imgURL : menu}
             className={s.image}
-            width={menu ? "100px" : "54px"}
+            width={menu ? "53.8px" : "53.8px"}
+            height={"53.8"}
           />
 
           <div
@@ -73,25 +77,27 @@ export default function Banner({
             //   flexDirection: "column",
             // }}
           >
+            
             <SubTitle
-              text={commerce.name}
+              text={capitalizeFirstLetter(commerce.name)}
               alignment={"left"}
               bold={true}
               size={3}
             />
             <Paragraph
               alignment={"left"}
-              text={` ${t("banner.Table")} ${table && table}`}
+              text={` Mesa ${table && table}`}
               secundary={true}
               color={"#000000"}
             />
           </div>
         </div>
+
         <div>
           <img
-            src={menu}
-            width={"150px"}
-            height={"100px"}
+            src={imenu}
+            width={"50px"}
+            height={"50px"}
             className={s.imagen2}
           />
         </div>

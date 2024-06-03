@@ -6,7 +6,7 @@ import s from "./Mercadopago.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
-  // getActiveProducts,
+  getActiveProducts,
   getPaymentMethods,
   getPosValue,
   getSectorValue,
@@ -33,7 +33,7 @@ export default function Mercadopago() {
   const tableID = useSelector((state) => state.table);
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const totalPrice = cart.reduce((count, p) => count + p.price * p.amount, 0);
+  const totalPrice = cart.reduce((count, p) => count + p.cost * p.amount, 0);
   const [price, setPrice] = useState({});
   const [order, setOrder] = useState({});
   const [isLoading, setIsloading] = useState(true);
@@ -85,7 +85,7 @@ export default function Mercadopago() {
     dispatch(getActiveProducts(commerceID));
     dispatch(getStatus(commerceID, setIsloading));
     dispatch(getPaymentMethods(commerceID));
-  }, []);
+  }, [commerceID, dispatch, sectorID, tableID]);
 
   useEffect(() => {
     formattedOrder(
@@ -101,7 +101,17 @@ export default function Mercadopago() {
       setPrice,
       setOrder
     );
-  }, [tablePrice, sectorPrice, productsList]);
+  }, [
+    tablePrice,
+    sectorPrice,
+    productsList,
+    cart,
+    commerceID,
+    sectorID,
+    tableID,
+    totalPrice,
+    user,
+  ]);
 
   const handleMp = async () => {
     setIsloading(true);
@@ -112,7 +122,6 @@ export default function Mercadopago() {
     dispatch(removerCart());
     //!
     const url = await createPreference();
-    console.log(url, "id 105");
     if (url) {
       window.location.href = url;
     }
@@ -139,7 +148,7 @@ export default function Mercadopago() {
           />{" "}
         </>
       ) : (
-        <LoadingPage text={t("loader.title")} />
+        <LoadingPage text={"Te estamos redirigiendo a Mercado Pago"} />
       )}
       {/*  {preferenceId && <Wallet initialization={createPreference}/>} */}
     </main>

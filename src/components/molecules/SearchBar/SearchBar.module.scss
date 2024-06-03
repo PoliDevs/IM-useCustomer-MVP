@@ -6,15 +6,15 @@
   justify-content: center;
   align-items: center;
   width: 90%;
-  height: auto;
+  height: 37px;
   background-color: $background-secundary;
   margin: 0 auto;
   margin-top: 15px;
   border-radius: 50px;
-  border: 2px solid transparent;
+  border: 2px solid #cdcdcd;
 
-
-  .searchIcon, .xIcon {
+  .searchIcon,
+  .xIcon {
     width: 20px;
     height: 15px;
     color: $color-nineth;
@@ -27,30 +27,39 @@
   .visible {
     visibility: visible;
     position: absolute;
-    right: 5px
+    right: 5px;
   }
 
   .strong {
-    color: $text-primary
+    color: $text-primary;
   }
 
-  
   @media screen and (min-width: 430px) {
     gap: 5px;
-    .searchIcon, .xIcon {
+    .searchIcon,
+    .xIcon {
       width: 25px;
       height: 20px;
     }
   }
-  
+
   @media screen and (min-width: 750px) {
-    gap: 9  px;
-    .searchIcon, .xIcon {
+    gap: 9 px;
+    .searchIcon,
+    .xIcon {
       width: 30px;
       height: 25px;
     }
   }
 }
 .border {
-  border: 2px solid $text-primary
+  border: 2px solid $text-primary;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
 }

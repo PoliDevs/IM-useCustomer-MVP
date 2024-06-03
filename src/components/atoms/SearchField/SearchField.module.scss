@@ -2,7 +2,13 @@
 @import "../../../scss/typography.scss";
 
 .searchField {
-  width: 40%;
+  width: 86%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  // width: 40%;
   height: 25px;
   color: $text-primary;
   font-size: $paragraph;
@@ -21,6 +27,9 @@
   &:-moz-placeholder {
     text-align: center;
   }
+  &input:focus {
+    font-size: $line-text;
+  }
 
   @media screen and (min-width: 430px) {
     font-size: $paragraph;
@@ -30,5 +39,11 @@
   @media screen and (min-width: 750px) {
     font-size: $line-text;
     height: 35px;
+  }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  input:focus {
+    font-size: $line-text;
   }
 }

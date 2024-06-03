@@ -26,10 +26,10 @@ export default function Home() {
   // const userEmail = useSelector((state) => state.user.email);
   const cant = useSelector((state) => state.cart);
   const cart = useSelector((state) => state.cart);
+  const categoryScroll = useSelector((state) => parseInt(state.idCategory));
   const pendingOrders = useSelector((state) => state.ordersByUser);
   const [isLoading, setIsLoading] = useState(true);
   const [category, setCategory] = useState(null);
-  const showBanner = useSelector((state) => state.statusBanner);
   const [aditionals, setAditionals] = useState(false);
   const [all, setAll] = useState(category || aditionals ? false : true);
   const [red, setRed] = useState(false);
@@ -56,14 +56,34 @@ export default function Home() {
     setAll(false);
   };
 
-  const categoryRefs = useRef({});
-  const scrollToCategory = (categoryId) => {
-    const firstCategoryId = parseInt(Object.values(categoryRefs.current)[0].id);
-    if (categoryId === firstCategoryId) {
+  const categoryTitleRefs = useRef({});
+  useEffect(() => {
+    const categoryTitleRefsSnapshot = categoryTitleRefs.current;
+    const firstCategoryId =
+      Object.values(categoryTitleRefsSnapshot).length > 0
+        ? parseInt(Object.values(categoryTitleRefsSnapshot)[0].id)
+        : null;
+
+    if (categoryScroll !== firstCategoryId) {
       dispatch(hideBanner(false));
-      categoryRefs.current[categoryId].scrollIntoView({ behavior: "smooth" });
-    } else if (categoryRefs.current[categoryId]) {
-      categoryRefs.current[categoryId].scrollIntoView({ behavior: "smooth" });
+    } else {
+      dispatch(hideBanner(true));
+    }
+  }, [dispatch, categoryScroll]);
+  const scrollToCategory = (categoryId) => {
+    const firstCategoryId = parseInt(
+      Object.values(categoryTitleRefs.current)[0].id
+    );
+    if (categoryId === firstCategoryId) {
+      dispatch(hideBanner(true));
+      categoryTitleRefs.current[categoryId].scrollIntoView({
+        behavior: "auto",
+      });
+    } else if (categoryTitleRefs.current[categoryId]) {
+      dispatch(hideBanner(false));
+      categoryTitleRefs.current[categoryId].scrollIntoView({
+        behavior: "auto",
+      });
     }
   };
 
@@ -75,21 +95,20 @@ export default function Home() {
     dispatch(getAllCategorys(commerce.id));
     dispatch(removerOrderId());
     // dispatch(getOrdersByUser(userEmail, commerce.id));
-  }, [cant]);
+  }, [cant, commerce.id, dispatch]);
 
   return (
     <main className={s.home}>
       {/* //?agregado setIsLoading a navBar */}
-      {!showBanner ? (
-        <Banner
-          ordersButton={pendingOrders.length && true}
-          navarrow={true}
-          setCategory={setCategory}
-          setAditionals={setAditionals}
-          setAll={setAll}
-          setIsLoading={setIsLoading}
-        />
-      ) : null}
+
+      <Banner
+        ordersButton={pendingOrders.length && true}
+        navarrow={true}
+        setCategory={setCategory}
+        setAditionals={setAditionals}
+        setAll={setAll}
+        setIsLoading={setIsLoading}
+      />
 
       {/* //movi hacia arriba searchBar y Categories */}
       <SearchBar />
@@ -113,11 +132,12 @@ export default function Home() {
           commercePlan={commerce.plan}
           aditionals={aditionals}
           scrollToCategory={scrollToCategory}
-          categoryRefs={categoryRefs}
+          categoryRefs={categoryTitleRefs}
         />
-        {!isLoading && cart.length > 0 ? (
+        {isLoading && cart.length > 0 ? (
           <Toast
-            text={`Tienes ${cart.length} productos pendientes, click para ir a ver tu pedido`}
+            text={`VER PEDIDO`}
+            numerocount={cart.length}
             link={"payment"}
           />
         ) : null}

@@ -10,9 +10,11 @@ export default function SubTitle({
   noLineheight,
   selected,
   size,
+  id,
 }) {
   return (
     <h2
+      id={id}
       className={`${s.subTitle} ${alignment === "left" ? s.left : ""} ${
         alignment === "right" ? s.right : ""
       } ${bold ? s.bold : ""} ${secundary && s.secundary} ${

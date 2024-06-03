@@ -21,6 +21,7 @@ export default function useModal(initialValue = false) {
   const openModal = (
     name,
     price,
+    cost,
     image,
     description,
     id,
@@ -41,6 +42,7 @@ export default function useModal(initialValue = false) {
     setProductData({
       name: name,
       price: price,
+      cost: cost,
       image: image,
       description: description,
       id: id,
@@ -58,7 +60,6 @@ export default function useModal(initialValue = false) {
       careful: careful,
     });
   };
-
   const closeModal = () => setIsOpen(false);
 
   return { isOpen, openModal, closeModal, productData };
@@ -72,6 +73,7 @@ export function useAmountControls() {
     name,
     description,
     price,
+    cost,
     amount,
     comment,
     id,
@@ -93,6 +95,7 @@ export function useAmountControls() {
       name: name,
       description: description,
       price: price,
+      cost: cost,
       amount: amount,
       comment: comment,
       id: id,
@@ -381,4 +384,16 @@ export const formatNumber = (number) => {
   return new Intl.NumberFormat('es-AR', {
     currency: 'ARS',
   }).format(number);
+};
+
+export function calculatePrice(price, amount) {
+  const numericPrice = price.replace(/[^0-9.-]+/g, ""); 
+  const priceNumber = parseFloat(numericPrice);
+  return priceNumber * amount;
+}
+
+let lastId = 0;
+export const generateUniqueId = () => {
+  lastId += 1;
+  return `unique_id_${lastId}`;
 };

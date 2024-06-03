@@ -9,7 +9,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: $color-seventh;
+  // background-color: $color-seventh;
+  background-color: white;
 
   .paymentContent {
     display: flex;
@@ -17,12 +18,16 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 90%;
-    height: calc(100% - 100px);
+    height: calc(100% - 70px);
     margin: 10px auto 0 auto;
     overflow-y: auto;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* Internet Explorer 10+ */
-
+    > h2 {
+      margin-top: 35px;
+      font-size: 16.88px;
+      font-weight: bold;
+    }
     .cashIcon {
       width: 20px;
       height: 20px;
@@ -46,12 +51,19 @@
         line-height: 1rem;
         width: 100%;
         margin: 4px 0 5px 0;
-        border: $border;
-        border-radius: $border-primary-radius;
-        height: 41px;
+        // border: $border;
+        border-radius: 25.51px;
+        height: 51px;
         cursor: pointer;
-        background-color: $background-buttom-primary-active;
+        background-color: #ff4747;
         color: $text-secondary;
+
+        &.disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+          pointer-events: none;
+          background-color: gray;
+        }
       }
     }
   }
@@ -67,9 +79,20 @@
       .bottomContent {
         .linkButton {
           font-size: $title;
-          height: 61px;
+          height: 51px;
         }
       }
     }
   }
+}
+
+.totalContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.paymentOption {
+  display: flex;
+  flex-direction: column;
 }
