@@ -18,7 +18,7 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 90%;
-    height: calc(100% - 70px);
+    height: calc(100% - 50px);
     margin: 10px auto 0 auto;
     overflow-y: auto;
     scrollbar-width: none; /* Firefox */
@@ -86,11 +86,19 @@
   }
 }
 
+
 .totalContainer {
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
 }
+
+@media screen and (max-height: 660px) {
+  .totalContainer{
+    margin-top: 0;
+  }
+}
+
 
 .paymentOption {
   display: flex;
