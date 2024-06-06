@@ -267,6 +267,8 @@ export const rootReducer = (state = initalState, action) => {
         };
       }
     }
+    case REMOVE_CART:
+      return { ...state, cart: [] };
 
     case SET_USER: {
       const clave = import.meta.env.VITE_REACT_APP_KEY;

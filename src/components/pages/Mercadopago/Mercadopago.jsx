@@ -15,7 +15,7 @@ import {
   removerCart,
 } from "../../../redux/actions";
 import { formattedOrder } from "../../../utils/Functions";
-//!
+import { useNavigate } from "react-router-dom";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
 
@@ -32,20 +32,28 @@ export default function Mercadopago() {
   const open = useSelector((state) => state.status);
   const tableID = useSelector((state) => state.table);
   const cart = useSelector((state) => state.cart);
+  console.log(cart);
   const dispatch = useDispatch();
   const totalPrice = cart.reduce((count, p) => count + p.cost * p.amount, 0);
   const [price, setPrice] = useState({});
   const [order, setOrder] = useState({});
   const [isLoading, setIsloading] = useState(true);
   const [t, i18n] = useTranslation(["global"]);
-  //!
+  const navigate = useNavigate();
+  const mercadoPagoMethod = paymentMethods.find(
+    (m) => m.type === "mercadopago"
+  );
+  const PUBLIC_KEY = mercadoPagoMethod ? mercadoPagoMethod.publicKey : "";
+
+  // Inicializa MercadoPago con la publicKey obtenida
+  if (PUBLIC_KEY) {
+    initMercadoPago(PUBLIC_KEY);
+  }
   //const PUBLIC_KEY = import.meta.env.PUBLIC_KEY;
-  const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
+  // const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
   //console.log(PUBLIC_KEY)
 
-  const [preferenceId, setPreferenceId] = useState(null);
-
-  initMercadoPago(PUBLIC_KEY);
+  // initMercadoPago(PUBLIC_KEY);
 
   const createPreference = async () => {
     const methodId = paymentMethods.filter((m) => m.type === "mercadopago")[0]
@@ -56,13 +64,15 @@ export default function Mercadopago() {
         order,
         methodId,
         mercadoPago,
-        commerce.name
+        commerce.name,
+        commerceID
       );
       let mpOrder = {
         order: order,
         methodId: methodId,
         mercadoPago: mercadoPago,
         commerceName: commerce.name,
+        commerceId: commerceID,
       };
       localStorage.setItem("mporder", JSON.stringify(mpOrder));
       /*       const { preferenceId } = response.data;
@@ -117,15 +127,21 @@ export default function Mercadopago() {
     const methodId = paymentMethods.filter((m) => m.type === "mercadopago")[0]
       .id;
     let mercadoPago = true;
-    await postOrder(order, methodId, mercadoPago, commerce.name);
-    dispatch(removerCart());
+    await postOrder(order, methodId, mercadoPago, commerce.name, commerceID);
     //!
     const url = await createPreference();
     if (url) {
       window.location.href = url;
     }
+    dispatch(removerCart());
     //!
   };
+
+  useEffect(() => {
+    if (!isLoading && (!localStorage.getItem("cart") || cart.length === 0)) {
+      navigate("/home");
+    }
+  }, [navigate, cart, isLoading]);
 
   return (
     <main className={s.mainContainer}>
