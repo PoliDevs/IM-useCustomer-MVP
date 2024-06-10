@@ -143,14 +143,14 @@ export default function Mercadopago() {
       ) : (
         <>
           <MpLogo className={s.mpLogo} />
-          <div className={s.orderContainer}>
+          {/* <div className={s.orderContainer}>
             <OrderInfo
               border={true}
               price={price}
               tablePrice={tablePrice}
               sectorPrice={sectorPrice}
             />
-          </div>
+          </div> */}
         </>
       )}
     </main>
