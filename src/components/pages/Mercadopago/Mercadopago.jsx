@@ -16,11 +16,11 @@ import {
 } from "../../../redux/actions";
 import { formattedOrder } from "../../../utils/Functions";
 import { useNavigate } from "react-router-dom";
-import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
+import { initMercadoPago } from "@mercadopago/sdk-react";
 import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
 
 export default function Mercadopago() {
-  const language = useSelector((state) => state.language);
+  // const language = useSelector((state) => state.language);
   const paymentMethods = useSelector((state) => state.paymentMethods);
   const sectorPrice = useSelector((state) => state.sectorPrice);
   const commerce = useSelector((state) => state.commerce);
@@ -29,17 +29,17 @@ export default function Mercadopago() {
   const tablePrice = useSelector((state) => state.tablePrice);
   const user = useSelector((state) => state.user);
   const sectorID = useSelector((state) => state.sector);
-  const open = useSelector((state) => state.status);
+  // const open = useSelector((state) => state.status);
   const tableID = useSelector((state) => state.table);
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
-  const dispatch = useDispatch();
   const totalPrice = cart.reduce((count, p) => count + p.cost * p.amount, 0);
   const [price, setPrice] = useState({});
   const [order, setOrder] = useState({});
   const [isLoading, setIsloading] = useState(true);
-  const [t, i18n] = useTranslation(["global"]);
+  const [t] = useTranslation(["global"]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const mercadoPagoMethod = paymentMethods.find(
     (m) => m.type === "mercadopago"
   );
@@ -49,11 +49,6 @@ export default function Mercadopago() {
   if (PUBLIC_KEY) {
     initMercadoPago(PUBLIC_KEY);
   }
-  //const PUBLIC_KEY = import.meta.env.PUBLIC_KEY;
-  // const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
-  //console.log(PUBLIC_KEY)
-
-  // initMercadoPago(PUBLIC_KEY);
 
   const createPreference = async () => {
     const methodId = paymentMethods.filter((m) => m.type === "mercadopago")[0]
@@ -75,10 +70,6 @@ export default function Mercadopago() {
         commerceId: commerceID,
       };
       localStorage.setItem("mporder", JSON.stringify(mpOrder));
-      /*       const { preferenceId } = response.data;
-      console.log(preferenceId)
-      return preferenceId;  */
-
       const { paymentURL } = response.data;
       return paymentURL;
     } catch (error) {
@@ -91,7 +82,7 @@ export default function Mercadopago() {
   useEffect(() => {
     dispatch(getPosValue(tableID));
     dispatch(getSectorValue(sectorID));
-    dispatch(getActiveProducts(commerceID));
+    // dispatch(getActiveProducts(commerceID));
     dispatch(getStatus(commerceID, setIsloading));
     dispatch(getPaymentMethods(commerceID));
   }, [commerceID, dispatch, sectorID, tableID]);
@@ -140,14 +131,17 @@ export default function Mercadopago() {
   useEffect(() => {
     if (!isLoading && (!localStorage.getItem("cart") || cart.length === 0)) {
       navigate("/home");
+    } else if (!isLoading) {
+      handleMp();
     }
   }, [navigate, cart, isLoading]);
 
   return (
     <main className={s.mainContainer}>
-      {!isLoading ? (
+      {isLoading ? (
+        <LoadingPage text={"Te estamos redirigiendo a Mercado Pago"} />
+      ) : (
         <>
-          {" "}
           <MpLogo className={s.mpLogo} />
           <div className={s.orderContainer}>
             <OrderInfo
@@ -157,15 +151,31 @@ export default function Mercadopago() {
               sectorPrice={sectorPrice}
             />
           </div>
-          <MpButton
-            /* path={"/rating"}  */ text={t("mercadoPago.payButton")}
-            onClick={handleMp}
-          />{" "}
         </>
-      ) : (
-        <LoadingPage text={"Te estamos redirigiendo a Mercado Pago"} />
       )}
-      {/*  {preferenceId && <Wallet initialization={createPreference}/>} */}
     </main>
+    // <main className={s.mainContainer}>
+    //   {!isLoading ? (
+    //     <>
+    //       {" "}
+    //       <MpLogo className={s.mpLogo} />
+    //       <div className={s.orderContainer}>
+    //         <OrderInfo
+    //           border={true}
+    //           price={price}
+    //           tablePrice={tablePrice}
+    //           sectorPrice={sectorPrice}
+    //         />
+    //       </div>
+    //       <MpButton
+    //         /* path={"/rating"}  */ text={t("mercadoPago.payButton")}
+    //         onClick={handleMp}
+    //       />{" "}
+    //     </>
+    //   ) : (
+    //     <LoadingPage text={"Te estamos redirigiendo a Mercado Pago"} />
+    //   )}
+    //   {/*  {preferenceId && <Wallet initialization={createPreference}/>} */}
+    // </main>
   );
 }

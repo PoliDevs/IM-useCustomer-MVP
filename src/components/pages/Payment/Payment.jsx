@@ -9,20 +9,15 @@ import {
   postOrder,
   removerCart,
 } from "../../../redux/actions";
-import { ReactComponent as IMenu } from "../../../assets/ImenuHorizontal.svg";
-import { dataDecrypt, formattedOrder } from "../../../utils/Functions";
-import { ReactComponent as CashIcon } from "../../../assets/CashIcon.svg";
+import { formattedOrder } from "../../../utils/Functions";
 import { useDispatch, useSelector } from "react-redux";
 import { paymentUrl } from "../../../utils/Constants";
 import { Link, useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import PaymentOptionButton from "../../atoms/PaymentOptionButton/PaymentOptionButton";
 import ClosedCommerce from "../../molecules/ClosedCommerce/ClosedCommerce";
 import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
 import OrderInfo from "../../molecules/OrderInfo/OrderInfo";
-import iMenuFull from "../../../assets/logo-imenu-full.png";
-import SmallText from "../../atoms/SmallText/SmallText";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import Banner from "../../molecules/Banner/Banner";
@@ -40,7 +35,7 @@ export default function Payment() {
   const commerceID = useSelector((state) => state.commerce.id);
   const productsList = useSelector((state) => state.products);
   const tablePrice = useSelector((state) => state.tablePrice);
-  const language = useSelector((state) => state.language);
+  // const language = useSelector((state) => state.language);
   const user = useSelector((state) => state.user);
   const sectorID = useSelector((state) => state.sector);
   const open = useSelector((state) => state.status);
@@ -49,7 +44,7 @@ export default function Payment() {
   const dispatch = useDispatch();
   const totalPrice = cart.reduce((count, p) => count + p.cost * p.amount, 0);
   // let mercadopago = null;
-  const [t, i18n] = useTranslation(["global"]);
+  // const [t, i18n] = useTranslation(["global"]);
   const [isLoading, setIsloading] = useState(true);
   const navigate = useNavigate();
   const handleChange = (option) => {
@@ -66,7 +61,7 @@ export default function Payment() {
     localStorage.removeItem("CSMO");
     dispatch(getPosValue(tableID));
     dispatch(getSectorValue(sectorID));
-    dispatch(getActiveProducts(commerceID));
+    // dispatch(getActiveProducts(commerceID));
     dispatch(getStatus(commerceID, setIsloading));
     dispatch(getPaymentMethods(commerceID));
   }, [cart.length, commerceID, sectorID, dispatch, tableID, navigate]);
@@ -96,6 +91,7 @@ export default function Payment() {
     tableID,
     totalPrice,
     user,
+    dispatch
   ]);
 
   const handleCash = () => {
