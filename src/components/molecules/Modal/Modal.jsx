@@ -18,7 +18,7 @@ export default function Modal({
   closeModal,
   changeStyle,
 }) {
- 
+
   const available = useSelector((state) => state.productAvailable);
   const [comment, setComment] = useState("");
   const [amount, setAmount] = useState(1);
@@ -143,9 +143,7 @@ export default function Modal({
             </button>
           </div>
           <div className={s.buttonContainer}>
-            <h3 className={s.productPrice}>{`$ ${
-              productData.cost * amount
-            }`}</h3>
+            <h3 className={s.productPrice}>{`$ ${(productData.cost * amount).toFixed(2)}`}</h3>
             <button
               className={`${s.addButton} ${!available && s.unavailable}`}
               onClick={() => {

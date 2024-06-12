@@ -132,7 +132,7 @@ export default function Payment() {
           <div className={s.totalContainer}>
             <Paragraph text={`Total: `} alignment={"left"} bold={true} />
             <Paragraph
-              text={`$ ${totalPrice}`}
+              text={`$ ${(totalPrice).toFixed(2)}`}
               alignment={"right"}
               bold={true}
             />

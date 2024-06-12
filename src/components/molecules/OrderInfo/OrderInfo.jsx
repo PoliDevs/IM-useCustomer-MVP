@@ -26,7 +26,8 @@ export default function OrderInfo({ border, price, tablePrice, sectorPrice }) {
             id={p.id}
             amount={p.amount}
             text={p.name}
-            price={p.cost * p.amount}
+            // ${(productData.cost * amount).toFixed(2)}
+            price={(p.cost * p.amount).toFixed(2)}
             description={p.description}
             comment={p.comment}
             //price={p.cost * p.amount}
