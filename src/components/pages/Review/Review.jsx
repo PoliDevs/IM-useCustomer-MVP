@@ -167,7 +167,7 @@ export default function Review() {
             width={"72.39px"}
             style={{ margin: "0 auto", width: "72.39px" }}
           />
-          <SubTitle text={"¿Cómo fue tu experiencia?"} />
+          <SubTitle text={"¿Cómo fue tu experiencia?"} size={5} bold={true}/>
           <Stars
             stars={stars}
             starsArray={starsArray}
