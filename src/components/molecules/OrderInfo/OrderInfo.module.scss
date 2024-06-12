@@ -10,6 +10,11 @@
   // margin-top: 10px;
   margin-bottom: 5px;
   max-height: 400px;
+
+  @media (max-height: 690px) {
+    max-height: 230px;
+  }
+
   .paymentTitle {
     width: 100%;
     display: flex;

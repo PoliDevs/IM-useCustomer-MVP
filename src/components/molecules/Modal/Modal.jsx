@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { isAvailable } from "../../../redux/actions";
 // import { emojiPng } from "../../../utils/Constants";
 import { useOnClickOutside } from "../../../hooks/useOnClickOutside";
+import { roundToTwo } from "../../../utils/Functions";
 export default function Modal({
   productData,
   isOpen,
@@ -143,7 +144,8 @@ export default function Modal({
             </button>
           </div>
           <div className={s.buttonContainer}>
-            <h3 className={s.productPrice}>{`$ ${(productData.cost * amount).toFixed(2)}`}</h3>
+            {/* <h3 className={s.productPrice}>{`$ ${(productData.cost * amount).toFixed(2)}`}</h3> */}
+            <h3 className={s.productPrice}>{`$ ${roundToTwo(productData.cost * amount)}`}</h3>
             <button
               className={`${s.addButton} ${!available && s.unavailable}`}
               onClick={() => {

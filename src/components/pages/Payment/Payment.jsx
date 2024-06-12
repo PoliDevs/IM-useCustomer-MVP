@@ -9,7 +9,7 @@ import {
   postOrder,
   removerCart,
 } from "../../../redux/actions";
-import { formattedOrder } from "../../../utils/Functions";
+import { formattedOrder, roundToTwo } from "../../../utils/Functions";
 import { useDispatch, useSelector } from "react-redux";
 import { paymentUrl } from "../../../utils/Constants";
 import { Link, useNavigate } from "react-router-dom";
@@ -132,7 +132,7 @@ export default function Payment() {
           <div className={s.totalContainer}>
             <Paragraph text={`Total: `} alignment={"left"} bold={true} />
             <Paragraph
-              text={`$ ${(totalPrice).toFixed(2)}`}
+              text={`$ ${roundToTwo(totalPrice)}`}
               alignment={"right"}
               bold={true}
             />

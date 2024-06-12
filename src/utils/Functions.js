@@ -397,3 +397,7 @@ export const generateUniqueId = () => {
   lastId += 1;
   return `unique_id_${lastId}`;
 };
+
+export function roundToTwo(num) {
+  return +(Math.round(num + "e+2") + "e-2");
+}

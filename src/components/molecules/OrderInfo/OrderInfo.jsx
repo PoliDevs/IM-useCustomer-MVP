@@ -5,6 +5,7 @@ import SubTitle from "../../atoms/SubTitle/SubTitle";
 import PaymentProduct from "../PaymentProduct/PaymentProduct";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import s from "./OrderInfo.module.scss";
+import { roundToTwo } from "../../../utils/Functions";
 
 export default function OrderInfo({ border, price, tablePrice, sectorPrice }) {
   const language = useSelector((state) => state.language);
@@ -27,7 +28,7 @@ export default function OrderInfo({ border, price, tablePrice, sectorPrice }) {
             amount={p.amount}
             text={p.name}
             // ${(productData.cost * amount).toFixed(2)}
-            price={(p.cost * p.amount).toFixed(2)}
+            price={roundToTwo(p.cost * p.amount)}
             description={p.description}
             comment={p.comment}
             //price={p.cost * p.amount}
