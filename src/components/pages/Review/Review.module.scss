@@ -13,8 +13,11 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+
+  /* Internet Explorer 10+ */
   .reviewHeader {
     position: relative;
     background-color: #f6f6f6;
@@ -51,29 +54,43 @@
     width: 285px;
     height: 266px;
     margin-top: 15px;
-    > h2 {
+
+    >h2 {
       margin-top: 15px;
     }
-    > p {
+
+    >p {
       margin-top: 15px;
       font-size: 20px;
     }
   }
-  .myOrdersLink{
+
+  .myOrdersLink {
     color: #2b2b2b;
     margin-top: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    > p {
+
+    >p {
       margin-top: 15px;
       text-decoration: none;
     }
-    > a {
-      margin-top: 30px;
+
+    >a {
+      margin: 60px 4px 0px;
       color: #000000;
     }
+
+    @media screen and (max-height: 690px) {
+      >a {
+        margin-top: 30px;
+        margin-bottom: 10px;
+        color: #000000;
+      }
+    }
+
   }
 
   .logo {
@@ -92,15 +109,18 @@
     margin: 0 auto;
     gap: 5px;
     height: 50%;
-    >h6{
+
+    >h6 {
       margin-top: 15px;
     }
+
     // padding-top: 16px;
     .textAreaHeader {
       display: flex;
       justify-content: space-between;
       margin: 0;
       height: auto;
+
       .label {
         font-size: $line-text;
         font-weight: bold;

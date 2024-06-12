@@ -144,8 +144,6 @@ export default function Review() {
                 to={"/home"}
                 style={{
                   fontWeight: "bold",
-                  margin: "0 4px",
-                  marginTop: "60px",
                   textDecoration: "underline",
                 }}
               >

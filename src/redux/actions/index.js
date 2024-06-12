@@ -213,7 +213,7 @@ export async function postOrder(order, methodId, mercadoPago, commerceName, comm
     order.productos.map((p) => {
       products.id.push(`${p.id}`);
       products.name.push(`${p.name}`);
-      products.cost.push(`${p.price}`);
+      products.cost.push(`${p.cost}`);
       products.unitTypeId.push(`${p.unitTypeId}`);
       products.productTypeId.push(`${p.productTypeId}`);
       products.supplierId.push(`${p.supplierId}`);
@@ -248,7 +248,7 @@ export async function postOrder(order, methodId, mercadoPago, commerceName, comm
       menu.id.push(`${m.id}`);
       menu.name.push(`${m.name}`);
       menu.description.push(`${m.description}`);
-      menu.cost.push(`${m.price}`);
+      menu.cost.push(`${m.cost}`);
       menu.menuTypeId.push(`${m.menuTypeId}`);
       menu.categoryId.push(`${m.categoryId}`);
       m.dishes ? menu.dishes.push(`${m.dishes}`) : menu.dishes.push("");
