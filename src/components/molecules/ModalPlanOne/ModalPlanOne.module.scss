@@ -1,0 +1,157 @@
+@import "../../../scss/colors.scss";
+@import "../../../scss/typography.scss";
+
+.modalBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 11;
+}
+
+.modalContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  background-color: rgb(0, 0, 0, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 11;
+
+  .modal {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: $color-sixth;
+    justify-content: space-around;
+    width: 92%;
+    z-index: 999;
+    padding: 10px;
+    border-radius: $border-primary-radius;
+
+    .closeIcon {
+      height: 24px;
+      width: 24px;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+    }
+
+    .productHeader {
+      display: flex;
+      align-items: flex-start;
+      margin: 0 auto;
+      justify-content: flex-start;
+      width: 100%;
+      height: auto;
+      padding: 10px;
+      gap: 16px;
+      .productIcon {
+        height: 60px;
+        width: 60px;
+        display: inline;
+        font-size: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .productInfo {
+        display: inline;
+        width: 100%;
+        .productTitle {
+          font-size: $title;
+        }
+
+        .productDescription {
+          font-size: $line-text;
+          margin: 0;
+          max-height: 3.6em; // Altura máxima de 2 líneas de texto
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+        }
+
+        .productPrice {
+          text-align: right;
+          margin-right: 5px;
+          font-size: $title;
+        }
+      }
+    }
+
+    .notAvailableProduct {
+      color: red;
+      text-align: right;
+      font-size: $line-text;
+      visibility: hidden;
+    }
+
+    .visible {
+      visibility: visible;
+    }
+
+    .textAreaHeader {
+      display: flex;
+      justify-content: space-between;
+      margin: 0;
+      height: auto;
+      .label {
+        font-size: $line-text;
+        font-weight: bold;
+      }
+
+      .textLimit {
+        display: inline;
+        margin-left: auto;
+        color: $color-nineth;
+      }
+    }
+
+    .amount {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      height: 50px;
+      margin: 0 auto;
+      background-color: $color-seventh;
+      border-radius: 20px;
+      padding: 15px;
+      .amountButton {
+        border: none;
+        font-size: $title;
+        line-height: inherit;
+      }
+      .cant {
+        font-size: $title;
+        line-height: inherit;
+      }
+    }
+
+    .addButton {
+      width: 100%;
+      background-color: $background-buttom-primary-active;
+      font-size: $title;
+      border-radius: $border-primary-radius;
+      height: 61px;
+      color: $text-secondary;
+      border: none;
+    }
+    .unavailable {
+      background-color: $background-buttom-primary-desable;
+    }
+  }
+}
+
+.open {
+  display: flex;
+}

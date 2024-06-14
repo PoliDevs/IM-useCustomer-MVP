@@ -134,7 +134,7 @@ export default function Home() {
           scrollToCategory={scrollToCategory}
           categoryRefs={categoryTitleRefs}
         />
-        {isLoading && cart.length > 0 ? (
+        {isLoading && cart.length > 0 && commerce.plan === "m2" ? (
           <Toast
             text={`VER PEDIDO`}
             numerocount={cart.length}

@@ -1,10 +1,11 @@
-import { useRef, useEffect, useLayoutEffect, useMemo, useState } from "react";
+import { useRef, useEffect, useMemo } from "react";
 /* eslint-disable react/prop-types */
 import { useSelector } from "react-redux";
 import useModal from "../../../utils/Functions";
 import ScrollContainer from "react-indiana-drag-scroll";
 import Product from "../Product/Product";
 import Modal from "../Modal/Modal";
+import ModalPlanOne from "../../molecules/ModalPlanOne/ModalPlanOne"
 import LoadingPage from "../LoadingPage/LoadingPage";
 import s from "./Products.module.scss";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
@@ -101,102 +102,110 @@ export default function Products({
         <ScrollContainer
           className={s.productsContainer}
           ref={divRef}
-          // onScroll={() => handleScrollChange(divRef.current.scrollTop)}
+        // onScroll={() => handleScrollChange(divRef.current.scrollTop)}
         >
           {search.length > 0
             ? search.map((category, index) => (
-                <div key={index} className={s.titleConteiner}>
-                  <SubTitle alignment={"left"} id={`category-${category.id}`}>
-                    {capitalizeFirstLetter(category.category)}
-                  </SubTitle>
-                  {category.products.map((product, index) => (
-                    <Product
-                      key={`${product.id}-${index}`}
-                      name={capitalizeFirstLetter(product.name) || ""}
-                      description={
-                        capitalizeFirstLetter(product.description) || ""
-                      }
-                      price={formatNumber(product.cost) || 0}
-                      cost={product.cost}
-                      bg={product.photo || ""}
-                      id={product.id || ""}
-                      active={product.active || false}
-                      promotion={product.promotion || false}
-                      discount={product.discount || 0}
-                      surcharge={product.surcharge || 0}
-                      openModal={openModal}
-                      product={product.product || false}
-                      aditional={product.aditional || false}
-                      menuTypeId={product.menuType ? product.menuType.id : ""}
-                      categoryId={product.category ? product.category.id : ""}
-                      unitTypeId={product.unitType ? product.unitType.id : ""}
-                      productTypeId={
-                        product.productType ? product.productType.id : ""
-                      }
-                      supplierId={product.supplier ? product.supplier.id : ""}
-                      allergenType={product.allergenType || ""}
-                      careful={product.careful || false}
-                    />
-                  ))}
-                </div>
-              ))
+              <div key={index} className={s.titleConteiner}>
+                <SubTitle alignment={"left"} id={`category-${category.id}`}>
+                  {capitalizeFirstLetter(category.category)}
+                </SubTitle>
+                {category.products.map((product, index) => (
+                  <Product
+                    key={`${product.id}-${index}`}
+                    name={capitalizeFirstLetter(product.name) || ""}
+                    description={
+                      capitalizeFirstLetter(product.description) || ""
+                    }
+                    price={formatNumber(product.cost) || 0}
+                    cost={product.cost}
+                    bg={product.photo || ""}
+                    id={product.id || ""}
+                    active={product.active || false}
+                    promotion={product.promotion || false}
+                    discount={product.discount || 0}
+                    surcharge={product.surcharge || 0}
+                    openModal={openModal}
+                    product={product.product || false}
+                    aditional={product.aditional || false}
+                    menuTypeId={product.menuType ? product.menuType.id : ""}
+                    categoryId={product.category ? product.category.id : ""}
+                    unitTypeId={product.unitType ? product.unitType.id : ""}
+                    productTypeId={
+                      product.productType ? product.productType.id : ""
+                    }
+                    supplierId={product.supplier ? product.supplier.id : ""}
+                    allergenType={product.allergenType || ""}
+                    careful={product.careful || false}
+                  />
+                ))}
+              </div>
+            ))
             : Array.from(productsByCategory).map(([categoryId, products]) => (
-                <div
-                  key={categoryId}
+              <div
+                key={categoryId}
+                id={categoryId}
+                className={s.titleConteiner}
+                ref={(e) => (categoryRefs.current[categoryId] = e)}
+              >
+                <h2
                   id={categoryId}
-                  className={s.titleConteiner}
-                  ref={(e) => (categoryRefs.current[categoryId] = e)}
+                  ref={(e) => (h2TitleRef.current[categoryId] = e)}
                 >
-                  <h2
-                    id={categoryId}
-                    ref={(e) => (h2TitleRef.current[categoryId] = e)}
-                  >
-                    {capitalizeFirstLetter(products[0]?.category?.category)}
-                  </h2>
-                  {products.map((product, index) => (
-                    <Product
-                      key={`${product.id}-${index}`}
-                      name={capitalizeFirstLetter(product.name) || ""}
-                      description={
-                        capitalizeFirstLetter(product.description) || ""
-                      }
-                      price={formatNumber(product.cost) || 0}
-                      cost={product.cost}
-                      bg={product.photo || ""}
-                      id={product.id || ""}
-                      active={product.active || false}
-                      promotion={product.promotion || false}
-                      discount={product.discount || 0}
-                      surcharge={product.surcharge || 0}
-                      openModal={openModal}
-                      product={product.product || false}
-                      aditional={product.aditional || false}
-                      menuTypeId={product.menuType ? product.menuType.id : ""}
-                      categoryId={product.category ? product.category.id : ""}
-                      unitTypeId={product.unitType ? product.unitType.id : ""}
-                      productTypeId={
-                        product.productType ? product.productType.id : ""
-                      }
-                      supplierId={product.supplier ? product.supplier.id : ""}
-                      allergenType={product.allergenType || ""}
-                      careful={product.careful || false}
-                    />
-                  ))}
-                </div>
-              ))}
+                  {capitalizeFirstLetter(products[0]?.category?.category)}
+                </h2>
+                {products.map((product, index) => (
+                  <Product
+                    key={`${product.id}-${index}`}
+                    name={capitalizeFirstLetter(product.name) || ""}
+                    description={
+                      capitalizeFirstLetter(product.description) || ""
+                    }
+                    price={formatNumber(product.cost) || 0}
+                    cost={product.cost}
+                    bg={product.photo || ""}
+                    id={product.id || ""}
+                    active={product.active || false}
+                    promotion={product.promotion || false}
+                    discount={product.discount || 0}
+                    surcharge={product.surcharge || 0}
+                    openModal={openModal}
+                    product={product.product || false}
+                    aditional={product.aditional || false}
+                    menuTypeId={product.menuType ? product.menuType.id : ""}
+                    categoryId={product.category ? product.category.id : ""}
+                    unitTypeId={product.unitType ? product.unitType.id : ""}
+                    productTypeId={
+                      product.productType ? product.productType.id : ""
+                    }
+                    supplierId={product.supplier ? product.supplier.id : ""}
+                    allergenType={product.allergenType || ""}
+                    careful={product.careful || false}
+                  />
+                ))}
+              </div>
+            ))}
         </ScrollContainer>
       )}
       {!loading && !productsByCategory.size && search.length === 0 && (
         <LoadingPage small={true} text={t("loader.title")} />
       )}
 
-      {/* {commercePlan !== "m1" && ()} */}
-      <Modal
-        isOpen={isOpen}
-        closeModal={closeModal}
-        productData={productData}
-        changeStyle={changeStyle}
-      />
+      {commercePlan === "m1" ?
+        (
+          <ModalPlanOne isOpen={isOpen} closeModal={closeModal} productData={productData} changeStyle={changeStyle} />
+        ) :
+
+        (
+          <Modal
+            isOpen={isOpen}
+            closeModal={closeModal}
+            productData={productData}
+            changeStyle={changeStyle}
+          />
+        )
+      }
+
     </>
   );
 }
