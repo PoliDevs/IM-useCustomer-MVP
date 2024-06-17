@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Logo  from "../assets/logo imenu orange.svg";
 // import { initialize } from "../utils/Firebase_inicialize";
+import {getStorage,getDownloadURL,ref } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -65,6 +66,7 @@ export async function uploadFile(file, name) {
   return await uploadBytes(storageRef, file);
 }
 
+
 export async function getFileDownloadURL(fileName) {
   const fileRef = ref(storage,fileName);
   
@@ -75,5 +77,6 @@ export async function getFileDownloadURL(fileName) {
     // Manejar el error (puede ser que el archivo no exista)
     console.error('Error al obtener una imagen');
     return Logo;
+
   }
 }

@@ -2,24 +2,24 @@
 @import "../../../scss/typography.scss";
 
 .feedbackButton {
-    font-size: $line-text;
+    font-size: 14px;
     font-weight: 700;
     background-color: $background-secundary;
     color: $text-primary;
     text-decoration: none;
     text-align: center;
-    width: 142px;
+    width: 133px;
     margin: 0 auto;
     border: $border;
-    border-radius: $border-primary-radius;
-    height: 30px;
+    border-radius: 13.63px;
+    height: 27.24px;
     cursor: pointer;
     &:hover {
       transform: scale(1.02);
     }
 
-    @media screen and (min-height: 690px){
-      font-size: $title;
-      height: 40px;
-    }
+    // @media screen and (min-height: 690px){
+    //   font-size: $title;
+    //   height: 40px;
+    // }
 }

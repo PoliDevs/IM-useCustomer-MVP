@@ -5,8 +5,10 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import menu from "../../../assets/logo-imenu-full.png";
+import imenu from "../../../assets/imenu.svg"
 import s from "./Banner.module.scss";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
+import { capitalizeFirstLetter } from "../../../utils/Functions";
 import { getFileDownloadURL } from "../../../Firebase/Firebase";
 import { capitalizeFirstLetter } from "../../../utils/Functions";
 
@@ -62,6 +64,7 @@ export default function Banner() {
             //   flexDirection: "column",
             // }}
           >
+            
             <SubTitle
               text={capitalizeFirstLetter(commerce.name)}
               alignment={"left"}
@@ -70,7 +73,7 @@ export default function Banner() {
             />
             <Paragraph
               alignment={"left"}
-              text={` ${t("banner.Table")} ${table && table}`}
+              text={` Mesa ${table && table}`}
               secundary={true}
               color={"#000000"}
             />
@@ -79,9 +82,9 @@ export default function Banner() {
 
         <div>
           <img
-            src={menu}
-            width={"100px"}
-            height={"100px"}
+            src={imenu}
+            width={"50px"}
+            height={"50px"}
             className={s.imagen2}
           />
         </div>

@@ -22,10 +22,12 @@ import SubTitle from "../../atoms/SubTitle/SubTitle";
 import NavBar from "../../molecules/NavBar/NavBar";
 import s from "./WelcomePage.module.scss";
 import ContactFooter from "../../molecules/ContactFooter/ContactFooter";
+
 import { redirect, useNavigate, useParams } from "react-router-dom";
 import { getFileDownloadURL } from "../../../Firebase/Firebase";
 import useFetchImageUrl from "../../../hooks/useFetchImageURL";
 import { dataDecrypt } from "../../../utils/Functions";
+
 export default function WelcomePage() {
   const orderStatus = useSelector((state) => state.orderStatus);
   const orderPending = useSelector((state) => state.orderId);
@@ -35,12 +37,15 @@ export default function WelcomePage() {
   const table = useSelector((state) => state.table);
   const open = useSelector((state) => state.status);
   const [isLoading, setIsloading] = useState(true);
+  const [imgUrl, setImgUrl] = useState(false);
   const [t, i18n] = useTranslation(["global"]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
   const params = useParams();
 
   const imgURL = useFetchImageUrl(commerce);
+
 
   useEffect(() => {
     localStorage.setItem("Pos", params["*"]);
@@ -66,6 +71,7 @@ export default function WelcomePage() {
   //     orderStatus !== "" &&
   //     navigate("/rating");
   // }, [orderPending]);
+ 
 
   return (
     <div className={s.home}>
@@ -82,10 +88,12 @@ export default function WelcomePage() {
                   <SubTitle text={t("welcome.subtitle")} />
                   <HugeTitle text={commerce.name} />
                   <div className={s.spacing}>
+
                     {/*<Logo className={s.logo} />*/}
 
                     <img src={imgURL} className={s.logo} />
                     {/* <img src={iMenuFull} className={s.logo}/> */}
+
                     <SubTitle
                       text={`${t("welcome.sector")} ${sector} - ${t(
                         "welcome.table"

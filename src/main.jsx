@@ -34,13 +34,13 @@ i18next.init({
 });
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <I18nextProvider i18n={i18next}>
-          <App />
-        </I18nextProvider>
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <Provider store={store}>
+    <BrowserRouter>
+      <I18nextProvider i18n={i18next}>
+        <App />
+      </I18nextProvider>
+    </BrowserRouter>
+  </Provider>
+  //</React.StrictMode>
 );

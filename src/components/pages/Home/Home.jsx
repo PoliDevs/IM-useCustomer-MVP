@@ -134,9 +134,10 @@ export default function Home() {
           scrollToCategory={scrollToCategory}
           categoryRefs={categoryTitleRefs}
         />
-        {!isLoading && cart.length > 0 ? (
+        {isLoading && cart.length > 0 && commerce.plan === "m2" ? (
           <Toast
-            text={`Tienes ${cart.length} productos pendientes, click para ir a ver tu pedido`}
+            text={`VER PEDIDO`}
+            numerocount={cart.length}
             link={"payment"}
           />
         ) : null}

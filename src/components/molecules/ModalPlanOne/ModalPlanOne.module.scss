@@ -25,6 +25,7 @@
   align-items: center;
   justify-content: center;
   z-index: 11;
+
   .modal {
     position: relative;
     display: flex;
@@ -35,7 +36,6 @@
     z-index: 999;
     padding: 10px;
     border-radius: $border-primary-radius;
-    gap: 20px;
 
     .closeIcon {
       height: 24px;
@@ -43,7 +43,6 @@
       position: absolute;
       top: 12px;
       right: 12px;
-      z-index: 9999;
     }
 
     .productHeader {
@@ -67,7 +66,6 @@
       .productInfo {
         display: inline;
         width: 100%;
-        gap: 16px;
         .productTitle {
           font-size: $title;
         }
@@ -122,7 +120,7 @@
     .amount {
       display: flex;
       justify-content: space-between;
-      width: 50%;
+      width: 100%;
       height: 50px;
       margin: 0 auto;
       background-color: $color-seventh;
@@ -139,28 +137,12 @@
       }
     }
 
-    .buttonContainer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      margin: 0 auto;
-      padding: 10px;
-    }
-
-    .productPrice {
-      font-size: 24.78px;
-      font-weight: bold;
-      text-align: right;
-      margin-right: 5px;
-    }
-
     .addButton {
-      width: 50%;
-      background-color: #ff4747;
+      width: 100%;
+      background-color: $background-buttom-primary-active;
       font-size: $title;
-      border-radius: 25.51px;
-      height: 46.16px;
+      border-radius: $border-primary-radius;
+      height: 61px;
       color: $text-secondary;
       border: none;
     }

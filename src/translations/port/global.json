@@ -63,6 +63,9 @@
   "categories": {
     "title": "Categorias"
   },
+    "products": {
+    "productNotAvailable": "Não há produtos disponíveis"
+  },
   "productModal": {
     "available": "O produto não está disponível.",
     "commentLabel" : "Comentários",
@@ -87,7 +90,7 @@
   },
   "orderInfo": {
     "table": "Mesa",
-    "paymentTotal": "Total a pagar: €"
+    "paymentTotal": "Total a pagar: "
   },
   "mercadoPago": {
     "payButton": "Pagar"

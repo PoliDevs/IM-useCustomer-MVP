@@ -1,31 +1,28 @@
 import {
-  // getActiveProducts,
+  getActiveProducts,
   getCommerce,
   getPaymentMethods,
   getPosValue,
   getSectorValue,
   getStatus,
+  hideBanner,
   postOrder,
   removerCart,
 } from "../../../redux/actions";
-import { ReactComponent as IMenu } from "../../../assets/ImenuHorizontal.svg";
-import { dataDecrypt, formattedOrder } from "../../../utils/Functions";
-import { ReactComponent as CashIcon } from "../../../assets/CashIcon.svg";
+import { formattedOrder, roundToTwo } from "../../../utils/Functions";
 import { useDispatch, useSelector } from "react-redux";
 import { paymentUrl } from "../../../utils/Constants";
 import { Link, useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import PaymentOptionButton from "../../atoms/PaymentOptionButton/PaymentOptionButton";
 import ClosedCommerce from "../../molecules/ClosedCommerce/ClosedCommerce";
 import LoadingPage from "../../molecules/LoadingPage/LoadingPage";
 import OrderInfo from "../../molecules/OrderInfo/OrderInfo";
-import iMenuFull from "../../../assets/logo-imenu-full.png";
-import SmallText from "../../atoms/SmallText/SmallText";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import Banner from "../../molecules/Banner/Banner";
 import s from "./Payment.module.scss";
+import ScrollContainer from "react-indiana-drag-scroll";
 
 export default function Payment() {
   const [method, setMethod] = useState("");
@@ -38,16 +35,16 @@ export default function Payment() {
   const commerceID = useSelector((state) => state.commerce.id);
   const productsList = useSelector((state) => state.products);
   const tablePrice = useSelector((state) => state.tablePrice);
-  const language = useSelector((state) => state.language);
+  // const language = useSelector((state) => state.language);
   const user = useSelector((state) => state.user);
   const sectorID = useSelector((state) => state.sector);
   const open = useSelector((state) => state.status);
   const tableID = useSelector((state) => state.table);
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const totalPrice = cart.reduce((count, p) => count + p.price * p.amount, 0);
+  const totalPrice = cart.reduce((count, p) => count + p.cost * p.amount, 0);
   // let mercadopago = null;
-  const [t, i18n] = useTranslation(["global"]);
+  // const [t, i18n] = useTranslation(["global"]);
   const [isLoading, setIsloading] = useState(true);
   const navigate = useNavigate();
   const handleChange = (option) => {
@@ -64,12 +61,13 @@ export default function Payment() {
     localStorage.removeItem("CSMO");
     dispatch(getPosValue(tableID));
     dispatch(getSectorValue(sectorID));
-    dispatch(getActiveProducts(commerceID));
+    // dispatch(getActiveProducts(commerceID));
     dispatch(getStatus(commerceID, setIsloading));
     dispatch(getPaymentMethods(commerceID));
-  }, []);
+  }, [cart.length, commerceID, sectorID, dispatch, tableID, navigate]);
 
   useEffect(() => {
+    dispatch(hideBanner(true));
     formattedOrder(
       user,
       cart,
@@ -83,7 +81,18 @@ export default function Payment() {
       setPrice,
       setOrder
     );
-  }, [tablePrice, sectorPrice, productsList]);
+  }, [
+    tablePrice,
+    sectorPrice,
+    productsList,
+    cart,
+    commerceID,
+    sectorID,
+    tableID,
+    totalPrice,
+    user,
+    dispatch
+  ]);
 
   const handleCash = () => {
     if (method === 2) {
@@ -91,6 +100,7 @@ export default function Payment() {
         .id;
       postOrder(order, methodId);
       localStorage.removeItem("cart");
+      localStorage.removeItem("CSMO_ID");
       dispatch(removerCart());
     }
     return;
@@ -105,39 +115,53 @@ export default function Payment() {
           arrow={true}
         />
         <section className={s.paymentContent}>
-          <SubTitle text={t("payment.title")} alignment={"left"} bold={true}>
-            <CashIcon className={s.cashIcon} />
-          </SubTitle>
-          <SmallText
+          <SubTitle text={"Tu pedido"} alignment={"left"} bold={true} />
+          {/* <SmallText
             text={t("payment.managePayment")}
             alignment={"left"}
             standarSpacing={true}
-          />
-          <OrderInfo
-            price={price}
-            tablePrice={tablePrice}
-            sectorPrice={sectorPrice}
-          />
-          {cash.length ? (
-            <PaymentOptionButton
-              text={t("payment.cash")}
-              option={2}
-              setMethod={setMethod}
-              handleChange={handleChange}
+          /> */}
+          <ScrollContainer horizontal={true} vertical={false}>
+            <OrderInfo
+              price={price}
+              tablePrice={tablePrice}
+              sectorPrice={sectorPrice}
             />
-          ) : (
-            ""
-          )}
-          {mp.length ? (
-            <PaymentOptionButton
-              text={"Mercadopago"}
-              option={1}
-              setMethod={setMethod}
-              handleChange={handleChange}
+          </ScrollContainer>
+
+          <div className={s.totalContainer}>
+            <Paragraph text={`Total: `} alignment={"left"} bold={true} />
+            <Paragraph
+              text={`$ ${roundToTwo(totalPrice)}`}
+              alignment={"right"}
+              bold={true}
             />
-          ) : (
-            ""
-          )}
+          </div>
+
+          <div style={{ marginTop: "20px" }} className={s.paymentOption}>
+            <SubTitle text={"Pago"} bold={true} alignment={"left"} size={2} />
+
+            {cash.length ? (
+              <PaymentOptionButton
+                text={"Pagar al Mozo"}
+                option={2}
+                setMethod={setMethod}
+                handleChange={handleChange}
+              />
+            ) : (
+              ""
+            )}
+            {mp.length ? (
+              <PaymentOptionButton
+                text={"Mercadopago"}
+                option={1}
+                setMethod={setMethod}
+                handleChange={handleChange}
+              />
+            ) : (
+              ""
+            )}
+          </div>
           {/* <PaymentOptionButton
             text={language.payment_deferred}
             option={3}
@@ -145,20 +169,21 @@ export default function Payment() {
             handleChange={handleChange}
           /> */}
           <div className={s.bottomContent}>
-            <Paragraph
+            {/* <Paragraph
               text={t("payment.poweredby")}
               bold={true}
               centered={true}
-            >
-              {/* <IMenu className={s.imenuLogo} /> */}
-              <img src={iMenuFull} className={s.imemuLogo} width={"70px"} />
-            </Paragraph>
+            > */}
+            {/* <IMenu className={s.imenuLogo} /> */}
+            {/* <img src={iMenuFull} className={s.imemuLogo} width={"70px"} />
+            </Paragraph> */}
             <Link
-              className={s.linkButton}
+              className={`${s.linkButton} ${method === "" ? s.disabled : ""}`}
               to={paymentUrl[method]}
               onClick={handleCash}
+              disabled={method === ""}
             >
-              {t("payment.continue")}
+              {"Hacer Pedido"}
             </Link>
           </div>
         </section>
@@ -167,6 +192,6 @@ export default function Payment() {
       <ClosedCommerce fullHeight={true} />
     )
   ) : (
-    <LoadingPage text={t("loader.title")} />
+    <LoadingPage text={"Espera mientras preparamos el menu"} />
   );
 }

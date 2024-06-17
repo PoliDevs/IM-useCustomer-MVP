@@ -2,8 +2,8 @@ import {
   dataDecrypt,
   // menuTranslate,
   // translateText,
-} from '../../utils/Functions';
-import CryptoJS from 'crypto-js';
+} from "../../utils/Functions";
+import CryptoJS from "crypto-js";
 import {
   ADD_PRODUCT,
   REMOVE_PRODUCT,
@@ -37,7 +37,9 @@ import {
   CLEAR_ORDER_STATUS,
   HIDE_BANNER,
   GET_ID_CATEGORY,
-} from '../actions/actionTypes';
+  REMOVE_PRODUCT_FROM_CART,
+} from "../actions/actionTypes";
+import { generateUniqueId } from "../../utils/Functions";
 // import { all_app_texts } from '../../utils/language';
 
 const getEncriptedItem = (item) => {
@@ -55,26 +57,27 @@ const getEncriptedItem = (item) => {
 // };
 
 const initalState = {
-  table: localStorage.getItem('Pos')
-    ? dataDecrypt(localStorage.getItem('Pos')).table
+  table: localStorage.getItem("Pos")
+    ? dataDecrypt(localStorage.getItem("Pos")).table
     : 0,
-  sector: localStorage.getItem('Pos')
-    ? dataDecrypt(localStorage.getItem('Pos')).sector
+  sector: localStorage.getItem("Pos")
+    ? dataDecrypt(localStorage.getItem("Pos")).sector
     : 0,
   allProducts: [],
   allDishes: [],
   products: [],
   allAditionals: [],
   allCategories: [],
-  filtroPor: '',
+  filtroPor: "",
   search: [],
+  productCart: [],
   paymentMethods: [],
   productAvailable: true,
   statusBanner: true,
   idCategory: 0,
-  cart: localStorage.getItem('cart') ? getEncriptedItem('cart') : [],
-  user: localStorage.getItem('user') ? getEncriptedItem('user') : {},
-  commerce: localStorage.getItem('CM') ? getEncriptedItem('CM') : {},
+  cart: localStorage.getItem("cart") ? getEncriptedItem("cart") : [],
+  user: localStorage.getItem("user") ? getEncriptedItem("user") : {},
+  commerce: localStorage.getItem("CM") ? getEncriptedItem("CM") : {},
   status: false,
   loading: false,
   // language: localStorage.getItem("Lang")
@@ -83,10 +86,10 @@ const initalState = {
   //   : "es",
   tablePrice: {},
   sectorPrice: {},
-  orderId: localStorage.getItem('CSMO_ID')
-    ? localStorage.getItem('CSMO_ID')
-    : '',
-  orderStatus: '',
+  orderId: localStorage.getItem("CSMO_ID")
+    ? localStorage.getItem("CSMO_ID")
+    : "",
+  orderStatus: "",
   ordersByUser: [],
 };
 
@@ -148,28 +151,100 @@ export const rootReducer = (state = initalState, action) => {
           clave
         ).toString();
 
-        localStorage.setItem('cart', objetoCifrado);
+        localStorage.setItem("cart", objetoCifrado);
       }
       return state;
+
+    // case ADD_PRODUCT: {
+    //   const existingProductIndex = state.cart.findIndex(
+    //     (p) =>
+    //       p.name === action.payload.name && p.comment === action.payload.comment
+    //   );
+
+    //   if (existingProductIndex === -1 && action.payload.amount !== 0) {
+    //     // Si no existe un producto idéntico (mismo nombre y comentario) en el carrito, agregarlo
+    //     return { ...state, cart: [...state.cart, action.payload] };
+    //   } else if (action.payload.amount !== 0) {
+    //     // Verificar si existe un producto idéntico con un comentario diferente
+    //     const existingProductWithDifferentComment = state.cart.find(
+    //       (p) =>
+    //         p.name === action.payload.name &&
+    //         p.comment !== action.payload.comment &&
+    //         p.amount !== 0
+    //     );
+
+    //     if (existingProductWithDifferentComment) {
+    //       // Agregar el nuevo producto como un elemento separado
+    //       return {
+    //         ...state,
+    //         cart: [...state.cart, action.payload],
+    //       };
+    //     } else {
+    //       // Actualizar la cantidad y el comentario del producto existente
+    //       return {
+    //         ...state,
+    //         cart: state.cart.map((p) =>
+    //           p.name === action.payload.name &&
+    //           p.comment === action.payload.comment
+    //             ? {
+    //                 ...p,
+    //                 amount: p.amount + action.payload.amount,
+    //                 comment: action.payload.comment,
+    //               }
+    //             : p
+    //         ),
+    //       };
+    //     }
+    //   }
+    //   return state;
+    // }
     case ADD_PRODUCT: {
-      const index = state.cart.length
-        ? state.cart.findIndex((p) => p.name === action.payload.name)
-        : -1;
-      if (index === -1 && action.payload.amount !== 0) {
-        return { ...state, cart: [...state.cart, action.payload] };
+      const existingProductIndex = state.cart.findIndex(
+        (p) =>
+          p.name === action.payload.name &&
+          p.comment === action.payload.comment &&
+          p.description === action.payload.description
+      );
+
+      if (existingProductIndex === -1 && action.payload.amount !== 0) {
+        // Si no existe un producto idéntico (mismo nombre y comentario) en el carrito, agregarlo con un nuevo ID
+        const newProduct = { ...action.payload, id: generateUniqueId() };
+        return { ...state, cart: [...state.cart, newProduct] };
       } else if (action.payload.amount !== 0) {
-        return {
-          ...state,
-          cart: state.cart.map((p) =>
-            p.name === action.payload.name
-              ? {
-                  ...p,
-                  amount: p.amount + action.payload.amount,
-                  comment: action.payload.comment,
-                }
-              : p
-          ),
-        };
+        // Verificar si existe un producto idéntico con un comentario diferente
+        const existingProductWithDifferentComment = state.cart.find(
+          (p) =>
+            p.name === action.payload.name &&
+            (p.comment !== action.payload.comment ||
+              p.description !== action.payload.description) &&
+            p.amount !== 0
+        );
+
+        if (existingProductWithDifferentComment) {
+          // Agregar el nuevo producto como un elemento separado con un nuevo ID
+          const newProduct = { ...action.payload, id: generateUniqueId() };
+          return {
+            ...state,
+            cart: [...state.cart, newProduct],
+          };
+        } else {
+          // Actualizar la cantidad y el comentario del producto existente
+          return {
+            ...state,
+            cart: state.cart.map((p) =>
+              p.name === action.payload.name &&
+              p.comment === action.payload.comment &&
+              p.description === action.payload.description
+                ? {
+                    ...p,
+                    amount: p.amount + action.payload.amount,
+                    comment: action.payload.comment,
+                    description: action.payload.description,
+                  }
+                : p
+            ),
+          };
+        }
       }
       return state;
     }
@@ -192,6 +267,9 @@ export const rootReducer = (state = initalState, action) => {
         };
       }
     }
+    case REMOVE_CART:
+      return { ...state, cart: [] };
+
     case SET_USER: {
       const clave = import.meta.env.VITE_REACT_APP_KEY;
       const objetoCifrado = CryptoJS.AES.encrypt(
@@ -199,7 +277,7 @@ export const rootReducer = (state = initalState, action) => {
         clave
       ).toString();
 
-      localStorage.setItem('user', objetoCifrado);
+      localStorage.setItem("user", objetoCifrado);
 
       return { ...state, user: action.payload };
     }
@@ -217,7 +295,7 @@ export const rootReducer = (state = initalState, action) => {
         clave
       ).toString();
 
-      localStorage.setItem('CM', objetoCifrado);
+      localStorage.setItem("CM", objetoCifrado);
       return { ...state, commerce: CM };
     }
     case GET_STATUS:
@@ -276,13 +354,13 @@ export const rootReducer = (state = initalState, action) => {
     }
     case REMOVE_USER:
       {
-        localStorage.removeItem('user');
-        state = { ...state, user: '' };
+        localStorage.removeItem("user");
+        state = { ...state, user: "" };
       }
       return state;
     case CHANGE_LANGUAGE:
       {
-        localStorage.setItem('Lang', action.payload.lang);
+        localStorage.setItem("Lang", action.payload.lang);
         // state = { ...state, language: action.payload };
         //!descomentar - probando loader en cambio de idioma - home
         // state = { ...state, language: action.payload.language, allProducts: [], allAditionals: [], products: [], allCategories: [] };
@@ -297,7 +375,7 @@ export const rootReducer = (state = initalState, action) => {
       let orderId = action.payload.allOrders.find(
         (o) => o.id == action.payload.orderId
       );
-      let status = orderId ? orderId.status : '';
+      let status = orderId ? orderId.status : "";
       return { ...state, orderStatus: status };
     }
     case PUT_ORDER_DATA:
@@ -305,20 +383,20 @@ export const rootReducer = (state = initalState, action) => {
     case GET_ORDER_PENDING: {
       let pendingOrder = action.payload.allOrders.filter((o) => {
         let pending =
-          o.status !== 'delivered' &&
+          o.status !== "delivered" &&
           o.sector.id == action.payload.sectorID &&
           o.po.id == action.payload.tableID;
         return pending;
       });
       if (pendingOrder.length) {
-        localStorage.setItem('CSMO_ID', pendingOrder[0].id);
+        localStorage.setItem("CSMO_ID", pendingOrder[0].id);
         return {
           ...state,
           orderId: pendingOrder && pendingOrder[0].id,
           orderStatus: pendingOrder[0].status,
         };
       } else {
-        localStorage.removeItem('CSMO_ID');
+        localStorage.removeItem("CSMO_ID");
         return state;
       }
     }
@@ -327,13 +405,18 @@ export const rootReducer = (state = initalState, action) => {
     case REMOVE_CART:
       return { ...state, cart: [] };
     case REMOVE_ORDER_ID:
-      return { ...state, orderId: '' };
+      return { ...state, orderId: "" };
     case CLEAR_ORDER_STATUS:
-      return { ...state, orderStatus: '' };
+      return { ...state, orderStatus: "" };
     case HIDE_BANNER:
       return { ...state, statusBanner: action.payload };
     case GET_ID_CATEGORY:
       return { ...state, idCategory: action.payload };
+    case REMOVE_PRODUCT_FROM_CART:
+      return {
+        ...state,
+        cart: state.cart.filter((p) => p.id !== action.payload),
+      };
     default:
       return state;
   }

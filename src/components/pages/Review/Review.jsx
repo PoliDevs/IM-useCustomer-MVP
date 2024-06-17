@@ -1,5 +1,10 @@
-import { clearStatus, getOrderStatus, removerCart, sendReview } from "../../../redux/actions";
-import { ReactComponent as ArrowRight } from '../../../assets/ArrowLongRight.svg'
+import {
+  clearStatus,
+  getOrderStatus,
+  removerCart,
+  sendReview,
+} from "../../../redux/actions";
+import { ReactComponent as ArrowRight } from "../../../assets/ArrowLongRight.svg";
 import { ReactComponent as ImenuLogo } from "../../../assets/ImenuHorizontal.svg";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,21 +24,25 @@ import Paragraph from "../../atoms/Paragraph/Paragraph";
 import useWindowSize from "react-use/lib/useWindowSize";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
 import logo from "../../../assets/ReviewIcon.png";
+import imenu from "../../../assets/imenu.svg";
+import check from "../../../assets/check.svg";
 import Stars from "../../atoms/Stars/Stars";
 import Confetti from "react-confetti";
 import s from "./Review.module.scss";
+import SmallText from "../../atoms/SmallText/SmallText";
 
 export default function Review() {
   const [comment, setComment] = useState("");
   const [sent, setSent] = useState(false);
-  const [duration, setDuration] =useState(true);
+  const [duration, setDuration] = useState(true);
   // const [loading, setLoading] = useState(true);
-  const userEmail = useSelector((state)=> state.user.email)
-  const language = useSelector((state)=> state.language);
-  const commerceInfo = useSelector((state)=> state.commerce);
-  const orderStatus = useSelector((state)=> state.orderStatus);
-  const orderId = useSelector((state)=> state.orderId);
-  const {width, height} = useWindowSize();
+  const [cmd_id, setCmd_id] = useState(localStorage.getItem("CSMO_ID"));
+  const userEmail = useSelector((state) => state.user.email);
+  const language = useSelector((state) => state.language);
+  const commerceInfo = useSelector((state) => state.commerce);
+  const orderStatus = useSelector((state) => state.orderStatus);
+  const orderId = useSelector((state) => state.orderId);
+  const { width, height } = useWindowSize();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -50,39 +59,43 @@ export default function Review() {
     merchantOrder,
     externalReference,
     paymentType,
-  }
-  if (id) localStorage.setItem('CSMO_ID', id)
+  };
+  if (id) localStorage.setItem("CSMO_ID", id);
+  // const cmd_id = localStorage.getItem("CSMO_ID");
+
   const [t, i18n] = useTranslation(["global"]);
 
   const { starsArray, stars, handleStars } = useRating();
 
-  const handleSent = ()=> {
+  const handleSent = () => {
     const review = {
       rating: stars,
-      feedback: comment
-    }
+      feedback: comment,
+    };
     sendReview(review, commerceInfo.id);
     setSent(true);
-  }
+  };
+  //#01a925
+  setTimeout(() => {
+    setDuration(false);
+  }, 1500);
 
-    setTimeout(() => {
-     setDuration(false)
-    }, 6000);
-
-    useEffect(() => {
-      if (status && status === "rejected") {navigate('/home'); localStorage.removeItem('mporder')}
-      if (status && status === 'approved'){
-        localStorage.getItem("mporder")
-          ? postMpOrder(
-              JSON.parse(localStorage.getItem("mporder")).order,
-              JSON.parse(localStorage.getItem("mporder")).methodId, mpInfo
-            )
-          : "";
+  useEffect(() => {
+    if (status && status === "rejected") {
+      navigate("/home");
+      localStorage.removeItem("mporder");
+    }
+    if (status && status === "approved") {
+      localStorage.getItem("mporder")
+        ? postMpOrder(
+            JSON.parse(localStorage.getItem("mporder")).order,
+            JSON.parse(localStorage.getItem("mporder")).methodId,
+            mpInfo
+          )
+        : "";
       dispatch(removerCart());
-
-      }
-    }, [])
-    
+    }
+  }, [dispatch, mpInfo, navigate, status]);
 
   useEffect(() => {
     dispatch(clearStatus());
@@ -90,23 +103,22 @@ export default function Review() {
       orderId && (await dispatch(getOrderStatus(orderId, commerceInfo.id)));
     };
     updateStatus();
-  }, [orderId, commerceInfo.id]);
-  
+  }, [orderId, commerceInfo.id, dispatch]);
 
   return (
     <section className={s.reviewContainer}>
       <>
         <header className={s.reviewHeader}>
-          {duration && (
-            <Confetti numberOfPieces={200} height={height / 2} width={width} />
-          )}
-          <img src={logo} className={s.logo} />
-          <div>
-            <HugeTitle text={commerceInfo.name} centered={true} review={true} />
-            <SubTitle text={t("rating.preparingOrder")} review={true} />
+          <div className={s.reviewBox}>
+            <img src={check} alt="check" width={72} height={72} />
+            <SubTitle text={"¡Pedido confirmado!"} bold={true} size={2} />
+            <Paragraph text={"Tu pedido es el numero: "} />
+            <SubTitle
+              text={localStorage.getItem("CSMO_ID")}
+              size={4}
+              bold={true}
+            />
           </div>
-          {/* <div className={s.progressBar}> */}
-          <StepProgressBar status={orderStatus} />
           {userEmail ? (
             <Link
               to="/myorders"
@@ -122,35 +134,38 @@ export default function Review() {
               </Paragraph>
             </Link>
           ) : (
-            <div style={{ marginTop: "15px" }}>
-              {localStorage.getItem("CSMO") && (
-                <Paragraph text={t("rating.order")} underline={true}>
-                  <span
-                    className="copyText"
-                    style={{
-                      fontWeight: "bold",
-                      margin: "0 4px",
-                      textDecoration: "underline",
-                    }}
-                  >
-                    {localStorage.getItem("CSMO")}
-                  </span>
-                  <CopyOrderCode />
-                </Paragraph>
-              )}
+            <div
+              style={{ marginTop: "20px", textDecoration: "none" }}
+              className={s.myOrdersLink}
+            >
+              <Paragraph text={"Lo recibirás en la mesa 👍"} bold={true} />
+              <Link
+                className="copyText"
+                to={"/home"}
+                style={{
+                  fontWeight: "bold",
+                  textDecoration: "underline",
+                }}
+              >
+                {"Volver a pedir"}
+              </Link>
             </div>
           )}
           {/* </div> */}
         </header>
         <article className={s.article}>
           {/* <ImenuLogo style={{ margin: "0 auto", height: "36px" }} /> */}
-          <img
-            src={iMenuFull}
-            className={s.imemuLogo}
-            width={"70px"}
-            style={{ margin: "0 auto" }}
+          <SmallText
+            text={"Este pedido fue realizado a travéz de"}
+            smaller={true}
           />
-          <SubTitle text={t("rating.reviewQuestion")} />
+          <img
+            src={imenu}
+            className={s.imemuLogo}
+            width={"72.39px"}
+            style={{ margin: "0 auto", width: "72.39px" }}
+          />
+          <SubTitle text={"¿Cómo fue tu experiencia?"} size={5} bold={true}/>
           <Stars
             stars={stars}
             starsArray={starsArray}
@@ -165,7 +180,7 @@ export default function Review() {
             <>
               <div className={s.textAreaHeader}>
                 <label className={s.label} htmlFor="comment">
-                  {t("rating.reviewLabel")}
+                  ¡Agradecemos tu opinión!
                 </label>
                 <Paragraph text={`${comment.length}/240`} />
               </div>
@@ -174,12 +189,12 @@ export default function Review() {
                 comment={comment}
                 setComment={setComment}
                 maxLength={240}
-                placeholder={t("rating.reviewPlaceholder")}
+                placeholder={"Escribe Aqui"}
               />
-              <FeedbackButton text={t("rating.send")} handleSent={handleSent} />
+              <FeedbackButton text={"Enviar"} handleSent={handleSent} />
             </>
           )}
-          <div className={s.buttonWrapper}>
+          {/* <div className={s.buttonWrapper}>
             <LinkButton
               text={t("rating.backButton")}
               path={"/home"}
@@ -190,7 +205,7 @@ export default function Review() {
               // newHeight={"61px"}
               // newFz={"21px"}
             />
-          </div>
+          </div> */}
         </article>
       </>
     </section>

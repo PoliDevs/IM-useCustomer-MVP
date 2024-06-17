@@ -63,6 +63,9 @@
   "categories": {
     "title": "Categories"
   },
+  "products": {
+    "productNotAvailable": "No products available"
+  },
   "productModal": {
     "available": "This product is not available",
     "commentLabel" : "Comments",
@@ -87,7 +90,7 @@
   },
   "orderInfo": {
     "table": "Table",
-    "paymentTotal": "Total to pay: $"
+    "paymentTotal": "Total to pay: "
   },
   "mercadoPago": {
     "payButton": "Pay"

@@ -3,12 +3,12 @@
 .paymentButton {
   display: flex;
   justify-content: space-between;
-  background-color: $color-sixth;
-  height: 73px;
+  // background-color: $color-sixth;
+  height: 37px;
   width: 100%;
   margin: 5px 0;
-  padding: 25px;
-
+  // padding: 25px;
+  margin-top: 20px;
   .method {
     display: flex;
     justify-content: center;
@@ -20,7 +20,7 @@
     }
   }
   .input {
-    accent-color: #232323;
+    accent-color: #01a925;
     height: 20px;
     width: 20px;
   }

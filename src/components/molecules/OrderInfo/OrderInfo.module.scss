@@ -2,13 +2,21 @@
 @import "../../../scss/typography.scss";
 
 .orderInfo {
-  background-color: $color-sixth;
+  // background-color: $color-sixth;
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 15px 20px 15px 20px;
-  margin-top: 10px;
+  // padding: 15px 20px 15px 20px;
+  // margin-top: 10px;
   margin-bottom: 5px;
+  max-height: 400px;
+
+  @media (max-height: 690px) {
+    max-height: 230px;
+  }
+  @media (max-height: 600px) {
+    max-height: 150px;
+  }
 
   .paymentTitle {
     width: 100%;
@@ -19,7 +27,7 @@
   .productsContainer {
     width: auto;
     height: auto;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: 23px;
     display: flex;
     box-sizing: border-box;
@@ -28,6 +36,6 @@
   }
 }
 
-.border {
-  border: $border;
-}
+// .border {
+//   border: $border;
+// }

@@ -1,12 +1,12 @@
 import s from "./Toast.module.scss";
 import { Link } from "react-router-dom";
-function Toast({ text, link }) {
+function Toast({ text, link, numerocount }) {
   return (
     <Link to={`/${link}`} className={s.link}>
       <div className={s.container}>
-        <div className={s.iconContainer}></div>
         <p className={s.title}>{text}</p>
-        <span className={s.close}>&times;</span>
+        <span className={s.numero}>{numerocount}</span>
+        {/* <span className={s.close}>&times;</span> */}
       </div>
     </Link>
   );
