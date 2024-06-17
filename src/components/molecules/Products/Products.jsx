@@ -24,6 +24,9 @@ export default function Products({
   const divRef = useRef(null);
   const h2TitleRef = useRef({});
   const dispatch = useDispatch();
+
+
+
   const allproducts = useSelector((state) => {
     const { allProducts, filtroPor, allAditionals, products, search } = state;
     if (search.length) {

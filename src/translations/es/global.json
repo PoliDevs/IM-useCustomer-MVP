@@ -64,6 +64,9 @@
   "categories": {
     "title": "Categorias"
   },
+    "products": {
+    "productNotAvailable": "No hay productos disponibles"
+  },
   "productModal": {
     "available": "Producto no disponible",
     "commentLabel" : "Comentarios",
