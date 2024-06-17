@@ -20,9 +20,10 @@ import MyOrders from "./components/pages/MyOrders/MyOrders";
 
 // axios.defaults.baseURL = "https://nodejs-production-bbf9.up.railway.app";
 // axios.defaults.baseURL = "https://web-production-053a.up.railway.app";
-axios.defaults.baseURL = "https://im-api.up.railway.app"
-// axios.defaults.baseURL = "https://api-v1.imenu.com.ar";
 
+// axios.defaults.baseURL = "https://im-api.up.railway.app"
+// axios.defaults.baseURL = "https://api-v1.imenu.com.ar";
+axios.defaults.baseURL = "https://api-v1.imenu.com.ar";
 function App() {
   const [scanResult, setScanResult] = useState();
   const dispatch = useDispatch();

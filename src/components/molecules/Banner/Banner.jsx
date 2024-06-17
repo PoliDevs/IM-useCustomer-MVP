@@ -1,36 +1,23 @@
+/* eslint-disable react/prop-types */
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as ArrowBackWhite } from "../../../assets/ArrowBackWhite.svg";
 import { useNavigate } from "react-router-dom";
 import SubTitle from "../../atoms/SubTitle/SubTitle";
-import burger from "../../../assets/Burgers.svg";
 import menu from "../../../assets/logo-imenu-full.png";
 import imenu from "../../../assets/imenu.svg"
 import s from "./Banner.module.scss";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import { capitalizeFirstLetter } from "../../../utils/Functions";
 import { getFileDownloadURL } from "../../../Firebase/Firebase";
+import { capitalizeFirstLetter } from "../../../utils/Functions";
 
 //? agrego setIsLoading a navbar
-export default function Banner({
-  setCategory,
-  ordersButton,
-  arrow,
-  navarrow,
-  path,
-  setAditionals,
-  setAll,
-  setIsLoading,
-  containerSubtitleMargin,
-}) {
-  const language = useSelector((state) => state.language);
+export default function Banner() {
   const showBanner = useSelector((state) => state.statusBanner);
   const table = useSelector((state) => state.table);
   const commerce = useSelector((state) => state.commerce);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [t, i18n] = useTranslation(["global"]);
+  const [t] = useTranslation(["global"]);
   const [imgURL, setImgURL] = useState(false);
 
   useEffect(() => {
@@ -40,7 +27,7 @@ export default function Banner({
       setImgURL(url);
     };
     fetchImageURL();
-  }, []);
+  }, [commerce.id]);
   return (
     <section
       className={`${s.banner} ${showBanner ? s.fadeIn : s.fadeOut}`}
