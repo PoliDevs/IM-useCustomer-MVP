@@ -40,11 +40,13 @@ export default function Mercadopago() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const mercadoPagoMethod = paymentMethods.find(
-    (m) => m.type === "mercadopago"
-  );
-  const PUBLIC_KEY = mercadoPagoMethod ? mercadoPagoMethod.publicKey : "";
+  // const mercadoPagoMethod = paymentMethods.find(
+  //   (m) => m.type === "mercadopago"
+  // );
+  // const PUBLIC_KEY = mercadoPagoMethod ? mercadoPagoMethod.publicKey : "";
 
+  const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
+  
   // Inicializa MercadoPago con la publicKey obtenida
   if (PUBLIC_KEY) {
     initMercadoPago(PUBLIC_KEY);
