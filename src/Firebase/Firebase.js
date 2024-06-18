@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Logo  from "../assets/logo imenu orange.svg";
 // import { initialize } from "../utils/Firebase_inicialize";
-import {getStorage,getDownloadURL,ref } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
