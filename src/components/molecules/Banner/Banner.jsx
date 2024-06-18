@@ -10,7 +10,6 @@ import s from "./Banner.module.scss";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import { capitalizeFirstLetter } from "../../../utils/Functions";
 import { getFileDownloadURL } from "../../../Firebase/Firebase";
-import { capitalizeFirstLetter } from "../../../utils/Functions";
 
 //? agrego setIsLoading a navbar
 export default function Banner() {
